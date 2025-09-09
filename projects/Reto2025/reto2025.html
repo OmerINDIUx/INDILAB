@@ -2,6 +2,8 @@
 <html lang="es">
 
 <head>
+      <link id="menu-css" rel="stylesheet" href="/css/base.css">
+
   <meta charset="UTF-8">
   <title>Reto de Innovación Urbana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,252 +12,63 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-
-  <style>
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #eee;
-      justify-content: center;
-      align-items: center;
-      height: 390vh;
-
-
-
-      
-      width: calc(100% - 100px);
-      height: 100vh;
-    }
-
-    .gif-container {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .gif-container img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      max-height: 100vh;
-      width: auto;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      /* Todos ocultos por defecto */
-    }
-
-    /* 🔹 El primero visible desde el inicio */
-    #gif1 {
-      opacity: 1;
-    }
-
-
-    section {
-      min-height: 105vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 10;
-
-    }
-
-    /* CARDS */
-    .card {
-      color: black;
-      padding: 2rem;
-      border-radius: 1rem;
-      max-width: 800px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .card h1,
-    .card h2,
-    .card h3 {
-      margin: 0.5rem 0;
-    }
-
-    .card p {
-      line-height: 1.5;
-    }
-
-    p {
-      color: black;
-    }
-
-    .black {
-      color: black;
-    }
-
-
-
-
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background-image: url('../../../img/noise.png');
-      background-repeat: repeat;
-      opacity: 0.3;
-      pointer-events: none;
-      animation: grain 8s steps(10) infinite;
-      z-index: 0;
-    }
-
-    /* Ruido automático en cualquier bloque con fondo #eee o #eeeeee */
-    *[style*="background: #eee"],
-    *[style*="background: #eeeeee"],
-    *[style*="background-color: #eee"],
-    *[style*="background-color: #eeeeee"],
-    #image-sequence,
-    .card,
-    .TextLarge {
-      position: relative;
-      background-color: #eeeeee;
-      overflow: hidden;
-    }
-
-    *[style*="background: #eee"]::before,
-    *[style*="background: #eeeeee"]::before,
-    *[style*="background-color: #eee"]::before,
-    *[style*="background-color: #eeeeee"]::before,
-    #image-sequence::before,
-    .card::before,
-    .TextLarge::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: -100%;
-      width: 300%;
-      height: 300%;
-      background-image: url('../../../img/noise.png');
-      background-repeat: repeat;
-      opacity: 0.3;
-      pointer-events: none;
-      animation: grain 8s steps(10) infinite;
-      z-index: 0;
-    }
-
-    /* Contenido encima del ruido */
-    #image-sequence>*,
-    .card>*,
-    .TextLarge>* {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* VIDEO */
-    .video-scroll-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .video-fullscreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .video-fullscreen video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-
-    /* CANVAS */
-    #image-sequence {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      background: #eeeeee;
-    }
-
-    /* TEXTO */
-    .TextLarge {
-      margin-top: 12vh;
-      text-align: center;
-      font-size: 1rem;
-      color: black;
-      padding: 4rem 2rem;
-    }
-
-    .TextLarge div {
-      max-width: 900px;
-      text-align: justify;
-      color: black;
-      line-height: 1.8;
-    }
-
-    .TextLarge h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: black;
-    }
-
-
-    /* ANIMACIÓN NOISE */
-    @keyframes grain {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-
-      10% {
-        transform: translate(-5%, -10%);
-      }
-
-      20% {
-        transform: translate(-15%, 5%);
-      }
-
-      30% {
-        transform: translate(7%, -25%);
-      }
-
-      40% {
-        transform: translate(-5%, 25%);
-      }
-
-      50% {
-        transform: translate(-15%, 10%);
-      }
-
-      60% {
-        transform: translate(15%, 0%);
-      }
-
-      70% {
-        transform: translate(0%, 15%);
-      }
-
-      80% {
-        transform: translate(3%, 35%);
-      }
-
-      90% {
-        transform: translate(-10%, 10%);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style_reto2025.css">
+  
 </head>
 
 <body>
+
+
+      <a href="index.html">
+        <div class="secundary-brand"></div>
+    </a>
+
+    <script>
+        const container = document.querySelector('.secundary-brand');
+        fetch('/svg/indi-lab_Vertical_Animate.svg')
+            .then(response => response.text())
+            .then(svgText => {
+                container.innerHTML = svgText; // Inserta el SVG como HTML
+            })
+            .catch(err => console.error('Error cargando SVG:', err));
+    </script>
+
+
+
+
+
+        <div id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
+
+
+
+
   <div class="gif-container">
     <img src="images/mix-001-reto_1.gif" alt="Innovación Urbana 1" id="gif1">
     <img src="images/aNCHOR-001-reto.gif" alt="Innovación Urbana 2" id="gif2">
@@ -335,6 +148,15 @@
     });
   </script>
 
+
+
+
+
+
+      <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
 </body>
 
 </html>
