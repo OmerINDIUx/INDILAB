@@ -67,19 +67,34 @@
   </div>
 
 
-  <div id="menu-placeholder"></div>
+    <div id="menu-placeholder"></div>
 
-  <script>
+<script>
     fetch('/menu.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('menu-placeholder').innerHTML = data;
-      });
-  </script>
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            const placeholder = document.getElementById('menu-placeholder');
+            if (!placeholder) {
+                throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+            }
+            placeholder.innerHTML = data;
 
-
-  </div>
-
+            // Cargar el script después de que el menú esté en el DOM
+            const script = document.createElement('script');
+            script.src = "/js/demo4/menu.js";
+            script.onload = () => console.log("menu.js cargado correctamente ✅");
+            script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+            document.body.appendChild(script);
+        })
+        .catch(error => {
+            console.error("Ocurrió un error al cargar el menú:", error);
+        });
+</script>
   </header>
   <script src="/js/demo4/menu.js"></script>
 
