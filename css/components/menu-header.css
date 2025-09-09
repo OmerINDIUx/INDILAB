@@ -6,11 +6,13 @@
   position: fixed;
   inset: 0; /* equivale a top:0; left:0; width:100%; height:100vh; */
   /* pointer-events: none; */
+
 }
 
 /* ==============================
    MENÚ FULLSCREEN
 ============================== */
+
 .menu-fullscreen {
   position: fixed;
   inset: 0;
@@ -192,9 +194,9 @@
   align-items: center;
   gap: 15px;
   pointer-events: auto;
-  z-index: 1001;
   padding: 1rem 0;
-  background: transparent;
+    z-index: 10010;
+
 }
 
 /* Botón idioma */
@@ -207,12 +209,16 @@
   background: transparent;
   cursor: pointer;
   transition: border-color 0.2s ease;
+    z-index: 10010;
+
 }
 .lang-btn {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
   overflow: hidden;
+    z-index: 10010;
+
 }
 .hamburger {
   width: 75px;
@@ -224,6 +230,8 @@
   gap: 6px;
   margin: 0;
   box-sizing: border-box;
+    z-index: 10010;
+
 }
 
 /* Efecto hover compartido */
@@ -277,6 +285,10 @@
 .hamburger.is-active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
+
+
+
+
 
 /* ==============================
    COLUMNAS DE MENÚ
@@ -336,7 +348,27 @@
   font-size: 0.85rem;
   margin-top: 0.3rem;
   color: #666;
+
+  
 }
+
+
+
+.sidebar12 {
+  position: fixed;       /* Siempre visible */
+  top: 0;
+  left: 0;
+  width: 100px;          /* Ancho fijo */
+  height: 100vh;         /* Toda la pantalla */
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 900;
+}
+
+
 
 @media (max-width: 768px) {
   .buttons-menu {

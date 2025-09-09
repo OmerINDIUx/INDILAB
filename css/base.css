@@ -10,11 +10,11 @@
 
 /* Css del logo inicial */
 @import url("./layout/brand.css"); 
+@import url("./layout/secundary-brand.css"); 
 @import url("./layout/scroll_down.css");
 @import url("./layout/layout-columns.css");
 @import url("./layout/map&watch.css");
 @import url("./layout/svg_iconbrand.css");
-
 @import url("./layout/sliders.css");
 @import url("./layout/footer.css");
 

@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   position: relative;  /* o absolute, fixed */
+  z-index: 10000;
 }
 
 .branding{
@@ -24,12 +25,14 @@
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 10000;
   }
 
   /* ahora se oculta con opacity (para que GSAP pueda medir elementos) */
   .hidden {
     opacity: 0;
     pointer-events: none;
+    z-index: 10000;
   }
 
   .INDI path {
@@ -49,7 +52,9 @@
     height: auto;
   }
 
-
+#svg-wrapper, .svg-containedor {
+  pointer-events: none;
+}
 
   @media (max-width: 1024px) {
   #svg-wrapper {

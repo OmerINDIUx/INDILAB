@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-        <link id="menu-css" rel="stylesheet" href="/css/base.css">
+    <link id="menu-css" rel="stylesheet" href="/css/base.css">
 
     <meta charset="UTF-8">
     <title>Vivienda Modular</title>
@@ -26,38 +26,59 @@
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
+
+
 </head>
 
 <body>
+    <a href="index.htm">
+        <div class="secundary-brand"></div>
+    </a>
+
+    <script>
+        const container = document.querySelector('.secundary-brand');
+        fetch('/svg/indi-lab_Vertical_Animate.svg')
+            .then(response => response.text())
+            .then(svgText => {
+                container.innerHTML = svgText; // Inserta el SVG como HTML
+            })
+            .catch(err => console.error('Error cargando SVG:', err));
+    </script>
+
+
+
+
+
+
 
     <div id="menu-placeholder"></div>
 
-<script>
-    fetch('/menu.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            const placeholder = document.getElementById('menu-placeholder');
-            if (!placeholder) {
-                throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-            }
-            placeholder.innerHTML = data;
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
 
-            // Cargar el script después de que el menú esté en el DOM
-            const script = document.createElement('script');
-            script.src = "/js/demo4/menu.js";
-            script.onload = () => console.log("menu.js cargado correctamente ✅");
-            script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-            document.body.appendChild(script);
-        })
-        .catch(error => {
-            console.error("Ocurrió un error al cargar el menú:", error);
-        });
-</script>
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
 
 
 

@@ -104,6 +104,7 @@ body::before {
   margin-left: 50px;  /* solo espacio a la izquierda */
   margin-right: 0;
   box-sizing: border-box; /* para que el margen no afecte el ancho total */
+  
 }
 
 
@@ -120,7 +121,7 @@ body::before {
   margin-top: 12vh;
   text-align: center;
   font-size: 1rem;
-  color: black;
+  color: #1a1a1a;
   padding: 4rem 2rem;
 }
 
