@@ -1,0 +1,38 @@
+<section id="stay" style="height:100vh; background:tomato;">Sección 1</section>
+<section id="stay" style="height:100vh; background:gold;">Sección 2</section>
+<section id="stay" style="height:100vh; background:lightgreen;">Sección 3</section>
+<section id="stay" style="height:100vh; background:skyblue;">Sección 4</section>
+
+<script>
+  const sections = document.querySelectorAll('#stay');
+  let current = 0;       // índice de la sección actual
+  let isScrolling = false;
+
+  function goToSection(index) {
+    if (index < 0 || index >= sections.length) return;
+    isScrolling = true;
+    current = index;
+    sections[current].scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => (isScrolling = false), 600); // evita rebotes
+  }
+
+  // --- Control con rueda del mouse ---
+  window.addEventListener("wheel", (e) => {
+    if (isScrolling) return;
+    if (e.deltaY > 0) {
+      goToSection(current + 1); // scroll hacia abajo → siguiente
+    } else if (e.deltaY < 0) {
+      goToSection(current - 1); // scroll hacia arriba → anterior
+    }
+  });
+
+  // --- Control con teclado ---
+  window.addEventListener("keydown", (e) => {
+    if (isScrolling) return;
+    if (e.key === "ArrowDown") {
+      goToSection(current + 1);
+    } else if (e.key === "ArrowUp") {
+      goToSection(current - 1);
+    }
+  });
+</script>

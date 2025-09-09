@@ -1,0 +1,57 @@
+/* ---------------- TIPOGRAFÍAS ---------------- */
+@font-face {
+  font-family: "power_grotesk_black";
+  src: url("../../fonts/power_grotesk-black-webfont.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "power_grotesk_bold";
+  src: url("../../fonts/power_grotesk-bold-webfont.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "power_grotesk_heavy";
+  src: url("../../fonts/power_grotesk-heavy-webfont.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "power_grotesk_light";
+  src: url("../../fonts/power_grotesk-light-webfont.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "power_grotesk_medium";
+  src: url("../../fonts/power_grotesk-medium-webfont.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "power_grotesk_regular";
+  src: url("../../fonts/power_grotesk-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.work-sans-regular {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.work-sans-bold {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}

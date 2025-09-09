@@ -1,0 +1,308 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.main-content {
+  padding-left: 5%;
+  display: flex;
+  flex-direction: row;
+}
+
+.right-column {
+  flex-direction: column;
+  justify-content: space-between;
+}
+.svg-container {
+  flex: 1;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+.corner {
+  position: absolute;
+  width: 200px;
+  /* ajusta tamaño */
+  height: auto;
+  pointer-events: none;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row; /* lado a lado */
+  height: 100vh;       /* ocupa toda la pantalla */
+  width: 100vw;
+}
+
+.left-column,
+.right-column {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* centra horizontalmente el contenido */
+  align-items: center;     /* centra verticalmente el contenido */
+  box-sizing: border-box;
+  position: relative;
+}
+/* COLUMNA IZQUIERDA: 40% */
+.left-column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.center-controls {
+  position: absolute;
+  bottom: 15%;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinea los hijos dentro de la columna */
+  padding: 2rem; /* opcional, para separarlo un poco del borde */
+  align-items: center;
+  background: rgba(77, 77, 77, 0.301); /* Fondo translúcido */
+  backdrop-filter: blur(12px); /* Desenfoque para el glassmorphismo */
+  -webkit-backdrop-filter: blur(12px); /* Compatibilidad con Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Sutil borde brillante */
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  z-index: 301;
+}
+
+.hour {
+  font-family: "power_grotesk_bold", sans-serif;
+  font-size: 1.5rem;
+  margin-top: -1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-white-brand, #efefef);
+  z-index: 301;
+}
+
+#svg-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  overflow: visible;
+  z-index: 301;
+}
+
+.icon1 {
+  color: var(--color-highlight-start-map, #e7e5d9);
+}
+
+/* Slider base */
+#hourSlider {
+  width: 180px;
+  height: 6px;
+  background: var(--color-white-brand, #efefef);
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+  margin: 0;
+  position: relative;
+  z-index: 301;
+}
+.mapa_video {
+  z-index: 1;
+}
+/* WebKit (Chrome, Safari) */
+#hourSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--color-white-brand, #efefef);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;
+  z-index: 301;
+}
+
+#hourSlider::-webkit-slider-runnable-track {
+  background: #d9e7e50f;
+  height: 6px;
+  border-radius: 3px;
+  z-index: 301;
+}
+
+/* Firefox */
+#hourSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #e7e5d950;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  z-index: 301;
+}
+
+#hourSlider::-moz-range-track {
+  background: #d9e7e50f;
+  height: 6px;
+  border-radius: 3px;
+  z-index: 301;
+}
+
+/* Edge */
+#hourSlider::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: #43d7cd;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 301;
+}
+
+#hourSlider::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  height: 6px;
+  z-index: 301;
+}
+
+/* Reloj abajo */
+.time-ctrl {
+  height: auto;
+  /* padding: 2rem 0; */
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text, #0c0c0c);
+  position: relative;
+  z-index: 301;
+}
+
+.right-column {
+  width: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* z-index: 301; */
+}
+
+.svg-container {
+  position: relative;
+  /* top: 10rem;
+  left: 15rem; */
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+.corner-icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 2;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.content-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#content-row {
+  opacity: 0; /* Oculto por defecto */
+}
+
+#maping-contorler {
+  opacity: 0; /* Oculto por defecto */
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    flex-direction: column;
+    padding-left: 0;
+  }
+
+  .center-controls {
+    bottom: 10%;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1.5rem;
+  }
+
+  #hourSlider {
+    width: 150px;
+  }
+
+  .corner-icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+/* ---------- Móviles ---------- */
+@media (max-width: 768px) {
+  .hour {
+    font-size: 1.2rem;
+    margin-top: -1rem;
+  }
+
+  .center-controls {
+    padding: 1rem;
+    bottom: 5%;
+    border-radius: 0.8rem;
+  }
+
+  #hourSlider {
+    width: 120px;
+    height: 5px;
+  }
+
+  .corner-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .svg-container {
+    height: auto;
+    min-height: 250px;
+  }
+
+  .content-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+
+#trafficVideo {
+  opacity: .53;              /* controla transparencia */
+  mix-blend-mode: multiply;  /* aplica efecto Multiply */
+}

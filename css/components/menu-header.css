@@ -1,0 +1,389 @@
+/* HEADER GLOBAL */
+/* ==============================
+   HEADER Y WRAPPERS
+============================== */
+#site-header {
+  position: fixed;
+  inset: 0; /* equivale a top:0; left:0; width:100%; height:100vh; */
+  /* pointer-events: none; */
+}
+
+/* ==============================
+   MENÚ FULLSCREEN
+============================== */
+.menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 6rem 4rem;
+  background: rgba(77, 77, 77, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+.menu-fullscreen.show {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 20001;
+}
+/* wrapper para animación 3D */
+.menu-wrapper {
+  perspective: 1200px;
+  position: fixed;
+  inset: 0;
+  z-index: 20000; /* más alto que lo demás */
+  pointer-events: none;
+}
+
+#fullscreen-menu {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  pointer-events: auto;
+  transform-origin: left center;
+  transform: rotateY(-90deg); /* inicio oculto */
+}
+
+/* ==============================
+   ITEMS DE MENÚ
+============================== */
+.menu__item {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: black;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding: 3rem 2rem;
+  margin-left: auto;
+  transition: color 0.3s ease;
+  text-align: left;
+}
+
+/* Bordes decorativos */
+.menu__item::before,
+.menu__item::after {
+  content: "";
+  position: absolute;
+  width: 1.8rem;
+  height: 1.8rem;
+  opacity: 0;
+  border: 3px solid #ff6f61;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
+  pointer-events: none;
+}
+.menu__item::before {
+  top: 0;
+  left: 0;
+  border-width: 8px 0 0 8px;
+  transform: translate3d(10px, 10px, 0);
+}
+.menu__item::after {
+  right: 0;
+  bottom: 0;
+  border-width: 0 8px 8px 0;
+  transform: translate3d(-10px, -10px, 0);
+}
+.menu__item:hover::before,
+.menu__item:hover::after,
+.menu__item:focus::before,
+.menu__item:focus::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Contenedor de enlaces */
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==============================
+   BOTÓN DE CIERRE
+============================== */
+.close-menu {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 56px; /* antes 44px → más grande */
+  height: 56px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1002;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-menu::before,
+.close-menu::after {
+  content: "";
+  position: absolute;
+  width: 32px; /* antes 24px → más largo */
+  height: 4px; /* antes 2px → más grueso */
+  background: #1a1a1a;
+  border-radius: 2px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.close-menu::before {
+  transform: rotate(45deg);
+}
+
+.close-menu::after {
+  transform: rotate(-45deg);
+}
+
+.close-menu:hover::before {
+  transform: rotate(135deg);
+  background: #ff6f61;
+}
+
+.close-menu:hover::after {
+  transform: rotate(-135deg);
+  background: #ff6f61;
+}
+
+/* ==============================
+   REDES SOCIALES
+============================== */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  position: fixed;
+  bottom: 19.5rem;
+  left: 15rem;
+  justify-content: center;
+  z-index: 1000;
+}
+.redes-sociales {
+  height: 2rem;
+  width: auto;
+}
+
+/* ==============================
+   BOTONES LATERALES
+============================== */
+.buttons-menu {
+  position: fixed;
+  bottom: 0; /* directamente al fondo */
+  left: 0;
+  width: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  pointer-events: auto;
+  z-index: 1001;
+  padding: 1rem 0;
+  background: transparent;
+}
+
+/* Botón idioma */
+.lang-btn,
+.hamburger {
+  position: relative;
+  border: 2px solid #eee;
+  border-radius: 6px 0 6px 0;
+  color: #eee;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.lang-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden;
+}
+.hamburger {
+  width: 75px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Efecto hover compartido */
+.lang-btn::before,
+.hamburger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--angle, 90deg),
+    #ffcd7000,
+    #ffcd7000,
+    #ff6f61,
+    #ffcc70
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  filter: drop-shadow(0 0 2px #ff6f61) drop-shadow(0 0 12px #ffcc70);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.lang-btn:hover,
+.hamburger:hover {
+  border-color: transparent;
+}
+.lang-btn:hover::before,
+.hamburger:hover::before {
+  opacity: 1;
+}
+
+/* Hamburguesa barras */
+.hamburger span {
+  height: 5px;
+  width: 60%;
+  background-color: #eee;
+  display: block;
+  border-radius: 2px 0 2px 0;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.is-active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ==============================
+   COLUMNAS DE MENÚ
+============================== */
+.menu-columns {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 4rem;
+  width: 100%;
+  height: calc(100vh - 6rem); /* restamos padding superior si quieres */
+  padding: 6rem 4rem;
+  box-sizing: border-box;
+}
+
+/* Blog */
+.menu-blog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  height: 100%; /* iguala altura al contenedor padre */
+  overflow-y: auto; /* scroll interno */
+  padding-right: 1rem;
+}
+
+/* opcional: scroll más bonito */
+.menu-blog::-webkit-scrollbar {
+  width: 6px;
+}
+.menu-blog::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.blog-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.blog-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.blog-info {
+  display: flex;
+  flex-direction: column;
+}
+.blog-title {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1a1a1a;
+}
+.blog-date {
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .buttons-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 100vw;
+    height: auto;
+    display: flex; /* Asegúrate de tener display:flex */
+    flex-direction: row;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background-color: #ff6e6100;
+    justify-content: flex-end; /* Esto los lleva a la derecha */
+    align-items: center; /* Centrado vertical */
+    display: flex;
+  }
+
+  .top-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lang-btn,
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .lang-btn {
+    margin-top: 0;
+    position: relative;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .hamburger {
+    position: relative;
+    width: 50px;
+    height: 40px;
+  }
+
+  .hamburger span {
+    height: 4px;
+    width: 60%;
+  }
+}
