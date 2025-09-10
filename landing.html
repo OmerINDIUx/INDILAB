@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Work Sans", sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 4rem 0 4rem;
+            background: transparent;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        .nav a:hover {
+            color: #ff6f61;
+        }
+        .main-content {
+            max-width: 900px;
+            margin: 3rem auto 0 auto;
+            padding: 0 2rem;
+        }
+        .about-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        .about-section h1 {
+            margin-top: 0;
+            color: #ff6f61;
+            font-size: 2.2rem;
+        }
+        .blog-section {
+            margin-bottom: 3rem;
+        }
+        .blog-section h2 {
+            color: #222;
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+        }
+        .blog-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .blog-item {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s;
+        }
+        .blog-item:hover {
+            box-shadow: 0 4px 24px rgba(255,111,97,0.15);
+        }
+        .blog-thumb {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .blog-info {
+            padding: 1rem;
+        }
+        .blog-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff6f61;
+        }
+        .blog-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        @media (max-width: 800px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 1rem 0 1rem;
+            }
+            .main-content {
+                padding: 0 1rem;
+            }
+            .blog-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/">
+            <!-- Logo SVG aquí -->
+            <img src="/img/logo.svg" alt="Logo" class="logo">
+        </a>
+        <nav class="nav">
+            <a href="#home">Inicio</a>
+            <a href="#about">Quiénes somos</a>
+            <a href="#projects">Proyectos</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="about-section" id="about">
+            <h1>Quiénes somos</h1>
+            <p>
+                Somos una empresa dedicada a la innovación urbana y soluciones modulares para la vivienda y movilidad. Nuestro equipo combina experiencia técnica y creatividad para transformar ciudades y comunidades.
+            </p>
+        </section>
+        <section class="blog-section" id="blog">
+            <h2>News + Updates</h2>
+            <div class="blog-list">
+                <article class="blog-item">
+                    <a href="/projects/Reto2025/reto2025.html">
+                        <img src="/projects/Reto2025/images/Riu2025-01.png" alt="Reto Innovación Urbana" class="blog-thumb">
+                        <div class="blog-info">
+                            <h3 class="blog-title">Reto de Innovación urbana</h3>
+                            <p class="blog-date">Sept 2025</p>
+                        </div>
+                    </a>
+                </article>
+                <article class="blog-item">
+                    <a href="/projects/ViviendaModular/vivienda_modular.html">
+                        <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Vivienda Modular" class="blog-thumb">
+                        <div class="blog-info">
+                            <h3 class="blog-title">VIVIENDA MODULAR</h3>
+                            <p class="blog-date">Diciembre 2024</p>
+                        </div>
+                    </a>
+                </article>
+                <article class="blog-item">
+                    <a href="/projects/ElectroMovilidad/electromovilidad.html">
+                        <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Electromovilidad" class="blog-thumb">
+                        <div class="blog-info">
+                            <h3 class="blog-title">Electromovilidad</h3>
+                            <p class="blog-date">Diciembre 2024</p>
+                        </div>
+                    </a>
+                </article>
+                <article class="blog-item">
+                    <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+                        <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Islas de Calor Urbanas" class="blog-thumb">
+                        <div class="blog-info">
+                            <h3 class="blog-title">ISLAS DE CALOR URBANAS</h3>
+                            <p class="blog-date">Diciembre 2024</p>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

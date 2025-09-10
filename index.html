@@ -50,7 +50,7 @@
     window.addEventListener("resize", function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        window.scrollTo(0, 0); // posición inicial antes de recargar
+        // No cambiar la posición de scroll al recargar, se mantiene donde se quedó
         location.reload();
       }, 300); // espera 300ms después de dejar de redimensionar
     });
@@ -67,34 +67,34 @@
   </div>
 
 
-    <div id="menu-placeholder"></div>
+  <div id="menu-placeholder"></div>
 
-<script>
+  <script>
     fetch('/menu.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then(data => {
-            const placeholder = document.getElementById('menu-placeholder');
-            if (!placeholder) {
-                throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-            }
-            placeholder.innerHTML = data;
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        const placeholder = document.getElementById('menu-placeholder');
+        if (!placeholder) {
+          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+        }
+        placeholder.innerHTML = data;
 
-            // Cargar el script después de que el menú esté en el DOM
-            const script = document.createElement('script');
-            script.src = "/js/demo4/menu.js";
-            script.onload = () => console.log("menu.js cargado correctamente ✅");
-            script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-            document.body.appendChild(script);
-        })
-        .catch(error => {
-            console.error("Ocurrió un error al cargar el menú:", error);
-        });
-</script>
+        // Cargar el script después de que el menú esté en el DOM
+        const script = document.createElement('script');
+        script.src = "/js/demo4/menu.js";
+        script.onload = () => console.log("menu.js cargado correctamente ✅");
+        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Ocurrió un error al cargar el menú:", error);
+      });
+  </script>
 
   </header>
   <script src="/js/demo4/menu.js"></script>
@@ -119,7 +119,35 @@
       <!-- SVG destino (rectángulo, oculto al inicio) -->
       <div id="svg-rect" class="svg-containedor hidden"></div>
     </div>
+
     <script clas="branding" src="js/demo4/animation_brand.js"></script>
+
+    <div class="navigation-arrows">
+       <a href="#map"><div class="core-belive">
+        <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
+          <h3>Our core beliefs</h3>
+      </div></a>
+
+             <a href="landing.html"><div class="our-projects">
+        <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+        <h3>Our projects</h3>
+      </div></a>
+
+    </div>
+    <script>
+      window.addEventListener('scroll', function () {
+        const scrollY = window.scrollY;
+        const scrollElement = document.querySelector('.navigation-arrows');
+
+        if (scrollY > 500) {
+          scrollElement.classList.add('hidden');
+        } else {
+          scrollElement.classList.remove('hidden');
+        }
+      });
+    </script>
+
+
 
     <div class="scroll-animation">
       <a href="#map">
@@ -128,6 +156,10 @@
 
 
     </div>
+
+
+
+
     <script>
       window.addEventListener('scroll', function () {
         const scrollY = window.scrollY;
@@ -141,7 +173,8 @@
       });
     </script>
 
-    
+
+
   </section>
   <div class="stay">
     <section id="map" class="main-content">
@@ -193,13 +226,21 @@
             </p>
             <span id="hourLabel" class="hour">--:--</span>
             <input id="hourSlider" type="range" min="0" max="23" step="1">
-            <p class="text-large_M">
+            <!-- <br><br>
+            <div class="info-phi">
+              <button class="phi" aria-label="Logo Phi">
+                <img src="img/phi-01.png" alt="Logo Phi" />
+                <span class="tooltip-phi"> <a data-i18n="info phi"></a>
+                </span>
+              </button>
+            </div> -->
+            <!-- <p class="text-large_M2">
               <br>
 
               <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food1"></mark> <br>
               <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food2"></mark> <br>
               <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food3"></mark>
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -377,7 +418,7 @@
       <p class="text-large_w" data-i18n="text of the to Action">
       </p>
       <br><br>
-      <p class="text-large_M"> <mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark> </p>
+      <!-- <p class="text-large_M"> <mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark> </p> -->
       </p>
     </div>
   </div>
@@ -419,8 +460,7 @@
     <div class="corner-icon1 top-right1">
       <img id="svg3" class="icon4" src="svg\cornner_top_right_loading.svg" alt="Icono inicio">
     </div>
-    <h1 class="complment_loader" id="complment_loader">Cities are humanity’s greatest creation. <br> smart by
-      definition.</h1>
+    <h1 class="complment_loader" id="complment_loader">Cities are <br></h1>
     <div class="loader-box">
       <div id="text_loading" class="text_load">Preparando recursos…</div>
       <div id="text_parpadeando">

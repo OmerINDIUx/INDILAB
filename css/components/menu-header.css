@@ -62,19 +62,19 @@
 ============================== */
 .menu__item {
   font-family: "Work Sans", sans-serif;
-  font-weight: 700;
-  font-size: 3rem;
+  font-weight: 600;
+  font-size: 2rem;
   color: black;
   text-decoration: none;
   position: relative;
   display: block;
   width: fit-content;
   padding: 3rem 2rem;
-  margin-left: auto;
+  margin-left: 0; /* 🔹 quitar "auto" */
+  margin-right: auto; /* 🔹 si quieres empujarlo todo a la izquierda */
   transition: color 0.3s ease;
-  text-align: right;
-    text-transform: uppercase;
-
+  /* text-transform: uppercase; */
+  text-align: left; /* 🔹 asegura que el texto se pegue a la izquierda */
 }
 
 /* Bordes decorativos */
@@ -114,8 +114,7 @@
 .menu-links {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  
+  gap: 0.2rem;
 }
 
 /* ==============================
@@ -200,13 +199,11 @@
   gap: 1.5rem; /* aquí defines la separación real */
 }
 .lang-btn {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
-
 
 /* Botón idioma */
 .lang-btn,
-
 .hamburger {
   position: relative;
   border: 2px solid #eee;
@@ -273,8 +270,8 @@
 
 /* Hamburguesa barras */
 .hamburger span {
-  height: 5px;
-  width: 60%;
+  height: 4px;
+  width: 45%;
   background-color: #eee;
   display: block;
   border-radius: 2px 0 2px 0;
@@ -296,7 +293,7 @@
 ============================== */
 .menu-columns {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 30% 70%;
   gap: 4rem;
   width: 100%;
   height: calc(100vh - 6rem); /* restamos padding superior si quieres */
@@ -339,8 +336,9 @@
   flex-direction: column;
 }
 .blog-title {
-  text-transform: uppercase;
-  font-size: 1.1rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
   color: #1a1a1a;
@@ -364,6 +362,27 @@
   padding-top: 20px;
   z-index: 900;
 }
+
+
+.menu-blog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.blog-heading {
+  flex: 0 0 auto;         /* título fijo arriba */
+  margin-bottom: 1.5rem;  /* espacio debajo */
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* las entradas en dos columnas */
+  gap: 2rem;
+}
+
 
 @media (max-width: 768px) {
   .buttons-menu {
@@ -414,3 +433,50 @@
     width: 60%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.secundary-brand2 {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  padding: 0px;;
+  width: 90px;      /* ajusta el tamaño */
+  z-index: 20005;    /* por encima del fondo */
+  pointer-events: auto; /* clickeable */
+}
+
+/* Close arriba a la derecha */
+.close-menu {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  z-index: 20005;
+}
+
+
+
+  .secundary-brand2 .INDI path {
+    fill: #1a1a1a;
+  }
+
+  .secundary-brand2 .LAB path {
+    fill: #1a1a1a;
+  }
+
+  .secundary-brand2 .colorkey path {
+    fill: rgb(226, 177, 43);
+  }

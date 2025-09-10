@@ -1,8 +1,8 @@
 {
-  "menu home": "HOME",
-  "menu about": "INDIlab",
-  "menu projects": "PROJECTS",
-  "menu contact": "CONTACT",
+  "menu home": "Our Core Beliefs",
+  "menu about": "Who We Are",
+  "menu projects": "What We Do",
+  "menu contact": "Our Approach",
 
   "menu homef": "HOME→",
   "menu aboutf": "INDIlab→",
@@ -14,10 +14,10 @@
   "hero_intro_text": "  where innovation, creativity, and possibilities converge At INDIlab, we think of cities as dynamic, ever-evolving entities that embody our collective potential. We believe in a future where technology and community work hand in hand to help humanity thrive in urban environments.",
   "icon_start_alt": "Start icon",
   "icon_end_alt": "End icon",
-  "cdmx traffic page food1": "Simulated daily trips in ",
-  "cdmx traffic page food2": "Mexico City by time. Data from Mapbox,",
+  "cdmx traffic page food1": "Simulated daily vehicle trips in CDMX by time of day.  ",
+  "cdmx traffic page food2": "Each bold dot represents 100 trips, and each small dot represents 50 trips.",
 
-  "cdmx traffic page food3": "analysis and visualization by INDIx",
+  "cdmx traffic page food3": "Data analysis and visualization by INDI Lab.",
 
   "Technology as a Force for": " Technology as a Force ",
   "Human Potential": " for Human Potential",

@@ -105,6 +105,15 @@
 }
 
 
+.text-large_M2 {
+  color: var(  --color-white-brand, #EFEFEF);
+  font-size: clamp(.5rem, .7rem, 1rem);
+  max-width: 120px;
+  margin: 0 0 1.5em 0;
+  line-height: 1.2; 
+  text-align: center;
+}
+
 .text-large {
   font-size: clamp(1.5rem, 5vw, 3rem);
   max-width: 900px;
