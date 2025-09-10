@@ -190,11 +190,26 @@
     </section>
 
     <script src="js/vivienda_modular.js"></script>
-
     <script src="/js/gsap.min.js"></script>
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
+
+
+    <script>document.addEventListener("DOMContentLoaded", () => {
+  const path = document.body.getAttribute("data-i18n-path");
+
+  fetch(path)
+    .then(res => res.json())
+    .then(translations => {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[key]) el.textContent = translations[key];
+      });
+    });
+});
+</script>
+  <script type="module" src="/js/demo4/traduction.js"></script>
 
 </body>
 
