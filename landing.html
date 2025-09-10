@@ -1,178 +1,706 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+    <link id="menu-css" rel="stylesheet" href="/css/base.css">
+
     <meta charset="UTF-8">
+    <title>landing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+    <!-- 
+    <script>document.documentElement.className = "js";</script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/style_viviendamodular.css">
+
+    <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+ -->
+
     <style>
-        body {
+        /* RESET Y BASE */
+
+        /* CSS Base: Importar todos los estilos relacionados */
+        @import url("../../../css/base/typography.css");
+
+        html {
             margin: 0;
+            padding: 0;
             font-family: "Work Sans", sans-serif;
-            background: #f5f5f5;
-            color: #222;
+
+            background-color: #eeeeee;
+            overflow-x: hidden;
+            position: relative;
         }
-        .header {
+
+        /* Fondo noise global en el body */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background-image: url("../../../img/noise.png");
+            background-repeat: repeat;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: grain 8s steps(10) infinite;
+            z-index: 0;
+        }
+
+        /* Ruido automático en cualquier bloque con fondo #eee o #eeeeee */
+        *[style*="background: #eee"],
+        *[style*="background: #eeeeee"],
+        *[style*="background-color: #eee"],
+        *[style*="background-color: #eeeeee"],
+        #image-sequence,
+        .card,
+        .TextLarge {
+            position: relative;
+            background-color: #eeeeee;
+            overflow: hidden;
+        }
+
+        *[style*="background: #eee"]::before,
+        *[style*="background: #eeeeee"]::before,
+        *[style*="background-color: #eee"]::before,
+        *[style*="background-color: #eeeeee"]::before,
+        #image-sequence::before,
+        .card::before,
+        .TextLarge::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background-image: url("../../../img/noise.png");
+            background-repeat: repeat;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: grain 8s steps(10) infinite;
+            z-index: 0;
+        }
+
+        /* Contenido encima del ruido */
+        #image-sequence>*,
+        .card>*,
+        .TextLarge>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* VIDEO */
+        .video-scroll-wrapper {
+            position: relative;
+            /* width: 100%; */
+            background-color: #1a1a1a4b;
+
+
+        }
+
+        .video-fullscreen {
+            position: fixed;
+            top: 0;
+
+
+            z-index: 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 2rem 4rem 0 4rem;
+            justify-content: center;
+        }
+
+        .video-fullscreen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+
+        .video-scroll-wrapper,
+        .video-fullscreen,
+        .video-fullscreen video {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            /* solo espacio a la izquierda */
+            margin-right: 0;
+            box-sizing: border-box;
+            /* para que el margen no afecte el ancho total */
+
+        }
+
+
+        /* CANVAS */
+        #image-sequence {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            background: #eeeeee;
+        }
+
+        /* TEXTO */
+        .TextLarge {
+            margin-top: 12vh;
+            text-align: center;
+            font-size: 1rem;
+            color: #1a1a1a;
+            padding: 4rem 2rem;
+        }
+
+        .TextLarge div {
+            max-width: 900px;
+            text-align: justify;
+            color: black;
+            line-height: 1.8;
+        }
+
+        .TextLarge h2 {
+            font-family: "power_grotesk_bold";
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: black;
+        }
+
+        /* SECCIONES */
+        section {
+            min-height: 105vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* CARDS */
+        .card {
+            color: black;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h2,
+        .card h3 {
+            font-family: "Work Sans", sans-serif;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .card h1 {
+            font-family: "power_grotesk_heavy";
+            text-transform: uppercase;
+            margin: 0.5rem 0;
+        }
+
+        .card p {
+            line-height: 1.5;
+        }
+
+        p {
+            color: black;
+        }
+
+        .black {
+            color: black;
+        }
+
+        /* ANIMACIÓN NOISE */
+        @keyframes grain {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            10% {
+                transform: translate(-5%, -10%);
+            }
+
+            20% {
+                transform: translate(-15%, 5%);
+            }
+
+            30% {
+                transform: translate(7%, -25%);
+            }
+
+            40% {
+                transform: translate(-5%, 25%);
+            }
+
+            50% {
+                transform: translate(-15%, 10%);
+            }
+
+            60% {
+                transform: translate(15%, 0%);
+            }
+
+            70% {
+                transform: translate(0%, 15%);
+            }
+
+            80% {
+                transform: translate(3%, 35%);
+            }
+
+            90% {
+                transform: translate(-10%, 10%);
+            }
+        }
+
+
+        .Title {
+            width: 30vw;
+            min-width: 300px;
+            max-width: 600px;
+            margin: 4vh auto;
+            padding: 2rem 1rem;
+            text-align: center;
+            font-family: "Work Sans", sans-serif;
+            font-weight: 600;
+            color: #eee;
             background: transparent;
         }
-        .logo {
-            width: 120px;
-            height: auto;
-        }
-        .nav {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav a {
-            text-decoration: none;
-            color: #222;
+
+        .Title h2,
+        .Title h3 {
+            font-family: "Work Sans", sans-serif;
+            color: #eee;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.2s;
+            /*
+    text-shadow: Esta propiedad aplica una sombra al texto del elemento.
+    - El primer valor (0 0 16px #000) indica una sombra negra con un desenfoque de 16px.
+    - El segundo valor (0 0 32px #000) añade una sombra adicional negra con un desenfoque de 32px.
+    Puedes editar los valores de desplazamiento (primeros dos números), el radio de desenfoque (tercer número) y el color (#000) para cambiar el efecto visual de la sombra en el texto.
+  */
+            text-shadow: 0 0 16px #000000a8;
+            margin: 0.5rem 0;
         }
-        .nav a:hover {
-            color: #ff6f61;
+
+        .Title h2 {
+            font-size: 2rem;
+            letter-spacing: 0.05em;
         }
-        .main-content {
-            max-width: 900px;
-            margin: 3rem auto 0 auto;
-            padding: 0 2rem;
+
+        .Title h1 {
+            font-family: "Work Sans", sans-serif;
+            font-weight: 700;
+            color: #eee;
+            font-size: 3rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 24px #000000a8;
+            margin: 0.5rem 0 1rem 0;
         }
-        .about-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            padding: 2rem;
-            margin-bottom: 3rem;
+
+        .Title h3 {
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
         }
-        .about-section h1 {
-            margin-top: 0;
-            color: #ff6f61;
-            font-size: 2.2rem;
-        }
-        .blog-section {
-            margin-bottom: 3rem;
-        }
-        .blog-section h2 {
-            color: #222;
-            font-size: 1.7rem;
-            margin-bottom: 1.5rem;
-        }
-        .blog-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        .blog-item {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: box-shadow 0.2s;
-        }
-        .blog-item:hover {
-            box-shadow: 0 4px 24px rgba(255,111,97,0.15);
-        }
-        .blog-thumb {
+
+
+
+
+        .text-image-section {
+            position: relative;
             width: 100%;
-            height: 160px;
+            height: 100vh;
+            /* altura de pantalla completa */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .text-column,
+        .image-column {
+            flex: 1;
+        }
+
+        .text-column {
+            padding-right: 2rem;
+        }
+
+        .text-column .title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-column .text-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .image-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-column img {
+            max-width: 100%;
+            border-radius: 1rem;
             object-fit: cover;
         }
-        .blog-info {
-            padding: 1rem;
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Capa semi-transparente (RGBA o hex con alpha) */
+            background-color: rgba(26, 26, 26, 0.5);
+            /* 0.3 = 30% opacidad */
+            pointer-events: none;
+            /* permite hacer scroll sin bloquear */
+            z-index: 1;
         }
-        .blog-title {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.2rem;
+
+        .reveal-text {
+            font-family: "Work Sans", sans-serif;
             font-weight: 600;
-            color: #ff6f61;
-        }
-        .blog-date {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        @media (max-width: 800px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem 1rem 0 1rem;
-            }
-            .main-content {
-                padding: 0 1rem;
-            }
-            .blog-list {
-                grid-template-columns: 1fr;
-            }
+            font-size: 2.5rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #eee;
+            padding: 0 1rem;
         }
     </style>
+
 </head>
-<body>
-    <header class="header">
-        <a href="/">
-            <!-- Logo SVG aquí -->
-            <img src="/img/logo.svg" alt="Logo" class="logo">
-        </a>
-        <nav class="nav">
-            <a href="#home">Inicio</a>
-            <a href="#about">Quiénes somos</a>
-            <a href="#projects">Proyectos</a>
-            <a href="#contact">Contacto</a>
-        </nav>
-    </header>
-    <main class="main-content">
-        <section class="about-section" id="about">
-            <h1>Quiénes somos</h1>
-            <p>
-                Somos una empresa dedicada a la innovación urbana y soluciones modulares para la vivienda y movilidad. Nuestro equipo combina experiencia técnica y creatividad para transformar ciudades y comunidades.
-            </p>
-        </section>
-        <section class="blog-section" id="blog">
-            <h2>News + Updates</h2>
-            <div class="blog-list">
-                <article class="blog-item">
-                    <a href="/projects/Reto2025/reto2025.html">
-                        <img src="/projects/Reto2025/images/Riu2025-01.png" alt="Reto Innovación Urbana" class="blog-thumb">
-                        <div class="blog-info">
-                            <h3 class="blog-title">Reto de Innovación urbana</h3>
-                            <p class="blog-date">Sept 2025</p>
-                        </div>
-                    </a>
-                </article>
-                <article class="blog-item">
-                    <a href="/projects/ViviendaModular/vivienda_modular.html">
-                        <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Vivienda Modular" class="blog-thumb">
-                        <div class="blog-info">
-                            <h3 class="blog-title">VIVIENDA MODULAR</h3>
-                            <p class="blog-date">Diciembre 2024</p>
-                        </div>
-                    </a>
-                </article>
-                <article class="blog-item">
-                    <a href="/projects/ElectroMovilidad/electromovilidad.html">
-                        <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Electromovilidad" class="blog-thumb">
-                        <div class="blog-info">
-                            <h3 class="blog-title">Electromovilidad</h3>
-                            <p class="blog-date">Diciembre 2024</p>
-                        </div>
-                    </a>
-                </article>
-                <article class="blog-item">
-                    <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
-                        <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Islas de Calor Urbanas" class="blog-thumb">
-                        <div class="blog-info">
-                            <h3 class="blog-title">ISLAS DE CALOR URBANAS</h3>
-                            <p class="blog-date">Diciembre 2024</p>
-                        </div>
-                    </a>
-                </article>
-            </div>
-        </section>
-    </main>
+
+
+
+
+
+
+
+
+
+
+</header>
+
+
+
+<div class="video-scroll-wrapper">
+    <div class="video-fullscreen">
+        <canvas id="image-sequence"></canvas>
+        <div class="video-overlay"></div>
+
+    </div>
+</div>
+
+
+
+
+<section class="tittle">
+    <div>
+        <h1 class="reveal-text">We design, prototype, and pilot solutions that address the most urgent urban challenges,
+            positioned at the convergence of engineering, technology, and city life.
+
+        </h1>
+
+    </div>
+</section>
+
+
+<section class="tittle">
+    <div>
+        <h1 class="reveal-text">Innovation at the Intersection of Cities, Infrastructure, Technology, and Community
+        </h1>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <p>INDIlab is Grupo INDI’s urban innovation lab and venture platform, an incubator and R&D engine that mobilizes
+            shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate
+            execution and scale transformative urban solutions.
+        </p>
+    </div>
+</section>
+<section>
+    <div class="card">
+        <p>Scalable solutions that evolve into revenue-generating public infrastructure programs, deployable across
+            cities.
+
+        </p>
+    </div>
+</section>
+<section>
+    <div class="card">
+        <p>Civic tech and gov tech ventures with the potential to spin off into public-private partnerships or
+            commercial offerings.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <p>Applied research, data analysis, and strategic studies that not only support implementation but also
+            contribute to global urban discourse and policymaking
+        </p>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        document.querySelectorAll(".reveal-text").forEach((p, i) => {
+            let text = p.innerText; // guardamos el texto
+            p.innerText = "";       // lo vaciamos
+
+            gsap.to(p, {
+                text: text, // ahora sí funciona
+                duration: 2,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: p,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+    });
+
+</script>
+
+
+
+
+<section class="text-image-section">
+    <div class="container">
+        <div class="text-column">
+            <h2 class="title">Contexto:</h2>
+            <p class="text-content">México tiene un déficit de vivienda...</p>
+        </div>
+        <div class="image-column">
+            <img src="img/landing/computer vision.png" alt="Imagen 1" class="image-content">
+        </div>
+    </div>
+</section>
+
+
+<!-- 
+<section class="text-image-section">
+    <div class="container">
+        <div class="text-column">
+            <h2 class="title">Contextsso:</h2>
+            <p class="text-content">Malgo del parking.</p>
+        </div>
+        <div class="image-column">
+            <img src="img/landing/parking twin.png" alt="Imagen 1" class="image-content">
+        </div>
+    </div>
+</section>
+
+
+
+<section class="text-image-section">
+    <div class="container">
+        <div class="text-column">
+            <h2 class="title">priotitary:</h2>
+            <p class="text-content">desing del parking.</p>
+        </div>
+        <div class="image-column">
+            <img src="img/landing/paticipatory design.jpg" alt="Imagen 1" class="image-content">
+        </div>
+    </div>
+</section> -->
+
+
+<script>gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+    // Array con todos los contenidos
+    const sections = [
+        {
+            title: "Contexto:",
+            text: "México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas...",
+            img: "img/landing/computer vision.png"
+        },
+        {
+            title: "Contextsso:",
+            text: "Malgo del parking.",
+            img: "img/landing/parking twin.png"
+        },
+        {
+            title: "Priotitary:",
+            text: "Desing del parking.",
+            img: "img/landing/paticipatory design.jpg"
+        }
+    ];
+
+    // Referencias a los elementos
+    const titleEl = document.querySelector(".text-column .title");
+    const textEl = document.querySelector(".text-column .text-content");
+    const imgEl = document.querySelector(".image-column img");
+
+    // ScrollTrigger principal
+    gsap.to({}, {
+        scrollTrigger: {
+            trigger: ".text-image-section",
+            start: "top top",
+            end: "+=" + (sections.length * window.innerHeight), // duración total
+            scrub: 1,
+            pin: true,
+            onUpdate: self => {
+                const progress = self.progress; // 0 a 1
+                const index = Math.floor(progress * sections.length);
+                const section = sections[Math.min(index, sections.length - 1)];
+
+                // Cambiar título, texto e imagen dinámicamente
+                titleEl.innerText = section.title;
+                textEl.innerText = section.text;
+                imgEl.src = section.img;
+            }
+        }
+    });
+
+</script>
+
+<section class="TextLarge">
+    <div>
+        <h2 class="white">Contexto:</h2>
+        <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
+            rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
+            población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
+            Comisión Nacional de Vivienda en 2020</p>
+        <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
+            la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
+            situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
+            que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
+        <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
+            vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
+            accesibles, marcando un cambio de paradigma en la construcción. </p>
+    </div>
+</section>
+
+<section class="TextLarge">
+    <div>
+        <h2 class="white">Contexto:</h2>
+        <p>Las viviendas prefabricadas destacan por su eficiencia y adaptabilidad, permitiendo la integración de
+            módulos para atender necesidades diversas, desde familias pequeñas hasta desarrollos multifamiliares.
+            Además, su diseño modular y facilidad de transporte hacen que sean ideales para comunidades con
+            infraestructura limitada, ofreciendo una solución sostenible y práctica 3. </p>
+        <p>Ante los desafíos actuales en la construcción de vivienda, la edificación modular es una alternativa
+            viable y estratégica frente a los métodos tradicionales. Su principal ventaja radica en la reducción
+            significativa de costos y tiempos de entrega, lo que permite acelerar la disponibilidad de vivienda sin
+            comprometer la calidad. </p>
+        <p>Este modelo de construcción se basa en la producción industrializada de módulos, lo que garantiza un
+            control de calidad constante y minimiza el desperdicio de materiales, optimizando así los recursos.
+            Además, su impacto ambiental es considerablemente menor en comparación con las técnicas convencionales.
+            Ejemplos exitosos de su implementación pueden observarse en países como Japón, donde esta metodología ha
+            permitido la rápida expansión del parque habitacional 4.</p>
+    </div>
+</section>
+
+<script src="/js/gsap.min.js"></script>
+<script src="/js/ScrollTrigger.min.js"></script>
+<script src="/js/lenis.min.js"></script>
+<script src="/js/splitting.min.js"></script>
+
+
+
+
+
+
+<script>    gsap.registerPlugin(ScrollTrigger);
+
+    const canvas = document.getElementById("image-sequence");
+    const context = canvas.getContext("2d");
+
+    const frameStart = 10000;
+    const frameEnd = 14307;
+    const frameCount = frameEnd - frameStart + 1;
+    const currentFrame = index => `img/sequence_ours/Sequence 01_${frameStart + index}.jpg`;
+
+    const images = [];
+    const imageSeq = { frame: 0 };
+
+    for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+        images.push(img);
+    }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        render();
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function render() {
+        const img = images[imageSeq.frame];
+        if (img && img.complete) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
+    }
+
+    // Pin de la secuencia
+    ScrollTrigger.create({
+        trigger: ".video-scroll-wrapper",
+        start: "top top",
+        endTrigger: ".text-image-section",
+        end: "top top",
+        pin: ".video-fullscreen",
+        pinSpacing: false, // evita espacio extra
+        scrub: false,
+        markers: true
+    });
+
+    // Animación de frames ligada al scroll
+    gsap.to(imageSeq, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".video-scroll-wrapper",
+            start: "top top",
+            endTrigger: ".TextLarge",
+            end: "top top",
+            scrub: 1
+        },
+        onUpdate: render
+    });
+
+    // Fade out cuando llega el texto
+    gsap.to(".video-fullscreen", {
+        opacity: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: ".TextLarge",
+            start: "top bottom",
+            end: "top center",
+            scrub: true
+        }
+    });
+
+    images[0].onload = render;</script>
 </body>
+
 </html>

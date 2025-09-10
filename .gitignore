@@ -3,3 +3,5 @@ node_modules
 .parcel-cache
 package-lock.jsonimg/Branding INDI x.ai
 /video
+
+img/sequence_ours/
