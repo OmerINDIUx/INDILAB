@@ -5,6 +5,8 @@
     <!-- <link id="menu-css" rel="stylesheet" href="/css/base.css"> -->
     <link id="menu-css" rel="stylesheet" href="/css/landing.css">
     <link id="menu-css" rel="stylesheet" href="/css/landing-menu.css">
+        <link id="menu-css" rel="stylesheet" href="/css/layout/scroll_down.css">
+
 
 
 
@@ -155,7 +157,27 @@
     </div>
 </div>
 
+<div class="scroll-animation">
+    
+        <img src="img/Scroll Down.gif" alt="scroll down">
 
+    </div>
+
+
+
+
+    <script>
+      window.addEventListener('scroll', function () {
+        const scrollY = window.scrollY;
+        const scrollElement = document.querySelector('.scroll-animation');
+
+        if (scrollY > 500) {
+          scrollElement.classList.add('hidden');
+        } else {
+          scrollElement.classList.remove('hidden');
+        }
+      });
+    </script>
 <!-- <div class="reveal-texts-container">
   <div class="reveal-text">We design, prototype, and pilot solutions that address the </div>
 

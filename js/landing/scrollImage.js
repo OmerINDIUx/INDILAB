@@ -12,8 +12,8 @@ const sections = [
     img: "../../img/landing/parking twin.png"
   },
   {
-    title: "Priotitary:",
-    text: "Desing del parking.",
+    title: "Participatory Design: Linear Park Underneath Elevated Highway",
+    text: "We flip the traditional design process: the people who use public space get a say in how it looks, works, functions, and evolves. Through co-design workshops, user surveys, and embedded planning sessions with impacted population, we are integrating community voices and key stakeholders into early design phases of a linear park. Grounded in existing legal frameworks, this participatory methodology ensures design decisions reflect real-world needs and use cases. The model is modular and scalable, designed for replication across future urban projects. It also aims to establish a co-governance and co-management framework for the park, grounded in urban commons theory.",
     img: "../../img/landing/paticipatory design.jpg"
   }
 ];
