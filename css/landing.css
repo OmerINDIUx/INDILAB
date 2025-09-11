@@ -240,8 +240,41 @@ section {
   justify-content: center;
   padding: 4rem;
   color: #1a1a1a; /* 👈 Color texto */
-  background: #fff; /* opcional, para contrastar */
+  background: #eee; /* opcional, para contrastar */
 }
+
+/* NOISE para text-column */
+.text-column::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+.text-column {
+  position: relative; /* necesario para que ::before se posicione relativo al contenedor */
+  overflow: hidden;   /* para que el noise no se salga */
+  background-color: #eee; /* opcional, para mantener consistencia */
+}
+
+/* Hacer que el contenido del text-column esté encima del noise */
+.text-column > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
 
 .text-column .title {
   font-size: 2.5rem;
