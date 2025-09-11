@@ -21,26 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
   texts.forEach((textEl, i) => {
     let fullText = textEl.innerText.trim();
     if (!fullText) return;
-
     textEl.innerText = "";
 
     let tl = gsap.timeline({
       scrollTrigger: {
-        trigger: textEl.closest("section") || textEl,
-        start: "top 80%",
-        end: "bottom 20%",
-        scrub: true,   // 👈 ahora todo el timeline se liga al scroll
+        trigger: `.tittle:nth-of-type(${i + 1})`, // 👈 Cada sección controla un texto
+        start: "top center",
+        end: "bottom center",
+        scrub: true,
         markers: false,
       }
     });
 
-    // 1. Fade in
-    tl.fromTo(textEl, { opacity: 0, y: 20 }, { opacity: 1, y: 0 });
-
-    // 2. Escritura progresiva
-    tl.to(textEl, { text: fullText, ease: "none" });
-
-    // 3. Fade out
-    tl.to(textEl, { opacity: 0 });
+    tl.fromTo(textEl, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
+      .to(textEl, { text: fullText, ease: "none" })
+      .to(textEl, { opacity: 0 });
   });
 });
