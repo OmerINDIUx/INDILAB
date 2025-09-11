@@ -1,0 +1,134 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #eee;
+}
+
+/* Hero */
+.hero {
+  background: #eee;
+  padding: 100px 20px;
+}
+
+/* Blog Section */
+.blog-section {
+  padding: 60px 10%;
+}
+
+.blog-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: block;
+  margin: 100px auto 40px auto;
+  max-width: 400px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.blog-item {
+    max-width: 400px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.blog-item:hover {
+  transform: translateY(-5px);
+}
+
+.blog-thumb {
+  width: 100%;
+  display: block;
+}
+
+.blog-info {
+  padding: 15px;
+}
+
+.blog-title {
+    font-family: work-sans, sans-serif;
+    font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #eee  ;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: #eee;
+      font-family: work-sans, sans-serif;
+    font-weight: 400;
+}
+
+/* ===================
+   GRAIN / NOISE
+   =================== */
+body::before,
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+body::before {
+  position: fixed; /* cubre toda la pantalla */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.hero {
+  position: relative; /* necesario para contener el ::before */
+  overflow: hidden;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1; /* que el texto quede arriba del grain */
+}
+
+/* ANIMACIÓN NOISE */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}

@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       end,
       scrub: 0.8,
       pinSpacing: true,
-      markers: true,
+      markers: false
+,
     },
   });
 

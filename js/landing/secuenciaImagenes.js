@@ -42,7 +42,8 @@
         pin: ".video-fullscreen",
         pinSpacing: false, // evita espacio extra
         scrub: false,
-        markers: true
+        markers: false
+
     });
 
     // Animación de frames ligada al scroll

@@ -79,7 +79,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       start: "top top",
       end: "center top",
       scrub: 1,
-      markers: true,
+      markers: false
+,
     },
   });
 

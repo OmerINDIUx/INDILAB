@@ -13,11 +13,7 @@
         }
 
         /* contenedor principal (puedes posicionarlo donde quieras: fixed, absolute, relative) */
-        main,
-        body {
-            /* evita scroll inesperado si pones fixed */
-            min-height: 100vh;
-        }
+
 
         /* Ajusta la posición: aquí lo centramos horizontalmente y lo dejamos a 24px del top */
         main-menu,
