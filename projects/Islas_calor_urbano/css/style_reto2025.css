@@ -1,19 +1,29 @@
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #eee;
-      justify-content: center;
-      align-items: center;
-      height: 390vh;
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Work Sans", sans-serif;
 
+  background-color: #eeeeee;
+  overflow-x: hidden;
+  position: relative;
+}
 
+/* Fondo noise global en el body */
+body::before {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background-image: url("../../../img/noise.png");
+  background-repeat: repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
 
-      
-      width: calc(100% - 100px);
-      height: 100vh;
-    }
 
     .gif-container {
       position: fixed;
@@ -192,6 +202,59 @@
       font-size: 2rem;
       color: black;
     }
+
+
+
+
+
+    
+.Title {
+  width: 30vw;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 4vh auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  color: #eee;
+  background: transparent;
+}
+
+.Title h2,
+.Title h3 {
+  font-family: "Work Sans", sans-serif;
+  color: #eee;
+  font-weight: 600;
+  /*
+    text-shadow: Esta propiedad aplica una sombra al texto del elemento.
+    - El primer valor (0 0 16px #000) indica una sombra negra con un desenfoque de 16px.
+    - El segundo valor (0 0 32px #000) añade una sombra adicional negra con un desenfoque de 32px.
+    Puedes editar los valores de desplazamiento (primeros dos números), el radio de desenfoque (tercer número) y el color (#000) para cambiar el efecto visual de la sombra en el texto.
+  */
+  text-shadow: 0 0 16px #000000a8;
+  margin: 0.5rem 0;
+}
+
+.Title h2 {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.Title h1 {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: #eee;
+  font-size: 3rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px #000000a8;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.Title h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
 
 
     /* ANIMACIÓN NOISE */

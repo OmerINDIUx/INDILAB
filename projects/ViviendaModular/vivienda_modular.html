@@ -26,6 +26,8 @@
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
+    <script type="module" src="/js/demo4/traduction.js"></script>
+
 
 
 </head>
@@ -34,7 +36,6 @@
     <a href="index.html">
         <div class="secundary-brand"></div>
     </a>
-
     <script>
         const container = document.querySelector('.secundary-brand');
         fetch('/svg/indi-lab_Vertical_Animate.svg')
@@ -44,8 +45,6 @@
             })
             .catch(err => console.error('Error cargando SVG:', err));
     </script>
-
-
 
 
 
@@ -79,13 +78,6 @@
                 console.error("Ocurrió un error al cargar el menú:", error);
             });
     </script>
-
-
-
-
-
-    </header>
-
 
 
     <div class="video-scroll-wrapper">
@@ -196,7 +188,7 @@
     <script src="/js/splitting.min.js"></script>
 
 
-    <script>document.addEventListener("DOMContentLoaded", () => {
+    <!-- <script>document.addEventListener("DOMContentLoaded", () => {
   const path = document.body.getAttribute("data-i18n-path");
 
   fetch(path)
@@ -208,8 +200,7 @@
       });
     });
 });
-</script>
-  <script type="module" src="/js/demo4/traduction.js"></script>
+</script> -->
 
 </body>
 

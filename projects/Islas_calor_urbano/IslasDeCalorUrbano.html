@@ -13,6 +13,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <link rel="stylesheet" href="css/style_reto2025.css">
+  <script type="module" src="/js/demo4/traduction.js"></script>
+
 
 </head>
 
@@ -153,28 +155,28 @@
     </div>
   </section>
 
-  
-<section class="TextLarge">
-        <div>
-            <h2 class="white">Contexto:</h2>
-            <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
-                rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
-                población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
-                Comisión Nacional de Vivienda en 2020</p>
-            <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
-                la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
-                situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
-                que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
-            <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
-                vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
-                accesibles, marcando un cambio de paradigma en la construcción. </p>
-        </div>
-    </section>
+
+  <section class="TextLarge">
+    <div>
+      <h2 class="white">Contexto:</h2>
+      <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
+        rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
+        población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
+        Comisión Nacional de Vivienda en 2020</p>
+      <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
+        la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
+        situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
+        que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
+      <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
+        vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
+        accesibles, marcando un cambio de paradigma en la construcción. </p>
+    </div>
+  </section>
 
 
 
-  
-<script>
+
+  <script>
     gsap.registerPlugin(ScrollTrigger);
 
     // Inicialmente, solo el primer gif visible
@@ -207,45 +209,55 @@
         }
       });
 
-          // Fade out cuando llega el texto
-    gsap.to("#fullscreen1", {
+      // Fade out cuando llega el texto
+      gsap.to("#fullscreen1", {
         opacity: 0,
         ease: "power2.out",
         scrollTrigger: {
-            trigger: ".TextLarge",
-            start: "top top",
-            end: "top center",
-            scrub: true
+          trigger: ".TextLarge",
+          start: "top top",
+          end: "top center",
+          scrub: true
         }
-    });
+      });
     });
 
   </script>
 
 
-<div class="archivo-erick-islas" style="width:100%;max-width:900px;margin:auto;">
-  <!-- Inserta el contenido del archivo HTML externo -->
-  <div id="islasdecalor-erick-placeholder" style="width:100%;min-height:600px;"></div>
-  <script>
-    fetch('/inserciones/islasdecalor/islasdecalor-erick.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error al cargar islasdecalor-erick.html: ${response.status} ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then(html => {
-        const placeholder = document.getElementById('islasdecalor-erick-placeholder');
-        if (!placeholder) {
-          throw new Error("Elemento con id 'islasdecalor-erick-placeholder' no encontrado en el DOM");
-        }
-        placeholder.innerHTML = html;
+  <div class="archivo-erick-islas" style="width:100%;max-width:900px;margin:auto;">
+    <!-- Inserta el contenido del archivo HTML externo -->
+    <div id="islasdecalor-erick-placeholder" style="width:100%;min-height:600px;"></div>
+    <script>
+      fetch('/inserciones/islasdecalor/islasdecalor-erick.html')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error al cargar islasdecalor-erick.html: ${response.status} ${response.statusText}`);
+          }
+          return response.text();
+        })
+        .then(html => {
+          const placeholder = document.getElementById('islasdecalor-erick-placeholder');
+          if (!placeholder) {
+            throw new Error("Elemento con id 'islasdecalor-erick-placeholder' no encontrado en el DOM");
+          }
+          placeholder.innerHTML = html;
 
-        // Cargar Leaflet JS si no está presente
-        if (!window.L) {
-          const leafletScript = document.createElement('script');
-          leafletScript.src = "https://unpkg.com/leaflet/dist/leaflet.js";
-          leafletScript.onload = () => {
+          // Cargar Leaflet JS si no está presente
+          if (!window.L) {
+            const leafletScript = document.createElement('script');
+            leafletScript.src = "https://unpkg.com/leaflet/dist/leaflet.js";
+            leafletScript.onload = () => {
+              // Ejecutar los scripts embebidos del HTML insertado
+              const scripts = placeholder.querySelectorAll("script");
+              scripts.forEach(s => {
+                if (s.textContent) {
+                  eval(s.textContent);
+                }
+              });
+            };
+            document.body.appendChild(leafletScript);
+          } else {
             // Ejecutar los scripts embebidos del HTML insertado
             const scripts = placeholder.querySelectorAll("script");
             scripts.forEach(s => {
@@ -253,45 +265,34 @@
                 eval(s.textContent);
               }
             });
-          };
-          document.body.appendChild(leafletScript);
-        } else {
-          // Ejecutar los scripts embebidos del HTML insertado
-          const scripts = placeholder.querySelectorAll("script");
-          scripts.forEach(s => {
-            if (s.textContent) {
-              eval(s.textContent);
-            }
-          });
-        }
-        console.log("islasdecalor-erick.html cargado correctamente ✅");
-      })
-      .catch(err => console.error('Error cargando islasdecalor-erick.html:', err));
-  </script>
-</div>
+          }
+          console.log("islasdecalor-erick.html cargado correctamente ✅");
+        })
+        .catch(err => console.error('Error cargando islasdecalor-erick.html:', err));
+    </script>
+  </div>
 
-<section class="TextLarge">
-        <div>
-            <h2 class="white">Contexto:</h2>
-            <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
-                rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
-                población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
-                Comisión Nacional de Vivienda en 2020</p>
-            <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
-                la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
-                situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
-                que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
-            <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
-                vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
-                accesibles, marcando un cambio de paradigma en la construcción. </p>
-        </div>
-    </section>
+  <section class="TextLarge">
+    <div>
+      <h2 class="white">Contexto:</h2>
+      <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
+        rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
+        población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
+        Comisión Nacional de Vivienda en 2020</p>
+      <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
+        la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
+        situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
+        que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
+      <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
+        vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
+        accesibles, marcando un cambio de paradigma en la construcción. </p>
+    </div>
+  </section>
 
   <script src="/js/gsap.min.js"></script>
   <script src="/js/ScrollTrigger.min.js"></script>
   <script src="/js/lenis.min.js"></script>
   <script src="/js/splitting.min.js"></script>
-    <script type="module" src="/js/demo4/traduction.js"></script>
 
 </body>
 

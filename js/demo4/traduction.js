@@ -2,6 +2,10 @@ let currentLang = "en"; // idioma por defecto al iniciar
 
 function translatePage(lang = "en") {
   const elements = document.querySelectorAll("[data-i18n]");
+  if (elements.length === 0) {
+    console.warn("⚠️ No hay elementos [data-i18n] en el DOM todavía");
+    return;
+  }
 
   // Fade out
   gsap.to(elements, {
@@ -12,9 +16,12 @@ function translatePage(lang = "en") {
     ease: "power1.in",
     onComplete: () => {
       fetch(`/json/${lang}.json`)
-        .then((res) => res.json())
-        .then((translations) => {
-          elements.forEach((el) => {
+        .then(res => {
+          if (!res.ok) throw new Error("Archivo JSON no encontrado");
+          return res.json();
+        })
+        .then(translations => {
+          elements.forEach(el => {
             const key = el.getAttribute("data-i18n");
             const translation = translations[key] || key;
 
@@ -40,7 +47,6 @@ function translatePage(lang = "en") {
             }
           );
 
-          // Actualiza el idioma actual
           currentLang = lang;
         })
         .catch((err) => console.error("Error cargando idioma:", err));
@@ -57,8 +63,8 @@ document.getElementById("lang-toggle")?.addEventListener("click", () => {
     scale: 0.8,
     duration: 0.15,
     onComplete: () => {
-      btn.textContent = nextLang.toUpperCase(); // Mostrar a qué idioma va a cambiar
-      translatePage(nextLang); // Traducir al nuevo idioma
+      btn.textContent = nextLang.toUpperCase();
+      translatePage(nextLang);
 
       gsap.to(btn, {
         scale: 1,
@@ -69,15 +75,40 @@ document.getElementById("lang-toggle")?.addEventListener("click", () => {
   });
 });
 
-// Animación inicial y carga en inglés
+// 🚀 Ahora esperamos a que el menú esté cargado antes de traducir/animar
 window.addEventListener("DOMContentLoaded", () => {
-  gsap.from("[data-i18n]", {
-    opacity: 0,
-    y: 20,
-    duration: 0.5,
-    stagger: 0.03,
-    ease: "power2.out",
-  });
+  fetch('/menu.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const placeholder = document.getElementById('menu-placeholder');
+      if (!placeholder) throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+      placeholder.innerHTML = data;
 
-  translatePage(currentLang); // usa 'en' por defecto
+      // Animación inicial cuando ya existen los [data-i18n]
+      gsap.from("[data-i18n]", {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.03,
+        ease: "power2.out",
+      });
+
+      // Traducción inicial
+      translatePage(currentLang);
+
+      // Cargar el JS del menú después de insertarlo
+      const script = document.createElement('script');
+      script.src = "/js/demo4/menu.js";
+      script.onload = () => console.log("menu.js cargado correctamente ✅");
+      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+      document.body.appendChild(script);
+    })
+    .catch(error => {
+      console.error("Ocurrió un error al cargar el menú:", error);
+    });
 });
