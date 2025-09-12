@@ -2,7 +2,34 @@
 <html lang="es">
 
 <head>
-  <link id="menu-css" rel="stylesheet" href="/css/blog-menu.css">
+  <link id="menu-css" rel="stylesheet" href="/css/base.css">
+
+  <meta charset="UTF-8">
+  <title>Vivienda Modular</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+  <script>document.documentElement.className = "js";</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+
+  <link rel="stylesheet" href="css/style_viviendamodular.css">
+
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/ScrollTrigger.min.js"></script>
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+  <script type="module" src="/js/demo4/traduction.js"></script>
+
+
+
   <link id="menu-css" rel="stylesheet" href="/css/blog.css">
   <!-- Cargar GSAP y plugins -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -18,187 +45,219 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing Blog</title>
-  
+
+
+
+
+
 </head>
 
 <body>
 
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector('.secundary-brand');
+    fetch('/svg/indi-lab_Vertical_Animate.svg')
+      .then(response => response.text())
+      .then(svgText => {
+        container.innerHTML = svgText; // Inserta el SVG como HTML
+      })
+      .catch(err => console.error('Error cargando SVG:', err));
+  </script>
+
+
+
+
+
+  <div id="menu-placeholder"></div>
+
+  <script>
+    fetch('/menu.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        const placeholder = document.getElementById('menu-placeholder');
+        if (!placeholder) {
+          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+        }
+        placeholder.innerHTML = data;
+
+        // Cargar el script después de que el menú esté en el DOM
+        const script = document.createElement('script');
+        script.src = "/js/demo4/menu.js";
+        script.onload = () => console.log("menu.js cargado correctamente ✅");
+        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Ocurrió un error al cargar el menú:", error);
+      });
+  </script>
+
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/ScrollTrigger.min.js"></script>
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+
   <!-- Hero -->
-  <section class="hero">
+  <section class="heroes">
 
-<menu class="main-menu">
 
-    <div class="menu-inner">
-      <div class="secundary-brand3">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px" y="0px" viewBox="0 0 1920 1920" style="enable-background:new 0 0 1920 1920;" xml:space="preserve">
-          <g class="IndiGrup" id="IndiGrup">
-            <g class="colorkey">
-              <path class="keyTop colorkey" id="keyTop" d="M1915,370.5l0,588.9h-129.9l0-438.8c0-18.3,8.7-38.1,21.3-50.8l-0.8-0.8c-12.6,12.7-32.3,21.4-50.4,21.4l-427.9,0V370.5
-                    L1915,370.5z" />
-            </g>
-            <g class="LAB" id="LAB">
-              <path
-                d="M1033.4,1549.5V1250h70.6v218.6c0,9.8-4.7,20.5-11.5,27.4l0.4,0.4c6.8-6.8,17.5-11.5,27.4-11.5h161.3v64.6H1033.4z" />
-              <path d="M1414.9,1250h91.1l112.9,299.4h-75.7l-24-56.5h-118.9l-21.8,56.5H1302L1414.9,1250z M1419.2,1435.2
-                        c32.9,0,47.5-0.4,61.2,4.3c13.7,4.3,25.7,25.2,35.9,43.2l-56.9-152.7L1419.2,1435.2z" />
-              <path d="M1638.2,1549.5V1250h154.4c65,0,106.9,22.7,106.9,74.9c0,14.5-12.8,34.6-39.4,45.8c-6.4,3-15.8,3.8-23.1,4.3v0.9
-                        c7.3-0.4,16.7-0.4,23.5,1.7c41.5,11.5,54.3,37.6,54.3,81.7c0,63.7-41.1,90.3-109.5,90.3H1638.2z M1709.2,1374.1h97.1
-                        c24.8,0,36.8-9.4,36.8-30.8c0-21.4-20.5-30.4-43.2-30.4h-90.7V1374.1z M1709.2,1485.3h103.1c21,0,36.8-11.5,36.8-31.2
-                        c0-16.7-12.4-27.4-32.9-27.4h-106.9V1485.3z" />
-            </g>
-            <g class="INDI" id="INDI">
-              <path d="M5,370.5h130.7v554.6H5V370.5z" />
-              <path
-                d="M183.3,370.5h136.3l264.6,331.2c13.5,16.6,26.1,41.2,33.3,61.8l1.6-0.8c-7.1-19.8-12.7-47.5-12.7-68.9V370.5h130.7v554.6
-                        H600.8L337,596.4c-13.5-16.6-26.9-42-34.1-61.8h-1.6c7.1,20.6,12.7,48.3,12.7,69.7v320.9H183.3V370.5z" />
-              <path d="M279.2,992.5c154.5,0,282.1,88.7,282.1,277.3s-127.6,277.3-282.1,277.3H5V992.5H279.2z M136.5,1138.3
-                        c0,22.2,0,182.2,0,289.2h153.7c57,0,139.5-46.7,139.5-157.7c0-107-81.6-157.7-139.5-157.7h-229
-                        C90.6,1112.2,136.5,1113.7,136.5,1138.3z" />
-              <path d="M608,992.5h130.7v554.6H608V992.5z" />
-            </g>
-          </g>
-        </svg>
-      </div>
 
-      <nav class="menu-links">
-        <a href="/index.html" class="menu__item" data-i18n="menu home"></a>
-        <a href="/index.html/#map" class="menu__item" data-i18n="menu about"></a>
-        <a href="/index.html" class="menu__item" data-i18n="menu projects"></a>
-        <a href="/index.html" class="menu__item" data-i18n="menu contact"></a>
 
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <img class="redes-sociales" src="/img/social_networt_icon/facebook.png" alt="Facebook">
-          </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer">
-            <img class="redes-sociales" src="/img/social_networt_icon/twitter.png" alt="X">
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <img class="redes-sociales" src="/img/social_networt_icon/linkedin.png" alt="LinkedIn">
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img class="redes-sociales" src="/img/social_networt_icon/instagram.png" alt="Instagram">
-          </a>
-        </div>
-      </nav>
-    </div>
-    </menu>
+  <div class="text-container1">
+    <p >
+      INDIlab projects are as flexible and dynamic as urban life itself. Here are a few of the fronts we’re actively exploring:
+    </p>
+  </div>
 
-    <!-- Buscador -->
-    <input type="text" id="searchInput" class="search-bar" placeholder="Buscar artículos..." />
+<div class="filter-buttons">
+  <button data-tag="all" class="active">All</button>
+  <button data-tag="Movilidad">Mobility</button>
+  <button data-tag="Resiliencia">Urban Resilience</button>
+  <button data-tag="Soluciones Digitales">Digital Solutions</button>
+  <button data-tag="Materiales">Materials</button>
+  <button data-tag="Vivienda">Housing</button>
+</div>
+
+
+  <div class="text-container1">
+    <p class="textchange" >
+---    </p>
+  </div>
   </section>
 
   <!-- Blog -->
-  <section class="blog-section" id="blog">
-    <h2 class="blog-heading">Últimos Artículos</h2>
+  <section class="blog-section1" id="blog">
+    <h2 class="blog-heading1">Our works</h2>
+
+    <section id="blog">
 
 
+      <div class="blog-list1" id="blogList">
 
-    <div class="blog-list" id="blogList">
+        <article class="blog-item1" data-tags="Resiliencia">
+          <a href="/projects/Reto2025/reto2025.html">
+            <img src="/projects/Reto2025/images/Riu2025-01.png" alt="Post 2" class="blog-thumb">
+            <div class="blog-info1">
+              <h3 class="blog-title1">Reto de Innovación urbana</h3>
+              <p class="blog-date1">Sept 2025</p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item">
-        <a href="/projects/Reto2025/reto2025.html">
-          <img src="/projects/Reto2025/images/Riu2025-01.png" alt="Post 2" class="blog-thumb">
-          <div class="blog-info">
-            <h3 class="blog-title">Reto de Innovación urbana</h3>
-            <p class="blog-date">Sept 2025</p>
-          </div>
-        </a>
-      </article>
+        <article class="blog-item1" data-tags="Vivienda">
+          <a href="/projects/ViviendaModular/vivienda_modular.html">
+            <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
+            <div class="blog-info1">
+              <h3 class="blog-title1">Vivienda Modular</h3>
+              <p class="blog-date1">Diciembre 2024</p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item">
-        <a href="/projects/ViviendaModular/vivienda_modular.html">
-          <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
-          <div class="blog-info">
-            <h3 class="blog-title">Vivienda Modular</h3>
-            <p class="blog-date">Diciembre 2024</p>
-          </div>
-        </a>
-      </article>
+        <article class="blog-item1" data-tags="Movilidad">
+          <a href="/projects/ElectroMovilidad/electromovilidad.html">
+            <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
+            <div class="blog-info1">
+              <h3 class="blog-title1">Electromovilidad</h3>
+              <p class="blog-date1">Diciembre 2024</p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item">
-        <a href="/projects/ElectroMovilidad/electromovilidad.html">
-          <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
-          <div class="blog-info">
-            <h3 class="blog-title">Electromovilidad</h3>
-            <p class="blog-date">Diciembre 2024</p>
-          </div>
-        </a>
-      </article>
+        <article class="blog-item1" data-tags="Resiliencia">
+          <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+            <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
+              class="blog-thumb">
+            <div class="blog-info1">
+              <h3 class="blog-title1">Islas de Calor Urbanas</h3>
+              <p class="blog-date1">Diciembre 2024</p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item">
-        <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
-          <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
-            class="blog-thumb">
-          <div class="blog-info">
-            <h3 class="blog-title">Islas de Calor Urbanas</h3>
-            <p class="blog-date">Diciembre 2024</p>
-          </div>
-        </a>
-      </article>
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <script>
+      const filterButtons = document.querySelectorAll(".filter-buttons button");
+      const blogItems = document.querySelectorAll(".blog-item1");
+      const textChange = document.querySelector(".textchange");
 
+      // Textos según el tag
+      const tagTexts = {
+        "all": "---",
+        "Vivienda": "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
+        "Soluciones Digitales":"Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
+        "Resiliencia": "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
+        "Movilidad":  "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
+        "Materiales": "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
+      };
 
-  <script>
-    function scrollToBlog() {
-      document.getElementById("blog").scrollIntoView({ behavior: "smooth" });
-    }
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          // Quitar active
+          filterButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
 
-    // 🔎 Lógica de búsqueda
-    const searchInput = document.getElementById("searchInput");
-    const blogList = document.getElementById("blogList");
-    const blogItems = blogList.getElementsByClassName("blog-item");
+          const tag = button.dataset.tag;
 
-    searchInput.addEventListener("keyup", function () {
-      const filter = searchInput.value.toLowerCase();
+          // Filtrar artículos
+          blogItems.forEach(item => {
+            const tags = item.dataset.tags.split(",").map(t => t.trim());
+            if (tag === "all" || tags.includes(tag)) {
+              item.style.display = "";
+            } else {
+              item.style.display = "none";
+            }
+          });
 
-      for (let i = 0; i < blogItems.length; i++) {
-        const title = blogItems[i].querySelector(".blog-title").innerText.toLowerCase();
-        const date = blogItems[i].querySelector(".blog-date").innerText.toLowerCase();
-
-        if (title.includes(filter) || date.includes(filter)) {
-          blogItems[i].style.display = "";
-        } else {
-          blogItems[i].style.display = "none";
-        }
-      }
-    });
-  </script>
-
-
-  <script>
-    // Cargar SVG con fetch
-    fetch("/svg/indi-lab_Square_Animate.svg")
-      .then(res => res.text())
-      .then(svgText => {
-        const wrapper = document.getElementById("logoWrapper");
-        wrapper.innerHTML = svgText;
-
-        // Cambiar colores dinámicamente
-        wrapper.querySelectorAll(".INDI path").forEach(path => path.setAttribute("fill", "#eee"));
-        wrapper.querySelectorAll(".LAB path").forEach(path => path.setAttribute("fill", "#eee"));
-
-        // Animación con GSAP (fade out al hacer scroll)
-        gsap.to(wrapper, {
-          opacity: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: "#cards-section",
-            start: "top bottom",
-            end: "top center",
-            scrub: true
-          }
+          // Cambiar texto
+          textChange.innerText = tagTexts[tag] || tagTexts["all"];
         });
       });
+    </script>
+
+
+
+
+    <script>
+      // Cargar SVG con fetch
+      fetch("/svg/indi-lab_Square_Animate.svg")
+        .then(res => res.text())
+        .then(svgText => {
+          const wrapper = document.getElementById("logoWrapper");
+          wrapper.innerHTML = svgText;
+
+          // Cambiar colores dinámicamente
+          wrapper.querySelectorAll(".INDI path").forEach(path => path.setAttribute("fill", "#eee"));
+          wrapper.querySelectorAll(".LAB path").forEach(path => path.setAttribute("fill", "#eee"));
+
+          // Animación con GSAP (fade out al hacer scroll)
+          gsap.to(wrapper, {
+            opacity: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#cards-section",
+              start: "top bottom",
+              end: "top center",
+              scrub: true
+            }
+          });
+        });
 
 
 
 
 
-  </script>
+    </script>
 </body>
 
 </html>

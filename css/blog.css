@@ -1,4 +1,6 @@
-/* Reset */
+/* ===================
+   RESET
+=================== */
 * {
   margin: 0;
   padding: 0;
@@ -10,52 +12,83 @@ body {
   line-height: 1.6;
   color: #1a1a1a;
   background: #eee;
+  position: relative;
 }
 
-/* Hero */
-.hero {
+/* ===================
+   HERO
+=================== */
+.heroes {
   background: #eee;
-  padding: 100px 20px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;  /* hijos uno debajo del otro */
+  align-items: center;
+  text-align: center;
+  gap: 20px;               /* espacio entre divs */
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
 }
 
-/* Blog Section */
-.blog-section {
+.heroes .text-container1 {
+  max-width: 800px;
+}
+
+/* ===================
+   FILTER BUTTONS
+=================== */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 10px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.filter-buttons button.active {
+  background-color: #555;
+}
+
+/* ===================
+   BLOG
+=================== */
+.blog-section1 {
   padding: 60px 10%;
 }
 
-.blog-heading {
+.blog-heading1 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-.search-bar {
-  display: block;
-  margin: 100px auto 40px auto;
-  max-width: 400px;
-  padding: 12px 15px;
-  font-size: 1rem;
-  border: 1px solid #1a1a1a;
-  border-radius: 8px;
-  width: 100%;
-}
-
-.blog-list {
+.blog-list1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.blog-item {
-    max-width: 350px;
+.blog-item1 {
+  max-width: 350px;
   background-color: #1a1a1a;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   overflow: hidden;
   transition: transform 0.3s;
 }
 
-.blog-item:hover {
+.blog-item1:hover {
   transform: translateY(-5px);
 }
 
@@ -64,62 +97,46 @@ body {
   display: block;
 }
 
-.blog-info {
+.blog-info1 {
   padding: 15px;
 }
 
-.blog-title {
-    font-family: work-sans, sans-serif;
-    font-weight: 700;
+.blog-title1 {
+  font-weight: 700;
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #eee  ;
+  color: #eee;
 }
 
-.blog-date {
+.blog-date1 {
   font-size: 0.9rem;
   color: #eee;
-      font-family: work-sans, sans-serif;
-    font-weight: 400;
+  font-weight: 400;
 }
 
 /* ===================
    GRAIN / NOISE
-   =================== */
+=================== */
 body::before,
-.hero::before {
+.heroes::before {
   content: "";
   position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: url("../../../img/noise.png") repeat;
-  opacity: 0.3;
+  opacity: 0.1;
   pointer-events: none;
   animation: grain 8s steps(10) infinite;
   z-index: 0;
 }
 
-body::before {
-  position: fixed; /* cubre toda la pantalla */
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-.hero {
-  position: relative; /* necesario para contener el ::before */
-  overflow: hidden;
-}
-
-.hero > * {
+.heroes > * {
   position: relative;
-  z-index: 1; /* que el texto quede arriba del grain */
+  z-index: 1; /* texto y botones arriba del noise */
 }
 
-/* ANIMACIÓN NOISE */
 @keyframes grain {
   0%, 100% { transform: translate(0, 0); }
   10% { transform: translate(-5%, -10%); }
@@ -131,4 +148,168 @@ a {
   70% { transform: translate(0%, 15%); }
   80% { transform: translate(3%, 35%); }
   90% { transform: translate(-10%, 10%); }
+}
+
+/* ===================
+   LINKS
+=================== */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+/* ===================
+   TEXT CONTAINERS EN HERO
+=================== */
+.heroes .text-container1 {
+  max-width: 800px;       /* ancho máximo para que no sea muy largo */
+  margin-bottom: 20px;    /* espacio entre textos */
+  padding: 0 10px;        /* padding horizontal para móviles */
+  text-align: center;     /* centrado del texto */
+}
+
+.heroes .text-container1 p {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: opacity 0.4s ease, transform 0.4s ease; /* para animar cambios si quieres fade */
+}
+
+/* Estilo especial para el segundo texto que cambia con los filtros */
+.heroes .text-container1 .textchange {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease; /* fade suave al cambiar */
+}
+
+/* Opcional: efecto fade cuando cambie el texto con JS */
+.textchange.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.textchange.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* HERO */
+.vm-hero {
+  background: #eee;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.vm-hero .vm-text-container1 {
+  max-width: 800px;
+}
+
+/* FILTER BUTTONS */
+.vm-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vm-filter-buttons button {
+  padding: 10px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.vm-filter-buttons button.vm-active {
+  background-color: #555;
+}
+
+/* BLOG */
+.vm-blog-section1 {
+  padding: 60px 10%;
+}
+
+.vm-blog-heading1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.vm-blog-list1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.vm-blog-item1 {
+  max-width: 350px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.vm-blog-item1:hover {
+  transform: translateY(-5px);
+}
+
+.vm-blog-thumb {
+  width: 100%;
+  display: block;
+}
+
+.vm-blog-info1 {
+  padding: 15px;
+}
+
+.vm-blog-title1 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #eee;
+}
+
+.vm-blog-date1 {
+  font-size: 0.9rem;
+  color: #eee;
+  font-weight: 400;
+}
+
+/* TEXTS IN HERO */
+.vm-hero .vm-text-container1 p {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.vm-hero .vm-text-container1 .vm-textchange {
+  margin-top: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Fade effect */
+.vm-textchange.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.vm-textchange.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
