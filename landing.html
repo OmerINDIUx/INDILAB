@@ -2,6 +2,8 @@
 <html lang="es">
 
 <head>
+
+
     <link id="menu-css" rel="stylesheet" href="/css/base.css">
 
     <meta charset="UTF-8">
@@ -20,7 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
 
-    <link rel="stylesheet" href="css/style_viviendamodular.css">
 
     <script src="/js/gsap.min.js"></script>
     <script src="/js/ScrollTrigger.min.js"></script>
@@ -28,77 +29,134 @@
     <script src="/js/splitting.min.js"></script>
     <script type="module" src="/js/demo4/traduction.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js"></script>
 
+  <!-- Estilos -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #eee;        /* fondo corregido */
+      color: #1a1a1a;          /* texto corregido */
+      line-height: 1.8;
+    }
 
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      opacity: 0;
+    }
+
+    ul {
+      margin-bottom: 25px;
+      padding-left: 20px;
+      opacity: 0;
+    }
+
+    li {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 
 <body>
-    <a href="index.html">
-        <div class="secundary-brand"></div>
-    </a>
-    <script>
-        const container = document.querySelector('.secundary-brand');
-        fetch('/svg/indi-lab_Vertical_Animate.svg')
-            .then(response => response.text())
-            .then(svgText => {
-                container.innerHTML = svgText; // Inserta el SVG como HTML
-            })
-            .catch(err => console.error('Error cargando SVG:', err));
-    </script>
+  <!-- Logo -->
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector('.secundary-brand');
+    fetch('/svg/indi-lab_Vertical_Animate.svg')
+      .then(response => response.text())
+      .then(svgText => {
+        container.innerHTML = svgText;
+      })
+      .catch(err => console.error('Error cargando SVG:', err));
+  </script>
 
+  <!-- Menú -->
+  <div id="menu-placeholder"></div>
+  <script>
+    fetch('/menu.html')
+      .then(response => {
+        if (!response.ok) throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+        return response.text();
+      })
+      .then(data => {
+        const placeholder = document.getElementById('menu-placeholder');
+        placeholder.innerHTML = data;
 
+        const script = document.createElement('script');
+        script.src = "/js/demo4/menu.js";
+        document.body.appendChild(script);
+      })
+      .catch(error => console.error("Ocurrió un error al cargar el menú:", error));
+  </script>
 
+  <!-- Contenido -->
+  <div class="container">
+    <h1 style="color: #1a1a1a;">Innovation at the Intersection of Cities, Infrastructure, Technology, and Community</h1>
 
+    <p>INDIx is Grupo INDI’s urban innovation lab and venture platform, an incubator and R&D engine that mobilizes shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate execution and scale transformative urban solutions.</p>
 
-    <div id="menu-placeholder"></div>
+    <p>Our work creates:</p>
 
-    <script>
-        fetch('/menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('menu-placeholder');
-                if (!placeholder) {
-                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-                }
-                placeholder.innerHTML = data;
+    <ul>
+      <li>We design, prototype, and pilot solutions that address the most urgent urban challenges, positioned at the convergence of engineering, technology, and city life.</li>
+      <li>Scalable solutions that evolve into social impact-generating public infrastructure programs, deployable across cities.</li>
+      <li>Civic tech and gov tech ventures with the potential to spin off into public-private partnerships or commercial offerings.</li>
+      <li>Applied research, data analysis, and strategic studies that not only support implementation but also contribute to global urban discourse and policymaking.</li>
+    </ul>
 
-                // Cargar el script después de que el menú esté en el DOM
-                const script = document.createElement('script');
-                script.src = "/js/demo4/menu.js";
-                script.onload = () => console.log("menu.js cargado correctamente ✅");
-                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-                document.body.appendChild(script);
-            })
-            .catch(error => {
-                console.error("Ocurrió un error al cargar el menú:", error);
-            });
-    </script>
+    <p>By tapping into Grupo INDI’s deep bench of talent and technical expertise, we’re able to respond fluidly to the evolving needs of our clients, partners, and collaborators, whether they require bold experimentation or operational precision.</p>
+  </div>
 
-    <script src="/js/gsap.min.js"></script>
-    <script src="/js/ScrollTrigger.min.js"></script>
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
+  <!-- Animaciones -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
 
-
-    <!-- <script>document.addEventListener("DOMContentLoaded", () => {
-  const path = document.body.getAttribute("data-i18n-path");
-
-  fetch(path)
-    .then(res => res.json())
-    .then(translations => {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[key]) el.textContent = translations[key];
+    gsap.utils.toArray("h1, p, ul").forEach(el => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
       });
     });
-});
-</script> -->
 
+    gsap.utils.toArray("li").forEach((li, i) => {
+      gsap.from(li, {
+        opacity: 0,
+        x: -30,
+        duration: 0.8,
+        delay: i * 0.2,
+        scrollTrigger: {
+          trigger: li,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
