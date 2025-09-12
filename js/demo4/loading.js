@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let dotCount = 0;
   const dotInterval = setInterval(() => {
     dotCount = (dotCount + 1) % 4;
-    loadingDots.textContent = "Cargando" + ".".repeat(dotCount);
+    loadingDots.textContent = "." + ".".repeat(dotCount);
   }, 500);
 
   // Simulación de barra de carga
@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Esperar a que termine animación y fuentes
   const loadFont = () => {
-    const observer = new FontFaceObserver("power_grotesk", {
-      weight: 400,
+    const observer = new FontFaceObserver("Work Sans", {
+      weight: 600,
       style: "normal",
     });
     return observer.load(null, 5000);

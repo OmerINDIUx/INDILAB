@@ -34,11 +34,12 @@
 }
 
 .complment_loader {
+  font-family: work-sans, sans-serif;
+  font-weight: 600;
   font-size: 1.4rem;
   color: #eeeeee;
   align-items: center;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .text_load {

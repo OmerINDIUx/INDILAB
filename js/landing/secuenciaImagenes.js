@@ -4,7 +4,7 @@
     const context = canvas.getContext("2d");
 
     const frameStart = 10000;
-    const frameEnd = 14307;
+    const frameEnd = 12595;
     const frameCount = frameEnd - frameStart + 1;
     const currentFrame = index => `img/sequence_ours/Sequence 01_${frameStart + index}.jpg`;
 
