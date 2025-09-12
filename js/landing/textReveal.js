@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let tl = gsap.timeline({
       scrollTrigger: {
-        trigger: `.tittle:nth-of-type(${i + 1})`, // 👈 Cada sección controla un texto
+        trigger: `.tittle:nth-of-type(${i + 1})`,
         start: "top center",
         end: "bottom center",
         scrub: true,
@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tl.fromTo(textEl, { opacity: 0, y: 20 }, { opacity: 1, y: 0 })
       .to(textEl, { text: fullText, ease: "none" })
+      .to({}, { duration: 0.5 }) // 👈 Pausa de medio segundo
       .to(textEl, { opacity: 0 });
   });
 });

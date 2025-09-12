@@ -41,6 +41,11 @@ body::before {
   position: fixed;
 }
 
+.secondary {
+  text-align: center;
+}
+
+
 *[style*="background: #eee"],
 *[style*="background: #eeeeee"],
 *[style*="background-color: #eee"],
@@ -161,8 +166,7 @@ body::before {
 }
 
 .TextLarge h2 {
-  font-family: "power_grotesk_bold";
-  text-transform: uppercase;
+  font: "Work Sans", sans-serif;
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -260,7 +264,7 @@ section {
 
 .text-column {
   position: relative; /* necesario para que ::before se posicione relativo al contenedor */
-  overflow: hidden;   /* para que el noise no se salga */
+  overflow: hidden; /* para que el noise no se salga */
   background-color: #eee; /* opcional, para mantener consistencia */
 }
 
@@ -269,12 +273,6 @@ section {
   position: relative;
   z-index: 1;
 }
-
-
-
-
-
-
 
 .text-column .title {
   font-size: 2.5rem;
