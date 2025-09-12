@@ -1,7 +1,7 @@
 html {
   margin: 0;
   padding: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
 
   background-color: #eeeeee;
   overflow-x: hidden;
@@ -215,7 +215,7 @@ body::before {
   margin: 4vh auto;
   padding: 2rem 1rem;
   text-align: center;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 600;
   color: #eee;
   background: transparent;
@@ -223,7 +223,7 @@ body::before {
 
 .Title h2,
 .Title h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   color: #eee;
   font-weight: 600;
   /*
@@ -242,7 +242,7 @@ body::before {
 }
 
 .Title h1 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 700;
   color: #eee;
   font-size: 3rem;

@@ -3,7 +3,8 @@ body {
   padding: 0;
   color: var(--color-text);
   background-color: var(--color-bg);
-  font-family: "power_grotesk_bold", sans-serif;
+   font-family: "Figtree", sans-serif;
+_bold", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -98,7 +99,8 @@ p {
 }
 
 span {
-  font-family: "power_grotesk_light";
+   font-family: "Figtree", sans-serif;
+_light";
   font-variation-settings: "slnt" 0, "wdth" 100, "wght" 400, "INKT" 400;
 }
 

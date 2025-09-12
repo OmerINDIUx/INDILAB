@@ -6,7 +6,7 @@
 html {
   margin: 0;
   padding: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
 
   background-color: #eeeeee;
   overflow-x: hidden;
@@ -133,7 +133,8 @@ body::before {
 }
 
 .TextLarge h2 {
-  font-family: "power_grotesk_bold";
+   font-family: "Figtree", sans-serif;
+_bold";
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 2rem;
@@ -163,13 +164,14 @@ section {
 
 .card h2,
 .card h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 700;
   margin: 0.5rem 0;
 }
 
 .card h1 {
-  font-family: "power_grotesk_heavy";
+   font-family: "Figtree", sans-serif;
+_heavy";
   text-transform: uppercase;
   margin: 0.5rem 0;
 }

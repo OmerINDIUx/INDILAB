@@ -2,23 +2,20 @@
 <html lang="es">
 
 <head>
-    <!-- <link id="menu-css" rel="stylesheet" href="/css/base.css"> -->
-    <link id="menu-css" rel="stylesheet" href="/css/landing.css">
-    <link id="menu-css" rel="stylesheet" href="/css/landing-menu.css">
-    <link id="menu-css" rel="stylesheet" href="/css/layout/scroll_down.css">
-
-
-
+    <link id="menu-css" rel="stylesheet" href="/css/base.css">
 
     <meta charset="UTF-8">
-    <title>landing</title>
+    <title>Vivienda Modular</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    <!-- 
+
     <script>document.documentElement.className = "js";</script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
@@ -29,364 +26,78 @@
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
- -->
-
+    <script type="module" src="/js/demo4/traduction.js"></script>
 
 
 
 </head>
 
-</header>
-
-
-<!-- HTML (usa tu estructura actual, sólo añade texto en los <a> si quieres) -->
-<menu class="main-menu">
-    <div class="menu-inner">
-        <div class="secundary-brand3">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1920"
-                style="enable-background:new 0 0 1920 1920;" xml:space="preserve">
-                <g class="IndiGrup" id="IndiGrup">
-                    <g class="colorkey">
-                        <path class="keyTop colorkey" id="keyTop" d="M1915,370.5l0,588.9h-129.9l0-438.8c0-18.3,8.7-38.1,21.3-50.8l-0.8-0.8c-12.6,12.7-32.3,21.4-50.4,21.4l-427.9,0V370.5
-                    L1915,370.5z" />
-                    </g>
-                    <g class="LAB" id="LAB">
-                        <path
-                            d="M1033.4,1549.5V1250h70.6v218.6c0,9.8-4.7,20.5-11.5,27.4l0.4,0.4c6.8-6.8,17.5-11.5,27.4-11.5h161.3v64.6H1033.4z" />
-                        <path d="M1414.9,1250h91.1l112.9,299.4h-75.7l-24-56.5h-118.9l-21.8,56.5H1302L1414.9,1250z M1419.2,1435.2
-                        c32.9,0,47.5-0.4,61.2,4.3c13.7,4.3,25.7,25.2,35.9,43.2l-56.9-152.7L1419.2,1435.2z" />
-                        <path d="M1638.2,1549.5V1250h154.4c65,0,106.9,22.7,106.9,74.9c0,14.5-12.8,34.6-39.4,45.8c-6.4,3-15.8,3.8-23.1,4.3v0.9
-                        c7.3-0.4,16.7-0.4,23.5,1.7c41.5,11.5,54.3,37.6,54.3,81.7c0,63.7-41.1,90.3-109.5,90.3H1638.2z M1709.2,1374.1h97.1
-                        c24.8,0,36.8-9.4,36.8-30.8c0-21.4-20.5-30.4-43.2-30.4h-90.7V1374.1z M1709.2,1485.3h103.1c21,0,36.8-11.5,36.8-31.2
-                        c0-16.7-12.4-27.4-32.9-27.4h-106.9V1485.3z" />
-                    </g>
-                    <g class="INDI" id="INDI">
-                        <path d="M5,370.5h130.7v554.6H5V370.5z" />
-                        <path
-                            d="M183.3,370.5h136.3l264.6,331.2c13.5,16.6,26.1,41.2,33.3,61.8l1.6-0.8c-7.1-19.8-12.7-47.5-12.7-68.9V370.5h130.7v554.6
-                        H600.8L337,596.4c-13.5-16.6-26.9-42-34.1-61.8h-1.6c7.1,20.6,12.7,48.3,12.7,69.7v320.9H183.3V370.5z" />
-                        <path d="M279.2,992.5c154.5,0,282.1,88.7,282.1,277.3s-127.6,277.3-282.1,277.3H5V992.5H279.2z M136.5,1138.3
-                        c0,22.2,0,182.2,0,289.2h153.7c57,0,139.5-46.7,139.5-157.7c0-107-81.6-157.7-139.5-157.7h-229
-                        C90.6,1112.2,136.5,1113.7,136.5,1138.3z" />
-                        <path d="M608,992.5h130.7v554.6H608V992.5z" />
-                    </g>
-                </g>
-            </svg>
-        </div>
-
-        <nav class="menu-links">
-            <a href="/index.html" class="menu__item" data-i18n="menu home"></a>
-            <a href="/index.html/#map" class="menu__item" data-i18n="menu about"></a>
-            <a href="/index.html" class="menu__item" data-i18n="menu projects"></a>
-            <a href="/index.html" class="menu__item" data-i18n="menu contact"></a>
-
-            <div class="social-icons">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                    <img class="redes-sociales" src="/img/social_networt_icon/facebook.png" alt="Facebook">
-                </a>
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer">
-                    <img class="redes-sociales" src="/img/social_networt_icon/twitter.png" alt="X">
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                    <img class="redes-sociales" src="/img/social_networt_icon/linkedin.png" alt="LinkedIn">
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                    <img class="redes-sociales" src="/img/social_networt_icon/instagram.png" alt="Instagram">
-                </a>
-            </div>
-        </nav>
-    </div>
-</menu>
-
-
-
-<div class="video-scroll-wrapper">
-    <div class="video-fullscreen">
-        <canvas id="image-sequence"></canvas>
-        <div class="video-overlay"></div>
-    </div>
-</div>
-
-<!-- Canvas del logo (centrado en pantalla) -->
-<div id="logoWrapper"></div>
-
-
-
-
-
-<section class="tittle"></section>
-<section class="tittle"></section>
-<section class="tittle"></section>
-
-<div class="reveal-texts-container">
-    <div class="reveal-text">We design, prototype, and pilot solutions that address the most urgent urban challenges,
-    </div>
-    <div class="reveal-text">positioned at the convergence of engineering, technology, and city life.</div>
-    <div class="reveal-text">Innovation at the Intersection of Cities, Infrastructure, Technology, and Community
-    </div>
-</div>
-
-<div class="scroll-animation">
-
-    <img src="img/Scroll Down.gif" alt="scroll down">
-
-</div>
-
-
-
-
-<script>
-    window.addEventListener('scroll', function () {
-        const scrollY = window.scrollY;
-        const scrollElement = document.querySelector('.scroll-animation');
-
-        if (scrollY > 500) {
-            scrollElement.classList.add('hidden');
-        } else {
-            scrollElement.classList.remove('hidden');
-        }
-    });
-</script>
-<!-- <div class="reveal-texts-container">
-  <div class="reveal-text">We design, prototype, and pilot solutions that address the </div>
-
-</div>
-
-<div class="reveal-texts-container">
-  <div class="reveal-text">Another powerful statement about your work here...</div>
-</div>
-<div class="reveal-texts-container">
- 
-  <div class="reveal-text">Final message that replaces the previous ones.</div>
-</div> -->
-
-<section id="cards-section">
-    <div class="card">
-        <p> INDIlab is Grupo INDI’s <strong>urban innovation lab and venture platform,</strong> an incubator and R&D
-            engine that mobilizes
-            shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate
-            execution and scale transformative urban solutions.
-        </p>
-    </div>
-</section>
-<section>
-    <div class="card">
-        <p><strong>Scalable solutions</strong> <br> that evolve into revenue-generating public infrastructure programs,
-            deployable across
-            cities.
-
-        </p>
-        <br>
-        <p><strong>Civic tech and gov tech ventures </strong> <br>with the potential to spin off into public-private
-            partnerships or
-            commercial offerings.
-        </p>
-        <br>
-
-        <p><strong>Applied research, data analysis, and strategic studies </strong> <br> that not only support
-            implementation but also
-            contribute to global urban discourse and policymaking
-        </p>
-    </div>
-</section>
-
-
-<script src="js/landing/textReveal.js"></script>
-
-
-<section class="TextLarge">
-    <div>
-        <h2 class="white">Infrastructure-Backed Execution</h2>
-        <p class="secondary">
-            Embedded within <strong>Grupo INDI, INDIlab</strong> leverages national-scale construction
-            capacity to reduce R&D risk and accelerate implementation through real-world projects.
-        </p>
-
-        <br>
-
-        <h2 class="white">Prototype–Deploy–Scale Pipeline</h2>
-        <p class="secondary">
-            We turn concepts into pilots, and pilots into replicable solutions—heavy focus on data driven
-            scaling, and IP retention that can be licensed or scaled through public funding.
-        </p>
-
-        <br>
-
-        <h2 class="white">Ecosystem Leverage</h2>
-        <p class="secondary">
-            Strategic partnerships with universities, non-profits, civic tech startups, and governments.
-        </p>
-    </div>
-</section>
-
-
-
-
-<section class="text-image-section">
-    <div class="container">
-        <div class="text-column">
-            <h2 class="title"></h2>
-            <p class="text-content"></p>
-        </div>
-        <div class="image-column">
-            <img src="img/landing/computer vision.png" alt="Imagen 1" class="image-content">
-        </div>
-    </div>
-</section>
-
-<section class="text-image-section">
-    <div class="container">
-        <div class="image-column">
-            <img src="img/landing/urban magrove.jpg" alt="Imagen 1" class="image-content">
-        </div>
-        <div class="text-column">
-            <h2 class="title"></h2>
-            <p class="text-content"></p>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- 
-<section class="text-image-section">
-    <div class="container">
-        <div class="text-column">
-            <h2 class="title">Contextsso:</h2>
-            <p class="text-content">Malgo del parking.</p>
-        </div>
-        <div class="image-column">
-            <img src="img/landing/parking twin.png" alt="Imagen 1" class="image-content">
-        </div>
-    </div>
-</section>
-
-
-
-<section class="text-image-section">
-    <div class="container">
-        <div class="text-column">
-            <h2 class="title">priotitary:</h2>
-            <p class="text-content">desing del parking.</p>
-        </div>
-        <div class="image-column">
-            <img src="img/landing/paticipatory design.jpg" alt="Imagen 1" class="image-content">
-        </div>
-    </div>
-</section> -->
-
-
-
-
-
-<script src="js/landing/scrollImage.js"></script>
-
-
-<section class="TextLarge">
-    <div>
-        <h2 class="white">Additional Projects
-        </h2>
-        <p class="secondary">
-            INDIx projects are as flexible and dynamic as urban life itself. Here are a few of the additional fronts
-            we’re actively exploring:
-
-        </p>
-
-        <br>
-
-        <h2 class="white">Housing.</h2>
-        <p class="secondary">
-            We’re doing research around alternative models of affordable housing, ownership, and financing to address
-            structural barriers in the housing system and unlock more inclusive pathways to home access.
-
-        </p>
-
-        <br>
-
-        <h2 class="white">Organizational Consulting. </h2>
-        <p class="secondary">
-            We provide tailored consulting services focused on process optimization, digital tools, and internal policy
-            improvements, enhancing how teams work across sectors and domains.
-
-        </p>
-
-        <br>
-
-        <h2 class="white">Policy Design and Legislative Strategy</h2>
-        <p class="secondary">
-            Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and
-            support the drafting of legislative frameworks that can scale innovation responsibly.
-
-        </p>
-        <br>
-
-
-        <h2 class="white">Urban Sensors and Micro-Scale Data. </h2>
-        <p class="secondary">
-            We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water
-            levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public
-            health and urban livability. </p>
-    </div>
-</section>
-
-
-
-<script src="/js/gsap.min.js"></script>
-<script src="/js/ScrollTrigger.min.js"></script>
-<script src="/js/lenis.min.js"></script>
-<script src="/js/splitting.min.js"></script>
-<script type="module" src="js/demo4/traduction2.js"></script>
-
-
-<script src="js/landing/secuenciaImagenes.js"></script>
-
-
-
-
-<script>
-    // Cargar SVG con fetch
-    fetch("/svg/indi-lab_Square_Animate.svg")
-        .then(res => res.text())
-        .then(svgText => {
-            const wrapper = document.getElementById("logoWrapper");
-            wrapper.innerHTML = svgText;
-
-            // Cambiar colores dinámicamente
-            wrapper.querySelectorAll(".INDI path").forEach(path => path.setAttribute("fill", "#eee"));
-            wrapper.querySelectorAll(".LAB path").forEach(path => path.setAttribute("fill", "#eee"));
-
-            // Animación con GSAP (fade out al hacer scroll)
-            gsap.to(wrapper, {
-                opacity: 0,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#cards-section",
-                    start: "top bottom",
-                    end: "top center",
-                    scrub: true
+<body>
+    <a href="index.html">
+        <div class="secundary-brand"></div>
+    </a>
+    <script>
+        const container = document.querySelector('.secundary-brand');
+        fetch('/svg/indi-lab_Vertical_Animate.svg')
+            .then(response => response.text())
+            .then(svgText => {
+                container.innerHTML = svgText; // Inserta el SVG como HTML
+            })
+            .catch(err => console.error('Error cargando SVG:', err));
+    </script>
+
+
+
+
+
+    <div id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
                 }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
             });
-        });
+    </script>
 
-</script>
+    <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Lista de colores posibles
-        const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+    <!-- <script>document.addEventListener("DOMContentLoaded", () => {
+  const path = document.body.getAttribute("data-i18n-path");
 
-        // Seleccionamos todos los <strong> y los <h2 class="white">
-        const elements = document.querySelectorAll("strong, h2.white");
-
-        elements.forEach(el => {
-            // Color aleatorio
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            el.style.color = randomColor;
-        });
+  fetch(path)
+    .then(res => res.json())
+    .then(translations => {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[key]) el.textContent = translations[key];
+      });
     });
-</script>
+});
+</script> -->
 
 </body>
 

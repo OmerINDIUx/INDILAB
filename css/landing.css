@@ -4,7 +4,7 @@
 html {
   margin: 0;
   padding: 0;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   background-color: #eee;
   overflow-x: hidden;
   position: relative;
@@ -194,14 +194,15 @@ section {
 }
 
 .card h1 {
-  font-family: "power_grotesk_heavy";
+   font-family: "Figtree", sans-serif;
+_heavy";
   text-transform: uppercase;
   margin: 0.5rem 0;
 }
 
 .card h2,
 .card h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 700;
   margin: 0.5rem 0;
 }
@@ -317,7 +318,7 @@ section {
 }
 
 .reveal-text {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-size: 2rem;
   font-weight: 600;
   color: #eee;

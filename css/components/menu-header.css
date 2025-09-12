@@ -61,7 +61,7 @@
    ITEMS DE MENÚ
 ============================== */
 .menu__item {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 600;
   font-size: 2rem;
   color: black;
@@ -336,7 +336,7 @@
   flex-direction: column;
 }
 .blog-title {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Figtree", sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
   font-weight: 600;
