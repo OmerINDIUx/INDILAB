@@ -20,7 +20,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
 
-  <link rel="stylesheet" href="css/style_viviendamodular.css">
 
   <script src="/js/gsap.min.js"></script>
   <script src="/js/ScrollTrigger.min.js"></script>
@@ -113,7 +112,7 @@
 
   <div class="text-container1">
     <p >
-      INDIlab projects are as flexible and dynamic as urban life itself. Here are a few of the fronts we’re actively exploring:
+     <span> INDIlab projects </span>are as flexible and dynamic as urban life itself. Here are a few of the fronts we’re actively exploring:
     </p>
   </div>
 
@@ -185,79 +184,72 @@
 
       </div>
     </section>
-
     <script>
-      const filterButtons = document.querySelectorAll(".filter-buttons button");
-      const blogItems = document.querySelectorAll(".blog-item1");
-      const textChange = document.querySelector(".textchange");
+      document.addEventListener("DOMContentLoaded", () => {
+        // Lista de colores posibles
+        const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
 
-      // Textos según el tag
-      const tagTexts = {
-        "all": "---",
-        "Vivienda": "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
-        "Soluciones Digitales":"Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
-        "Resiliencia": "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
-        "Movilidad":  "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
-        "Materiales": "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
-      };
+        // Seleccionamos todos los <span> y los <h2 class="white">
+        const elements = document.querySelectorAll("span, h2.white");
 
-      filterButtons.forEach(button => {
-        button.addEventListener("click", () => {
-          // Quitar active
-          filterButtons.forEach(btn => btn.classList.remove("active"));
-          button.classList.add("active");
-
-          const tag = button.dataset.tag;
-
-          // Filtrar artículos
-          blogItems.forEach(item => {
-            const tags = item.dataset.tags.split(",").map(t => t.trim());
-            if (tag === "all" || tags.includes(tag)) {
-              item.style.display = "";
-            } else {
-              item.style.display = "none";
-            }
-          });
-
-          // Cambiar texto
-          textChange.innerText = tagTexts[tag] || tagTexts["all"];
+        elements.forEach((el) => {
+          // Color aleatorio
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          el.style.color = randomColor;
         });
       });
     </script>
+<script>
+  const filterButtons = document.querySelectorAll(".filter-buttons button");
+  const blogItems = document.querySelectorAll(".blog-item1");
+  const textChange = document.querySelector(".textchange");
+
+  // Textos según el tag, con <span>
+  const tagTexts = {
+    "all": "---",
+    "Vivienda": "<span>Housing.</span> We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
+    "Soluciones Digitales":"<span>Urban Sensors and Micro-Scale Data.</span> We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
+    "Resiliencia": "<span>Policy Design and Legislative Strategy.</span> Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
+    "Movilidad":  "<span>Organizational Consulting.</span> We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
+    "Materiales": "<span>Exploring sustainable and innovative materials</span> to improve urban construction and environmental performance."
+  };
+
+  // Función para dar color random a spans y h2.white
+  function colorize() {
+    const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+    const elements = textChange.querySelectorAll("span, h2.white");
+    elements.forEach((el) => {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      el.style.color = randomColor;
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // Quitar active
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const tag = button.dataset.tag;
+
+      // Filtrar artículos
+      blogItems.forEach(item => {
+        const tags = item.dataset.tags.split(",").map(t => t.trim());
+        item.style.display = (tag === "all" || tags.includes(tag)) ? "" : "none";
+      });
+
+      // Cambiar texto con HTML y recolorear
+      textChange.innerHTML = tagTexts[tag] || tagTexts["all"];
+      colorize();
+    });
+  });
+
+  // Colorear al cargar por primera vez
+  document.addEventListener("DOMContentLoaded", colorize);
+</script>
 
 
 
-
-    <script>
-      // Cargar SVG con fetch
-      fetch("/svg/indi-lab_Square_Animate.svg")
-        .then(res => res.text())
-        .then(svgText => {
-          const wrapper = document.getElementById("logoWrapper");
-          wrapper.innerHTML = svgText;
-
-          // Cambiar colores dinámicamente
-          wrapper.querySelectorAll(".INDI path").forEach(path => path.setAttribute("fill", "#eee"));
-          wrapper.querySelectorAll(".LAB path").forEach(path => path.setAttribute("fill", "#eee"));
-
-          // Animación con GSAP (fade out al hacer scroll)
-          gsap.to(wrapper, {
-            opacity: 0,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: "#cards-section",
-              start: "top bottom",
-              end: "top center",
-              scrub: true
-            }
-          });
-        });
-
-
-
-
-
-    </script>
 </body>
 
 </html>

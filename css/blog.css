@@ -13,6 +13,8 @@ body {
   color: #1a1a1a;
   background: #eee;
   position: relative;
+      width: calc(100% - 100px);
+        margin-left: 100px;
 }
 
 /* ===================
@@ -158,6 +160,11 @@ a {
   text-decoration: none;
 }
 
+span {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        color: inherit; /* hereda el color de la sección */
+      }
 
 
 /* ===================
