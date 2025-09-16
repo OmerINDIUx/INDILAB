@@ -187,9 +187,7 @@
         color: inherit; /* hereda el color de la sección */
       }
 
-
-
-          .list2 {
+      .list2 {
         background-color: #eeeeee;
         color: #1a1a1a;
         display: flex;
@@ -200,8 +198,6 @@
         overflow: hidden;
         position: relative;
       }
-
-
 
       .list2 span {
         font-family: "Figtree", sans-serif;
@@ -248,8 +244,8 @@
       /* Efecto noise para todos los fondos claros (#eee / #eeeeee) */
       body::before,
       .intro::before,
-      .list::before,      .list2::before,
-
+      .list::before,
+      .list2::before,
       section[style*="background-color: #eee"]::before,
       section[style*="background-color: #eeeeee"]::before {
         content: "";
@@ -367,13 +363,13 @@
         scaled through public funding.
       </div>
       <div class="phrase">
-        <span> Ecosystem Leverage​ </span><br>
+        <span> Ecosystem Leverage​ </span><br />
         Strategic partnerships with universities, non-profits, civic tech
         startups, and governments.
       </div>
 
       <div class="phrase">
-        <span> Data & Collective Intelligence​ </span><br>
+        <span> Data & Collective Intelligence​ </span><br />
         Our projects are both data-driven and guided by collective
         intelligence—combining quantitative analysis with community engagement
         strategies to ensure that every intervention is context-sensitive,
@@ -467,98 +463,84 @@
       });
     </script>
 
-
-
-
     <section class="list2">
       <div class="phrase2">
+        <span>Experimental + Data Driven Approach​</span> <br />
 
+        Data driven, small scale interventions, impact assessment​
 
-<span>Experimental + Data Driven Approach​</span> <br>
+        <br /><br />
+        <span>Urban Spaces</span> <br />
 
-Data driven, small scale interventions, impact assessment​
+        Public spaces + urban life​
+        <br /><br />
 
-<br><br>
-<span>Urban Spaces</span> <br>
+        ​
 
-Public spaces + urban life​
-<br><br>
+        <span>Mobility​</span><br />
 
-​
-
-<span>Mobility​</span><br>
-
-Road safety, electromobility, tactical urbanism
-
-
+        Road safety, electromobility, tactical urbanism
       </div>
 
-<div class="phrase2">
+      <div class="phrase2">
+        <span>Housing​</span> <br />
 
+        Co-housing, land trusts, modular housing​
+        <br /><br />
+        <span>Materials and processes</span> <br />
 
-<span>Housing​</span> <br>
+        Eco-friendly, innovative materials and construction processes
+        <br /><br />
 
-Co-housing, land trusts, modular housing​
-<br><br>
-<span>Materials and processes</span> <br>
+        ​
 
-Eco-friendly, innovative materials and construction processes
-<br><br>
+        <span>Digital tools​</span><br />
 
-​
-
-<span>Digital tools​</span><br>
-
-GIS platforms, computer vision models, digital twins
-
-
+        GIS platforms, computer vision models, digital twins
       </div>
-
-      
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
-  gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger);
 
-  // Seleccionamos todas las frases de la lista 2
-  const phrases2 = gsap.utils.toArray(".list2 .phrase2");
+      // Seleccionamos todas las frases de la lista 2
+      const phrases2 = gsap.utils.toArray(".list2 .phrase2");
 
-  // Timeline general para el efecto de scroll
-  let tl2 = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".list2", // apuntamos a la sección correcta
-      start: "top top",
-      end: "+=" + phrases2.length * 2 * window.innerHeight, // usamos phrases2
-      scrub: true,
-      pin: true,
-    },
-  });
+      // Timeline general para el efecto de scroll
+      let tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".list2", // apuntamos a la sección correcta
+          start: "top top",
+          end: "+=" + phrases2.length * 2 * window.innerHeight, // usamos phrases2
+          scrub: true,
+          pin: true,
+        },
+      });
 
-  // Animamos cada frase de manera secuencial
-  phrases2.forEach((phrase, i) => {
-    const fadeInTime = i * 2; // momento de fade in
-    const fadeOutTime = fadeInTime + 1; // momento de fade out
+      // Animamos cada frase de manera secuencial
+      phrases2.forEach((phrase, i) => {
+        const fadeInTime = i * 2; // momento de fade in
+        const fadeOutTime = fadeInTime + 1; // momento de fade out
 
-    // Fade in: aparece desde abajo
-    tl2.fromTo(
-      phrase,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-      fadeInTime
-    );
+        // Fade in: aparece desde abajo
+        tl2.fromTo(
+          phrase,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+          fadeInTime
+        );
 
-    // Fade out: desaparece hacia arriba
-    tl2.to(
-      phrase,
-      { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
-      fadeOutTime
-    );
-  });
-</script>
-
+        // Fade out: desaparece hacia arriba
+        tl2.to(
+          phrase,
+          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
+          fadeOutTime
+        );
+      });
+    </script>
 
     <!-- Otros scripts (si es necesario) -->
     <script src="/js/lenis.min.js"></script>
