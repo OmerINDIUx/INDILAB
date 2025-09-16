@@ -7,11 +7,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const squareContainer = document.getElementById("svg-square");
   const rectContainer = document.getElementById("svg-rect");
 
+  // Insertar SVGs
   squareContainer.innerHTML = squareText;
   rectContainer.innerHTML = rectText;
 
+  // Aplicar min-width a contenedores
+  squareContainer.style.minWidth = "100px";
+  rectContainer.style.minWidth = "100px";
+
+  // Obtener los SVG dentro de los contenedores
   const squareSvg = squareContainer.querySelector("svg");
   const rectSvg = rectContainer.querySelector("svg");
+
+  // Aplicar min-width directamente a los SVGs también
+  squareSvg.style.minWidth = "100px";
+  rectSvg.style.minWidth = "100px";
 
   // IDs que queremos animar
   const ids = ["INDI", "LAB", "keyTop", "keyButton"];
@@ -46,7 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const targetX = wrapperRect.width * 0.015; // 1.5%
   const targetY = wrapperRect.height * 0.02; // 2%
 
-  // Posición final del rectángulo
   gsap.set(rectGroup, {
     scale: 0.15,
     x: targetX,
@@ -54,21 +63,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     transformOrigin: "top left",
   });
 
-  // 📌 Función para valores responsive
+  // Función para valores responsive
   function getAnimValues() {
     if (window.innerWidth <= 770) {
       return { yx: "10%", xx: "-10%", xscale: 0.12 };
     } else if (window.innerWidth <= 1024) {
       return { yx: "1%", xx: "-15%", xscale: 0.1 };
-
-          } else if (window.innerWidth <= 1008) {
+    } else if (window.innerWidth <= 1008) {
       return { yx: "1%", xx: "-15%", xscale: "40px" };
     } else {
-      return { yx: "1%", xx: "-37.5%", xscale: 0.046};
+      return { yx: "1%", xx: "-37.5%", xscale: 0.046 };
     }
   }
-
-
 
   // Timeline con scroll
   gsap.registerPlugin(ScrollTrigger);
@@ -79,8 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       start: "top top",
       end: "center top",
       scrub: 1,
-      markers: false
-,
+      markers: false,
     },
   });
 
@@ -93,11 +98,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fromBox = fromEl.getBBox();
     const toBox = toEl.getBBox();
 
-    // Diferencias de posición
     const dx = toBox.x + toBox.width / 2 - (fromBox.x + fromBox.width / 2);
     const dy = toBox.y + toBox.height / 2 - (fromBox.y + fromBox.height / 2);
 
-    // Escala relativa
     const scaleX = toBox.width / fromBox.width;
     const scaleY = toBox.height / fromBox.height;
     const scale = Math.min(scaleX, scaleY);
@@ -115,6 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       0
     );
   });
+
   const { xx, yx, xscale } = getAnimValues();
 
   tl.to(
@@ -136,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     tl.to(
       keyButton,
       {
-        opacity: 0, // se desvanece
+        opacity: 0,
         duration: 0.5,
         ease: "power2.out",
       },
