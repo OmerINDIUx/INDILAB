@@ -1,0 +1,479 @@
+<!--  -->
+<!DOCTYPE html>
+<link id="menu-css" rel="stylesheet" href="/css/base.css" />
+<html lang="es">
+  <head>
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <title>Vivienda Modular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- GSAP (última versión estable) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js"></script>
+
+    <!-- Otros scripts y librerías -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Estilos -->
+
+    <!-- Clase JS activa en HTML -->
+    <script>
+      document.documentElement.className = "js";
+    </script>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        background-color: #1a1a1a;
+        color: #eeeeee;
+        line-height: 1.6;
+        width: calc(100% - 100px);
+        margin-left: 100px;
+        /* Scroll snapping */
+      }
+
+      section {
+        padding: 6rem 10%;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        scroll-snap-align: start; /* Cada sección encaja al hacer scroll */
+      }
+
+      .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.6);
+        z-index: -1;
+      }
+      /* Body */
+      body {
+        margin: 0;
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        line-height: 1.6;
+        width: calc(100% - 100px);
+        margin-left: 100px;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+      }
+
+      /* Secciones generales */
+      section {
+        padding: 6rem 10%;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        scroll-snap-align: start;
+      }
+
+      /* Hero - sección 1: oscuro */
+      .hero {
+        color: #eeeeee;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.6);
+        z-index: -1;
+      }
+
+      .hero-text h2 {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        font-size: 2.5rem;
+        max-width: 800px;
+        text-align: center;
+        line-height: 1.3;
+      }
+
+      /* Intro - sección 2: claro */
+      .intro {
+        background-color: #eeeeee;
+        color: #1a1a1a;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .intro img {
+        display: block;
+        margin: 3rem auto 0;
+        max-width: 250px;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Statement - sección 3: oscuro */
+      .statement {
+        background-color: #1a1a1a;
+        color: #eeeeee;
+        text-align: center;
+        padding: 4rem 10%;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .reveal-text {
+        opacity: 0;
+      }
+
+      /* List - sección 4: claro */
+      .list {
+        background-color: #eeeeee;
+        color: #1a1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .list .phrase {
+        position: absolute;
+        max-width: 800px;
+        font-size: 1.6rem;
+        opacity: 0;
+        transform: translateY(50px);
+        color: inherit; /* hereda el color de la sección */
+      }
+
+      .list span {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        color: inherit; /* hereda el color de la sección */
+      }
+
+      /* Closing - sección 5: oscuro */
+      .closing {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        background-color: #1a1a1a;
+        color: #eeeeee;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      h3 {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        font-size: 1.2rem;
+        max-width: 800px;
+        line-height: 1.4;
+      }
+
+      .reveal-text  {
+        font-family: "Figtree", sans-serif;
+        font-weight: 400;
+        font-size: 1.8rem;
+        max-width: 800px;
+        line-height: 1.4;
+      }
+
+
+      /* Efecto noise para todos los fondos claros (#eee / #eeeeee) */
+body::before,
+.intro::before,
+.list::before,
+section[style*="background-color: #eee"]::before,
+section[style*="background-color: #eeeeee"]::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.2;          /* sutil para elegancia */
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+
+
+/* Asegurar que el contenido esté encima del noise */
+
+/* Animación grain existente */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+    </style>
+  </head>
+
+  <body>
+    <!-- Logo -->
+    <a href="index.html">
+      <div class="secundary-brand"></div>
+    </a>
+    <script>
+      const container = document.querySelector(".secundary-brand");
+      fetch("/svg/indi-lab_Vertical_Animate.svg")
+        .then((response) => response.text())
+        .then((svgText) => {
+          container.innerHTML = svgText;
+        })
+        .catch((err) => console.error("Error cargando SVG:", err));
+    </script>
+
+    <!-- Menú dinámico -->
+    <div id="menu-placeholder"></div>
+    <script>
+      fetch("/menu.html")
+        .then((response) => {
+          if (!response.ok)
+            throw new Error(
+              `Error al cargar el menú: ${response.status} ${response.statusText}`
+            );
+          return response.text();
+        })
+        .then((data) => {
+          const placeholder = document.getElementById("menu-placeholder");
+          placeholder.innerHTML = data;
+
+          const script = document.createElement("script");
+          script.src = "/js/demo4/menu.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) =>
+          console.error("Ocurrió un error al cargar el menú:", error)
+        );
+    </script>
+
+    <!-- Contenido principal -->
+    <section class="hero">
+      <img src="/img/pexels-vividcafe-681335.jpg" alt="full image" />
+      <div class="hero-text">
+        <h2>
+          Innovation at the Intersection of Cities, Infrastructure, Technology,
+          and Community
+        </h2>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>
+        INDIx is Grupo INDI’s
+        <span>urban innovation lab and venture platform,</span>
+        an incubator and R&D engine that mobilizes shared resources such as
+        data, infrastructure, capital, talent, and institutional knowledge to
+        accelerate execution and scale transformative urban solutions.
+      </p>
+      <img src="/svg/indi-lab_Square_Animate.svg" alt="branding" />
+    </section>
+
+    <section class="statement">
+      <h2 class="reveal-text">
+        We design, prototype, and pilot solutions that address the most urgent
+        urban challenges, positioned at the convergence of engineering,
+        technology, and city life.
+      </h2>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const texts = gsap.utils.toArray(".reveal-text");
+
+        texts.forEach((textEl) => {
+          // Inicialmente invisible
+          textEl.style.opacity = 0;
+
+          gsap.to(textEl, {
+            scrollTrigger: {
+              trigger: textEl.parentElement, // dispara cuando la sección llegue al top
+              start: "top center", // top del trigger en top de viewport
+              toggleActions: "play none none none",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power2.out",
+            yoyo: false,
+            from: { y: 20 }, // desplazamiento inicial
+          });
+        });
+      });
+    </script>
+
+    <section class="list">
+      <div class="phrase">
+        <span>Scalable solutions</span> that evolve into social
+        impact-generating public infrastructure programs, deployable across
+        cities.
+      </div>
+      <div class="phrase">
+        <span>Civic tech and gov tech ventures</span> with the potential to spin
+        off into public-private partnerships or commercial offerings.
+      </div>
+      <div class="phrase">
+        <span> Applied research, data analysis, and strategic studies</span>
+        that not only support implementation but also contribute to global urban
+        discourse and policymaking.
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Seleccionamos todas las frases
+      const phrases = gsap.utils.toArray(".list .phrase");
+
+      // Timeline general para el efecto de scroll
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".list",
+          start: "top top",
+          end: "+=" + phrases.length * 2 * window.innerHeight, // más largo porque separa fade in/out
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      // Animamos cada frase de manera secuencial
+      phrases.forEach((phrase, i) => {
+        const fadeInTime = i * 2; // momento de fade in
+        const fadeOutTime = fadeInTime + 1; // momento de fade out
+
+        // Fade in: aparece desde abajo
+        tl.fromTo(
+          phrase,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+          fadeInTime
+        );
+
+        // Fade out: desaparece hacia arriba
+        tl.to(
+          phrase,
+          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
+          fadeOutTime
+        );
+      });
+    </script>
+
+    <section class="closing">
+      <h3>
+        By tapping into Grupo INDI’s deep bench of talent and technical
+        expertise, we’re able to respond fluidly to the evolving needs of our
+        clients, partners, and collaborators, whether they require bold
+        experimentation or operational precision.
+      </h3>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animación inicial hero
+      gsap.from(".hero-text h2", {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: "power3.out",
+      });
+
+      gsap.from(".hero img", {
+        scale: 1.2,
+        duration: 3,
+        ease: "power2.out",
+      });
+
+      // Animación especial del logo
+      gsap.from(".intro img", {
+        scrollTrigger: {
+          trigger: ".intro img",
+          start: "top 80%",
+        },
+        opacity: 0, // aparece suavemente
+        y: 30, // sube un poco desde abajo
+        scale: 0.95, // pequeño escalado para profundidad
+        duration: 1.5, // tiempo de animación
+        ease: "power2.out", // movimiento elegante y natural
+      });
+    </script>
+
+    <!-- Otros scripts (si es necesario) -->
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+    <script type="module" src="/js/demo4/traduction.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Lista de colores posibles
+        const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+
+        // Seleccionamos todos los <span> y los <h2 class="white">
+        const elements = document.querySelectorAll("span, h2.white");
+
+        elements.forEach((el) => {
+          // Color aleatorio
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          el.style.color = randomColor;
+        });
+      });
+    </script>
+  </body>
+</html>

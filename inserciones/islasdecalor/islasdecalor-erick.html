@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islas de Calor en CDMX 2020-2024</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div id="map" style="height: 600px; width: 100%;"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([19.4326, -99.1332], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var bounds = [[19.0461, -99.5386], [19.6003, -98.7906]];
+        var raster1 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2020%20UHI.png", bounds, { opacity: 0.65 });
+        var raster2 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2021%20UHI.png", bounds, { opacity: 0.65 });
+        var raster3 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2022%20UHI.png", bounds, { opacity: 0.65 });
+        var raster4 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2023%20UHI.png", bounds, { opacity: 0.65 });
+        var raster5 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.1%20UHI.png", bounds, { opacity: 0.65 });
+        var raster6 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.2%20UHI.png", bounds, { opacity: 0.65 });
+        var points = [
+            {lat: 19.3889, lon: -99.1915, label: "Plaza Exhibimex"},
+            {lat: 19.3633, lon: -99.2630, label: "Expo Santa Fé"},
+            {lat: 19.3558, lon: -99.2147, label: "Campo de Futbol Las Águilas"},
+            {lat: 19.3298, lon: -99.2107, label: "Plaza San Jerónimo"},
+            {lat: 19.3769, lon: -99.2503, label: "Gran Carpa Santa Fé"},
+            {lat: 19.3661, lon: -99.2416, label: "Campos Deportivos La Salle"},
+            {lat: 19.5025, lon: -99.1938, label: "Industria"},
+            {lat: 19.5069, lon: -99.1873, label: "Grupo Bimbo"},
+            {lat: 19.4784, lon: -99.1650, label: "Correos de México"},
+            {lat: 19.4989, lon: -99.1602, label: "Industria"},
+            {lat: 19.5049, lon: -99.1679, label: "Industria"},
+            {lat: 19.4883, lon: -99.2102, label: "IES Rosario Castellanos"},
+            {lat: 19.3586, lon: -99.1538, label: "Alberca Olímpica"},
+            {lat: 19.4014, lon: -99.1515, label: "Ministerio Público"},
+            {lat: 19.4031, lon: -99.1537, label: "Parque Delta"},
+            {lat: 19.3890, lon: -99.1610, label: "Centro Universitario México"},
+            {lat: 19.3714, lon: -99.1591, label: "Alcaldía Benito Juárez"},
+            {lat: 19.3708, lon: -99.1649, label: "Cruce Metro Zapata"},
+            {lat: 19.3801, lon: -99.1405, label: "Estacionamiento Walmart Nativitas"},
+            {lat: 19.3447, lon: -99.1423, label: "Taller Metro Tasqueña"},
+            {lat: 19.3030, lon: -99.1537, label: "Estacionamiento E. Azteca"},
+            {lat: 19.3060, lon: -99.1661, label: "Gran Sur"},
+            {lat: 19.3102, lon: -99.1195, label: "Cancha/Campo SCT"},
+            {lat: 19.3090, lon: -99.1279, label: "Campo de Futbol"},
+            {lat: 19.3115, lon: -99.1366, label: "Club América"},
+            {lat: 19.3329, lon: -99.1849, label: "UNAM Campus CU"},
+            {lat: 19.3587, lon: -99.2617, label: "Campo"},
+            {lat: 19.3826, lon: -99.2538, label: "Galerías Reforma"},
+            {lat: 19.4526, lon: -99.1250, label: "Talleres gráficos SEGOB"},
+            {lat: 19.4431, lon: -99.1518, label: "Deportivo Cuauhtémoc"},
+            {lat: 19.4607, lon: -99.1578, label: "Amazon Atlampa"},
+            {lat: 19.4342, lon: -99.1248, label: "Mercado Mixcalco/Calle Correo Mayor"},
+            {lat: 19.4155, lon: -99.1341, label: "Subsecretaria Sistema Penitenciario"},
+            {lat: 19.4245, lon: -99.1296, label: "Unidad Médica Juárez Centro"},
+            {lat: 19.4258, lon: -99.1538, label: "Cruce Peatonal Cuauhtémoc-Chapultepec"},
+            {lat: 19.5278, lon: -99.1677, label: "Industria"},
+            {lat: 19.4614, lon: -99.0683, label: "Bosque de Arágon"},
+            {lat: 19.4653, lon: -99.0951, label: "Deportivo Fco. Zarco"},
+            {lat: 19.4863, lon: -99.0834, label: "Centro Recreativo Bicentenario"},
+            {lat: 19.4766, lon: -99.0937, label: "Industria"},
+            {lat: 19.4825, lon: -99.1037, label: "Industria"},
+            {lat: 19.3989, lon: -99.0850, label: "Ciudad Deportiva"},
+            {lat: 19.4052, lon: -99.0996, label: "Palacio de los Deportes"},
+            {lat: 19.3980, lon: -99.0739, label: "Campo Deportivo"},
+            {lat: 19.4045, lon: -99.0761, label: "Industria"},
+            {lat: 19.4059, lon: -99.1086, label: "Industria"},
+            {lat: 19.3445, lon: -99.0866, label: "Parque Nacional Cerro de la Estrella"},
+            {lat: 19.3697, lon: -99.0523, label: "Parque Industrial FINSA"},
+            {lat: 19.3672, lon: -99.0462, label: "Parque Cuitláhuac"},
+            {lat: 19.3100, lon: -99.0604, label: "Panteón San Lorenzo Tezonco"},
+            {lat: 19.3197, lon: -99.0550, label: "Industria"},
+            {lat: 19.3806, lon: -99.0469, label: "Dpvo. Francisco I. Madero"},
+            {lat: 19.3301, lon: -99.2114, label: "Estacionamiento San Jerónimo"},
+            {lat: 19.3233, lon: -99.2209, label: "Deportivo"},
+            {lat: 19.2906, lon: -99.2447, label: "Subestación CFE"},
+            {lat: 19.2936, lon: -99.2432, label: "Campo de Futbol"},
+            {lat: 19.3199, lon: -99.2392, label: "Campo de Futbol"},
+            {lat: 19.4703, lon: -99.2022, label: "Parque Bicentenario"},
+            {lat: 19.4551, lon: -99.1646, label: "Estadio IPN"},
+            {lat: 19.4373, lon: -99.2236, label: "Hipódromo"},
+            {lat: 19.4420, lon: -99.2069, label: "COSTCO Polanco"},
+            {lat: 19.4634, lon: -99.2023, label: "Refinería-Panteón Español"},
+            {lat: 19.2120, lon: -98.9777, label: "Campo"},
+            {lat: 19.2233, lon: -98.9916, label: "Campo"},
+            {lat: 19.2854, lon: -99.0491, label: "Bosque de Tláhuac - Pista"},
+            {lat: 19.2947, lon: -99.0595, label: "Deportivo"},
+            {lat: 19.2854, lon: -99.0664, label: "Depósito vehicular"},
+            {lat: 19.2916, lon: -99.1731, label: "Deportivo Vivanco"},
+            {lat: 19.2861, lon: -99.1419, label: "Estadio ITESM"},
+            {lat: 19.2859, lon: -99.1379, label: "COSTCO Villa Coapa"},
+            {lat: 19.4453, lon: -99.1152, label: "Deportivo Eduardo Molina"},
+            {lat: 19.4266, lon: -99.1191, label: "Deportivo Venustiano Carranza"},
+            {lat: 19.4150, lon: -99.1205, label: "Deportivo Lázaro Cárdenas"},
+            {lat: 19.4263, lon: -99.1247, label: "Mercado La Merced"},
+            {lat: 19.4458, lon: -99.0816, label: "Deportivo Oceanía"},
+            {lat: 19.3123, lon: -99.0977, label: "Parque Cuemanco"},
+            {lat: 19.2729, lon: -99.1187, label: "Industria"},
+            {lat: 19.2772, lon: -99.1271, label: "Estacionamiento SAT"},
+            {lat: 19.2682, lon: -99.1270, label: "Almacenes SEDESOL"},
+            {lat: 19.2619, lon: -99.1040, label: "Mercado de Xochimilco"}
+        ];
+        var pointLayer = L.layerGroup();
+        points.forEach(function(point) {
+            var marker = L.marker([point.lat, point.lon]).addTo(pointLayer);
+            marker.bindPopup('<b>' + point.label + '</b>');
+        });
+        var overlays = {
+            "Puntos": pointLayer,
+            "Abril 2020": raster1,
+            "Abril 2021": raster2,
+            "Abril 2022": raster3,
+            "Abril 2023": raster4,
+            "Abril 2024": raster5,
+            "Mayo 2024": raster6
+        };
+        L.control.layers(null, overlays).addTo(map);
+    </script>
+</body>
+</html>

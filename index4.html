@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fluid Gradient Mouse Follow</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: #eee;
+    }
+
+    #gradient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="gradient-canvas"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    const canvas = document.getElementById('gradient-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    // 4 colores, el primero sigue el mouse (5c6f9f)
+    const colors = [
+      { r: 92, g: 111, b: 159 }, // Azul que sigue el mouse
+      { r: 171, g: 2, b: 4 },    // Azul
+      { r: 252, g: 51, b: 16 },  // Rosa
+      { r: 240, g: 154, b: 51 }  // Verde
+    ];
+
+    // Centros de los gradientes
+    let centers = Array(colors.length).fill().map(() => ({
+      x: width / 2, y: height / 2
+    }));
+
+    // Target para el centro principal (sigue el mouse)
+    let target = { x: width / 2, y: height / 2 };
+
+    window.addEventListener('mousemove', e => {
+      target.x = e.clientX;
+      target.y = e.clientY;
+    });
+
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+
+    function drawMultiGradient() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Dibujar gradientes superpuestos
+      for (let i = 0; i < colors.length; i++) {
+        let grad = ctx.createRadialGradient(
+          centers[i].x, centers[i].y, 0,
+          centers[i].x, centers[i].y, Math.max(width, height) / 1.2
+        );
+        grad.addColorStop(0, `rgb(${colors[i].r},${colors[i].g},${colors[i].b})`);
+        grad.addColorStop(1, `rgba(${colors[i].r},${colors[i].g},${colors[i].b},0.6)`);
+        ctx.globalAlpha = 1;
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, width, height);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function animate(time) {
+      // Centro principal sigue el mouse suavemente
+      centers[0].x += (target.x - centers[0].x) * 0.15;
+      centers[0].y += (target.y - centers[0].y) * 0.15;
+
+      // Los otros centros se mueven en ondas fluidas
+      for (let i = 1; i < centers.length; i++) {
+        let angle = time * 0.001 + i * 1.5;
+        let phase = Math.sin(time * 0.0007 + i) * 0.5 + 0.5;
+        let radiusX = 150 + i * 40;
+        let radiusY = 120 + i * 30;
+        centers[i].x = width / 2 + Math.cos(angle + i) * radiusX;
+        centers[i].y = height / 2 + Math.sin(angle + i * 1.2) * radiusY;
+      }
+
+      drawMultiGradient();
+      requestAnimationFrame(animate);
+    }
+
+    animate(performance.now());
+  </script>
+</body>
+
+</html>

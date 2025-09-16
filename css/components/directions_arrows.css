@@ -1,0 +1,42 @@
+.navigation-arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  position: fixed;
+  top: 75vh;
+}
+
+.navigation-arrows .core-belive,
+.navigation-arrows .our-projects {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.navigation-arrows h3 {
+  font-family: work-sans, sans-serif;
+  font-weight: 600;
+
+  color: #eee;
+  font-size: 1.2rem;
+  margin: .3rem;
+  font-weight: 500;
+}
+
+.navigation-arrows a {
+    text-decoration: none;
+}
+
+.navigation-arrows .brand-icon-back {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  display: block;
+}
+
+.navigation-arrows.hidden {
+  opacity: 0;
+}
+

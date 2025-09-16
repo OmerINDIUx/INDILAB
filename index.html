@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Some examples for how sticky sections can be animated." />
+  <meta name="keywords" content="sticky, css, gsap, animation, sticky section, layout" />
+  <meta name="author" content="Codrops" />
+  <link rel="shortcut icon" href="ico-01.png" />
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+
+
+  <!-- Estilos propios y Font Awesome -->
+  <link rel="stylesheet" href="css/base.css" />
+  <!-- JS clases y librerías -->
+  <script>document.documentElement.className = "js";</script>
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+  <script src="js/lenis.min.js"></script>
+  <script src="js/splitting.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <!-- Lógica modular -->
+  <script type="module" src="js/demo4/index.js"></script>
+</head>
+
+<body class="loading demo-4">
+  <script type="module" src="js/demo4/loading.js"></script>
+
+  <script>
+    let resizeTimer;
+
+    // Esto evita que el  recuerde la posición de scroll
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    // Siempre al pixel 0 al cargar
+    window.scrollTo(0, 0);
+
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        // No cambiar la posición de scroll al recargar, se mantiene donde se quedó
+        location.reload();
+      }, 300); // espera 300ms después de dejar de redimensionar
+    });
+  </script>
+
+
+
+  <div class="info-phi">
+    <button class="phi" aria-label="Logo Phi">
+      <img src="img/phi-01.png" alt="Logo Phi" />
+      <span class="tooltip-phi"> <a data-i18n="info phi"></a>
+      </span>
+    </button>
+  </div>
+
+
+  <div id="menu-placeholder"></div>
+
+  <script>
+    fetch('/menu.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        const placeholder = document.getElementById('menu-placeholder');
+        if (!placeholder) {
+          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+        }
+        placeholder.innerHTML = data;
+
+        // Cargar el script después de que el menú esté en el DOM
+        const script = document.createElement('script');
+        script.src = "/js/demo4/menu.js";
+        script.onload = () => console.log("menu.js cargado correctamente ✅");
+        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Ocurrió un error al cargar el menú:", error);
+      });
+  </script>
+
+  </header>
+  <script src="/js/demo4/menu.js"></script>
+
+
+
+
+
+
+  <main>
+    <div class="frame frame--header">
+      <div class="frame__heading">
+      </div>
+    </div>
+  </main>
+  <!-- Sección brand -->
+  <section id="brand" class="brand">
+
+    <div id="svg-wrapper">
+      <!-- SVG inicial (cuadrado) -->
+      <div id="svg-square" class="svg-containedor"></div>
+      <!-- SVG destino (rectángulo, oculto al inicio) -->
+      <div id="svg-rect" class="svg-containedor hidden"></div>
+    </div>
+
+    <script clas="branding" src="js/demo4/animation_brand.js"></script>
+
+    <div class="navigation-arrows">
+      <a href="#map">
+        <div class="core-belive">
+          <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
+          <h3>Our core beliefs</h3>
+        </div>
+      </a>
+
+      <a href="blog.html">
+        <div class="our-projects">
+          <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+          <h3>Our work</h3>
+        </div>
+      </a>
+
+    </div>
+    <script>
+      window.addEventListener('scroll', function () {
+        const scrollY = window.scrollY;
+        const scrollElement = document.querySelector('.navigation-arrows');
+
+        if (scrollY > 500) {
+          scrollElement.classList.add('hidden');
+        } else {
+          scrollElement.classList.remove('hidden');
+        }
+      });
+    </script>
+
+
+
+    <div class="scroll-animation">
+      <a href="#map">
+        <img src="img/Scroll Down.gif" alt="scroll down">
+      </a>
+
+
+    </div>
+
+
+
+
+    <script>
+      window.addEventListener('scroll', function () {
+        const scrollY = window.scrollY;
+        const scrollElement = document.querySelector('.scroll-animation');
+
+        if (scrollY > 500) {
+          scrollElement.classList.add('hidden');
+        } else {
+          scrollElement.classList.remove('hidden');
+        }
+      });
+    </script>
+
+
+
+  </section>
+  <div class="stay">
+    <section id="map" class="main-content">
+      <div id="brand" class="layout section">
+        <!-- COLUMNA IZQUIERDA -->
+        <div id="left-column" class="left-column">
+          <div id="content-row">
+            <div class="content content--highlight content--intro">
+              <p class="text-large_w">
+                <mark class="hx hx-3" data-i18n="hero_highlighted_text"></mark> <br>
+                <span data-i18n="hero_intro_text"></span>
+              </p>
+            </div>
+          </div>
+          <!-- CORNERS -->
+          <div class="corner corner-bottom-left">
+            <img src="svg/cornner_bottom_left.svg" alt="Corner Bottom Left">
+          </div>
+          <div class="corner corner-top-right">
+            <img src="svg/cornner_top_right.svg" alt="Corner Top Right">
+          </div>
+        </div>
+
+        <script>
+          gsap.registerPlugin(ScrollTrigger);
+          gsap.fromTo("#content-row",
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 2,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: "#left-column",
+                start: "top 25%",
+                end: "top 10%",
+                toggleActions: "restart none none reset",
+              }
+            }
+          );
+        </script>
+
+
+        <div id="maping-contorler" class="right-column">
+          <video id="trafficVideo" class="mapa_video" width="100%" preload="auto" muted playsinline></video>
+          <div class="center-controls">
+            <p class="text-large_M">
+              <mark class="hx-1 hx-2" data-i18n="CDMX Traffic"></mark>
+            </p>
+            <span id="hourLabel" class="hour">--:--</span>
+            <input id="hourSlider" type="range" min="0" max="23" step="1">
+            <!-- <br><br>
+            <div class="info-phi">
+              <button class="phi" aria-label="Logo Phi">
+                <img src="img/phi-01.png" alt="Logo Phi" />
+                <span class="tooltip-phi"> <a data-i18n="info phi"></a>
+                </span>
+              </button>
+            </div> -->
+            <!-- <p class="text-large_M2">
+              <br>
+
+              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food1"></mark> <br>
+              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food2"></mark> <br>
+              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food3"></mark>
+            </p> -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo("#maping-contorler",
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#left-column",
+          start: "top 25%",
+          end: "top 10%",
+          toggleActions: "restart none none reset",
+        }
+      }
+    );
+  </script>
+  <script src="js/demo4/icons_bran.js"></script>
+  </section>
+
+
+  <script src="js/demo4/scroll_animation.js"></script>
+  <script src="js/demo4/animation_hero.js"></script>
+  <script src="js/demo4/script_map.js"></script>
+  <script type="module" src="js/demo4/traduction.js"></script>
+  <script src="js/demo4/ramdon_color.js"></script>
+
+
+  <style>
+    /* LAYOUT TEXT + IMAGE */
+.text-image-section {
+  position: relative;
+  width: calc(100% - 100px);
+  height: 100vh;
+  left: 100px;
+  display: flex;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+/* GRANO para toda la sección */
+.text-image-section::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3; /* 👈 Intensidad del grano */
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1; /* 👈 para estar sobre el grain */
+}
+
+/* Columnas */
+.text-column {
+  flex: 0 0 40%; /* 👈 30% ancho fijo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: #1a1a1a;
+  background-color: #eee;
+}
+
+
+
+.image-column {
+  flex: 0 0 60%; /* 👈 70% ancho fijo */
+  height: 100%;
+    justify-content: 50%; /* centra horizontal */
+  align-items: 50%;     /* centra vertical */
+}
+
+.image-column img {
+  width: 80%;
+  height: auto;
+  object-fit: cover; /* rellena sin deformar */
+  border-radius: 0;
+}
+
+/* Tipografía */
+.text-column .title {
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.text-column .text-content {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Reveal texts (si se usa en otra parte) */
+.reveal-texts-container {
+  position: fixed;
+  bottom: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.reveal-text {
+  font-family: "Figtree", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #eee;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  position: absolute; /* apilados */
+}
+
+  </style>
+
+  <section class="text-image-section">
+    <div class="container">
+      <div class="text-column">
+        <h2 class="title"></h2>
+        <p class="text-content"></p>
+      </div>
+      <div class="image-column">
+        <div class="color_brand content__img content__img--large" id="circle_arrow"></div>
+
+        <div class="content__img-wrapper"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-image-section">
+    <div class="container">
+      <div class="image-column">
+        <div class="color_brand content__img content__img--large" id="circle_arrow"></div>
+
+        <div class="content__img-wrapper"></div>
+      </div>
+      <div class="text-column">
+        <h2 class="title"></h2>
+        <p class="text-content"></p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+   gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+const allSectionsData = [
+  [
+    { title: "Technology as a Force for Human Potential", text: "Just as cities are crucibles of innovation, technology can be a catalyst that unlocks and amplifies human potential. When used ethically, it can empower overlooked communities, reveal invisible needs, and fuel just, informed decisions. At INDIlab, technology is a means to a greater purpose: improving urban life, fostering creativity, and sparking progress.", anim: "img/avance_tech.svg", type: "arrow" },
+   
+   
+    { title: "Experimentation: The Pathway to Innovation ", text: "We embrace an experimental mindset, formulating hypotheses, prototyping, testing in real environments, and documenting every outcome. Success lies as much in what we learn from failure as in what we achieve. Each experiment—win or lose—expands our shared urban intelligence.", anim:"img/experimentation.svg", type: "circle" },
+   
+   
+    { title: "Harnessing Collective Wisdom", text: "Cities speak: we listen The knowledge embedded in communities is a resource too vast to ignore. We seek it out through engagement with those who live, work, and create in urban environments. Often, the most valuable insights emerge at the edges of official systems—in markets, grassroots networks, and cultural practices. By integrating these unplanned systems, we design solutions that reflect the authentic character of cities. Public life thrives in the unpredictable rhythms of the street.", anim: "img/colective.svg", type: "circle" },
+  ],
+  [
+    
+  { title: "Public-Private Cooperation: A Shared Responsibility", text: "Urban challenges demand collaboration. Governments set the frameworks; the private sector brings agility, innovation, and sustainable models. Together, we achieve more than either could alone. The private sector’s role in public challenges isn’t just an ethical choice, it’s a long-term investment in resilience.", anim: "img/colaboration.svg", type: "circle" },
+  
+  
+  { title: "A Fluid: and Responsive Agenda", text: "Our priorities evolve with the city. We track emerging trends and urgent needs, ready to respond with agility. From sustainability to infrastructure, mobility to public space, every innovation we create is rooted in the specific realities of people and place.", anim: "img/fluid.svg", type: "circle" },
+  
+  
+  { title: "Collaboration and Partnership", text: "We unite disciplines and perspectives to tackle complex challenges. From academic labs to startups and civic organizations, our partnerships expand our capacity to innovate. Together, we form networks that test bold ideas and amplify the human experience.", anim: "img/collavoration.svg", type: "circle" },
+  
+  
+  { title: "An Identity Rooted in Innovation", text: "INDIlab aims to be both an action hub and a thought leader in urban experimentation. Building on Grupo INDI’s legacy of transformative engineering, we now apply cutting-edge tools and methods to create impact for our clients and for the communities we serve.", anim: "img/innovation.svg", type: "circle" },
+
+  ],
+];
+
+// Función genérica para animar SVG
+async function loadAndAnimateSVG(container, svgPath, type) {
+  if (!container) return console.warn("⚠️ Contenedor no encontrado");
+
+  try {
+    const response = await fetch(svgPath);
+    if (!response.ok) throw new Error(`No se pudo cargar el SVG: ${response.status}`);
+    const svgText = await response.text();
+
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+    const svgElement = svgDoc.documentElement;
+    container.innerHTML = "";
+    container.appendChild(svgElement);
+
+    if (type === "arrow") {
+      const basePath = svgElement.querySelector('#rotCircle');
+      if (!basePath) return console.warn("⚠️ No se encontró #rotCircle");
+      const clones = [basePath];
+      const numClones = 12;
+
+      basePath.style.transformBox = "fill-box";
+      basePath.style.transformOrigin = "center";
+      basePath.style.transformStyle = "preserve-3d";
+
+      for (let i = 1; i < numClones; i++) {
+        const clone = basePath.cloneNode(true);
+        clone.setAttribute("data-index", i);
+        svgElement.appendChild(clone);
+        clones.push(clone);
+      }
+
+      let angle = 0;
+      function animate() {
+        angle += 0.4;
+        clones.forEach((path, i) => {
+          path.style.transform = `rotateY(${angle + (360/numClones)*i}deg)`;
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      const line1 = svgElement.querySelector('.arrow1');
+      const line2 = svgElement.querySelector('.arrow2');
+
+      function animateArrowLine(line) {
+        if (!line) return;
+        const length = line.getTotalLength();
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const progress = (ts - start)/2000;
+          line.style.strokeDashoffset = Math.max(length*(1-progress),0);
+          if (progress < 1) requestAnimationFrame(step);
+          else { line.style.strokeDashoffset = length; start = null; requestAnimationFrame(step);}
+        }
+        requestAnimationFrame(step);
+      }
+
+      if (line1) animateArrowLine(line1);
+      if (line2) animateArrowLine(line2);
+    }
+
+    else if (type === "circle") {
+      const baseCircles = svgElement.querySelectorAll('.circle');
+      const numClones = 12;
+      const allClones = [];
+
+      baseCircles.forEach((baseCircle, circleIndex) => {
+        baseCircle.style.transformBox = "fill-box";
+        baseCircle.style.transformOrigin = "center";
+        baseCircle.style.transformStyle = "preserve-3d";
+
+        const clones = [baseCircle];
+        for (let i=1;i<numClones;i++){
+          const clone = baseCircle.cloneNode(true);
+          clone.setAttribute("data-index", `${circleIndex}-${i}`);
+          svgElement.appendChild(clone);
+          clones.push(clone);
+        }
+        allClones.push(clones);
+      });
+
+      let angle = 0;
+      function animateCircles() {
+        angle += 0.4;
+        allClones.forEach(clones => clones.forEach((c,i)=>{
+          const offset = (360/numClones)*i;
+          c.style.transform = `rotateY(${angle+offset}deg)`;
+        }));
+        requestAnimationFrame(animateCircles);
+      }
+      animateCircles();
+
+      const lines = svgElement.querySelectorAll('.line');
+      const cubes = svgElement.querySelectorAll('.cube');
+      const circles = svgElement.querySelectorAll('.circle');
+
+      cubes.forEach((cube, i) => {
+        const line = lines[i % lines.length];
+        const length = line.getTotalLength();
+        const direction = Math.random()<0.5 ? 1:-1;
+        let startTime = null;
+        const duration = 10000 + Math.random()*2000;
+
+        function animateCube(timestamp) {
+          if(!startTime) startTime = timestamp;
+          const elapsed = (timestamp - startTime) % duration;
+          const progress = elapsed/duration;
+          const pos = direction===1 ? progress : 1-progress;
+          const point = line.getPointAtLength(pos*length);
+          cube.setAttribute("x", point.x-6);
+          cube.setAttribute("y", point.y-6);
+
+          circles.forEach(circle=>{
+            const bbox = circle.getBBox();
+            const padding=5;
+            const isNear =
+              point.x+12>bbox.x-padding &&
+              point.x<bbox.x+bbox.width+padding &&
+              point.y+12>bbox.y-padding &&
+              point.y<bbox.y+bbox.height+padding;
+            if(isNear && !circle.classList.contains("pulsing")){
+              circle.classList.add("pulsing");
+              setTimeout(()=>circle.classList.remove("pulsing"),400);
+            }
+          });
+
+          requestAnimationFrame(animateCube);
+        }
+        requestAnimationFrame(animateCube);
+      });
+    }
+
+  } catch(err) {
+    console.error("💥 Error al cargar o animar el SVG:", err);
+  }
+}
+
+// ScrollTrigger principal
+document.querySelectorAll(".text-image-section").forEach((sectionEl, sectionIndex)=>{
+  const titleEl = sectionEl.querySelector(".text-column .title");
+  const textEl = sectionEl.querySelector(".text-column .text-content");
+  const imgContainer = sectionEl.querySelector(".image-column .content__img-wrapper");
+
+  if(!titleEl || !textEl || !imgContainer) return;
+
+  const slides = allSectionsData[sectionIndex];
+  if(!slides || !slides.length) return;
+
+  let currentIndex = -1;
+
+  gsap.to({},{
+    scrollTrigger:{
+      trigger: sectionEl,
+      start:"top top",
+      end:"+="+slides.length*window.innerHeight,
+      scrub:1,
+      pin:true,
+      onUpdate:self=>{
+        const progress = self.progress;
+        const index = Math.floor(progress*slides.length);
+
+        if(index!==currentIndex){
+          currentIndex=index;
+          const data = slides[index];
+          if(!data) return;
+
+          gsap.to([titleEl,textEl,imgContainer],{
+            opacity:0, y:30, duration:0.4,
+            onComplete:()=>{
+              titleEl.innerText = data.title||"";
+              textEl.innerText = data.text||"";
+              imgContainer.innerHTML = "";
+
+              const animDiv = document.createElement("div");
+              animDiv.classList.add("content__img","content__img--large");
+              animDiv.id = `svg_anim_${sectionIndex}_${index}`;
+              imgContainer.appendChild(animDiv);
+
+              loadAndAnimateSVG(animDiv,data.anim,data.type);
+
+              gsap.fromTo([titleEl,textEl,imgContainer],
+                {opacity:0, y:30},
+                {opacity:1, y:0, duration:0.6,ease:"power2.out"});
+            }
+          });
+        }
+      }
+    }
+  });
+});
+
+
+
+ </script>
+   <!--
+ <div class="stay">
+    <div class="wrap section">
+      <div class="content content--sticky bg-1">
+        <div class="content__grid">
+          <div class="content__textual">
+            <h2 class="content__title titlle-1">
+              <span data-i18n="Technology as a Force for"></span>
+              <span class="content__title_h2" data-i18n="Human Potential"></span>
+            </h2>
+            <p class="content__text text-meta" data-i18n="text of Human Potential"></p>
+          </div>
+          <div class="content__img-wrapper">
+            <div class="color_brand content__img content__img--large" id="circle_arrow"></div>
+            <script src="js/demo4/1_animation.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="stay">
+      <div class="content content--sticky bg-2 content--reverse section">
+        <div class="content__grid">
+          <div class="content__textual">
+            <h2 class="content__title titlle-2">
+              <span data-i18n="Experimentation"></span>
+              <span class="content__title_h2" data-i18n="The Pathway to Innovation"></span>
+            </h2>
+            <p class="content__text text-meta" data-i18n="text of The Pathway to Innovation"></p>
+          </div>
+          <div class="content__img-wrapper">
+            <div class="color_brand content__img content__img--large" id="experimentation"></div>
+            <script src="js/demo4/2_animation.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stay">
+      <div class="content content--sticky bg-3 section">
+        <div class="content__grid">
+          <div class="content__textual">
+            <h2 class="content__title titlle-3">
+              <span data-i18n="Harnessing"></span>
+              <span class="content__title_h2" data-i18n="Collective Wisdom"></span>
+            </h2>
+            <p class="content__text text-meta" data-i18n="text of the Collective Wisdom"></p>
+          </div>
+          <div class="content__img-wrapper">
+            <div class="color_brand content__img content__img--large" id="colective-winsorth"></div>
+            <script src="js/demo4/3_animation.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay">
+    <div class="content content--sticky bg-4 content--reverse section">
+      <div class="content__grid">
+        <div class="content__textual">
+          <h2 class="content__title titlle-4">
+            <span data-i18n="Public-Private Cooperation"></span>
+            <span class="content__title_h2" data-i18n="A Shared Responsibility"></span>
+          </h2>
+          <p class="content__text text-meta" data-i18n="text of the A Shared Responsibility"></p>
+        </div>
+
+        <div class="content__img-wrapper">
+          <div class="color_brand content__img content__img--large" id="colaboration-public-private"></div>
+          <script src="js/demo4/4_animation.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay">
+    <div class="content content--sticky bg-5 section">
+      <div class="content__grid">
+        <div class="content__textual">
+          <h2 class="content__title titlle-5">
+            <span data-i18n="A Fluid"></span>
+            <span class="content__title_h2" data-i18n="and Responsive Agenda"></span>
+          </h2>
+          <p class="content__text text-meta" data-i18n="text of the and Responsive Agenda"></p>
+        </div>
+        <div class="content__img-wrapper">
+          <div class="color_brand content__img content__img--large" id="fluid"></div>
+          <script src="js/demo4/5_animation.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay">
+    <div class="content content--sticky bg-6 content--reverse section">
+      <div class="content__grid">
+        <div class="content__textual">
+          <h2 class="content__title titlle-6">
+            <span data-i18n="Collaboration"></span>
+            <span class="content__title_h2" data-i18n="and Partnership"></span>
+          </h2>
+          <p class="content__text text-meta" data-i18n="text of and Partnership"></p>
+        </div>
+
+        <div class="content__img-wrapper">
+          <div class="color_brand content__img F" id="collavoration"></div>
+          <script src="js/demo4/6_animation.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stay">
+    <div class="content content--sticky bg-7 section">
+      <div class="content__grid">
+        <div class="content__textual">
+          <h2 class="content__title titlle-7">
+            <span data-i18n="An Identity Rooted"></span>
+            <span class="content__title_h2" data-i18n="in Innovation"></span>
+          </h2>
+          <p class="content__text text-meta" data-i18n="text of the in Innovation"></p>
+        </div>
+        <div class="content__img-wrapper">
+          <div class="color_brand content__img content__img--large" id="innovation"></div>
+          <script src="js/demo4/7_animation.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div> -->
+  
+
+  <div class="stay">
+    <div class="content content--highlight content--outro section">
+      <p class="text-large_w" data-i18n="text of the to Action">
+      </p>
+      <br><br>
+      <!-- <p class="text-large_M"> <mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark> </p> -->
+      </p>
+    </div>
+  </div>
+  <!-- <footer id="contact">
+      <div class="footer-container">
+        <h3 class="hover-image" style="--img:url(../../img/4.png)">One "X" word (Explora)</h3>
+        <h3 class="hover-image" style="--img:url(../../img/5.png)">Two "X" word (Experimenta)</h3>
+        <h3 class="hover-image" style="--img:url(../../img/8.png)">Three "X" word ()</h3>
+      </div>
+      <div class="footer-bottom">
+        <p class="text-meta">© 2025 INDIlab. All rights reserved.</p>
+        <p class="text-meta">Powered by
+          <a href="https://www.grupoindi.com/" target="_blank" rel="noopener noreferrer">Grupo INDI</a>
+        </p>
+      </div>
+    </footer> -->
+
+
+
+
+
+  <!-- SVG PUNTERO -->
+  <div class="custom-cursor">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#eeeeee" />
+          <stop offset="100%" stop-color="#eeeeee" />
+        </linearGradient>
+      </defs>
+      <path d="M495.01,80.63v413.88H81.13c-41.77,0-75.63-33.86-75.63-75.63V4.99h413.88
+      C461.14,4.99,495.01,38.86,495.01,80.63z" fill="none" stroke="url(#grad)" stroke-width="15" />
+    </svg>
+  </div>
+  <script src="js/demo4/cursor.js">  </script>
+
+
+  <div id="loader-overlay">
+    <div class="corner-icon1 top-right1">
+      <img id="svg3" class="icon4" src="svg\cornner_top_right_loading.svg" alt="Icono inicio">
+    </div>
+    <h1 class="complment_loader" id="complment_loader">Cities are <br></h1>
+    <div class="loader-box">
+      <div id="text_loading" class="text_load">Preparando recursos…</div>
+      <div id="text_parpadeando">
+        <p id="loading"></p>
+      </div>
+    </div>
+    <div class="corner-icon1 bottom-left1">
+      <img id="svg4" class="icon4" src="svg/cornner_bottom_left_loading.svg" alt="Icono final">
+    </div>
+  </div>
+
+
+  <script src="js/imagesloaded.pkgd.min.js"></script>
+
+  <header class="sidebar" id="site-header">
+    <div id="svg-container"></div>
+  </header>
+
+
+
+
+  <script>
+    const sections = document.querySelectorAll('#stay');
+    let isScrolling = false;
+
+    window.addEventListener("scroll", () => {
+      if (isScrolling) return;
+
+      clearTimeout(window.scrollTimeout);
+      window.scrollTimeout = setTimeout(() => {
+        // Buscar la sección más cercana al top
+        let closest = null;
+        let closestOffset = Infinity;
+
+        sections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          const offset = Math.abs(rect.top); // distancia al top
+          if (offset < closestOffset) {
+            closestOffset = offset;
+            closest = sec;
+          }
+        });
+
+        if (closest) {
+          isScrolling = true;
+          closest.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => (isScrolling = false), 700);
+        }
+      }, 100);
+    });
+  </script>
+
+
+
+</body>
+
+</html>

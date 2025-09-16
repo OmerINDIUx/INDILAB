@@ -1,0 +1,48 @@
+body {
+  cursor: url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><circle cx='8' cy='8' r='6' fill='%23F79036' /></svg>") 8 8, auto;
+}
+
+.custom-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 10px;
+    height: 10px;
+    transition: transform 0.2s ease, filter 0.3s ease;
+    transform: scale(1); /* Quitamos translate */
+  }
+
+  .custom-cursor.hover {
+    transform: scale(1.6);
+    filter: brightness(1.3);
+  }
+
+  .custom-cursor.clicked {
+    animation: clickPulse 0.4s ease;
+  }
+
+.custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  width: 40px;
+  height: 40px;
+  z-index: 9999;
+}
+.custom-cursor svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+  @keyframes clickPulse {
+    0% {
+      transform: scale(.8);
+    }
+    50% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(.8);
+    }
+  }

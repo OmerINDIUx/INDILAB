@@ -1,0 +1,21 @@
+:root {
+  font-size: 16px;
+  --page-padding: 1.5rem;
+  --color-text: #EFEFEF;
+  --color-link: rgba(255, 0, 0, 0.6);
+  --color-link-hover: #EFEFEF;
+  --color-bg-3: var(--color-bg-1);
+  --color-bg-4: var(--color-bg-2);
+  --color-bg-5: var(--color-bg-1);
+  --color-bg-6: var(--color-bg-2);
+  --color-bg-7: var(--color-bg-1);
+}
+
+.demo-4 {
+  --color-text: #0c0c0c;
+  --color-bg: #000000;
+  --color-link: rgba(14, 14, 14, 0.6);
+  --color-link-hover: #000;
+  --color-white-brand: #EFEFEF;
+  
+}
