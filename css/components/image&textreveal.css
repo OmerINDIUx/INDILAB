@@ -1,0 +1,155 @@
+/* ==============================
+   DESKTOP (>768px)
+============================== */
+
+/* Sección principal */
+.text-image-section2 {
+  position: relative;
+  width: calc(100% - 100px);
+  height: 100vh; /* 👈 en desktop sí se puede usar pantalla completa */
+  left: 100px;
+  display: flex;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+/* Fondo con grano */
+.text-image-section2::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+/* Contenedor */
+.container2 {
+  display: flex;
+  flex-direction: row; /* lado a lado */
+  width: 100%;
+  height: 100%;
+}
+
+/* Columna de texto */
+.text-column2 {
+  flex: 0 0 40%; /* 40% ancho fijo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: #1a1a1a;
+  background-color: #eee;
+  z-index: 1; /* por encima del grano */
+}
+
+/* Columna de imagen */
+.image-column2 {
+  flex: 0 0 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.content__img-wrapper2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-column2 img {
+  width: 80%;
+  height: auto;
+  object-fit: cover; /* rellena sin deformar */
+  border-radius: 0;
+}
+
+/* Tipografía */
+.text-column2 .title2 {
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.text-column2 .text-content2 {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Reveal texts (si lo usas en otra parte) */
+.reveal-texts-container2 {
+  position: fixed;
+  bottom: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 900px;
+  text-align: center;
+  z-index: 2000;
+  pointer-events: none;
+  display: flex;
+}
+
+.reveal-text {
+  font-family: "Figtree", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #eee;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  position: absolute; /* apilados */
+}
+
+
+@media (max-width: 768px) {
+  .text-image-section2 {
+    width: 100%;
+    height: 100vh;  /* 👈 mantener altura para ScrollTrigger */
+    left: 0;
+    top: 0;
+    padding: 0;
+  }
+
+  .container2 {
+    flex-direction: column;
+    height: 100%;   /* que ocupe toda la sección */
+  }
+
+  .text-column2,
+  .image-column2 {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .image-column2,
+  .content__img-wrapper2 {
+    flex: 0 0 auto;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content__img-wrapper2 svg {
+    max-width: 100%;
+    max-height: 80vh; /* ajusta según SVG */
+    height: auto;
+  }
+
+  .text-image-section2 .text-column2 { order: 1; }
+  .text-image-section2 .image-column2 { order: 2; }
+}
+
+

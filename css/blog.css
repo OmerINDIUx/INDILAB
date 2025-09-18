@@ -131,7 +131,7 @@ body::before,
   opacity: 0.1;
   pointer-events: none;
   animation: grain 8s steps(10) infinite;
-  z-index: 0;
+  z-index: -1;
 }
 
 .heroes > * {
@@ -319,4 +319,102 @@ span {
 .vm-textchange.fade-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+
+/* ===================
+   RESPONSIVE < 768px
+=================== */
+@media (max-width: 768px) {
+
+  /* ===== BODY ===== */
+  body {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 80px; /* deja espacio si hay header fijo */
+    padding: 0 10px;
+  }
+
+  /* ===== HERO ===== */
+  .heroes {
+    padding: 30px 10px;
+    gap: 15px;
+    min-height: auto;
+  }
+
+  .heroes .text-container1 p,
+  .heroes .text-container1 .textchange {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0 5px;
+  }
+
+  /* ===== FILTER BUTTONS ===== */
+  .filter-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .filter-buttons button {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  /* ===== BLOG SECTION ===== */
+  .blog-section1 {
+    padding: 40px 5%;
+  }
+
+  .blog-heading1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .blog-list1 {
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+    gap: 15px;
+    justify-items: center;
+  }
+
+  .blog-item1 {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .blog-title1 {
+    font-size: 1rem;
+  }
+
+  .blog-date1 {
+    font-size: 0.8rem;
+  }
+
+  /* ===== SVG BRAND ===== */
+  .secundary-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  /* ===== NOISE / GRAIN ===== */
+  body::before,
+  .heroes::before {
+    opacity: 0.08; /* más tenue en móvil */
+  }
+
+  .filter-buttons {
+  position: relative;
+  z-index: 1000; /* asegúrate de que esté por encima de cualquier overlay */
+}
+.filter-buttons,
+.blog-list1 {
+  position: relative;
+  z-index: 1000;
+}
+
 }
