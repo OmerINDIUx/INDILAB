@@ -2,11 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loaderOverlay = document.getElementById("loader-overlay");
   const loadingText = document.getElementById("text_loading");
   const complmentLoader = document.getElementById("complment_loader");
-
   const loadingDots = document.getElementById("loading");
   const slider = document.getElementById("LoadSlider");
 
-  // Frases aleatorias
   const frases = [
     "the sum of countless small decisions, interactions, and exchanges.",
     "spaces where public life thrives in the unpredictable rhythms of the street. ",
@@ -18,14 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   loadingText.textContent = frases[Math.floor(Math.random() * frases.length)];
 
-  // Animación de puntos "Cargando..."
   let dotCount = 0;
   const dotInterval = setInterval(() => {
     dotCount = (dotCount + 1) % 4;
     loadingDots.textContent = "." + ".".repeat(dotCount);
   }, 500);
 
-  // Simulación de barra de carga
   let percent = 0;
   const sliderInterval = setInterval(() => {
     if (slider && percent < 100) {
@@ -36,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 30);
 
-  // GSAP timelines
   const tl = gsap.timeline();
 
   const safeTo = (selector, props) => {
@@ -45,58 +40,102 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Animaciones opcionales de elementos si existen
-  safeTo("#elemento1", { opacity: 1, duration: 1 });
-  safeTo("#elemento2", { x: 100, duration: 1 });
-  safeTo("#elemento3", { scale: 1.2, duration: 1 });
+  // ✅ Funciones para calcular offsets dinámicos
+  const getCornerOffsets = () => ({
+    topRight: {
+      x: window.innerWidth * 0.5 - window.innerWidth * .15, // relativo al ancho
+      y: -(window.innerHeight * 0.5 - window.innerHeight * 0.45),
+    },
+    bottomLeft: {
+      x: -(window.innerWidth * 0.5 - window.innerWidth * 0.15),
+      y: window.innerHeight * 0.5 - window.innerHeight * 0.45,
+    },
+  });
 
-  // Animación de íconos de esquina y texto
-  const cornerTimeline = gsap.timeline();
+  function runCornerAnimation() {
+    const offsets = getCornerOffsets();
 
-  cornerTimeline
-    .to(".top-right1", {
-      x: window.innerWidth / 2 - 450, // parte desde el centro en X
-      y: -(window.innerHeight / 2 - 380), // parte desde el centro en Y invertido
-      scale: 0.8,
-      opacity: 1,
-      duration: 1,
-      ease: "power2.out",
-    })
-    .to(
-      ".bottom-left1",
-      {
-        x: -(window.innerHeight / 2 - 50), // parte desde el centro en X
-        y: window.innerHeight / 2 - 380, // parte desde el centro en Y invertido
+    const cornerTimeline = gsap.timeline();
+    cornerTimeline
+      .to(".top-right1", {
+        x: offsets.topRight.x,
+        y: offsets.topRight.y,
         scale: 0.8,
         opacity: 1,
         duration: 1,
         ease: "power2.out",
+      })
+      .to(
+        ".bottom-left1",
+        {
+          x: offsets.bottomLeft.x,
+          y: offsets.bottomLeft.y,
+          scale: 0.8,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "<"
+      )
+      .from("#complment_loader", { opacity: 0, y: 20, duration: 0.05 })
+      .from("#text_loading", { opacity: 0, y: 20, duration: 1 });
+
+    return cornerTimeline;
+  }
+
+  tl.add(runCornerAnimation());
+
+  // 🔄 Recalcular posiciones si la ventana se redimensiona
+  window.addEventListener("resize", () => {
+    gsap.killTweensOf(".top-right1, .bottom-left1");
+    runCornerAnimation();
+  });
+
+  // Animación de salida
+  const animateExit = () => {
+    const exitTimeline = gsap.timeline({
+      onComplete: () => {
+        loaderOverlay.style.display = "none";
+        document.body.classList.remove("loading");
       },
-      "<"
-    )
-
-    .from("#complment_loader", {
-      opacity: 0,
-      y: 20,
-      duration: 0.05,
-      ease: "power2.out",
-    })
-
-    .from("#text_loading", {
-      opacity: 0,
-      y: 20,
-      duration: 1,
-      ease: "power2.out",
     });
 
-  tl.add(cornerTimeline);
+    exitTimeline
+      .to(["#text_loading", "#loading", "#complment_loader"], {
+        opacity: 0,
+        y: -20,
+        duration: 0.6,
+        ease: "power2.in",
+        stagger: 0.1,
+      })
+      .to(
+        ".top-right1",
+        {
+          x: window.innerWidth, // salir fuera de pantalla
+          y: -window.innerHeight,
+          scale: 1.2,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.in",
+        },
+        0
+      )
+      .to(
+        ".bottom-left1",
+        {
+          x: -window.innerWidth,
+          y: window.innerHeight,
+          scale: 1.2,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.in",
+        },
+        0
+      );
+  };
 
-  // Esperar a que termine animación y fuentes
   const loadFont = () => {
-    const observer = new FontFaceObserver("Work Sans", {
-      weight: 600,
-      style: "normal",
-    });
+    const observer = new FontFaceObserver("Work Sans", { weight: 600 });
     return observer.load(null, 5000);
   };
 
@@ -107,96 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
     new Promise((resolve) => tl.eventCallback("onComplete", resolve)),
   ]).then(() => {
     clearInterval(dotInterval);
-    gsap.to(loaderOverlay, {
-      opacity: 0,
-      duration: 0.5,
-      onComplete: () => {
-        loaderOverlay.style.display = "none";
-        document.body.classList.remove("loading");
-      },
-    });
-  });
-
-  Promise.allSettled([
-    loadFont().catch(() =>
-      console.warn("⚠️ No se cargó power_grotesk a tiempo")
-    ),
-    new Promise((resolve) => tl.eventCallback("onComplete", resolve)),
-  ]).then(() => {
-    clearInterval(dotInterval);
-
-    // ✨ Animación de salida
-    const exitTimeline = gsap.timeline({
-      onComplete: () => {
-        gsap.to(loaderOverlay, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => {
-            loaderOverlay.style.display = "none";
-            document.body.classList.remove("loading");
-          },
-        });
-      },
-    });
-
-    // Texto se desvanece
-    exitTimeline.to(
-      "#text_loading",
-      {
-        opacity: 0,
-        y: -20,
-        duration: 0.6,
-        ease: "power2.in",
-      },
-      0
-    );
-
-    exitTimeline.to(
-      "#loading",
-      {
-        opacity: 0,
-        y: -20,
-        duration: 0.6,
-        ease: "power2.in",
-      },
-      0
-    );
-    exitTimeline.to(
-      "#complment_loader",
-      {
-        opacity: 0,
-        y: -20,
-        duration: 0.6,
-        ease: "power2.in",
-      },
-      0
-    );
-
-    // Íconos se expanden hacia afuera y se desvanecen
-    exitTimeline.to(
-      ".top-right1",
-      {
-        x: window.innerWidth, // sale más a la derecha
-        y: -window.innerHeight, // sube más
-        scale: 1.2,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.in",
-      },
-      0
-    );
-
-    exitTimeline.to(
-      ".bottom-left1",
-      {
-        x: -window.innerWidth, // se va más a la izquierda
-        y: window.innerHeight, // baja más
-        scale: 1.2,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.in",
-      },
-      0
-    );
+    animateExit();
   });
 });
