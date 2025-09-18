@@ -356,96 +356,145 @@
 
 
     // Función genérica para animar SVG
-    async function loadAndAnimateSVG(container2, svgPath, type) {
-      if (!container2) {
-        logWarn("Contenedor no encontrado");
-        return;
+async function loadAndAnimateSVG(container, svgPath, type) {
+  if (!container) return console.warn("⚠️ Contenedor no encontrado");
+
+  try {
+    const response = await fetch(svgPath);
+    if (!response.ok) throw new Error(`No se pudo cargar el SVG: ${response.status}`);
+    const svgText = await response.text();
+
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+    const svgElement = svgDoc.documentElement;
+    container.innerHTML = "";
+    container.appendChild(svgElement);
+
+    if (type === "arrow") {
+      const basePath = svgElement.querySelector('#rotCircle');
+      if (!basePath) return console.warn("⚠️ No se encontró #rotCircle");
+      const clones = [basePath];
+      const numClones = 12;
+
+      basePath.style.transformBox = "fill-box";
+      basePath.style.transformOrigin = "center";
+      basePath.style.transformStyle = "preserve-3d";
+
+      for (let i = 1; i < numClones; i++) {
+        const clone = basePath.cloneNode(true);
+        clone.setAttribute("data-index", i);
+        svgElement.appendChild(clone);
+        clones.push(clone);
       }
 
-      try {
-        logInfo(`Cargando SVG desde: ${svgPath}`);
-        const response = await fetch(svgPath);
+      let angle = 0;
+      function animate() {
+        angle += 0.4;
+        clones.forEach((path, i) => {
+          path.style.transform = `rotateY(${angle + (360/numClones)*i}deg)`;
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
 
-        if (!response.ok) throw new Error(`No se pudo cargar el SVG (${response.status})`);
+      const line1 = svgElement.querySelector('.arrow1');
+      const line2 = svgElement.querySelector('.arrow2');
 
-        const svgText = await response.text();
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
-        const svgElement = svgDoc.documentElement;
-
-        container2.innerHTML = "";
-        container2.appendChild(svgElement);
-
-        logSuccess(`SVG cargado y agregado al contenedor (${type})`);
-
-        if (type === "arrow") {
-          logInfo("Iniciando animación tipo 'arrow'");
-          const basePath = svgElement.querySelector("#rotCircle");
-          if (!basePath) return logWarn("No se encontró #rotCircle en el SVG");
-
-          const clones = [basePath];
-          const numClones = 12;
-
-          basePath.style.transformBox = "fill-box";
-          basePath.style.transformOrigin = "center";
-          basePath.style.transformStyle = "preserve-3d";
-
-          for (let i = 1; i < numClones; i++) {
-            const clone = basePath.cloneNode(true);
-            clone.setAttribute("data-index", i);
-            svgElement.appendChild(clone);
-            clones.push(clone);
-          }
-
-          let angle = 0;
-          function animate() {
-            angle += 0.4;
-            clones.forEach((path, i) => {
-              path.style.transform = `rotateY(${angle + (360 / numClones) * i}deg)`;
-            });
-            requestAnimationFrame(animate);
-          }
-          animate();
-          logSuccess("Animación de círculos flecha iniciada ✅");
-
-          const line1 = svgElement.querySelector(".arrow1");
-          const line2 = svgElement.querySelector(".arrow2");
-
-          function animateArrowLine(line) {
-            if (!line) return;
-            const length = line.getTotalLength();
-            line.style.strokeDasharray = length;
-            line.style.strokeDashoffset = length;
-
-            let start = null;
-            function step(ts) {
-              if (!start) start = ts;
-              const progress = (ts - start) / 2000;
-              line.style.strokeDashoffset = Math.max(length * (1 - progress), 0);
-              if (progress < 1) requestAnimationFrame(step);
-              else {
-                line.style.strokeDashoffset = length;
-                start = null;
-                requestAnimationFrame(step);
-              }
-            }
-            requestAnimationFrame(step);
-          }
-
-          if (line1 || line2) {
-            animateArrowLine(line1);
-            animateArrowLine(line2);
-            logSuccess("Animación de líneas flecha iniciada ✅");
-          }
-        } else if (type === "circle") {
-          logInfo("Iniciando animación tipo 'circle'");
-          // ... tu lógica de "circle" sin cambios ...
-          logSuccess("Animación de círculos completada ✅");
+      function animateArrowLine(line) {
+        if (!line) return;
+        const length = line.getTotalLength();
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const progress = (ts - start)/2000;
+          line.style.strokeDashoffset = Math.max(length*(1-progress),0);
+          if (progress < 1) requestAnimationFrame(step);
+          else { line.style.strokeDashoffset = length; start = null; requestAnimationFrame(step);}
         }
-      } catch (err) {
-        logError("Error al cargar o animar el SVG", err);
+        requestAnimationFrame(step);
       }
+
+      if (line1) animateArrowLine(line1);
+      if (line2) animateArrowLine(line2);
     }
+
+    else if (type === "circle") {
+      const baseCircles = svgElement.querySelectorAll('.circle');
+      const numClones = 12;
+      const allClones = [];
+
+      baseCircles.forEach((baseCircle, circleIndex) => {
+        baseCircle.style.transformBox = "fill-box";
+        baseCircle.style.transformOrigin = "center";
+        baseCircle.style.transformStyle = "preserve-3d";
+
+        const clones = [baseCircle];
+        for (let i=1;i<numClones;i++){
+          const clone = baseCircle.cloneNode(true);
+          clone.setAttribute("data-index", `${circleIndex}-${i}`);
+          svgElement.appendChild(clone);
+          clones.push(clone);
+        }
+        allClones.push(clones);
+      });
+
+      let angle = 0;
+      function animateCircles() {
+        angle += 0.4;
+        allClones.forEach(clones => clones.forEach((c,i)=>{
+          const offset = (360/numClones)*i;
+          c.style.transform = `rotateY(${angle+offset}deg)`;
+        }));
+        requestAnimationFrame(animateCircles);
+      }
+      animateCircles();
+
+      const lines = svgElement.querySelectorAll('.line');
+      const cubes = svgElement.querySelectorAll('.cube');
+      const circles = svgElement.querySelectorAll('.circle');
+
+      cubes.forEach((cube, i) => {
+        const line = lines[i % lines.length];
+        const length = line.getTotalLength();
+        const direction = Math.random()<0.5 ? 1:-1;
+        let startTime = null;
+        const duration = 10000 + Math.random()*2000;
+
+        function animateCube(timestamp) {
+          if(!startTime) startTime = timestamp;
+          const elapsed = (timestamp - startTime) % duration;
+          const progress = elapsed/duration;
+          const pos = direction===1 ? progress : 1-progress;
+          const point = line.getPointAtLength(pos*length);
+          cube.setAttribute("x", point.x-6);
+          cube.setAttribute("y", point.y-6);
+
+          circles.forEach(circle=>{
+            const bbox = circle.getBBox();
+            const padding=5;
+            const isNear =
+              point.x+12>bbox.x-padding &&
+              point.x<bbox.x+bbox.width+padding &&
+              point.y+12>bbox.y-padding &&
+              point.y<bbox.y+bbox.height+padding;
+            if(isNear && !circle.classList.contains("pulsing")){
+              circle.classList.add("pulsing");
+              setTimeout(()=>circle.classList.remove("pulsing"),400);
+            }
+          });
+
+          requestAnimationFrame(animateCube);
+        }
+        requestAnimationFrame(animateCube);
+      });
+    }
+
+  } catch(err) {
+    console.error("💥 Error al cargar o animar el SVG:", err);
+  }
+}
 
     // ScrollTrigger principal
     document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionIndex) => {
