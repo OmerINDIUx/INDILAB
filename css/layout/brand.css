@@ -1,73 +1,119 @@
+/* ===========================
+   SECCIÓN BRAND
+=========================== */
 .brand {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;  /* o absolute, fixed */
+  position: relative;
+  z-index: 10000;
+  height: 100vh;
+  width: 100%;
+}
+
+/* ===========================
+   WRAPPER & CONTENEDORES
+=========================== */
+/* #svg-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 200vh; 
+  overflow: hidden;
+  pointer-events: none;
+} */
+
+
+#svg-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 200vh; /* o lo que necesites para el scroll */
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0; /* más bajo para que no tape todo */
+}
+
+
+.svg-containedor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20030;
+}
+
+/* Oculta el segundo SVG pero permite medirlo */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
   z-index: 10000;
 }
 
-.branding{
-  z-index: 10000;
-  min-width: 100px;
+/* ===========================
+   SVG ESTILOS
+=========================== */
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
-  .IndiGrup {
-    width: 100%;
-    height: auto;
-  }
 
+.IndiGrup {
+  width: 100%;
+  height: auto;
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 177, 43);
+}
+
+/* ===========================
+   RESPONSIVE ADAPTACIONES
+=========================== */
+@media (max-width: 1024px) {
   #svg-wrapper {
-    position: fixed;
-    width: 100%;
-    height: 200vh;
-    /* espacio para scroll */
-    overflow: hidden;
+    height: 220vh; /* un poco más de scroll en tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  #svg-wrapper {
+    height: 300vh; /* más espacio en móvil */
   }
 
-  .svg-containedor {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-  }
-
-  /* ahora se oculta con opacity (para que GSAP pueda medir elementos) */
-  .hidden {
-    opacity: 0;
-    pointer-events: none;
-    z-index: 10000;
-  }
-
-  .INDI path {
-    fill: #eee;
-  }
-
-  .LAB path {
-    fill: #eee;
-  }
-
-  .colorkey path {
-    fill: rgb(226, 177, 43);
+  .brand {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2rem; /* para que no quede pegado al borde superior */
+    height: 100vh;
   }
 
   svg {
-    width: 100%;
-    height: auto;
-  }
-
-#svg-wrapper, .svg-containedor {
-  pointer-events: none;
-}
-
-  @media (max-width: 1024px) {
-  #svg-wrapper {
-    height: 200vh; /* más espacio en tablet */
+    max-width: 90%; /* evita que el SVG se desborde en pantallas pequeñas */
+    margin: 0 auto;
   }
 }
 
-@media (max-width: 770px) {
+
+@media (max-width: 1024px) {
   #svg-wrapper {
-    height: 300vh; /* más espacio en móvil */
+    height: 180vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #svg-wrapper {
+    height: 250vh;
   }
 }
