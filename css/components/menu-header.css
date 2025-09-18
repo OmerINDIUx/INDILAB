@@ -341,12 +341,17 @@
   font-size: 1.5rem;
   margin: 0;
   color: #1a1a1a;
+   text-decoration: none;
 }
 .blog-date {
   font-size: 0.85rem;
   margin-top: 0.3rem;
   color: #666;
+   text-decoration: none;
 }
+
+.blog-item a:hover .blog-title {
+ text-decoration: none;}
 
 .sidebar12 {
   position: fixed; /* Siempre visible */
@@ -362,7 +367,6 @@
   z-index: 900;
 }
 
-
 .menu-blog {
   display: flex;
   flex-direction: column;
@@ -372,8 +376,10 @@
 }
 
 .blog-heading {
-  flex: 0 0 auto;         /* título fijo arriba */
-  margin-bottom: 1.5rem;  /* espacio debajo */
+  color: #1a1a1a;
+  flex: 0 0 auto; /* título fijo arriba */
+  margin-bottom: 1.5rem;
+  /* espacio debajo */
 }
 
 .blog-list {
@@ -381,42 +387,35 @@
   grid-template-columns: 1fr 1fr; /* las entradas en dos columnas */
   gap: 2rem;
 }
-  .secundary-brand2 .INDI path {
-    fill: #1a1a1a;
-  }
+.secundary-brand2 .INDI path {
+  fill: #1a1a1a;
+}
 
-  .secundary-brand2 .LAB path {
-    fill: #1a1a1a;
-  }
+.secundary-brand2 .LAB path {
+  fill: #1a1a1a;
+}
 
-  .secundary-brand2 .colorkey path {
-    fill: rgb(226, 177, 43);
-  }
+.secundary-brand2 .colorkey path {
+  fill: rgb(226, 177, 43);
+}
 
-  
 a {
   display: block;
 }
 
-  svg {
-    width: 100%;
-    height: auto;
-    min-width: 100px; /* esto asegura que nunca sea menor a 100px */
-  }
-
-
-
-
-
-
+svg {
+  width: 100%;
+  height: auto;
+  min-width: 100px; /* esto asegura que nunca sea menor a 100px */
+}
 
 .secundary-brand2 {
   position: absolute;
   top: 1.5rem;
   left: 2rem;
-  padding: 0px;;
-  width: 90px;      /* ajusta el tamaño */
-  z-index: 20005;    /* por encima del fondo */
+  padding: 0px;
+  width: 90px; /* ajusta el tamaño */
+  z-index: 20005; /* por encima del fondo */
   pointer-events: auto; /* clickeable */
   min-width: 100px;
 }
@@ -431,119 +430,185 @@ a {
   z-index: 20005;
 }
 
-
-
-
 @media (max-width: 768px) {
-
-
-.sidebar12 {
-  position: fixed;      /* Siempre visible */
-  top: 0;
-  left: 0;
-  width: 100%;          /* ahora ocupa todo el ancho */
-  height: 100px;         /* altura fija */
-  background-color: #1a1a1a;
-  display: flex;
-  flex-direction: row;  /* elementos en fila */
-  align-items: center;  /* centrados verticalmente */
-  justify-content: space-between; /* repartidos a los lados */
-  padding: 0 20px;      /* espacio interno horizontal */
-  z-index: 900;
-}
+  .sidebar12 {
+    position: fixed; /* Siempre visible */
+    top: 0;
+    left: 0;
+    width: 100%; /* ahora ocupa todo el ancho */
+    height: 100px; /* altura fija */
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: row; /* elementos en fila */
+    align-items: center; /* centrados verticalmente */
+    justify-content: space-between; /* repartidos a los lados */
+    padding: 0 20px; /* espacio interno horizontal */
+    z-index: 900;
+  }
 
   /* ==============================
    BOTONES EN TOP (no abajo)
 ============================== */
-.buttons-menu {
-  position: fixed;
-  top: 0;              /* ahora arriba */
-  right: 0;
-  width: 100%;         /* toda la parte superior */
-  display: flex;
-  justify-content: space-between; /* lang left, menu right */
-  align-items: center;
-  padding: 1rem 2rem;
-  pointer-events: auto;
-  z-index: 10010;
-}
+  .buttons-menu {
+    all: unset;
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10010;
+  }
 
-.lang-btn {
-  margin-top: 0;
-}
+  .top-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
 
-.hamburger {
-  margin-top: 0;
-}
-/* ==============================
+  /* Botón idioma */
+  .lang-btn,
+  .hamburger {
+    position: relative;
+    width: 60px;       /* 🔹 más compacto en móvil */
+    height: 44px;
+    border: 2px solid #eee;
+    border-radius: 6px 0 6px 0;
+    color: #eee;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .lang-btn {
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .hamburger span {
+    height: 3px;
+    width: 40%;
+    background-color: #eee;
+    display: block;
+    border-radius: 2px 0 2px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Hover con gradiente compartido */
+  .lang-btn::before,
+  .hamburger::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: linear-gradient(
+      var(--angle, 90deg),
+      #ffcd7000,
+      #ffcd7000,
+      #ff6f61,
+      #ffcc70
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    filter: drop-shadow(0 0 2px #ff6f61) drop-shadow(0 0 12px #ffcc70);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .lang-btn:hover,
+  .hamburger:hover {
+    border-color: transparent;
+  }
+
+  .lang-btn:hover::before,
+  .hamburger:hover::before {
+    opacity: 1;
+  }
+
+  /* Animación de hamburguesa activa */
+  .hamburger.is-active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.is-active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  /* ==============================
    FULLSCREEN MENU EN COLUMNAS
 ============================== */
-.menu-columns {
-  display: flex;
-  flex-direction: column; /* vertical: primero menu-links, luego blog */
-  width: 100%;
-  height: calc(100vh - 6rem); /* altura total menos padding superior */
-  padding: 6rem 2rem 2rem;
-  box-sizing: border-box;
-  overflow: hidden;
+  .menu-columns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh; /* Usar toda la altura disponible */
+    padding: 1rem 1rem 1rem; /* menos padding para que quepa más contenido */
+    box-sizing: border-box;
+    gap: 0.5rem; /* menos separación entre logo+links y blog */
+  }
+
+  /* Logo + menu links: 30% de altura */
+  .secundary-brand2 {
+    position: relative; /* para que participe del flujo */
+    top: -70px;
+    left: 0;
+    width: 70px;
+    margin-bottom: 0.5rem;
+  }
+
+  .menu-links {
+    flex: 0 0 20%; /* fuerza que ocupe 30% de la altura */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.01rem;
+    margin: 0;
+
+    justify-items: flex-start;
+    align-items: start;
+
+    position: relative; /* para que participe del flujo */
+    top: -130px;
+  }
+
+  /* Blog: 70% de altura y scrollable */
+  .menu-blog {
+    flex: 0 0 50%; /* ocupa 70% de la altura */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 0.3rem;
+    position: relative; /* para que participe del flujo */
+    top: -150px;
+  }
+
+  .menu-blog .blog-list {
+    grid-template-columns: 1fr; /* en móvil mejor una columna */
+    gap: 0.8rem;
+  }
+
+  .blog-thumb {
+    height: 140px; /* reduce imágenes en móvil */
+    border-radius: 8px;
+  }
+
+  .blog-heading {
+    position: relative; /* para que participe del flujo */
+    top: -150px;
+  }
 }
-
-/* ==============================
-   MENÚ LINKS ARRIBA (2 columnas)
-============================== */
-.menu-links {
-  flex: 0 0 auto; /* no crece */
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* dos columnas */
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  width: 100%;
-}
-
-/* ==============================
-   BLOG ABAJO (2 columnas con scroll)
-============================== */
-/* BLOG ABAJO (2 columnas con scroll) */
-/* ==============================
-   BLOG ABAJO (scroll propio)
-============================== */
-.menu-blog {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column; /* título arriba, lista abajo */
-  overflow: hidden;       /* oculta scroll del contenedor */
-  padding-right: 0.5rem;
-}
-
-/* la lista es la que scrollea */
-.menu-blog .blog-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* dos columnas */
-  gap: 1.5rem;
-  flex: 1 1 auto;          /* ocupa todo el espacio restante */
-  overflow-y: auto;        /* scroll vertical aquí */
-  padding-right: 0.5rem;
-}
-
-/* opcional: mejorar scrollbar */
-.menu-blog .blog-list::-webkit-scrollbar {
-  width: 6px;
-}
-.menu-blog .blog-list::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-

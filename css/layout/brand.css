@@ -13,7 +13,6 @@
   .IndiGrup {
     width: 100%;
     height: auto;
-    min-width: 100px; /* esto asegura que nunca sea menor a 100px */
   }
 
   #svg-wrapper {

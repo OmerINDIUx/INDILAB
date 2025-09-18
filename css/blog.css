@@ -395,11 +395,6 @@ span {
   }
 
   /* ===== SVG BRAND ===== */
-  .secundary-brand {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
 
   /* ===== NOISE / GRAIN ===== */
   body::before,
@@ -409,12 +404,10 @@ span {
 
   .filter-buttons {
   position: relative;
-  z-index: 1000; /* asegúrate de que esté por encima de cualquier overlay */
 }
 .filter-buttons,
 .blog-list1 {
   position: relative;
-  z-index: 1000;
 }
 
 }
