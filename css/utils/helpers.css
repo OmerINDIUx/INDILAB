@@ -152,4 +152,12 @@
   .text-large_w {
     max-width: 400px;
   }
+
+
+   #content-row {
+    margin-top: -300px; /* súbelo 30px, ajusta según necesites */
+  }
+
+
+  
 }
