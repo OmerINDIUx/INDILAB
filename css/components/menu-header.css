@@ -433,9 +433,8 @@ svg {
 @media (max-width: 768px) {
   .sidebar12 {
     position: fixed; /* Siempre visible */
-    top: 0;
-    left: 0;
-    width: 100%; /* ahora ocupa todo el ancho */
+
+    width: 100vw; /* ahora ocupa todo el ancho */
     height: 100px; /* altura fija */
     background-color: #1a1a1a;
     display: flex;

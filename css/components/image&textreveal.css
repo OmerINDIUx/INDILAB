@@ -1,12 +1,11 @@
 /* ==============================
-   DESKTOP (>768px)
+   DESKTOP (>= 1025px)
 ============================== */
 
-/* Sección principal */
 .text-image-section2 {
   position: relative;
   width: calc(100% - 100px);
-  height: 100vh; /* 👈 en desktop sí se puede usar pantalla completa */
+  height: 100vh; /* sección ocupa toda la altura de viewport */
   left: 100px;
   display: flex;
   overflow: hidden;
@@ -28,50 +27,26 @@
   z-index: 0;
 }
 
-/* Contenedor */
+/* Contenedor general */
 .container2 {
   display: flex;
-  flex-direction: row; /* lado a lado */
+  flex-direction: row;
   width: 100%;
   height: 100%;
 }
 
 /* Columna de texto */
 .text-column2 {
-  flex: 0 0 40%; /* 40% ancho fijo */
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 4rem;
   color: #1a1a1a;
   background-color: #eee;
-  z-index: 1; /* por encima del grano */
-}
-
-/* Columna de imagen */
-.image-column2 {
-  flex: 0 0 60%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1;
 }
 
-.content__img-wrapper2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-column2 img {
-  width: 80%;
-  height: auto;
-  object-fit: cover; /* rellena sin deformar */
-  border-radius: 0;
-}
-
-/* Tipografía */
 .text-column2 .title2 {
   font-family: "Figtree", sans-serif;
   font-weight: 600;
@@ -85,35 +60,77 @@
   line-height: 1.6;
 }
 
-/* Reveal texts (si lo usas en otra parte) */
-.reveal-texts-container2 {
-  position: fixed;
-  bottom: 30vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 900px;
-  text-align: center;
-  z-index: 2000;
-  pointer-events: none;
+/* Columna de imagen */
+.image-column2 {
+  flex: 0 0 60%;
+  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
-.reveal-text {
-  font-family: "Figtree", sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #eee;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(50px);
-  position: absolute; /* apilados */
+/* Contenedor para el SVG */
+.content__img-wrapper2 {
+  width: 85%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* mantiene el espacio incluso antes de cargar */
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+/* SVG: escalable y centrado */
+.content__img-wrapper2 svg {
+  width: 100%;
+  max-width: 1200px; /* ✅ tamaño mayor en desktop */
+  height: auto;
+  display: block;
+}
+
+/* ==============================
+   TABLET (768px - 1024px)
+============================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container2 {
+    flex-direction: column; /* apilar texto e imagen */
+  }
+
+  .text-column2,
+  .image-column2 {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .content__img-wrapper2 {
+    min-height: 260px;
+  }
+
+  .content__img-wrapper2 svg {
+    max-width: 450px;
+  }
+
+  .text-column2 .title2 {
+    font-size: 2rem;
+  }
+
+  .text-column2 .text-content2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==============================
+   MOBILE (< 768px)
+============================== */
+
+@media (max-width: 767px) {
   .text-image-section2 {
     width: 100%;
-    height: 100vh; /* 👈 mantener altura para ScrollTrigger */
+    height: 100vh;
     left: 0;
     top: 0;
     padding: 0;
@@ -121,66 +138,41 @@
 
   .container2 {
     flex-direction: column;
-    height: 100%; /* que ocupe toda la sección */
+    height: 100%;
   }
 
   .text-column2,
   .image-column2 {
     width: 100%;
-    padding: center;
     text-align: center;
     align-items: center;
+    padding: 1.5rem;
+  }
+
+  .text-column2 {
+    padding-top: 100px;
   }
 
   .image-column2 {
-    padding-bottom: 25rem;
+    padding-bottom: 4rem;
   }
-  .text-column2 {
-    padding-top: 110px;
-    max-width: 100%;
-    margin: 0 auto; /* 👈 centramos el bloque */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 👈 centramos todo el contenido horizontalmente */
-    text-align: center;
-  }
-  .image-column2,
+
   .content__img-wrapper2 {
-    flex: 0 0 auto;
-    min-height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 80%;
+    max-width: 700px;
+    /* min-height: 220px; */
   }
 
   .content__img-wrapper2 svg {
-    max-width: 100%;
-    max-height: 80vh; /* ajusta según SVG */
-    height: auto;
-  }
-  .sidebar {
-    opacity: 0;
-  }
-
-  .text-image-section2 .text-column2 {
-    order: 1;
-  }
-  .text-image-section2 .image-column2 {
-    order: 2;
+    max-width: 300px; /* ✅ más pequeño que desktop */
+    max-height: 70vh;
   }
 
   .text-column2 .title2 {
-    font-family: "Figtree", sans-serif;
-    font-weight: 600;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #1a1a1a;
-    text-align: center; /* 👈 aseguramos centrado del texto */
+    font-size: 1.8rem;
   }
 
   .text-column2 .text-content2 {
     font-size: 1rem;
-    line-height: 1.6;
-    text-align: center;
   }
 }

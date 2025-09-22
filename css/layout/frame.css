@@ -32,7 +32,7 @@ body.no-scroll {
 /* Sidebar fijo a la izquierda */
 .sidebar {
   width: 5%; /* o 5% si prefieres, pero puede ser poco en pantallas grandes */
-  background-color: #00000023;
+  background-color: #ffffff;
   position: sticky;
   top: 0;
   height: 100vh;
