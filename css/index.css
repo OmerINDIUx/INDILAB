@@ -214,8 +214,13 @@ body::before {
 /* ===========================
    Section Hero
 =========================== */
+
+/* ===========================
+   1. LAYOUT GENERAL
+=========================== */
 .main-content {
-  padding-left: 5%;
+    width: calc(100% - 100px);
+padding-left: 100px;
   display: flex;
   flex-direction: row;
 }
@@ -227,32 +232,34 @@ body::before {
   width: 100vw;
 }
 
-.layout {
-  flex-direction: column;
-  height: auto;
-}
-
 .left-column,
 .right-column {
   width: 50%;
   height: 100%;
   display: flex;
-  justify-content: center; /* centra horizontalmente el contenido */
-  align-items: center; /* centra verticalmente el contenido */
-  box-sizing: border-box;
-  position: relative;
-}
-/* COLUMNA IZQUIERDA: 40% */
-.left-column {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: transparent;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   position: relative;
 }
 
+/* Columna izquierda */
+.left-column {
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+}
+
+/* Columna derecha */
+.right-column {
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* ===========================
+   2. TEXTOS
+=========================== */
 .content--intro {
   padding-top: 45vh;
   z-index: 200;
@@ -267,145 +274,6 @@ body::before {
   text-align: center;
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-}
-.scroll-animation {
-  position: fixed;
-  left: 50%;
-  top: 90vh;
-  transform: translateX(-50%) translateY(-50%);
-  opacity: 1;
-  transition: opacity 0.5s ease;
-  pointer-events: none; /* Evita que interfiera con clics */
-}
-
-.scroll-animation.hidden {
-  opacity: 0;
-}
-
-.hx {
-  background: none;
-  color: var(--color-highlight-start);
-  display: inline-block;
-  position: relative;
-  white-space: nowrap;
-}
-
-.corner {
-  position: absolute;
-  width: 200px;
-  /* ajusta tamaño */
-  height: auto;
-  pointer-events: none;
-}
-
-.right-column {
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.right-column {
-  width: 50%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  /* z-index: 301; */
-}
-
-/* Slider base */
-#hourSlider {
-  width: 180px;
-  height: 6px;
-  background: var(--color-white-brand, #efefef);
-  border-radius: 3px;
-  outline: none;
-  appearance: none;
-  margin: 0;
-  position: relative;
-  z-index: 10011;
-  cursor: pointer;
-}
-.mapa_video {
-  z-index: 1;
-}
-/* WebKit (Chrome, Safari) */
-#hourSlider::-webkit-slider-thumb {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: var(--color-white-brand, #efefef);
-  border-radius: 50%;
-  cursor: pointer;
-  margin-top: -5px;
-  z-index: 10011;
-  cursor: pointer;
-}
-
-#hourSlider::-webkit-slider-runnable-track {
-  background: #d9e7e50f;
-  height: 6px;
-  border-radius: 3px;
-  z-index: 10011;
-}
-
-/* Firefox */
-#hourSlider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: #e7e5d950;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  z-index: 10011;
-}
-
-#hourSlider::-moz-range-track {
-  background: #d9e7e50f;
-  height: 6px;
-  border-radius: 3px;
-  z-index: 10011;
-}
-
-/* Edge */
-#hourSlider::-ms-thumb {
-  width: 16px;
-  height: 16px;
-  background: #43d7cd;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10011;
-}
-
-#hourSlider::-ms-track {
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-  height: 6px;
-  z-index: 10011;
-}
-
-/* Reloj abajo */
-.time-ctrl {
-  height: auto;
-  /* padding: 2rem 0; */
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-text, #0c0c0c);
-  position: relative;
-  z-index: 10011;
-}
-
 .text-large_M {
   color: var(--color-white-brand, #eee);
   font-size: clamp(0.7rem, 1rem, 2.7rem);
@@ -413,18 +281,6 @@ body::before {
   margin: 0 0 1.5em 0;
   line-height: 1.2;
   text-align: center;
-}
-
-.hx-1 {
-  background: none;
-  color: var(--color-highlight-start-map, #e7e5d9);
-  display: inline-block;
-  position: relative;
-  white-space: nowrap;
-}
-
-.hx-2 {
-  --color-highlight-end: var(--color-highlight-start-map, #e7e5d9);
 }
 
 .hour {
@@ -436,59 +292,33 @@ body::before {
   z-index: 10011;
 }
 
-
-.layout {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-}
-
-
-
-.svg-container {
-  flex: 1;
+/* ===========================
+   3. MARCADORES / DECORACIÓN
+=========================== */
+.hx {
+  background: none;
+  color: var(--color-highlight-start);
+  display: inline-block;
   position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
+  white-space: nowrap;
 }
 
-
-.layout {
-  display: flex;
-  flex-direction: row; /* lado a lado */
-  height: 100vh;       /* ocupa toda la pantalla */
-  width: 100vw;
-}
-
-
-
-
-#svg-container {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  overflow: visible;
-}
-
-.icon1 {
+.hx-1 {
+  background: none;
   color: var(--color-highlight-start-map, #e7e5d9);
-    z-index: 10011;
-  cursor: pointer;
 }
 
-.svg-container {
-  position: relative;
-  /* top: 10rem;
-  left: 15rem; */
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
+.hx-2 {
+  --color-highlight-end: var(--color-highlight-start-map, #e7e5d9);
 }
+
+.corner {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  pointer-events: none;
+}
+
 .corner-icon {
   position: absolute;
   width: 70px;
@@ -496,14 +326,144 @@ body::before {
   z-index: 2;
 }
 
-.top-left {
-  top: 0;
-  left: 0;
+.top-left { top: 0; left: 0; }
+.bottom-right { bottom: 0; right: 0; }
+
+/* ===========================
+   4. ANIMACIONES Y SCROLL
+=========================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(10px); }
 }
 
-.bottom-right {
-  bottom: 0;
-  right: 0;
+.scroll-animation {
+  position: fixed;
+  left: 50%;
+  top: 90vh;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.scroll-animation.hidden {
+  opacity: 0;
+}
+
+/* ===========================
+   5. MAPA Y CONTROLES
+=========================== */
+.mapa_video {
+  z-index: 1;
+  height: 100%;
+  width: auto;
+}
+
+.time-ctrl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text, #ff0000);
+  position: relative;
+  z-index: 10011;
+}
+
+/* ===========================
+   6. SLIDER HORA
+=========================== */
+/* Contenedor de hora + slider */
+.time-slider-box {
+  position: absolute;
+  bottom: 8rem;
+  right: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: #1a1a1a;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 10020;
+}
+
+/* Hora arriba del slider */
+.time-slider-box .hour {
+  font-family: "Figtree", sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+/* Slider estilizado */
+#hourSlider {
+  width: 180px;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* WebKit */
+#hourSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #eee;
+  border-radius: 50%;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+#hourSlider::-webkit-slider-runnable-track {
+  background: #eee;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Firefox */
+#hourSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffd90250;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+#hourSlider::-moz-range-track {
+  background: #d9e7e50f;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Edge */
+#hourSlider::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: #43d7cd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#hourSlider::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  height: 6px;
+}
+
+
+/* ===========================
+   7. ESTADOS INICIALES
+=========================== */
+#content-row,
+#maping-contorler {
+  opacity: 0; /* Ocultos por defecto */
 }
 
 .content-row {
@@ -512,13 +472,41 @@ body::before {
   gap: 1rem;
 }
 
-#content-row {
-  opacity: 0; /* Oculto por defecto */
+/* ===========================
+   8. footer video
+=========================== */
+
+/* Contenedor del pie de video */
+.video-footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #eeeeee;
+  font-size: 0.9rem;
+  z-index: 10030;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-width: 90%;
+  pointer-events: none; /* no bloquea clics en el video */
 }
 
-#maping-contorler {
-  opacity: 0; /* Oculto por defecto */
+/* Texto de cada línea */
+.video-footer .map_food {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+  line-height: 1.3;
 }
+
+
+
+
+
+
+
+
 
 
 /* ===========================
