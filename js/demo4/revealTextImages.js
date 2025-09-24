@@ -19,7 +19,7 @@ const allSectionsData = [
   [
     {
       title: "Technology as a Force for Human Potential",
-      text: "Just as cities are crucibles of innovation, technology can be a catalyst that unlocks and amplifies human potential. When used ethically, it can empower overlooked communities, reveal invisible needs, and fuel just, informed decisions. At INDIlab, technology is a means to a greater purpose: improving urban life, fostering creativity, and sparking progress.",
+      text: "Just as cities are crucibles of innovation, technology can be a catalyst that unlocks and amplifies human potential. When used ethically, it can empower overlooked communities, reveal invisible needs, and fuel just, informed decisions. At INDI Lab, technology is a means to a greater purpose: improving urban life, fostering creativity, and sparking progress.",
       anim: "img/avance_tech.svg",
       type: "arrow"
     },
@@ -57,7 +57,7 @@ const allSectionsData = [
     },
     {
       title: "An Identity Rooted in Innovation",
-      text: "INDIlab aims to be both an action hub and a thought leader in urban experimentation. Building on Grupo INDI’s legacy of transformative engineering, we now apply cutting-edge tools and methods to create impact for our clients and for the communities we serve.",
+      text: "INDI Lab aims to be both an action hub and a thought leader in urban experimentation. Building on Grupo INDI’s legacy of transformative engineering, we now apply cutting-edge tools and methods to create impact for our clients and for the communities we serve.",
       anim: "img/innovation.svg",
       type: "circle"
     }

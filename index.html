@@ -1,438 +1,286 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Some examples for how sticky sections can be animated." />
-  <meta name="keywords" content="sticky, css, gsap, animation, sticky section, layout" />
-  <meta name="author" content="Codrops" />
-  <link rel="shortcut icon" href="ico-01.png" />
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+    <link id="menu-css" rel="stylesheet" href="/css/index.css">
 
 
+    <meta charset="UTF-8">
+    <title>INDI Lab</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Some examples for how sticky sections can be animated." />
+    <meta name="keywords" content="sticky, css, gsap, animation, sticky section, layout" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="ico-01.png" />
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
 
-  <!-- Estilos propios y Font Awesome -->
-  <link rel="stylesheet" href="css/base.css" />
+    <script>document.documentElement.className = "js";</script>
 
-  <link rel="stylesheet" href="css/components/image&textreveal.css" />
-  <!-- JS clases y librerías -->
-  <script>document.documentElement.className = "js";</script>
-  <script src="js/gsap.min.js"></script>
-  <script src="js/ScrollTrigger.min.js"></script>
-  <script src="js/lenis.min.js"></script>
-  <script src="js/splitting.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-  <!-- Lógica modular -->
-  <script type="module" src="js/demo4/index.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script src="js/splitting.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+      <script type="module" src="js/demo4/traduction.js"></script>
+
 </head>
 
-<body class="loading demo-4">
-  <script type="module" src="js/demo4/loading.js"></script>
+<body>
 
-  <script>
-    let resizeTimer;
+    <div id="menu-placeholder"></div>
 
-    // Esto evita que el  recuerde la posición de scroll
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-
-    // Siempre al pixel 0 al cargar
-    window.scrollTo(0, 0);
-
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        // No cambiar la posición de scroll al recargar, se mantiene donde se quedó
-        location.reload();
-      }, 300); // espera 300ms después de dejar de redimensionar
-    });
-  </script>
-
-
-
-  <div class="info-phi">
-    <button class="phi" aria-label="Logo Phi">
-      <img src="img/phi-01.png" alt="Logo Phi" />
-      <span class="tooltip-phi"> <a data-i18n="info phi"></a>
-      </span>
-    </button>
-  </div>
-
-
-  <div id="menu-placeholder"></div>
-
-  <script>
-    fetch('/menu.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then(data => {
-        const placeholder = document.getElementById('menu-placeholder');
-        if (!placeholder) {
-          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-        }
-        placeholder.innerHTML = data;
-
-        // Cargar el script después de que el menú esté en el DOM
-        const script = document.createElement('script');
-        script.src = "/js/demo4/menu.js";
-        script.onload = () => console.log("menu.js cargado correctamente ✅");
-        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-        document.body.appendChild(script);
-      })
-      .catch(error => {
-        console.error("Ocurrió un error al cargar el menú:", error);
-      });
-  </script>
-
-  </header>
-  <script src="/js/demo4/menu.js"></script>
-
-
-
-
-
-<!-- 
-  <main>
-    <div class="frame frame--header">
-      <div class="frame__heading">
-      </div>
-    </div>
-  </main> -->
-
-
-
-
-
-
-
-
-
-
-  <!-- Sección brand -->
-  <section id="brand" class="brand">
-
-    <div id="svg-wrapper">
-      <!-- SVG inicial (cuadrado) -->
-      <div id="svg-square" class="svg-containedor"></div>
-      <!-- SVG destino (rectángulo, oculto al inicio) -->
-      <div id="svg-rect" class="svg-containedor hidden"></div>
-    </div>
-
-    <script clas="branding" src="js/demo4/animation_brand.js"></script>
-
-    <div class="navigation-arrows">
-      <a href="#map">
-        <div class="core-belive">
-          <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
-          <h3>Our core beliefs</h3>
-        </div>
-      </a>
-
-      <a href="/What_We _Do.html">
-        <div class="our-projects">
-          <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
-          <h3>Our work</h3>
-        </div>
-      </a>
-
-    </div>
     <script>
-      window.addEventListener('scroll', function () {
-        const scrollY = window.scrollY;
-        const scrollElement = document.querySelector('.navigation-arrows');
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
 
-        if (scrollY > 500) {
-          scrollElement.classList.add('hidden');
-        } else {
-          scrollElement.classList.remove('hidden');
-        }
-      });
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
     </script>
 
 
-
-    <div class="scroll-animation">
-        <img src="img/Scroll Down.gif" alt="scroll down">
-    </div>
-
-
-
-
-    <script>
-      window.addEventListener('scroll', function () {
-        const scrollY = window.scrollY;
-        const scrollElement = document.querySelector('.scroll-animation');
-
-        if (scrollY > 500) {
-          scrollElement.classList.add('hidden');
-        } else {
-          scrollElement.classList.remove('hidden');
-        }
-      });
-    </script>
-  </section>
+    <!-- ---------------------todo esto es el menu>------------------------------------------- -->
+    <!-- ---------------------todo esto es el menu>------------------------------------------- -->
+    <!-- ---------------------todo esto es el menu>------------------------------------------- -->
 
 
 
 
+    <!-- ---------------------aquí inicia esl código------------------------------------------- -->
+    <section id="brand" class="brand">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="stay">
-    <section id="map" class="main-content">
-      <div id="brand" class="layout section">
-        <!-- COLUMNA IZQUIERDA -->
-        <div id="left-column" class="left-column">
-          <div id="content-row">
-            <div class="content content--highlight content--intro">
-              <p class="text-large_w">
-                <mark class="hx hx-3" data-i18n="hero_highlighted_text"></mark> <br>
-                <span data-i18n="hero_intro_text"></span>
-              </p>
-            </div>
-          </div>
-          <!-- CORNERS -->
-          <div class="corner corner-bottom-left">
-            <img src="svg/cornner_bottom_left.svg" alt="Corner Bottom Left">
-          </div>
-          <div class="corner corner-top-right">
-            <img src="svg/cornner_top_right.svg" alt="Corner Top Right">
-          </div>
+        <div id="svg-wrapper">
+            <!-- SVG inicial (cuadrado) -->
+            <div id="svg-square" class="svg-containedor"></div>
+            <!-- SVG destino (rectángulo, oculto al inicio) -->
+            <div id="svg-rect" class="svg-containedor hidden"></div>
         </div>
 
+        <script class="branding" src="js/demo4/animation_brand.js"></script>
+
+        <div class="navigation-arrows">
+            <a href="#map">
+                <div class="core-belive">
+                    <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                    <h3>Our core beliefs</h3>
+                </div>
+            </a>
+
+            <a href="/What_We _Do.html">
+                <div class="our-projects">
+                    <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                    <h3>Our work</h3>
+                </div>
+            </a>
+
+        </div>
         <script>
-          gsap.registerPlugin(ScrollTrigger);
-          gsap.fromTo("#content-row",
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 2,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: "#left-column",
-                start: "top 25%",
-                end: "top 10%",
-                toggleActions: "restart none none reset",
-              }
-            }
-          );
+            window.addEventListener('scroll', function () {
+                const scrollY = window.scrollY;
+                const scrollElement = document.querySelector('.navigation-arrows');
+
+                if (scrollY > 500) {
+                    scrollElement.classList.add('hidden');
+                } else {
+                    scrollElement.classList.remove('hidden');
+                }
+            });
         </script>
 
 
-        <div id="maping-contorler" class="right-column">
-          <video id="trafficVideo" class="mapa_video" width="100%" preload="auto" muted playsinline></video>
-          <div class="center-controls">
-            <p class="text-large_M">
-              <mark class="hx-1 hx-2" data-i18n="CDMX Traffic"></mark>
-            </p>
-            <span id="hourLabel" class="hour">--:--</span>
-            <input id="hourSlider" type="range" min="0" max="23" step="1">
-            <!-- <br><br>
-            <div class="info-phi">
-              <button class="phi" aria-label="Logo Phi">
-                <img src="img/phi-01.png" alt="Logo Phi" />
-                <span class="tooltip-phi"> <a data-i18n="info phi"></a>
-                </span>
-              </button>
-            </div> -->
-            <!-- <p class="text-large_M2">
-              <br>
 
-              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food1"></mark> <br>
-              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food2"></mark> <br>
-              <mark class="hx-1 hx-2" data-i18n="cdmx traffic page food3"></mark>
-            </p> -->
-          </div>
+        <div class="scroll-animation">
+            <img src="img/Scroll Down.gif" alt="scroll down">
         </div>
-      </div>
+
+
+
+
+        <script>
+            window.addEventListener('scroll', function () {
+                const scrollY = window.scrollY;
+                const scrollElement = document.querySelector('.scroll-animation');
+
+                if (scrollY > 500) {
+                    scrollElement.classList.add('hidden');
+                } else {
+                    scrollElement.classList.remove('hidden');
+                }
+            });
+        </script>
     </section>
-  </div>
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.fromTo("#maping-contorler",
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#left-column",
-          start: "top 25%",
-          end: "top 10%",
-          toggleActions: "restart none none reset",
-        }
-      }
-    );
-  </script>
-  <script src="js/demo4/icons_bran.js"></script>
-  </section>
+    <section id="map" class="main-content">
+        <div class="stay">
+
+            <div id="brand" class="layout section">
+                <!-- COLUMNA IZQUIERDA -->
+                <div id="left-column" class="left-column">
+                    <div id="content-row">
+                        <div class="content content--highlight content--intro">
+                            <p class="text-large_w">
+                                <mark class="hx hx-3" data-i18n="hero_highlighted_text"></mark> <br>
+                                <span data-i18n="hero_intro_text"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- CORNERS -->
+                    <div class="corner corner-bottom-left">
+                        <img src="svg/cornner_bottom_left.svg" alt="Corner Bottom Left">
+                    </div>
+                    <div class="corner corner-top-right">
+                        <img src="svg/cornner_top_right.svg" alt="Corner Top Right">
+                    </div>
+                </div>
+
+                <script>
+                    gsap.registerPlugin(ScrollTrigger);
+                    gsap.fromTo("#content-row",
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 2,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: "#left-column",
+                                start: "top 25%",
+                                end: "top 10%",
+                                toggleActions: "restart none none reset",
+                            }
+                        }
+                    );
+                </script>
 
 
-  <script src="js/demo4/scroll_animation.js"></script>
-  <script src="js/demo4/animation_hero.js"></script>
-  <script src="js/demo4/script_map.js"></script>
-  <script type="module" src="js/demo4/traduction.js"></script>
-  <script src="js/demo4/ramdon_color.js"></script>
+                <div id="maping-contorler" class="right-column">
+                    <video id="trafficVideo" class="mapa_video" width="100%" preload="auto" muted playsinline></video>
+                    <div class="center-controls">
+                        <p class="text-large_M">
+                            <mark class="hx-1 hx-2" data-i18n="CDMX Traffic"></mark>
+                        </p>
+                        <span id="hourLabel" class="hour">--:--</span>
+                        <input id="hourSlider" type="range" min="0" max="23" step="1">
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
+        <script>
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.fromTo("#maping-contorler",
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#left-column",
+                        start: "top 25%",
+                        end: "top 10%",
+                        toggleActions: "restart none none reset",
+                    }
+                }
+            );
+        </script>
+        <script src="js/demo4/icons_bran.js"></script>
+        <script src="js/demo4/script_map.js"></script>
 
-  <section class="text-image-section2">
-    <div class="container2">
-      <div class="text-column2">
-        <h2 class="title2"></h2>
-        <p class="text-content2"></p>
-      </div>
-      <div class="image-column2">
-        <!-- <div class="color_brand content__img content__img--large" id="circle_arrow"></div> -->
+    </section>
 
-        <div class="content__img-wrapper2"></div>
-      </div>
+    <section class="text-image-section2">
+        <div class="container2">
+            <div class="text-column2">
+                <h2 class="title2"></h2>
+                <p class="text-content2"></p>
+            </div>
+            <div class="image-column2">
+                <!-- <div class="color_brand content__img content__img--large" id="circle_arrow"></div> -->
+
+                <div class="content__img-wrapper2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-image-section2">
+        <div class="container2">
+            <div class="image-column2">
+                <!-- <div class="color_brand content__img content__img--large" id="circle_arrow"></div> -->
+
+                <div class="content__img-wrapper2"></div>
+            </div>
+            <div class="text-column2">
+                <h2 class="title2"></h2>
+                <p class="text-content2"></p>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="js/demo4/revealTextImages.js">  </script>
+
+
+<section class="calltoaction-section">
+    <div class="secundary-logo">
+        <img src="svg/indi-lab_Vertical-white.svg" alt="INDI Lab Logo" class="indi-lab-logo" />
     </div>
-  </section>
 
-  <section class="text-image-section2">
-    <div class="container2">
-      <div class="image-column2">
-        <!-- <div class="color_brand content__img content__img--large" id="circle_arrow"></div> -->
-
-        <div class="content__img-wrapper2"></div>
-      </div>
-      <div class="text-column2">
-        <h2 class="title2"></h2>
-        <p class="text-content2"></p>
-      </div>
+    <div class="stay">
+        <div class="content content--highlight content--outro section">
+            <p class="text-large_w" data-i18n="text of the to Action">
+                <!-- Aquí tu texto de llamada a la acción -->
+            </p>
+            <!-- <p class="text-large_M"><mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark></p> -->
+        </div>
     </div>
-  </section>
 
-  <script src="js/demo4/revealTextImages.js">  </script>
-
-   <div class="stay">
-    <div class="content content--highlight content--outro section">
-      <p class="text-large_w" data-i18n="text of the to Action">
-      </p>
-      <br><br>
-      <!-- <p class="text-large_M"> <mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark> </p> -->
-      </p>
+    <div class="navigation-arrows-whatwedo">
+        <a href="/What_We_Do.html" class="our-projects">
+            <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+            <h3>Our Work</h3>
+        </a>
     </div>
-  </div>
+</section>
 
 
 
+<!-- ------js funcionales sin llamdos html---------- -->
 
-
-
-  <!-- SVG PUNTERO -->
-  <div class="custom-cursor">
-    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#eeeeee" />
-          <stop offset="100%" stop-color="#eeeeee" />
-        </linearGradient>
-      </defs>
-      <path d="M495.01,80.63v413.88H81.13c-41.77,0-75.63-33.86-75.63-75.63V4.99h413.88
-      C461.14,4.99,495.01,38.86,495.01,80.63z" fill="none" stroke="url(#grad)" stroke-width="15" />
-    </svg>
-  </div>
-  <script src="js/demo4/cursor.js">  </script>
-
-
-  <div id="loader-overlay">
-    <div class="corner-icon1 top-right1">
-      <img id="svg3" class="icon4" src="svg\cornner_top_right_loading.svg" alt="Icono inicio">
-    </div>
-    <h1 class="complment_loader" id="complment_loader">Cities are <br></h1>
-    <div class="loader-box">
-      <div id="text_loading" class="text_load">Preparando recursos…</div>
-      <div id="text_parpadeando">
-        <p id="loading"></p>
-      </div>
-    </div>
-    <div class="corner-icon1 bottom-left1">
-      <img id="svg4" class="icon4" src="svg/cornner_bottom_left_loading.svg" alt="Icono final">
-    </div>
-  </div>
-
-
-  <script src="js/imagesloaded.pkgd.min.js"></script>
-
-  <!-- <header class="sidebar" id="site-header">
-    <div id="svg-container"></div>
-  </header> -->
-
-
-
-
-  <script>
-    const sections = document.querySelectorAll('#stay');
-    let isScrolling = false;
-
-    window.addEventListener("scroll", () => {
-      if (isScrolling) return;
-
-      clearTimeout(window.scrollTimeout);
-      window.scrollTimeout = setTimeout(() => {
-        // Buscar la sección más cercana al top
-        let closest = null;
-        let closestOffset = Infinity;
-
-        sections.forEach(sec => {
-          const rect = sec.getBoundingClientRect();
-          const offset = Math.abs(rect.top); // distancia al top
-          if (offset < closestOffset) {
-            closestOffset = offset;
-            closest = sec;
-          }
-        });
-
-        if (closest) {
-          isScrolling = true;
-          closest.scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => (isScrolling = false), 700);
-        }
-      }, 100);
-    });
-  </script>
-
-
+  <script src="js/demo4/RaditionAndWheather.js"></script>
 
 </body>
 
