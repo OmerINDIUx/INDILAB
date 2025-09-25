@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const [squareText, rectText] = await Promise.all([
-    fetch("../../svg/indi-lab_Square_Animate.svg").then((r) => r.text()),
-    fetch("../../svg/indi-lab_Vertical_Animate.svg").then((r) => r.text()),
+    fetch("../../svg/Principal_Brand.svg").then((r) => r.text()),
+    fetch("../../svg/Terciary_Brand.svg").then((r) => r.text()),
   ]);
 
   const squareContainer = document.getElementById("svg-square");
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const xx =
       -wrapperRect.width *
       (window.innerWidth > 1024
-        ? 0.375 // Desktop → lo mueve bastante a la izquierda
+        ? 0.235 // Desktop → lo mueve bastante a la izquierda
         : window.innerWidth > 768
         ? 0.25 // Tablet → lo mueve un poco menos
         : 1); // Móvil → lo mueve todavía menos (para que no se salga de vista)
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const yx =
       wrapperRect.height *
       (window.innerWidth > 1024
-        ? 0.01 // Desktop → baja 1% del alto
+        ? -.001 // Desktop → baja 1% del alto
         : window.innerWidth > 768
         ? 0.03 // Tablet → baja un poco más (3%)
         : -0.01); // Móvil → baja aún más (6%) para dejar espacio visual

@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-// Utilidades para debug
+// ✅ Utilidades de log
 function logSuccess(msg) {
   console.log(`✅ %c${msg}`, "color: green; font-weight: bold;");
 }
@@ -14,7 +14,7 @@ function logError(msg, err) {
   console.error(`💥 ERROR: ${msg}`, err || "");
 }
 
-// Datos de las secciones
+// ✅ Datos de las secciones
 const allSectionsData = [
   [
     {
@@ -65,7 +65,7 @@ const allSectionsData = [
 ];
 
 /**
- * Función genérica para cargar y animar SVG
+ * 📌 Función para cargar y animar SVGs
  */
 async function loadAndAnimateSVG(container, svgPath, type) {
   if (!container) return console.warn("⚠️ Contenedor no encontrado");
@@ -79,7 +79,7 @@ async function loadAndAnimateSVG(container, svgPath, type) {
     const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
     const svgElement = svgDoc.documentElement;
 
-    // 🔧 Forzar que el SVG sea responsive
+    // 🔧 SVG responsive
     svgElement.removeAttribute("width");
     svgElement.removeAttribute("height");
     svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -90,7 +90,7 @@ async function loadAndAnimateSVG(container, svgPath, type) {
     container.innerHTML = "";
     container.appendChild(svgElement);
 
-    // 🔁 Animaciones según tipo
+    // 🔁 Animaciones
     if (type === "arrow") {
       const basePath = svgElement.querySelector("#rotCircle");
       if (!basePath) return console.warn("⚠️ No se encontró #rotCircle");
@@ -221,9 +221,12 @@ async function loadAndAnimateSVG(container, svgPath, type) {
   }
 }
 
-// ScrollTrigger principal
+// ✅ ScrollTrigger principal
 document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionIndex) => {
   logInfo(`Inicializando sección ${sectionIndex}`);
+
+  // ❌ Quitamos el set de ancho/margen para ocupar toda la pantalla
+
   const titleEl = sectionEl.querySelector(".text-column2 .title2");
   const textEl = sectionEl.querySelector(".text-column2 .text-content2");
   const imgContainer = sectionEl.querySelector(".image-column2 .content__img-wrapper2");
@@ -246,6 +249,8 @@ document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionInd
       end: "+=" + slides.length * window.innerHeight,
       scrub: 1,
       pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
       onUpdate: (self) => {
         const progress = self.progress;
         const index = Math.floor(progress * slides.length);

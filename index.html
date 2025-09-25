@@ -106,16 +106,9 @@
 
         </div>
 
-
-
-
         <div class="scroll-animation">
             <img src="img/Scroll Down.gif" alt="scroll down">
         </div>
-
-
-
-
 
     </section>
 
@@ -224,26 +217,42 @@
 
 
     <section class="calltoaction-section">
+
         <div class="secundary-logo">
-            <img src="svg/indi-lab_Vertical-white.svg" alt="INDI Lab Logo" class="indi-lab-logo" />
+            <div class="indi-lab-logo" data-svg="svg/Secundary_Brand.svg"></div>
         </div>
 
-        <div class="stay">
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("[data-svg]").forEach(el => {
+                    const svgPath = el.getAttribute("data-svg");
+                    fetch(svgPath)
+                        .then(res => res.text())
+                        .then(svgContent => {
+                            el.innerHTML = svgContent;
+                        })
+                        .catch(err => console.error("Error cargando SVG:", err));
+                });
+            });
+        </script>
+
+        <div>
             <div class="content content--highlight content--outro section">
                 <p class="text-large_w" data-i18n="text of the to Action">
                     <!-- Aquí tu texto de llamada a la acción -->
                 </p>
-                <!-- <p class="text-large_M"><mark class="hx hx-3" data-i18n="text 2 of the to Action"></mark></p> -->
             </div>
         </div>
 
         <div class="navigation-arrows-whatwedo">
-            <a href="/What_We_Do.html" class="our-projects">
+
+            <a href="/What_We _Do.html" class="our-projects">
                 <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
                 <h3>Our Work</h3>
             </a>
         </div>
     </section>
+
 
 
 

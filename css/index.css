@@ -24,6 +24,16 @@ html {
   position: relative;
 }
 
+body {
+  width: 100%;               /* full viewport width */
+  margin: 0;
+  padding-left: 100px;       /* 👈 desplaza TODO el contenido 100px */
+  background-color: #1a1a1a;
+  font-family: "Figtree", sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
 /* Fondo noise global en el body */
 body::before {
   content: "";
@@ -117,6 +127,11 @@ body::before {
 /* ===========================
    Section BRAND
 =========================== */
+#brand {
+  margin-left: -100px;  /* 👈 compensa el padding global */
+  width: 100vw;         /* vuelve a ocupar todo el viewport */
+}
+
 
 .brand {
   display: flex;
@@ -125,7 +140,6 @@ body::before {
   position: relative;
   z-index: 10000;
   height: 100vh;
-  width: 100%;
 }
 
 #svg-wrapper {
@@ -219,8 +233,8 @@ body::before {
    1. LAYOUT GENERAL
 =========================== */
 .main-content {
-    width: calc(100% - 100px);
-padding-left: 100px;
+    /* width: calc(100% - 100px);
+padding-left: 100px; */
   display: flex;
   flex-direction: row;
 }
@@ -516,16 +530,27 @@ padding-left: 100px;
 
 .text-image-section2 {
   position: relative;
-  width: calc(100% - 100px);
-  height: 100vh; /* sección ocupa toda la altura de viewport */
-  left: 100px;
+  /* width: calc(100% - 100px);
+  left: 100px; */
+    height: 100vh; /* sección ocupa toda la altura de viewport */
+
   display: flex;
   overflow: hidden;
   background-color: #eee;
 }
 
+.text-column2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: #1a1a1a;
+  background-color: #eee;
+  z-index: 1;
+}
 /* Fondo con grano */
-.text-image-section2::before {
+.text-image-section2::before,
+.text-column2::before {
   content: "";
   position: absolute;
   top: -100%;
@@ -548,16 +573,7 @@ padding-left: 100px;
 }
 
 /* Columna de texto */
-.text-column2 {
-  flex: 0 0 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 4rem;
-  color: #1a1a1a;
-  background-color: #eee;
-  z-index: 1;
-}
+
 
 .text-column2 .title2 {
   font-family: "Figtree", sans-serif;
@@ -585,7 +601,7 @@ padding-left: 100px;
 /* Contenedor para el SVG */
 .content__img-wrapper2 {
   width: 85%;
-  max-width: 1200px;
+  max-width: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -596,7 +612,7 @@ padding-left: 100px;
 /* SVG: escalable y centrado */
 .content__img-wrapper2 svg {
   width: 100%;
-  max-width: 1200px; /* ✅ tamaño mayor en desktop */
+  max-width: 1000px; /* ✅ tamaño mayor en desktop */
   height: auto;
   display: block;
 }
@@ -616,41 +632,40 @@ Call to Action
     text-align: center;
     min-height: 100vh;
     padding: 2rem;
-    background-color: #1a1a1a; /* Ajusta según el diseño */
+    background-color: #1a1a1a;
     color: #eeeeee;
+    gap: 2rem; /* Espaciado uniforme entre elementos */
 }
 
 .secundary-logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4rem;
 }
 
 .indi-lab-logo {
-    max-height: 200px;
+    max-width: 250px;
     width: 100%;
     height: auto;
 }
 
 .stay {
-    max-width: 700px;
-    margin-bottom: 2rem;
+    margin-left: 100px;
 }
 
 .text-large_w {
-  font-family: "Figtree", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400; /* el bold lo controlas aquí */
-  font-size: 1.5rem;
-  line-height: 1.4;
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: clamp(1.25rem, 2vw, 1.5rem); /* Escala responsiva */
+    line-height: 1.4;
 }
-
 
 .navigation-arrows-whatwedo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .our-projects {
@@ -659,16 +674,18 @@ Call to Action
     gap: 0.5rem;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s ease;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .our-projects:hover {
     transform: scale(1.05);
+    color: #ffffff;
 }
 
 .brand-icon-back {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
 }
 
 
