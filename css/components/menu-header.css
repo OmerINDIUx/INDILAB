@@ -111,11 +111,11 @@
 }
 
 /* Contenedor de enlaces */
-.menu-links {
+/* .menu-links {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-}
+} */
 
 /* ==============================
    BOTÓN DE CIERRE
@@ -182,134 +182,130 @@
   width: auto;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ==============================
    BOTONES LATERALES
 ============================== */
-.buttons-menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 75px;
+
+.sidebar-buttons {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  pointer-events: auto;
-  padding: 1rem 0 1rem 25px; /* simplificado */
-  z-index: 10010;
-  gap: 1.5rem; /* aquí defines la separación real */
-}
-.lang-btn {
-  margin-top: 0.5rem;
+  gap: 2rem;
+  z-index: 1000;
+  padding-bottom: 3rem;
 }
 
-/* Botón idioma */
 .lang-btn,
 .hamburger {
   position: relative;
-  border: 2px solid #eee;
-  border-radius: 6px 0 6px 0;
+  width: 60px;
+  height: 44px;
+  border: 2px solid transparent;
+  border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
+  background: 
+    linear-gradient(#1a1a1a, #1a1a1a) padding-box, 
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
   color: #eee;
-  background: transparent;
   cursor: pointer;
-  transition: border-color 0.2s ease;
-  z-index: 10010;
-}
-.lang-btn {
-  width: 75px;
-
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 400;
-  overflow: hidden;
-  z-index: 10010;
-}
-.hamburger {
-  width: 75px;
-  height: 52px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
   box-sizing: border-box;
-  z-index: 10010;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.4s ease;
 }
 
-/* Efecto hover compartido */
-.lang-btn::before,
-.hamburger::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: inherit;
-  background: linear-gradient(
-    var(--angle, 90deg),
-    #ffcd7000,
-    #ffcd7000,
-    #ff6f61,
-    #ffcc70
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  filter: drop-shadow(0 0 2px #ff6f61) drop-shadow(0 0 12px #ffcc70);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-}
+/* 🔥 Resplandor degradado en hover */
 .lang-btn:hover,
 .hamburger:hover {
-  border-color: transparent;
-}
-.lang-btn:hover::before,
-.hamburger:hover::before {
-  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 0 8px 1px #18B2E880, 
+              0 0 16px 3px #FFC04380, 
+              0 0 24px 4px #F677A780;
 }
 
-/* Hamburguesa barras */
+/* Efecto extra: animar el gradiente del borde en hover */
+.lang-btn:hover,
+.hamburger:hover {
+  background: 
+    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18B2E8, #FFC043, #A51C5B, #F677A7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+}
+
+@keyframes borderGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hamburger {
+  flex-direction: column;
+  gap: 6px;
+}
+
 .hamburger span {
   height: 3px;
   width: 40%;
   background-color: #eee;
   display: block;
-  border-radius: 2px 0 2px 0;
-  transition: all 0.3s ease;
-  transform-origin: center;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
 }
-.hamburger.is-active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.is-active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.is-active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ==============================
    COLUMNAS DE MENÚ
 ============================== */
-.menu-columns {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 4rem;
-  width: 100%;
-  height: calc(100vh - 6rem); /* restamos padding superior si quieres */
-  padding: 6rem 4rem;
-  box-sizing: border-box;
-}
 
 /* Blog */
-.menu-blog {
+/* .menu-blog {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  height: 100%; /* iguala altura al contenedor padre */
-  overflow-y: auto; /* scroll interno */
+  height: 100%;
+  overflow-y: auto;
   padding-right: 1rem;
-}
+} */
 
 /* opcional: scroll más bonito */
 .menu-blog::-webkit-scrollbar {
@@ -324,6 +320,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-bottom:0.5rem;
 }
 .blog-thumb {
   width: 100%;
@@ -367,20 +364,19 @@
   z-index: 900;
 }
 
-.menu-blog {
+/* .menu-blog {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
   padding-right: 1rem;
-}
+} */
 
-.blog-heading {
+/* .blog-heading {
   color: #1a1a1a;
-  flex: 0 0 auto; /* título fijo arriba */
+  flex: 0 0 auto;
   margin-bottom: 1.5rem;
-  /* espacio debajo */
-}
+} */
 
 .blog-list {
   display: grid;
@@ -430,6 +426,94 @@ svg {
   z-index: 20005;
 }
 
+
+.menu-columns {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 0 5rem;
+  height: 100%; 
+  width: 80%;          /* 👈 que ocupe el alto total disponible */
+  align-items: top;    /* 👈 centra verticalmente los dos bloques */
+}
+
+
+.menu-links {
+  grid-column: 1 / 2;
+  align-self: start;
+}
+
+.blog-heading,
+.menu-blog {
+  grid-column: 2 ;
+}
+
+.blog-heading {
+  margin: 0; /* quita el margen superior */
+
+}
+
+.menu-blog {
+  display: grid;
+  gap: 1rem;
+  margin-top: -40rem;
+  height: auto;
+}
+
+
+.menu-columns {
+  padding-top: 4rem; /* controla la distancia desde arriba */
+    align-items: top;
+}
+
+
+
+
+.blog-heading {
+  margin-bottom: 1rem; /* separa el título del grid */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
   .sidebar12 {
     position: fixed; /* Siempre visible */
@@ -448,20 +532,7 @@ svg {
   /* ==============================
    BOTONES EN TOP (no abajo)
 ============================== */
-  .buttons-menu {
-    all: unset;
-    position: fixed;
-    top: 0.5rem;
-    right: 0.5rem;
-    z-index: 10010;
-  }
 
-  .top-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
-  }
 
   /* Botón idioma */
   .lang-btn,
@@ -469,7 +540,6 @@ svg {
     position: relative;
     width: 60px;       /* 🔹 más compacto en móvil */
     height: 44px;
-    border: 2px solid #eee;
     border-radius: 6px 0 6px 0;
     color: #eee;
     background: transparent;
