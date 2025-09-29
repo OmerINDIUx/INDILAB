@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const xscale =
       window.innerWidth > 1024
-        ? 0.046 // Desktop: escala final muy pequeña
+        ? 0.040 // Desktop: escala final muy pequeña
         : window.innerWidth > 768
         ? 0.06 // Tablet: un poco más grande
         : 0.2; // Móvil: aún más grande para compensar pantallas pequeñas

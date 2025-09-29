@@ -44,7 +44,7 @@ const allSectionsData = [
       type: "circle"
     },
     {
-      title: "A Fluid: and Responsive Agenda",
+      title: "A Fluid and Responsive Agenda",
       text: "Our priorities evolve with the city. We track emerging trends and urgent needs, ready to respond with agility. From sustainability to infrastructure, mobility to public space, every innovation we create is rooted in the specific realities of people and place.",
       anim: "img/fluid.svg",
       type: "circle"

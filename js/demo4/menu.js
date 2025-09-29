@@ -2,14 +2,12 @@
   try {
     console.log("✅ Script menu.js inicializado...");
 
-    // Verificar GSAP
     if (typeof gsap === "undefined") {
       console.error("❌ Error: GSAP no está cargado. Revisa la importación del script.");
-      return; // ✅ ahora sí se puede usar porque estamos dentro de una función
+      return;
     }
     console.log("✅ GSAP detectado correctamente.");
 
-    // Obtener elementos del DOM
     const menuToggle = document.getElementById('menu-toggle');
     const fullscreenMenu = document.getElementById('fullscreen-menu');
     const closeButton = document.getElementById('close-menu');
@@ -23,6 +21,7 @@
 
     let menuOpen = false;
 
+    // ✅ openMenu mejorada (con animación de los links)
     function openMenu() {
       try {
         if (menuOpen) return;
@@ -40,6 +39,22 @@
           { rotateZ: 0, rotateY: 0, opacity: 1, duration: 1.5, ease: "power4.out" }
         );
 
+        // 🔹 Animación en cascada para los enlaces
+        gsap.fromTo(
+          menuLinks,
+          { opacity: 0, y: -10, paddingTop: 0, paddingBottom: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            paddingTop: "1.5rem",
+            paddingBottom: "1.5rem",
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.1,
+            delay: 0.3
+          }
+        );
+
         console.log("✅ Menú abierto correctamente.");
       } catch (err) {
         console.error("❌ Error al abrir el menú:", err);
@@ -50,6 +65,17 @@
       try {
         if (!menuOpen) return;
         menuOpen = false;
+
+        gsap.to(menuLinks, {
+          opacity: 0,
+          y: -10,
+          paddingTop: 0,
+          paddingBottom: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          stagger: 0.05
+        });
+
         gsap.to(fullscreenMenu, {
           rotateZ: 90,
           rotateY: -90,
@@ -58,6 +84,7 @@
           transformPerspective: 1200,
           duration: 0.6,
           ease: "power4.in",
+          delay: 0.2,
           onComplete: () => {
             fullscreenMenu.classList.remove('show');
             console.log("✅ Menú cerrado correctamente.");
@@ -68,64 +95,81 @@
       }
     }
 
-    // Listeners
+    // Listeners de botones
     if (menuToggle) {
       menuToggle.addEventListener('click', () => {
         if (!menuOpen) openMenu();
       });
       console.log("✅ Listener agregado a #menu-toggle.");
-    } else {
-      console.warn("⚠️ Advertencia: No se encontró #menu-toggle en el DOM.");
     }
 
     if (closeButton) {
       closeButton.addEventListener('click', closeMenu);
       console.log("✅ Listener agregado a #close-menu.");
-    } else {
-      console.warn("⚠️ Advertencia: No se encontró #close-menu en el DOM.");
     }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menuOpen) closeMenu();
     });
-    console.log("✅ Listener agregado para tecla ESC.");
 
     if (menuLinks.length > 0) {
-      menuLinks.forEach(link => {
+      menuLinks.forEach((link, index) => {
+        // Click para cerrar y navegar
         link.addEventListener('click', (e) => {
-          try {
-            e.preventDefault();
-            closeMenu();
-            const href = link.getAttribute('href');
+          e.preventDefault();
+          closeMenu();
+          const href = link.getAttribute('href');
 
-            if (href && href.startsWith('#')) {
-              setTimeout(() => {
-                const target = document.querySelector(href);
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth' });
-                  console.log(`✅ Scroll hacia ${href} realizado correctamente.`);
-                } else {
-                  console.warn(`⚠️ Advertencia: No se encontró el destino ${href} en el DOM.`);
-                }
-              }, 700);
-            } else if (href) {
-              console.log(`➡️ Redirigiendo a: ${href}`);
-              window.location.href = href;
-            } else {
-              console.warn("⚠️ Advertencia: Link sin 'href' detectado.");
-            }
-          } catch (err) {
-            console.error("❌ Error al manejar el click de un enlace del menú:", err);
+          if (href && href.startsWith('#')) {
+            setTimeout(() => {
+              const target = document.querySelector(href);
+              if (target) target.scrollIntoView({ behavior: 'smooth' });
+            }, 700);
+          } else if (href) {
+            window.location.href = href;
           }
         });
+
+        // 🔹 Hover interactivo
+        link.addEventListener("mouseenter", () => {
+          menuLinks.forEach((other, i) => {
+            if (i > index) {
+              gsap.to(other, {
+                y: 10,
+                duration: 0.25,
+                ease: "power2.out"
+              });
+            }
+          });
+          // 🔹 Escalar ligeramente el link activo
+          gsap.to(link, {
+            scale: 1.05,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        });
+
+        link.addEventListener("mouseleave", () => {
+          menuLinks.forEach((other) => {
+            gsap.to(other, {
+              y: 0,
+              duration: 0.25,
+              ease: "power2.inOut"
+            });
+          });
+          // 🔹 Regresar a escala normal
+          gsap.to(link, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.inOut"
+          });
+        });
       });
+
       console.log(`✅ ${menuLinks.length} enlaces del menú listos.`);
-    } else {
-      console.warn("⚠️ Advertencia: No se encontraron enlaces con clase .menu__item.");
     }
 
     console.log("🎉 Menú inicializado correctamente.");
-
   } catch (error) {
     console.error("❌ Error crítico en la inicialización del menú:", error);
   }
