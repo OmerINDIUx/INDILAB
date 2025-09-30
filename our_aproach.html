@@ -1,303 +1,431 @@
 <!--  -->
 <!DOCTYPE html>
-<link id="menu-css" rel="stylesheet" href="/css/base.css" />
+<link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
 
 <link id="menu-css" rel="stylesheet" href="/css/Our_Aproach.css" />
 
 <html lang="es">
-  <head>
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <title>Vivienda Modular</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- GSAP (última versión estable) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js"></script>
+<head>
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <title>Vivienda Modular</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Otros scripts y librerías -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <!-- GSAP (última versión estable) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js"></script>
 
-    <!-- Estilos -->
+  <!-- Otros scripts y librerías -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script type="module" src="/js/demo4/traduction.js"></script>
 
-    <!-- Clase JS activa en HTML -->
-    <script>
-      document.documentElement.className = "js";
-    </script>
+  <!-- Estilos -->
 
-  </head>
+  <!-- Clase JS activa en HTML -->
+  <script>
+    document.documentElement.className = "js";
+  </script>
 
-  <body>
-    <!-- Logo -->
-    <a href="index.html">
-      <div class="secundary-brand"></div>
-    </a>
-    <script>
-      const container = document.querySelector(".secundary-brand");
-      fetch("/svg/indi-lab_Vertical_Animate.svg")
-        .then((response) => response.text())
-        .then((svgText) => {
-          container.innerHTML = svgText;
-        })
-        .catch((err) => console.error("Error cargando SVG:", err));
-    </script>
+</head>
 
-    <!-- Menú dinámico -->
-    <div id="menu-placeholder"></div>
-    <script>
-      fetch("/menu.html")
-        .then((response) => {
-          if (!response.ok)
-            throw new Error(
-              `Error al cargar el menú: ${response.status} ${response.statusText}`
-            );
-          return response.text();
-        })
-        .then((data) => {
-          const placeholder = document.getElementById("menu-placeholder");
-          placeholder.innerHTML = data;
+<body>
 
-          const script = document.createElement("script");
-          script.src = "/js/demo4/menu.js";
-          document.body.appendChild(script);
-        })
-        .catch((error) =>
-          console.error("Ocurrió un error al cargar el menú:", error)
+
+
+  <!-- Contenido principal -->
+  <section class="hero">
+    <img src="/img/pexels-vividcafe-681335.jpg" alt="full image" />
+    <div class="hero-text">
+      <h1 data-i18n="our approach"> </h1>
+      <h2 data-i18n="our approach sub"></h2>
+    </div>
+  </section>
+
+  <section class="list">
+    <div class="phrase">
+      <span>Infrastructure-Backed Executio</span> <br />Embedded within Grupo
+      INDI, INDIx leverages national-scale construction capacity to reduce R&D
+      risk and accelerate implementation through real-world projects
+    </div>
+    <div class="phrase">
+      <span>Prototype–Deploy–Scale Pipelin</span><br />
+      We turn concepts into pilots, and pilots into replicable solutions—heavy
+      focus on data driven scaling, and IP retention that can be licensed or
+      scaled through public funding.
+    </div>
+    <div class="phrase">
+      <span> Ecosystem Leverage​ </span><br />
+      Strategic partnerships with universities, non-profits, civic tech
+      startups, and governments.
+    </div>
+
+    <div class="phrase">
+      <span> Data & Collective Intelligence​ </span><br />
+      Our projects are both data-driven and guided by collective
+      intelligence—combining quantitative analysis with community engagement
+      strategies to ensure that every intervention is context-sensitive,
+      socially grounded, and responsive to the needs of people and place.
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Seleccionamos todas las frases
+    const phrases = gsap.utils.toArray(".list .phrase");
+
+    // Timeline general
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".list",
+        start: "top top",
+        end: "+=" + phrases.length * window.innerHeight,
+        scrub: true,
+        pin: true,
+        snap: {
+          snapTo: 1 / (phrases.length - 1), // Divide el scroll en "pasos" iguales
+          duration: 0.5, // tiempo del "salto" automático
+          ease: "power1.inOut"
+        }
+      }
+    });
+
+    // Animamos cada frase
+    phrases.forEach((phrase, i) => {
+      tl.fromTo(
+        phrase,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      )
+        .to(
+          phrase,
+          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" }
         );
-    </script>
+    });
+  </script>
 
-    <!-- Contenido principal -->
-    <section class="hero">
-      <img src="/img/pexels-vividcafe-681335.jpg" alt="full image" />
-      <div class="hero-text">
-        <h2>
-          Our Approach​ <br />
-          Ideation Meets Real World Executiony
-        </h2>
-      </div>
-    </section>
 
-    <section class="list">
-      <div class="phrase">
-        <span>Infrastructure-Backed Executio</span> <br />Embedded within Grupo
-        INDI, INDIx leverages national-scale construction capacity to reduce R&D
-        risk and accelerate implementation through real-world projects
-      </div>
-      <div class="phrase">
-        <span>Prototype–Deploy–Scale Pipelin</span><br />
-        We turn concepts into pilots, and pilots into replicable solutions—heavy
-        focus on data driven scaling, and IP retention that can be licensed or
-        scaled through public funding.
-      </div>
-      <div class="phrase">
-        <span> Ecosystem Leverage​ </span><br />
-        Strategic partnerships with universities, non-profits, civic tech
-        startups, and governments.
-      </div>
 
-      <div class="phrase">
-        <span> Data & Collective Intelligence​ </span><br />
-        Our projects are both data-driven and guided by collective
-        intelligence—combining quantitative analysis with community engagement
-        strategies to ensure that every intervention is context-sensitive,
-        socially grounded, and responsive to the needs of people and place.
+  <section class="statement">
+    <div id="content-row">
+      <div class="content-text">
+        <h2 data-i18n="we aim to"></h2>
+        <div class="corner corner-bottom-left" data-svg="svg/cornner_bottom_left.svg"></div>
+        <div class="corner corner-top-right" data-svg="svg/cornner_top_right.svg"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Seleccionamos todas las frases
-      const phrases = gsap.utils.toArray(".list .phrase");
+      const bottomLeft = document.querySelector(".corner-bottom-left");
+      const topRight = document.querySelector(".corner-top-right");
+      const content = document.querySelector(".content-text");
+      let tl; // 👈 declarar antes de usar
 
-      // Timeline general para el efecto de scroll
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".list",
-          start: "top top",
-          end: "+=" + phrases.length * 2 * window.innerHeight, // más largo porque separa fade in/out
-          scrub: true,
-          pin: true,
-        },
-      });
+      function getPositions() {
+        const w = content.offsetWidth;
+        const h = content.offsetHeight;
 
-      // Animamos cada frase de manera secuencial
-      phrases.forEach((phrase, i) => {
-        const fadeInTime = i * 2; // momento de fade in
-        const fadeOutTime = fadeInTime + 1; // momento de fade out
+        return {
+          bottomLeft: { x: -50, y: + h - 290 },
+          topRight: { x: + w, y: -h - 65 },
+          center: { x: w / 2 - 25, y: h / 2 - 25 }
+        };
+      }
 
-        // Fade in: aparece desde abajo
-        tl.fromTo(
-          phrase,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          fadeInTime
-        );
+      function animateCorners() {
+        const pos = getPositions();
 
-        // Fade out: desaparece hacia arriba
-        tl.to(
-          phrase,
-          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
-          fadeOutTime
-        );
-      });
-    </script>
-
-    <section class="closing">
-      <h3>
-        ​ We aim to develop urban analytics platforms, engagement strategies,
-        and applied research that inform policy, improve project design, and
-        drive more equitable, data-informed, and community-centered
-        infrastructure solutions.​ We aim to develop urban analytics platforms,
-        engagement strategies, and applied research that inform policy, improve
-        project design, and drive more equitable, data-informed, and
-        community-centered infrastructure solutions.
-      </h3>
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Animación inicial hero
-      gsap.from(".hero-text h2", {
-        opacity: 0,
-        y: 50,
-        duration: 1.5,
-        ease: "power3.out",
-      });
-
-      gsap.from(".hero img", {
-        scale: 1.2,
-        duration: 3,
-        ease: "power2.out",
-      });
-
-      // Animación especial del logo
-      gsap.from(".intro img", {
-        scrollTrigger: {
-          trigger: ".intro img",
-          start: "top 80%",
-        },
-        opacity: 0, // aparece suavemente
-        y: 30, // sube un poco desde abajo
-        scale: 0.95, // pequeño escalado para profundidad
-        duration: 1.5, // tiempo de animación
-        ease: "power2.out", // movimiento elegante y natural
-      });
-    </script>
-
-    <section class="list2">
-      <div class="phrase2">
-        <span>Experimental + Data Driven Approach​</span> <br />
-
-        Data driven, small scale interventions, impact assessment​
-
-        <br /><br />
-        <span>Urban Spaces</span> <br />
-
-        Public spaces + urban life​
-        <br /><br />
-
-        ​
-
-        <span>Mobility​</span><br />
-
-        Road safety, electromobility, tactical urbanism
-      </div>
-
-      <div class="phrase2">
-        <span>Housing​</span> <br />
-
-        Co-housing, land trusts, modular housing​
-        <br /><br />
-        <span>Materials and processes</span> <br />
-
-        Eco-friendly, innovative materials and construction processes
-        <br /><br />
-
-        ​
-
-        <span>Digital tools​</span><br />
-
-        GIS platforms, computer vision models, digital twins
-      </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Seleccionamos todas las frases de la lista 2
-      const phrases2 = gsap.utils.toArray(".list2 .phrase2");
-
-      // Timeline general para el efecto de scroll
-      let tl2 = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".list2", // apuntamos a la sección correcta
-          start: "top top",
-          end: "+=" + phrases2.length * 2 * window.innerHeight, // usamos phrases2
-          scrub: true,
-          pin: true,
-        },
-      });
-
-      // Animamos cada frase de manera secuencial
-      phrases2.forEach((phrase, i) => {
-        const fadeInTime = i * 2; // momento de fade in
-        const fadeOutTime = fadeInTime + 1; // momento de fade out
-
-        // Fade in: aparece desde abajo
-        tl2.fromTo(
-          phrase,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          fadeInTime
-        );
-
-        // Fade out: desaparece hacia arriba
-        tl2.to(
-          phrase,
-          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
-          fadeOutTime
-        );
-      });
-    </script>
-
-    <!-- Otros scripts (si es necesario) -->
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
-    <script type="module" src="/js/demo4/traduction.js"></script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Lista de colores posibles
-        const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
-
-        // Seleccionamos todos los <span> y los <h2 class="white">
-        const elements = document.querySelectorAll("span, h2.white");
-
-        elements.forEach((el) => {
-          // Color aleatorio
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
-          el.style.color = randomColor;
+        gsap.set([bottomLeft, topRight], {
+          position: "absolute",
+          x: pos.center.x,
+          y: pos.center.y,
+          opacity: 0
         });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".statement",
+            start: "top center",
+            end: "bottom bottom",
+            scrub: true,
+            //           markers: true
+
+          }
+        });
+
+        tl.to(bottomLeft, {
+          x: pos.bottomLeft.x,
+          y: pos.bottomLeft.y,
+          opacity: 1,
+          ease: "power3.out"
+        }).to(topRight, {
+          x: pos.topRight.x,
+          y: pos.topRight.y,
+          opacity: 1,
+          ease: "power3.out"
+        }, "<");
+
+        return tl;
+      }
+
+      // Fade-in del texto
+      gsap.fromTo(".content-text",
+        { opacity: 0.01 },
+        {
+          opacity: 1,
+          scrollTrigger: {
+            trigger: ".statement",
+            start: "top center",
+            end: "bottom bottom",
+            scrub: true,
+            // markers: true
+          }
+        }
+      );
+
+      // ⚡ iniciar con delay de 2s
+      setTimeout(() => {
+        tl = animateCorners();
+      }, 2000);
+
+      // recalcular al hacer resize
+      window.addEventListener("resize", () => {
+        if (tl) {
+          tl.kill();
+          tl = animateCorners();
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section class="list2">
+    <div class="phrase2">
+      <span data-i18n="experimental +"></span> <br />
+
+      <p data-i18n="data driven"></p>
+      <br /><br />
+      <span data-i18n="urban spaces"></span> <br />
+
+      <p data-i18n="public spaces"></p>
+      <br /><br />
+
+      <span data-i18n="mobility"></span> <br />
+
+      <p data-i18n="road safety"></p>
+
+    </div>
+
+    <div class="phrase2">
+
+
+      <span data-i18n="housing"></span> <br />
+
+      <p data-i18n="co-housing"></p>
+
+      <br /><br />
+
+
+
+      <span data-i18n="Materials and processes"></span> <br />
+
+      <p data-i18n="Eco-friendly"></p>
+
+      <br /><br />
+
+      <span data-i18n="digital tools"></span> <br />
+
+      <p data-i18n="data visualization"></p>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Seleccionamos todas las frases de la lista 2
+    const phrases2 = gsap.utils.toArray(".list2 .phrase2");
+
+    // Timeline general para el efecto de scroll
+    let tl2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".list2", // apuntamos a la sección correcta
+        start: "top top",
+        end: "+=" + phrases2.length * 2 * window.innerHeight, // usamos phrases2
+        scrub: true,
+        pin: true,
+      },
+    });
+
+    // Animamos cada frase de manera secuencial
+    phrases2.forEach((phrase, i) => {
+      const fadeInTime = i * 2; // momento de fade in
+      const fadeOutTime = fadeInTime + 1; // momento de fade out
+
+      // Fade in: aparece desde abajo
+      tl2.fromTo(
+        phrase,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        fadeInTime
+      );
+
+      // Fade out: desaparece hacia arriba
+      tl2.to(
+        phrase,
+        { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" },
+        fadeOutTime
+      );
+    });
+  </script>
+
+  <!-- Otros scripts (si es necesario) -->
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+  <script type="module" src="/js/demo4/traduction.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Lista de colores posibles
+      const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+
+      // Seleccionamos todos los <span> y los <h2 class="white">
+      const elements = document.querySelectorAll("span, h2.white");
+
+      elements.forEach((el) => {
+        // Color aleatorio
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        el.style.color = randomColor;
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Menú dinámico -->
+  <div id="menu-placeholder"></div>
+  <script>
+    fetch("/menu.html")
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            `Error al cargar el menú: ${response.status} ${response.statusText}`
+          );
+        return response.text();
+      })
+      .then((data) => {
+        const placeholder = document.getElementById("menu-placeholder");
+        placeholder.innerHTML = data;
+
+        const script = document.createElement("script");
+        script.src = "/js/demo4/menu.js";
+        document.body.appendChild(script);
+      })
+      .catch((error) =>
+        console.error("Ocurrió un error al cargar el menú:", error)
+      );
+  </script> <!-- Logo -->
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector(".secundary-brand");
+    fetch("/svg/indi-lab_Vertical_Animate.svg")
+      .then((response) => response.text())
+      .then((svgText) => {
+        container.innerHTML = svgText;
+      })
+      .catch((err) => console.error("Error cargando SVG:", err));
+  </script>
+
+
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("[data-svg]").forEach(el => {
+        const svgPath = el.getAttribute("data-svg");
+        fetch(svgPath)
+          .then(res => res.text())
+          .then(svgContent => {
+            el.innerHTML = svgContent;
+          })
+          .catch(err => console.error("Error cargando SVG:", err));
+      });
+    });
+  </script>
+</body>
+
 </html>

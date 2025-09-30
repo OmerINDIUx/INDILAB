@@ -420,7 +420,41 @@ section[style*="background-color: #eeeeee"]::before {
   pointer-events: none;
   z-index: 50;
   /* background-color: red; */
+  color: #eee;
 }
+
+
+
+
+.list2 {
+  background-color: #eeeeee;
+  color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.list2 .phrase2 {
+  position: absolute;
+  max-width: 800px;
+  font-size: 1.6rem;
+  opacity: 0;
+  transform: translateY(50px);
+  color: inherit; /* hereda el color de la sección */
+}
+
+.list2 span {
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  color: inherit; /* hereda el color de la sección */
+}
+
+
+
 
 
 
