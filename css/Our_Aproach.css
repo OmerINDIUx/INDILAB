@@ -1,15 +1,3 @@
-body {
-  margin: 0;
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  background-color: #1a1a1a;
-  color: #eeeeee;
-  line-height: 1.6;
-  width: calc(100% - 100px);
-  margin-left: 100px;
-  /* Scroll snapping */
-}
-
 section {
   padding: 6rem 10%;
   position: relative;
@@ -49,6 +37,8 @@ body {
   margin-left: 100px;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
+  background-color: #1a1a1a;
+  color: #eeeeee;
 }
 
 /* Secciones generales */
@@ -153,44 +143,23 @@ section {
   color: inherit; /* hereda el color de la sección */
 }
 
-.list2 {
-  background-color: #eeeeee;
-  color: #1a1a1a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.list2 span {
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  color: inherit; /* hereda el color de la sección */
-}
-.list2 .phrase2 {
-  position: absolute;
-  max-width: 800px;
-  font-size: 2rem;
-  opacity: 0;
-  transform: translateY(50px);
-  color: inherit; /* hereda el color de la sección */
-}
-
 /* Closing - sección 5: oscuro */
 .closing {
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
   background-color: #1a1a1a;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.closing p {
   color: #eeeeee;
   text-align: center;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  max-width: 800px;
+  font-size: 1.6rem;
 }
-
 h3 {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
@@ -208,10 +177,8 @@ h3 {
 }
 
 /* Efecto noise para todos los fondos claros (#eee / #eeeeee) */
-body::before,
 .intro::before,
 .list::before,
-.list2::before,
 section[style*="background-color: #eee"]::before,
 section[style*="background-color: #eeeeee"]::before {
   content: "";
@@ -264,6 +231,199 @@ section[style*="background-color: #eeeeee"]::before {
   }
 }
 
+.secundary-brand {
+  all: unset;
+
+  position: fixed;
+  top: 0;
+  left: 10px;
+  z-index: 10;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+.secundary-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero h1{
+  font-family: "Figtree", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  max-width: 800px;
+  text-align: center;
+
+}
+
+.hero h2{
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  max-width: 800px;
+  text-align: center;
+}
+
+
+
+.indi-lab-logo {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+}
+
+
+.intro p {
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  max-width: 800px;
+}
+
+.intro span {
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  max-width: 800px;
+}
+
+
+
+
+.intro .secundary-logo .indi-lab-logo svg .INDI path {
+  fill: #1a1a1a; /* Cambia INDI */
+}
+
+.intro .secundary-logo .indi-lab-logo svg .LAB path {
+  fill: #1a1a1a; /* Cambia LAB */
+}
+
+
+
+.navigation-arrows-whatwedo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+
+.our-projects {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.our-projects:hover {
+    transform: scale(1.05);
+    color: #eeeeee;
+}
+
+.brand-icon-back {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  display: block;
+}
+
+
+
+
+
+/* .statement {
+  position: relative;
+
+  background-color: #1a1a1a;
+  color: #eeeeee;
+  text-align: center;
+  padding: 4rem 10%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 200vh; 
+} */
+
+.brand-icon-back {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  display: block;
+}
+
+/* .corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  background-color: red;
+  z-index: 50;
+} */
+
+.corner-icon {
+  position: absolute;
+  z-index: 20;
+}
+
+/* .content-text {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #fff;
+  position: relative;
+  background-color: blue;
+} */
+
+.statement {
+  position: relative;
+  height: 100vh; /* solo para que tengas scroll */
+  background: #1a1a1a;
+}
+
+.content-text {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+  /* background-color: aqua; */
+  position: relative; /* MUY IMPORTANTE para calcular bien */
+}
+
+.corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  z-index: 50;
+  /* background-color: red; */
+}
+
+
+
 @media (max-width: 768px) {
   body {
     margin: 0;
@@ -297,8 +457,15 @@ section[style*="background-color: #eeeeee"]::before {
     line-height: 1.4;
   }
 
-  .list2 .phrase2 {
-    max-width: 500px;
-    font-size: 1.4rem;
+  .secundary-brand {
+    position: fixed;
+    top: -0.5rem;
+    left: 0.5;
+    z-index: 10;
+    width: 80px;
+    max-width: 90px;
+    padding: 8px;
+    background: transparent;
+    pointer-events: none; /* Prevents interference with other elements */
   }
 }

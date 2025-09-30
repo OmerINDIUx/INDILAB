@@ -4,8 +4,8 @@
 ============================== */
 #site-header {
   position: fixed;
-  inset: 0; /* equivale a top:0; left:0; width:100%; height:100vh; */
-  /* pointer-events: none; */
+  inset: 0;
+  z-index: 1005; /* aseguramos que esté arriba de la mayoría del contenido */
 }
 
 /* ==============================
@@ -30,31 +30,32 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  z-index: 1000;
+  z-index: 3020; /* arriba del resto */
 }
+
 .menu-fullscreen.show {
   opacity: 1;
   pointer-events: auto;
-  z-index: 20001;
 }
 /* wrapper para animación 3D */
 .menu-wrapper {
   perspective: 1200px;
   position: fixed;
   inset: 0;
-  z-index: 20031; /* más alto que lo demás */
   pointer-events: none;
+  z-index: 3000; /* muy por encima de contenido */
 }
 
 #fullscreen-menu {
   width: 100%;
   height: 100%;
-  background: #eeeeee;
+  background: #eee;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   pointer-events: auto;
   transform-origin: left center;
-  transform: rotateY(-90deg); /* inicio oculto */
+  transform: rotateY(-90deg);
+  z-index: 3010; /* por encima del wrapper */
 }
 
 /* ==============================
@@ -75,7 +76,8 @@
   transition: color 0.3s ease;
   text-align: left;
   opacity: 0; /* 🔹 Ocultamos para la animación inicial */
-  transform: translateY(-10px); /* 🔹 Compacto hacia arriba */
+  transform: translateY(-10px);
+  z-index: 3030; /* asegurar que los links estén clickeables */
 }
 
 /* Bordes decorativos */
@@ -87,7 +89,7 @@
   height: 1.8rem;
   opacity: 0;
   border: 3px solid transparent; /* Necesario para que border-image se muestre */
-  border-image: linear-gradient(135deg, #18B2E8, #01213E) 1;
+  border-image: linear-gradient(135deg, #18b2e8, #01213e) 1;
   border-image-slice: 1; /* Hace que ocupe todo el borde */
   transition: transform 0.3s, opacity 0.3s;
   transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
@@ -114,13 +116,6 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* Contenedor de enlaces */
-/* .menu-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-} */
-
 /* ==============================
    BOTÓN DE CIERRE
 ============================== */
@@ -133,11 +128,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 20031;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3050; /* el botón de cerrar siempre al frente */
 }
 
 .close-menu::before,
@@ -179,7 +174,7 @@
   bottom: 19.5rem;
   left: 15rem;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1045; /* aseguramos que no quede atrás */
 }
 .redes-sociales {
   height: 2rem;
@@ -197,8 +192,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  z-index: 1000;
   padding-bottom: 3rem;
+  z-index: 1050; /* botones por encima de todo */
 }
 
 .lang-btn,
@@ -268,16 +263,6 @@
    COLUMNAS DE MENÚ
 ============================== */
 
-/* Blog */
-/* .menu-blog {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 1rem;
-} */
-
 /* opcional: scroll más bonito */
 .menu-blog::-webkit-scrollbar {
   width: 6px;
@@ -290,14 +275,13 @@
 .blog-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding-bottom: 0.5rem;
+
 }
 .blog-thumb {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 0 12px 0 12px;
 }
 .blog-info {
   display: flex;
@@ -322,18 +306,32 @@
   text-decoration: none;
 }
 
+
+
+.blog-item a {
+  text-decoration: none; /* ❌ quita subrayado del enlace */
+  color: inherit;        /* usa el color de su contenido */
+}
+
+.blog-item a:visited,
+.blog-item a:active,
+.blog-item a:hover,
+.blog-item a:focus {
+  text-decoration: none; /* asegura que no reaparezca en hover/active */
+  color: inherit;
+}
+
 .sidebar12 {
   position: fixed; /* Siempre visible */
   top: 0;
   left: 0;
   width: 100px; /* Ancho fijo */
   height: 100vh; /* Toda la pantalla */
-  background-color: #1a1a1a;
+  background-color: #1a1a1a02;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 900;
 }
 
 .blog-list {
@@ -360,18 +358,15 @@ a {
 svg {
   width: 100%;
   height: auto;
-  min-width: 100px; /* esto asegura que nunca sea menor a 100px */
 }
 
 .secundary-brand2 {
   position: absolute;
   top: 1.5rem;
-  left: 2rem;
+  left: 1rem;
   padding: 0px;
-  width: 90px; /* ajusta el tamaño */
-  z-index: 20031; /* por encima del fondo */
+  width: 80px; 
   pointer-events: auto; /* clickeable */
-  min-width: 100px;
 }
 
 /* Close arriba a la derecha */
@@ -381,7 +376,6 @@ svg {
   right: 2rem;
   width: 56px;
   height: 56px;
-  z-index: 20031;
 }
 
 .menu-columns {
@@ -389,44 +383,38 @@ svg {
   grid-template-columns: 30% 70%;
   gap: 0 5rem;
   height: 100%;
-  width: 80%; /* 👈 que ocupe el alto total disponible */
-  align-items: top; /* 👈 centra verticalmente los dos bloques */
+  width: 80%;
+  padding-top: 4rem;
+  align-items: top;
+  z-index: 1040; /* mismo nivel que items */
 }
-
 .menu-links {
   grid-column: 1 / 2;
   align-self: start;
+  z-index: 1040;
 }
-
 
 .menu-blog {
   grid-column: 2;
 }
 
-
-
 .menu-blog {
   display: grid;
   gap: 1rem;
-  margin-top: -40rem;
+  margin-top: -35rem;
   height: auto;
+  z-index: 1040;
 }
 
 .menu-columns {
-  padding-top: 4rem; /* controla la distancia desde arriba */
+
   align-items: top;
 }
 
-.blog-heading {
-  margin-bottom: 1rem; /* separa el título del grid */
-}
-
-
-
-
-
-
-
+  .blog-heading {
+    position: relative;
+    top: -10px;
+  }
 
 
 
@@ -463,13 +451,11 @@ svg {
 
     width: 100vw; /* ahora ocupa todo el ancho */
     height: 100px; /* altura fija */
-    background-color: #1a1a1a;
     display: flex;
     flex-direction: row; /* elementos en fila */
     align-items: center; /* centrados verticalmente */
     justify-content: space-between; /* repartidos a los lados */
     padding: 0 20px; /* espacio interno horizontal */
-    z-index: 900;
   }
 
   /* ==============================
@@ -580,7 +566,6 @@ svg {
     position: relative; /* para que participe del flujo */
     top: -70px;
     left: 0;
-    width: 70px;
     margin-bottom: 0.5rem;
   }
 

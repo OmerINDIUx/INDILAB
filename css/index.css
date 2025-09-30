@@ -138,7 +138,6 @@ body::before {
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 10000;
   height: 100vh;
 }
 
@@ -159,13 +158,12 @@ body::before {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 20030;
 }
 
 .hidden {
   opacity: 0;
   pointer-events: none;
-  z-index: 10000;
+  /* z-index: 10000; */
 }
 
 .navigation-arrows {
@@ -215,7 +213,7 @@ body::before {
   left: 50%;
   top: 90vh; /* 90% de la altura del viewport */
   transform: translateX(-50%) translateY(-50%); /* Centrado horizontal y ajuste vertical */
-  z-index: 1000; /* Para que esté encima de otros elementos si es necesario */
+  z-index: 100; /* Para que esté encima de otros elementos si es necesario */
 }
 
 .scroll-animation img {
@@ -233,8 +231,7 @@ body::before {
    1. LAYOUT GENERAL
 =========================== */
 .main-content {
-    /* width: calc(100% - 100px);
-padding-left: 100px; */
+
   display: flex;
   flex-direction: row;
 }
@@ -303,7 +300,7 @@ padding-left: 100px; */
   margin-top: -1.5rem;
   margin-bottom: 0.5rem;
   color: var(--color-white-brand, #efefef);
-  z-index: 10011;
+  z-index: 210;
 }
 
 /* ===========================
@@ -337,7 +334,7 @@ padding-left: 100px; */
   position: absolute;
   width: 70px;
   height: 70px;
-  z-index: 2;
+  z-index: 20;
 }
 
 .top-left { top: 0; left: 0; }
@@ -369,7 +366,7 @@ padding-left: 100px; */
    5. MAPA Y CONTROLES
 =========================== */
 .mapa_video {
-  z-index: 1;
+  z-index: 10;
   height: 100%;
   width: auto;
 }
@@ -378,9 +375,9 @@ padding-left: 100px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-text, #ff0000);
+  color: var(--color-text, #eee);
   position: relative;
-  z-index: 10011;
+  z-index: 220;
 }
 
 /* ===========================
@@ -398,7 +395,7 @@ padding-left: 100px; */
   padding: 0.8rem 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  z-index: 10020;
+  z-index: 220;
 }
 
 /* Hora arriba del slider */
@@ -499,7 +496,7 @@ padding-left: 100px; */
   text-align: center;
   color: #eeeeee;
   font-size: 0.9rem;
-  z-index: 10030;
+  z-index: 230;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -546,7 +543,7 @@ padding-left: 100px; */
   padding: 4rem;
   color: #1a1a1a;
   background-color: #eee;
-  z-index: 1;
+  z-index: 10;
 }
 /* Fondo con grano */
 .text-image-section2::before,
@@ -595,7 +592,7 @@ padding-left: 100px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* Contenedor para el SVG */
@@ -680,13 +677,44 @@ Call to Action
 
 .our-projects:hover {
     transform: scale(1.05);
-    color: #ffffff;
+    color: #eeeeee;
 }
 
 .brand-icon-back {
     width: 28px;
     height: 28px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

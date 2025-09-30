@@ -2,8 +2,9 @@
 <html lang="es">
 
 <head>
-    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
     <link id="menu-css" rel="stylesheet" href="/css/index.css">
+    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
 
 
     <meta charset="UTF-8">
@@ -40,47 +41,11 @@
 
 <body>
 
-    <div id="menu-placeholder"></div>
-
-    <script>
-        fetch('/menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('menu-placeholder');
-                if (!placeholder) {
-                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-                }
-                placeholder.innerHTML = data;
-
-                // Cargar el script después de que el menú esté en el DOM
-                const script = document.createElement('script');
-                script.src = "/js/demo4/menu.js";
-                script.onload = () => console.log("menu.js cargado correctamente ✅");
-                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-                document.body.appendChild(script);
-            })
-            .catch(error => {
-                console.error("Ocurrió un error al cargar el menú:", error);
-            });
-    </script>
-
-
-    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
-    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
-    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
 
 
 
-
-    <!-- ---------------------aquí inicia esl código------------------------------------------- -->
     <section id="brand" class="brand">
-
-        <div id="svg-wrapper">
+                <div id="svg-wrapper">
             <!-- SVG inicial (cuadrado) -->
             <div id="svg-square" class="svg-containedor"></div>
             <!-- SVG destino (rectángulo, oculto al inicio) -->
@@ -88,29 +53,11 @@
         </div>
 
         <script class="branding" src="js/demo4/animation_brand.js"></script>
+            </section>
 
-        <div class="navigation-arrows">
-            <a href="#map">
-                <div class="core-belive">
-                    <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
-                    <h3>Our core beliefs</h3>
-                </div>
-            </a>
 
-            <a href="/What_We _Do.html">
-                <div class="our-projects">
-                    <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
-                    <h3>Our work</h3>
-                </div>
-            </a>
 
-        </div>
 
-        <div class="scroll-animation">
-            <img src="img/Scroll Down.gif" alt="scroll down">
-        </div>
-
-    </section>
 
     <!-- ---------------------aquí inicia el HeroMap------------------------------------------- -->
 
@@ -256,18 +203,94 @@
 
 
 
+
+
+
+
+
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+
+
+    <div class="menu-placeholder" id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
+
+    <!-- ---------------------aquí inicia esl código------------------------------------------- -->
+
+
+
+        <div class="navigation-arrows">
+            <a href="#map">
+                <div class="core-belive">
+                    <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                    <h3>Our core beliefs</h3>
+                </div>
+            </a>
+
+            <a href="/What_We _Do.html">
+                <div class="our-projects">
+                    <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                    <h3>Our work</h3>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="scroll-animation">
+            <img src="img/Scroll Down.gif" alt="scroll down">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
     <!-- ------js funcionales sin llamdos html---------- -->
     <script src="js/demo4/miniscritps.js"></script>
 
     <script src="js/demo4/RaditionAndWheather.js"></script>
 
     <script src="js/demo4/butoms_prueba.js"></script>
-        <script src="js/demo4/gsap-menu.js"></script>
+    <script src="js/demo4/gsap-menu.js"></script>
 
 
 
 
-      
+
 
 </body>
 
