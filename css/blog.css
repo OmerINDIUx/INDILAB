@@ -13,8 +13,133 @@ body {
   color: #1a1a1a;
   background: #eee;
   position: relative;
-      width: calc(100% - 100px);
-        margin-left: 100px;
+  width: calc(100% - 100px);
+  margin-left: 100px;
+}
+
+.sidebar12 {
+  background-color: #1a1a1a;
+}
+
+/* ===================
+   header
+=================== */
+
+.hero-carousel-section {
+  position: relative;
+  height: 33vh;
+  overflow: hidden;
+}
+
+/* Fondo con imágenes */
+.carousel-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.carousel-img.active {
+  opacity: 1;
+}
+/* 🔥 Pleca oscura */
+.hero-carousel-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #1a1a1a80; /* 15% */
+  z-index: 2; /* 👈 ahora encima de las imágenes */
+}
+/* Contenido centrado */
+.carousel-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #eee;
+}
+
+.carousel-content h2 {
+  color: #eee;
+  text-shadow: 0 2px 8px #1a1a1a;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* Caja de búsqueda */
+/* Línea de búsqueda minimalista */
+/* Línea de búsqueda minimalista */
+.search-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.1em;
+  color: #eee;
+  margin-top: 1em;
+}
+
+.search-line label {
+  font-weight: 600;
+  color: #eee;
+  text-shadow: 0 2px 6px #1a1a1a;
+}
+
+.hero-carousel-section h3 {
+  max-width: 800px;
+  text-align: center;
+  color: #eee;
+  font-size: 1.2em;
+  text-shadow: 0 2px 6px #1a1a1a;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+#carousel-search {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #eee;
+  padding: 0.3em 0;
+  font-size: 1em;
+  color: #eee;
+  outline: none;
+  text-shadow: 0 2px 6px #1a1a1a;
+}
+
+/* Sugerencia que se sobrepone al input */
+#carousel-suggestion {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.3em 0;
+  font-size: 1em;
+  color: #eeeeee90;
+  pointer-events: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* Cuando escribes, que la sugerencia se vea detrás del texto */
+#carousel-search:focus + #carousel-suggestion,
+#carousel-search:not(:placeholder-shown) + #carousel-suggestion {
+  display: none;
 }
 
 /* ===================
@@ -24,10 +149,10 @@ body {
   background: #eee;
   padding: 40px 20px;
   display: flex;
-  flex-direction: column;  /* hijos uno debajo del otro */
+  flex-direction: column; /* hijos uno debajo del otro */
   align-items: center;
   text-align: center;
-  gap: 20px;               /* espacio entre divs */
+  gap: 20px; /* espacio entre divs */
   position: relative;
   overflow: hidden;
   min-height: 250px;
@@ -54,7 +179,7 @@ body {
   border: none;
   border-radius: 6px;
   background-color: #333;
-  color: #fff;
+  color: #eee;
   transition: 0.3s;
 }
 
@@ -85,7 +210,7 @@ body {
   max-width: 350px;
   background-color: #1a1a1a;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s;
 }
@@ -119,7 +244,7 @@ body {
 /* ===================
    GRAIN / NOISE
 =================== */
-body::before,
+
 .heroes::before {
   content: "";
   position: absolute;
@@ -140,16 +265,37 @@ body::before,
 }
 
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
 }
 
 /* ===================
@@ -161,20 +307,19 @@ a {
 }
 
 span {
-        font-family: "Figtree", sans-serif;
-        font-weight: 400;
-        color: inherit; /* hereda el color de la sección */
-      }
-
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  color: inherit; /* hereda el color de la sección */
+}
 
 /* ===================
    TEXT CONTAINERS EN HERO
 =================== */
 .heroes .text-container1 {
-  max-width: 800px;       /* ancho máximo para que no sea muy largo */
-  margin-bottom: 20px;    /* espacio entre textos */
-  padding: 0 10px;        /* padding horizontal para móviles */
-  text-align: center;     /* centrado del texto */
+  max-width: 800px; /* ancho máximo para que no sea muy largo */
+  margin-bottom: 20px; /* espacio entre textos */
+  padding: 0 10px; /* padding horizontal para móviles */
+  text-align: center; /* centrado del texto */
 }
 
 .heroes .text-container1 p {
@@ -267,7 +412,7 @@ span {
   max-width: 350px;
   background-color: #1a1a1a;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s;
 }
@@ -321,13 +466,64 @@ span {
   transform: translateY(0);
 }
 
+.secundary-brand {
+  all: unset;
+
+  position: fixed;
+  top: 0;
+  left: 10px;
+  z-index: 10;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+.secundary-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+.hero-carousel-section {
+  position: relative;
+  z-index: 0 !important; /* base */
+}
+
+.hero-carousel-section::before {
+  z-index: 1 !important; /* sombra solo sobre imágenes */
+}
+.carousel-content {
+  z-index: 2; /* textos dentro del hero */
+}
 
 
 /* ===================
    RESPONSIVE < 768px
 =================== */
 @media (max-width: 768px) {
-
   /* ===== BODY ===== */
   body {
     margin: 0;
@@ -403,11 +599,10 @@ span {
   }
 
   .filter-buttons {
-  position: relative;
-}
-.filter-buttons,
-.blog-list1 {
-  position: relative;
-}
-
+    position: relative;
+  }
+  .filter-buttons,
+  .blog-list1 {
+    position: relative;
+  }
 }

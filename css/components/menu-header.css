@@ -44,6 +44,7 @@
   inset: 0;
   pointer-events: none;
   z-index: 3000; /* muy por encima de contenido */
+    pointer-events: none; /* 👈 evita bloquear cuando está cerrado */
 }
 
 #fullscreen-menu {
@@ -430,10 +431,16 @@ svg {
 
 
 
-
-
-
-
+/* Forzar menú sobre cualquier contenido */
+#menu-placeholder,
+#site-header,
+.menu-wrapper,
+#fullscreen-menu,
+.menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999 !important; /* menú por encima de todo */
+}
 
 
 

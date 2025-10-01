@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-<link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+  <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
 
   <meta charset="UTF-8">
   <title>Vivienda Modular</title>
@@ -53,203 +53,259 @@
 
 <body>
 
-  <a href="index.html">
-    <div class="secundary-brand"></div>
-  </a>
-  <script>
-    const container = document.querySelector('.secundary-brand');
-    fetch('/svg/indi-lab_Vertical_Animate.svg')
-      .then(response => response.text())
-      .then(svgText => {
-        container.innerHTML = svgText; // Inserta el SVG como HTML
-      })
-      .catch(err => console.error('Error cargando SVG:', err));
-  </script>
-
-
-
-
-
-  <div id="menu-placeholder"></div>
-
-  <script>
-    fetch('/menu.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then(data => {
-        const placeholder = document.getElementById('menu-placeholder');
-        if (!placeholder) {
-          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-        }
-        placeholder.innerHTML = data;
-
-        // Cargar el script después de que el menú esté en el DOM
-        const script = document.createElement('script');
-        script.src = "/js/demo4/menu.js";
-        script.onload = () => console.log("menu.js cargado correctamente ✅");
-        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-        document.body.appendChild(script);
-      })
-      .catch(error => {
-        console.error("Ocurrió un error al cargar el menú:", error);
-      });
-  </script>
-
-  <script src="/js/gsap.min.js"></script>
-  <script src="/js/ScrollTrigger.min.js"></script>
-  <script src="/js/lenis.min.js"></script>
-  <script src="/js/splitting.min.js"></script>
 
   <!-- Hero -->
-  <section class="heroes">
+  <section class="hero-carousel-section">
+    <div class="carousel-background">
+      <img src="/img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg" class="carousel-img active">
+      <img src="/img/What we do/pexels-susan-flores-232226967-12294911.jpg" class="carousel-img">
+      <img src="/img/What we do/pexels-victor-armas-262050668-12930992.jpg" class="carousel-img">
+    </div>
 
+    <div class="carousel-content">
+      <h3 id="carousel-phrase">
+        INDI Lab projects are as flexible and dynamic as urban life itself.
+      </h3>
 
-
-
-  <div class="text-container1">
-    <p >
-     <span> INDI Lab projects </span>are as flexible and dynamic as urban life itself. Here are a few of the fronts we’re actively exploring:
-    </p>
-  </div>
-
-<div class="filter-buttons">
-  <button data-tag="all" class="active">All</button>
-  <button data-tag="Movilidad">Mobility</button>
-  <button data-tag="Resiliencia">Urban Resilience</button>
-  <button data-tag="Soluciones Digitales">Digital Solutions</button>
-  <button data-tag="Materiales">Materials</button>
-  <button data-tag="Vivienda">Housing</button>
-</div>
-
-
-  <div class="text-container1">
-    <p class="textchange" >
----    </p>
-  </div>
+      <!-- 🔥 Línea de búsqueda con sugerencias -->
+      <div class="search-line">
+        <label for="carousel-search">INDI Lab #</label>
+        <div class="input-wrapper">
+          <input id="carousel-search" type="text" autocomplete="off">
+          <span id="carousel-suggestion">
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Blog -->
   <section class="blog-section1" id="blog">
     <h2 class="blog-heading1">Our works</h2>
 
-    <section id="blog">
+    <div class="blog-list1" id="blogList">
+      <article class="blog-item1" data-tags="Vivienda">
+        <a href="/projects/ViviendaModular/vivienda_modular.html">
+          <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1">Vivienda Modular</h3>
+            <p class="blog-date1">Diciembre 2024</p>
+          </div>
+        </a>
+      </article>
 
+      <article class="blog-item1" data-tags="Movilidad">
+        <a href="/projects/ElectroMovilidad/electromovilidad.html">
+          <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1">Electromovilidad</h3>
+            <p class="blog-date1">Diciembre 2024</p>
+          </div>
+        </a>
+      </article>
 
-      <div class="blog-list1" id="blogList">
+      <article class="blog-item1" data-tags="Resiliencia">
+        <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+          <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
+            class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1">Islas de Calor Urbanas</h3>
+            <p class="blog-date1">Diciembre 2024</p>
+          </div>
+        </a>
+      </article>
+    </div>
 
-        <article class="blog-item1" data-tags="Resiliencia">
-          <a href="/projects/Reto2025/reto2025.html">
-            <img src="/projects/Reto2025/images/Riu2025-01.png" alt="Post 2" class="blog-thumb">
-            <div class="blog-info1">
-              <h3 class="blog-title1">Reto de Innovación urbana</h3>
-              <p class="blog-date1">Sept 2025</p>
-            </div>
-          </a>
-        </article>
+    <!-- Mensaje si no hay resultados -->
+    <p id="noResults" style="display:none; color:#999; margin-top:1em;">No results found</p>
+  </section>
 
-        <article class="blog-item1" data-tags="Vivienda">
-          <a href="/projects/ViviendaModular/vivienda_modular.html">
-            <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
-            <div class="blog-info1">
-              <h3 class="blog-title1">Vivienda Modular</h3>
-              <p class="blog-date1">Diciembre 2024</p>
-            </div>
-          </a>
-        </article>
+  <script>
+    // =============================
+    // 🎞 Carousel
+    // =============================
+    const images = document.querySelectorAll('.carousel-img');
+    const phrases = [
+      "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.", 
+      "Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
+       "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.", "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.", 
+       "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
+    ];
+    const phraseEl = document.getElementById('carousel-phrase');
+    let current = 0;
 
-        <article class="blog-item1" data-tags="Movilidad">
-          <a href="/projects/ElectroMovilidad/electromovilidad.html">
-            <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
-            <div class="blog-info1">
-              <h3 class="blog-title1">Electromovilidad</h3>
-              <p class="blog-date1">Diciembre 2024</p>
-            </div>
-          </a>
-        </article>
+    function showSlide(idx) {
+      images.forEach((img, i) => img.style.opacity = i === idx ? "1" : "0");
+      phraseEl.textContent = phrases[idx];
+    }
 
-        <article class="blog-item1" data-tags="Resiliencia">
-          <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
-            <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
-              class="blog-thumb">
-            <div class="blog-info1">
-              <h3 class="blog-title1">Islas de Calor Urbanas</h3>
-              <p class="blog-date1">Diciembre 2024</p>
-            </div>
-          </a>
-        </article>
+    setInterval(() => {
+      current = (current + 1) % images.length;
+      showSlide(current);
+    }, 4000);
 
-      </div>
-    </section>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Lista de colores posibles
-        const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+    showSlide(current);
 
-        // Seleccionamos todos los <span> y los <h2 class="white">
-        const elements = document.querySelectorAll("span, h2.white");
+    // =============================
+    // ⌨️ Search suggestions typing loop
+    // =============================
+    const suggestions = [
+      "Mobility solutions",
+      "Urban resilience",
+      "Digital tools",
+      "Sustainable materials",
+      "Affordable housing"
+    ];
 
-        elements.forEach((el) => {
-          // Color aleatorio
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
-          el.style.color = randomColor;
-        });
-      });
-    </script>
-<script>
-  const filterButtons = document.querySelectorAll(".filter-buttons button");
-  const blogItems = document.querySelectorAll(".blog-item1");
-  const textChange = document.querySelector(".textchange");
+    const searchInput = document.getElementById('carousel-search');
+    const suggestionEl = document.getElementById('carousel-suggestion');
 
-  // Textos según el tag, con <span>
-  const tagTexts = {
-    "all": "---",
-    "Vivienda": "<span>Housing.</span> We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
-    "Soluciones Digitales":"<span>Urban Sensors and Micro-Scale Data.</span> We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
-    "Resiliencia": "<span>Policy Design and Legislative Strategy.</span> Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
-    "Movilidad":  "<span>Organizational Consulting.</span> We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
-    "Materiales": "<span>Exploring sustainable and innovative materials</span> to improve urban construction and environmental performance."
-  };
+    let suggestionIdx = 0;
+    let charIdx = 0;
+    let typing;
+    let isTyping = false;
 
-  // Función para dar color random a spans y h2.white
-  function colorize() {
-    const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
-    const elements = textChange.querySelectorAll("span, h2.white");
-    elements.forEach((el) => {
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      el.style.color = randomColor;
-    });
-  }
+    function typeSuggestion() {
+      isTyping = true;
+      const currentText = suggestions[suggestionIdx];
+      if (charIdx <= currentText.length) {
+        suggestionEl.textContent = currentText.substring(0, charIdx);
+        charIdx++;
+        typing = setTimeout(typeSuggestion, 100); // velocidad de escritura
+      } else {
+        typing = setTimeout(eraseSuggestion, 1500); // espera antes de borrar
+      }
+    }
 
-  filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      // Quitar active
-      filterButtons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
+    function eraseSuggestion() {
+      const currentText = suggestions[suggestionIdx];
+      if (charIdx >= 0) {
+        suggestionEl.textContent = currentText.substring(0, charIdx);
+        charIdx--;
+        typing = setTimeout(eraseSuggestion, 50); // velocidad de borrado
+      } else {
+        suggestionIdx = (suggestionIdx + 1) % suggestions.length;
+        typing = setTimeout(typeSuggestion, 500);
+      }
+    }
 
-      const tag = button.dataset.tag;
+    // 🔥 Inicia animación
+    suggestionEl.textContent = "";
+    typeSuggestion();
 
-      // Filtrar artículos
+    // =============================
+    // 📑 Filtrado de blog (multiidioma)
+    // =============================
+    const blogItems = document.querySelectorAll('.blog-item1');
+    const noResults = document.getElementById('noResults');
+
+    function filterBlog(query) {
+      const lowerQuery = query.toLowerCase();
+      let found = false;
+
       blogItems.forEach(item => {
-        const tags = item.dataset.tags.split(",").map(t => t.trim());
-        item.style.display = (tag === "all" || tags.includes(tag)) ? "" : "none";
+        const title = item.querySelector('.blog-title1').textContent.toLowerCase();
+        const date = item.querySelector('.blog-date1').textContent.toLowerCase();
+        const tags = item.dataset.tags ? item.dataset.tags.toLowerCase() : "";
+        const alt = item.querySelector('img').alt.toLowerCase();
+        const fullText = item.textContent.toLowerCase(); // incluye todo lo que hay dentro
+
+        if (
+          title.includes(lowerQuery) ||
+          date.includes(lowerQuery) ||
+          tags.includes(lowerQuery) ||
+          alt.includes(lowerQuery) ||
+          fullText.includes(lowerQuery)
+        ) {
+          item.style.display = "block";
+          found = true;
+        } else {
+          item.style.display = "none";
+        }
       });
 
-      // Cambiar texto con HTML y recolorear
-      textChange.innerHTML = tagTexts[tag] || tagTexts["all"];
-      colorize();
+      noResults.style.display = found ? "none" : "block";
+    }
+
+    // Eventos del buscador
+    searchInput.addEventListener('input', () => {
+      const value = searchInput.value.trim();
+
+      if (value) {
+        clearTimeout(typing);
+        suggestionEl.style.display = 'none';
+        isTyping = false;
+      } else {
+        suggestionEl.style.display = 'block';
+        if (!isTyping) {
+          charIdx = 0;
+          typeSuggestion();
+        }
+      }
+
+      filterBlog(value);
     });
-  });
 
-  // Colorear al cargar por primera vez
-  document.addEventListener("DOMContentLoaded", colorize);
-</script>
+    suggestionEl.addEventListener('click', () => {
+      searchInput.value = suggestionEl.textContent;
+      suggestionEl.style.display = 'none';
+      filterBlog(searchInput.value);
+    });
+  </script>
+
+
+  <!-- Menú dinámico -->
+  <div id="menu-placeholder"></div>
+  <script>
+    fetch("/menu.html")
+      .then((response) => {
+        if (!response.ok)
+          throw new Error(
+            `Error al cargar el menú: ${response.status} ${response.statusText}`
+          );
+        return response.text();
+      })
+      .then((data) => {
+        const placeholder = document.getElementById("menu-placeholder");
+        placeholder.innerHTML = data;
+
+        const script = document.createElement("script");
+        script.src = "/js/demo4/menu.js";
+        document.body.appendChild(script);
+      })
+      .catch((error) =>
+        console.error("Ocurrió un error al cargar el menú:", error)
+      );
+  </script> <!-- Logo -->
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector(".secundary-brand");
+    fetch("/svg/indi-lab_Vertical_Animate.svg")
+      .then((response) => response.text())
+      .then((svgText) => {
+        container.innerHTML = svgText;
+      })
+      .catch((err) => console.error("Error cargando SVG:", err));
+  </script>
 
 
 
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("[data-svg]").forEach(el => {
+        const svgPath = el.getAttribute("data-svg");
+        fetch(svgPath)
+          .then(res => res.text())
+          .then(svgContent => {
+            el.innerHTML = svgContent;
+          })
+          .catch(err => console.error("Error cargando SVG:", err));
+      });
+    });
+  </script>
 </body>
 
 </html>
