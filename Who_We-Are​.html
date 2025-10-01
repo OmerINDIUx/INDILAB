@@ -48,9 +48,11 @@
   </section>
 
   <section class="intro">
-    <p data-i18n="who mwe are intro"> </p>
-    <span data-i18n="who mwe are spam"> </span>
-    <p data-i18n="who we are text"> </p>
+    <p>
+    <span data-i18n="who mwe are intro"></span>
+    <span class="pdp" data-i18n="who mwe are spam"></span>
+    <span  data-i18n="who we are text"></span>
+  </p>
 
     <div class="secundary-logo">
       <div class="indi-lab-logo" data-svg="svg/Secundary_Brand.svg"></div>
@@ -118,7 +120,7 @@
   <section class="statement">
     <div id="content-row">
       <div class="content-text">
-        <h2 data-i18n="We design prototype"></h2>
+        <h2  data-i18n="We design prototype"></h2>
         <div class="corner corner-bottom-left" data-svg="svg/cornner_bottom_left.svg"></div>
         <div class="corner corner-top-right" data-svg="svg/cornner_top_right.svg"></div>
       </div>
@@ -256,16 +258,16 @@
 
   <section class="list">
     <div class="phrase">
-      <span>Scalable solutions</span> that evolve into social
+      <span class="pdp" >Scalable solutions</span> that evolve into social
       impact-generating public infrastructure programs, deployable across
       cities.
     </div>
     <div class="phrase">
-      <span>Civic tech and gov tech ventures</span> with the potential to spin
+      <span class="pdp">Civic tech and gov tech ventures</span> with the potential to spin
       off into public-private partnerships or commercial offerings.
     </div>
     <div class="phrase">
-      <span>Applied research, data analysis, and strategic studies</span>
+      <span class="pdp">Applied research, data analysis, and strategic studies</span>
       that not only support implementation but also contribute to global urban
       discourse and policymaking.
     </div>
@@ -374,7 +376,7 @@
       const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
 
       // Seleccionamos todos los <span> y los <h2 class="white">
-      const elements = document.querySelectorAll("span, h2.white");
+      const elements = document.querySelectorAll(".pdp, h2.white");
 
       elements.forEach((el) => {
         // Color aleatorio

@@ -3,82 +3,63 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const bottomLeft = document.querySelector(".corner-bottom-left");
   const topRight   = document.querySelector(".corner-top-right");
+        const content = document.querySelector(".content--intro");
 
-  // 🔧 Detectar tamaño de pantalla y ajustar posiciones
+
+  // 🔧 Detectar tamaño de pantalla y devolver coordenadas absolutas
   function getCornerPositions() {
     const w = window.innerWidth;
+    const h = window.innerHeight;
 
-    if (w <= 768) {
-      // 📱 Móviles
-      return {
-        bottomLeft: { left: "0%",  top: "80%" },
-        topRight:   { left: "83%", top: "20%" },
-        scale: 0.18
-      };
-    } else if (w <= 1024) {
-      // 📱 Tablets
-      return {
-        bottomLeft: { left: "2%",  top: "65%" },
-        topRight:   { left: "88%", top: "28%" },
-        scale: 0.22
-      };
-    } else {
-      // 🖥️ Desktop
-      return {
-        bottomLeft: { left: "0%",  top: "60%" },
-        topRight:   { left: "85%", top: "35%" },
-        scale: 0.25
-      };
-    }
+    return {
+      bottomLeft: { x: (- w / 4) + 165,  y:  585 },    // un poco fuera abajo/izquierda
+      topRight:   { x: (- w / 4) + 793,  y: + 330 },     // un poco fuera arriba/derecha
+      center:     { x: w / 4 - 400, y: h / 4 } // centro exacto menos offset
+    };
   }
 
-  // Obtener posiciones iniciales según pantalla
-  let positions = getCornerPositions();
+  function animateCorners() {
+    const pos = getCornerPositions();
 
-  // Posición inicial en el centro (antes de animar)
-  gsap.set([bottomLeft, topRight], {
-    xPercent: -50,
-    yPercent: -50,
-    left: "50%",
-    top: "50%",
-    position: "absolute",
-    opacity: 0,
-    scale: positions.scale
-  });
+    // Posición inicial → centro de la pantalla
+    gsap.set([bottomLeft, topRight], {
+      position: "absolute",
+      x: pos.center.x,
+      y: pos.center.y,
+      opacity: 0
+    });
 
-  // Timeline animado
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#map",
-      start: "top center",
-      toggleActions: "play none none reverse"
-    }
-  });
+    // Timeline con scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#brand",   // 👈 ajusta al contenedor que quieras
+        start: "bottom center",
+        end: "bottom top",
+        scrub: true,
+        // markers: true
+      }
+    });
+      tl.to(bottomLeft, {
+          x: pos.bottomLeft.x,
+          y: pos.bottomLeft.y,
+          opacity: 1,
+          ease: "power3.out"
+        }).to(topRight, {
+          x: pos.topRight.x,
+          y: pos.topRight.y,
+          opacity: 1,
+          ease: "power3.out"
+        }, "<");
 
-  tl.to(bottomLeft, {
-    duration: 1.5,
-    left: positions.bottomLeft.left,
-    top: positions.bottomLeft.top,
-    xPercent: 0,
-    yPercent: -50,
-    opacity: 1,
-    ease: "power3.out"
-  })
-  .to(topRight, {
-    duration: 1.5,
-    left: positions.topRight.left,
-    top: positions.topRight.top,
-    xPercent: -50,
-    yPercent: 0,
-    opacity: 1,
-    ease: "power3.out"
-  }, "<");
+        return tl;
+      }
 
-  // 🔄 Recalcular al cambiar el tamaño de la ventana
+
+  // Inicializar
+  animateCorners();
+
+  // 🔄 Recalcular al cambiar tamaño
   window.addEventListener("resize", () => {
-    positions = getCornerPositions();
-    gsap.set([bottomLeft, topRight], { scale: positions.scale });
-    // Opcional: actualizar timeline si quieres que cambie en tiempo real
-    tl.invalidate().restart(); // reinicia animación con nuevas posiciones
+    animateCorners();
   });
 });

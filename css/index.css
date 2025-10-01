@@ -174,6 +174,8 @@ body::before {
   width: 100%;
   position: fixed;
   top: 75vh;
+  left: -20px;
+
 }
 
 .navigation-arrows .core-belive,
@@ -271,10 +273,6 @@ body::before {
 /* ===========================
    2. TEXTOS
 =========================== */
-.content--intro {
-  padding-top: 45vh;
-  z-index: 200;
-}
 
 .text-large_w {
   color: var(--color-white-brand, #efefef);
@@ -322,12 +320,16 @@ body::before {
 .hx-2 {
   --color-highlight-end: var(--color-highlight-start-map, #e7e5d9);
 }
-
+.content--intro {
+  z-index: 200;
+  /* background-color: #43d7cd; */
+}
 .corner {
   position: absolute;
-  width: 200px;
-  height: auto;
+  width: 30px;
+  height: 30px;
   pointer-events: none;
+  /* background-color:  red; */
 }
 
 .corner-icon {
@@ -477,11 +479,15 @@ body::before {
   opacity: 0; /* Ocultos por defecto */
 }
 
-.content-row {
+#content-row {
   display: flex;
-  align-items: center;
+  justify-content: center; /* centra en X */
+  align-items: center;     /* centra en Y */
+  height: 100vh;           /* da el espacio total vertical */
   gap: 1rem;
 }
+
+
 
 /* ===========================
    8. footer video
