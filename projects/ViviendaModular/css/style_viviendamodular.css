@@ -1,33 +1,27 @@
-/* RESET Y BASE */
-
-/* CSS Base: Importar todos los estilos relacionados */
-@import url("../../../css/base/typography.css");
-
-html {
+/* Body */
+body {
   margin: 0;
-  padding: 0;
   font-family: "Figtree", sans-serif;
-  background-color: #eeeeee;
-  overflow-x: hidden;
+  font-weight: 400;
+  line-height: 1.6;
+  /* width: calc(100% - 100px); */
+  /* margin-left: 100px; */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  background-color: #1a1a1a;
+  color: #eeeeee;
+}
+
+/* Secciones generales */
+section {
+  padding: 6rem 10%;
   position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-/* Fondo noise global en el body */
-body::before {
-  content: "";
-  position: fixed;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background-image: url("../../../img/noise.png");
-  background-repeat: repeat;
-  opacity: 0.3;
-  pointer-events: none;
-  animation: grain 8s steps(10) infinite;
-  z-index: 0;
-}
-
 /* Ruido automático en bloques con fondo #eee */
 *[style*="background: #eee"],
 *[style*="background: #eeeeee"],
@@ -35,7 +29,8 @@ body::before {
 *[style*="background-color: #eeeeee"],
 #image-sequence,
 .card,
-.TextLarge {
+.TextLarge,
+.image-section {
   position: relative;
   background-color: #eeeeee;
   overflow: hidden;
@@ -47,12 +42,13 @@ body::before {
 *[style*="background-color: #eeeeee"]::before,
 #image-sequence::before,
 .card::before,
-.TextLarge::before {
+.TextLarge::before,
+.image-section::before {
   content: "";
   position: absolute;
   top: -100%;
   left: -100%;
-  width: 300%;
+  /* width: 300%; */
   height: 300%;
   background-image: url("../../../img/noise.png");
   background-repeat: repeat;
@@ -67,7 +63,6 @@ body::before {
 .card > *,
 .TextLarge > * {
   position: relative;
-  z-index: 1;
 }
 
 /* VIDEO */
@@ -75,14 +70,15 @@ body::before {
   position: relative;
   width: 100%;
   height: 100dvh; /* altura visible de pantalla */
+  left: 100px;
 }
 
 .video-fullscreen {
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100% - 50px); /* margen izquierdo en desktop */
-  height: 100dvh;
+  width: calc(100% - 100px);
+  left: 100px;
   overflow: hidden; /* recorta el exceso de video */
   margin-left: 50px;
   box-sizing: border-box;
@@ -91,20 +87,21 @@ body::before {
 .video-fullscreen video {
   position: absolute;
   top: 50%;
+  left: 100px;
   left: 50%;
-  min-width: 100%;  /* asegura que cubra el ancho */
+  min-width: 100%; /* asegura que cubra el ancho */
   min-height: 100%; /* asegura que cubra la altura */
   transform: translate(-50%, -50%);
-  object-fit: cover;  /* mantiene proporción y recorta lo sobrante */
+  object-fit: cover; /* mantiene proporción y recorta lo sobrante */
   object-position: center center; /* centra el recorte */
 }
-
 
 /* CANVAS */
 #image-sequence {
   display: block;
-  width: 100vw;
+
   height: 100vh;
+  left: 100px;
   background: #eeeeee;
 }
 
@@ -118,7 +115,7 @@ body::before {
 }
 
 .TextLarge div {
-  max-width: 900px;
+  max-width: 800px;
   text-align: justify;
   color: black;
   line-height: 1.8;
@@ -134,14 +131,14 @@ body::before {
 }
 
 /* SECCIONES */
-section {
+/* section {
   min-height: 105vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 10;
-}
+} */
 
 /* CARDS */
 .card {
@@ -178,18 +175,62 @@ p {
   color: black;
 }
 
+.image-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+}
+
+.card-image {
+  text-align: center; /* opcional, por si quieres centrar contenido */
+}
+
+.card-img {
+  max-width: 40%;
+  min-width: 20%;
+  border-radius: 0 2rem 0 2rem;
+  margin-bottom: 1rem;
+}
+
 /* ANIMACIÓN NOISE */
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
 }
 
 /* TITLES */
@@ -233,6 +274,64 @@ p {
 .Title h3 {
   font-size: 1.2rem;
   letter-spacing: 0.1em;
+}
+
+.secundary-brand {
+  all: unset;
+  z-index: 0 !important;
+  position: fixed;
+  top: 0;
+  left: 10px;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+html,
+body {
+  overflow-x: hidden; /* corta cualquier desbordamiento horizontal */
+}
+
+body {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  background-color: #1a1a1a;
+  color: #eeeeee;
+
+  /* en lugar de margin-left: 100px */
+  padding-left: 100px; /* reserva espacio para el menú sin romper ancho */
+  box-sizing: border-box;
+}
+
+
+/* Cuando el menú está abierto, oculta el logo */
+.menu-fullscreen.show ~ a .secundary-brand {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 /* RESPONSIVE */

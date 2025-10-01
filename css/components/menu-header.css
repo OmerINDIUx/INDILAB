@@ -120,6 +120,11 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+.menu-wrapper,
+.menu-fullscreen,
+#fullscreen-menu {
+  z-index: 99999 !important;
+}
 
 
 
@@ -408,10 +413,6 @@ svg {
     position: relative;
     top: -10px;
   }
-
-
-
-
 
 
 

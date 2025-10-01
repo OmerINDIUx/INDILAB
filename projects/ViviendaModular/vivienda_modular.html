@@ -2,7 +2,8 @@
 <html lang="es">
 
 <head>
-    <link id="menu-css" rel="stylesheet" href="/css/base.css">
+    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
 
     <meta charset="UTF-8">
     <title>Vivienda Modular</title>
@@ -33,59 +34,17 @@
 </head>
 
 <body>
-    <a href="index.html">
-        <div class="secundary-brand"></div>
-    </a>
-    <script>
-        const container = document.querySelector('.secundary-brand');
-        fetch('/svg/indi-lab_Vertical_Animate.svg')
-            .then(response => response.text())
-            .then(svgText => {
-                container.innerHTML = svgText; // Inserta el SVG como HTML
-            })
-            .catch(err => console.error('Error cargando SVG:', err));
-    </script>
+
+            <!-- Menú dinámico -->
 
 
-
-
-
-    <div id="menu-placeholder"></div>
-
-    <script>
-        fetch('/menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('menu-placeholder');
-                if (!placeholder) {
-                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-                }
-                placeholder.innerHTML = data;
-
-                // Cargar el script después de que el menú esté en el DOM
-                const script = document.createElement('script');
-                script.src = "/js/demo4/menu.js";
-                script.onload = () => console.log("menu.js cargado correctamente ✅");
-                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-                document.body.appendChild(script);
-            })
-            .catch(error => {
-                console.error("Ocurrió un error al cargar el menú:", error);
-            });
-    </script>
-
-
-    <div class="video-scroll-wrapper">
-        <div class="video-fullscreen">
-            <canvas id="image-sequence"></canvas>
+    <section class="video-scroll-wrapper">
+        <div>
+            <div class="video-fullscreen">
+                <canvas id="image-sequence"></canvas>
+            </div>
         </div>
-    </div>
-
+    </section>
 
     <!-- Cards -->
     <section>
@@ -154,41 +113,44 @@
                 accesibles, marcando un cambio de paradigma en la construcción. </p>
         </div>
     </section>
-    <section>
-        <div class="card">
-            <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Vivienda Modular"
-                style="max-width:100%; border-radius:1rem; box-shadow:0 4px 16px rgba(0,0,0,0.4); margin-bottom:1rem;">
-            <p>Ejemplo de vivienda modular: diseño moderno, eficiente y adaptable a distintos entornos.</p>
-        </div>
-    </section>
+        <section class="image-section">
+            <div class="card-image">
+                <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Vivienda Modular" class="card-img">
+                <p>Ejemplo de vivienda modular: diseño moderno, eficiente y adaptable a distintos entornos.</p>
+            </div>
+        </section>
 
-    <section class="TextLarge">
-        <div>
-            <h2 class="white">Contexto:</h2>
-            <p>Las viviendas prefabricadas destacan por su eficiencia y adaptabilidad, permitiendo la integración de
-                módulos para atender necesidades diversas, desde familias pequeñas hasta desarrollos multifamiliares.
-                Además, su diseño modular y facilidad de transporte hacen que sean ideales para comunidades con
-                infraestructura limitada, ofreciendo una solución sostenible y práctica 3. </p>
-            <p>Ante los desafíos actuales en la construcción de vivienda, la edificación modular es una alternativa
-                viable y estratégica frente a los métodos tradicionales. Su principal ventaja radica en la reducción
-                significativa de costos y tiempos de entrega, lo que permite acelerar la disponibilidad de vivienda sin
-                comprometer la calidad. </p>
-            <p>Este modelo de construcción se basa en la producción industrializada de módulos, lo que garantiza un
-                control de calidad constante y minimiza el desperdicio de materiales, optimizando así los recursos.
-                Además, su impacto ambiental es considerablemente menor en comparación con las técnicas convencionales.
-                Ejemplos exitosos de su implementación pueden observarse en países como Japón, donde esta metodología ha
-                permitido la rápida expansión del parque habitacional 4.</p>
-        </div>
-    </section>
+        <section class="TextLarge">
+            <div>
+                <h2 class="white">Contexto:</h2>
+                <p>Las viviendas prefabricadas destacan por su eficiencia y adaptabilidad, permitiendo la integración de
+                    módulos para atender necesidades diversas, desde familias pequeñas hasta desarrollos
+                    multifamiliares.
+                    Además, su diseño modular y facilidad de transporte hacen que sean ideales para comunidades con
+                    infraestructura limitada, ofreciendo una solución sostenible y práctica 3. </p>
+                <p>Ante los desafíos actuales en la construcción de vivienda, la edificación modular es una alternativa
+                    viable y estratégica frente a los métodos tradicionales. Su principal ventaja radica en la reducción
+                    significativa de costos y tiempos de entrega, lo que permite acelerar la disponibilidad de vivienda
+                    sin
+                    comprometer la calidad. </p>
+                <p>Este modelo de construcción se basa en la producción industrializada de módulos, lo que garantiza un
+                    control de calidad constante y minimiza el desperdicio de materiales, optimizando así los recursos.
+                    Además, su impacto ambiental es considerablemente menor en comparación con las técnicas
+                    convencionales.
+                    Ejemplos exitosos de su implementación pueden observarse en países como Japón, donde esta
+                    metodología ha
+                    permitido la rápida expansión del parque habitacional 4.</p>
+            </div>
+        </section>
 
-    <script src="js/vivienda_modular.js"></script>
-    <script src="/js/gsap.min.js"></script>
-    <script src="/js/ScrollTrigger.min.js"></script>
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
+        <script src="js/vivienda_modular.js"></script>
+        <script src="/js/gsap.min.js"></script>
+        <script src="/js/ScrollTrigger.min.js"></script>
+        <script src="/js/lenis.min.js"></script>
+        <script src="/js/splitting.min.js"></script>
 
 
-    <!-- <script>document.addEventListener("DOMContentLoaded", () => {
+        <!-- <script>document.addEventListener("DOMContentLoaded", () => {
   const path = document.body.getAttribute("data-i18n-path");
 
   fetch(path)
@@ -201,6 +163,43 @@
     });
 });
 </script> -->
+        <div id="menu-placeholder"></div>
+        <script>
+            fetch("/menu.html")
+                .then((response) => {
+                    if (!response.ok)
+                        throw new Error(
+                            `Error al cargar el menú: ${response.status} ${response.statusText}`
+                        );
+                    return response.text();
+                })
+                .then((data) => {
+                    const placeholder = document.getElementById("menu-placeholder");
+                    placeholder.innerHTML = data;
+
+                    const script = document.createElement("script");
+                    script.src = "/js/demo4/menu.js";
+                    document.body.appendChild(script);
+                })
+                .catch((error) =>
+                    console.error("Ocurrió un error al cargar el menú:", error)
+                );
+        </script> <!-- Logo -->
+        <a href="index.html">
+            <div class="secundary-brand"></div>
+        </a>
+        <script>
+            const container = document.querySelector(".secundary-brand");
+            fetch("/svg/indi-lab_Vertical_Animate.svg")
+                .then((response) => response.text())
+                .then((svgText) => {
+                    container.innerHTML = svgText;
+                })
+                .catch((err) => console.error("Error cargando SVG:", err));
+        </script>
+
+
+
 
 </body>
 
