@@ -426,6 +426,38 @@
       });
     });
   </script>
+
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación inicial hero
+    gsap.from(".hero-text h2", {
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+
+    gsap.from(".hero img", {
+      scale: 1.2,
+      duration: 3,
+      ease: "power2.out",
+    });
+
+    // Animación especial del logo
+    gsap.from(".intro img", {
+      scrollTrigger: {
+        trigger: ".intro img",
+        start: "top 80%",
+      },
+      opacity: 0, // aparece suavemente
+      y: 30, // sube un poco desde abajo
+      scale: 0.95, // pequeño escalado para profundidad
+      duration: 1.5, // tiempo de animación
+      ease: "power2.out", // movimiento elegante y natural
+    });
+  </script>
 </body>
 
 </html>

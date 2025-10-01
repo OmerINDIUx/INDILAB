@@ -1,5 +1,4 @@
 section {
-  padding: 6rem 10%;
   position: relative;
   height: 100vh;
   display: flex;
@@ -119,22 +118,22 @@ section {
 .list {
   background-color: #eeeeee;
   color: #1a1a1a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   text-align: center;
   overflow: hidden;
-  position: relative;
+  position: relative; /* referencia para absolute */
 }
 
 .list .phrase {
   position: absolute;
+  top: 40%;        /* centrado vertical */
+  left: 50%;       /* centrado horizontal */
+  transform: translate(-50%, -50%); /* mueve al centro exacto */
   max-width: 800px;
   font-size: 1.6rem;
   opacity: 0;
-  transform: translateY(50px);
   color: inherit; /* hereda el color de la sección */
+  bottom: 50%;
 }
 
 .list span {
@@ -160,13 +159,7 @@ section {
   max-width: 800px;
   font-size: 1.6rem;
 }
-h3 {
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  font-size: 1.2rem;
-  max-width: 800px;
-  line-height: 1.4;
-}
+
 
 .reveal-text {
   font-family: "Figtree", sans-serif;
@@ -368,7 +361,7 @@ section[style*="background-color: #eeeeee"]::before {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 200vh; 
+  height: 200vh;
 } */
 
 .brand-icon-back {

@@ -119,22 +119,22 @@ section {
 .list {
   background-color: #eeeeee;
   color: #1a1a1a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   text-align: center;
   overflow: hidden;
-  position: relative;
+  position: relative; /* referencia para absolute */
 }
 
 .list .phrase {
   position: absolute;
+  top: 40%;        /* centrado vertical */
+  left: 50%;       /* centrado horizontal */
+  transform: translate(-50%, -50%); /* mueve al centro exacto */
   max-width: 800px;
   font-size: 1.6rem;
   opacity: 0;
-  transform: translateY(50px);
   color: inherit; /* hereda el color de la sección */
+  bottom: 50%;
 }
 
 .list span {
@@ -401,22 +401,21 @@ section[style*="background-color: #eeeeee"]::before {
 .list2 {
   background-color: #eeeeee;
   color: #1a1a1a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   text-align: center;
   overflow: hidden;
-  position: relative;
+  position: relative; /* referencia para absolute */
 }
 
 .list2 .phrase2 {
   position: absolute;
+  top: 27%;        /* centrado vertical */
+  transform: translate(-50%, -50%); /* mueve al centro exacto */
   max-width: 800px;
   font-size: 1.6rem;
   opacity: 0;
-  transform: translateY(50px);
   color: inherit; /* hereda el color de la sección */
+  bottom: 50%;
 }
 
 .list2 span {
