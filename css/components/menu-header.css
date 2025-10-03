@@ -458,4 +458,37 @@ svg {
   .hamburger {
     order: 2; /* segundo, a la derecha */
   }
+
+
+
+.menu-columns {
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+    width: 100%;
+    justify-items: start;   /* 👈 fuerza alinear al lado izquierdo */
+  }
+
+  .menu-links {
+    width: 100%;
+  }
+
+  .menu-blog {
+    width: 100%;
+    margin-top: 0;
+    text-align: left;       /* 👈 asegura alineación de textos a la izquierda */
+  }
+
+  .blog-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: start;   /* 👈 asegura que cada post se pegue a la izquierda */
+  }
+
+  .blog-item {
+    width: 100%;            /* 👈 que no se encoja al centro */
+  }
+
+  .menu__item {
+    margin: 0;
+  }
 }
