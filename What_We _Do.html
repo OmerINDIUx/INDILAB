@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  
   <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
 
   <meta charset="UTF-8">
@@ -25,7 +26,6 @@
   <script src="/js/ScrollTrigger.min.js"></script>
   <script src="/js/lenis.min.js"></script>
   <script src="/js/splitting.min.js"></script>
-  <script type="module" src="/js/demo4/traduction.js"></script>
 
 
 
@@ -36,9 +36,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
 
   <!-- Tu script de traducción -->
-  <script type="module" src="js/demo4/traduction2.js"></script>
+  <script type="module" src="js/demo4/traduction.js"></script>
 
-  <script type="module" src="js/demo4/traduction2.js"></script>
 
 
   <meta charset="UTF-8">
@@ -125,10 +124,10 @@
     // =============================
     const images = document.querySelectorAll('.carousel-img');
     const phrases = [
-      "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.", 
+      "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
       "Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
-       "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.", "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.", 
-       "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
+      "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.", "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
+      "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
     ];
     const phraseEl = document.getElementById('carousel-phrase');
     let current = 0;
@@ -253,44 +252,6 @@
   </script>
 
 
-  <!-- Menú dinámico -->
-  <div id="menu-placeholder"></div>
-  <script>
-    fetch("/menu.html")
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            `Error al cargar el menú: ${response.status} ${response.statusText}`
-          );
-        return response.text();
-      })
-      .then((data) => {
-        const placeholder = document.getElementById("menu-placeholder");
-        placeholder.innerHTML = data;
-
-        const script = document.createElement("script");
-        script.src = "/js/demo4/menu.js";
-        document.body.appendChild(script);
-      })
-      .catch((error) =>
-        console.error("Ocurrió un error al cargar el menú:", error)
-      );
-  </script> <!-- Logo -->
-  <a href="index.html">
-    <div class="secundary-brand"></div>
-  </a>
-  <script>
-    const container = document.querySelector(".secundary-brand");
-    fetch("/svg/indi-lab_Vertical_Animate.svg")
-      .then((response) => response.text())
-      .then((svgText) => {
-        container.innerHTML = svgText;
-      })
-      .catch((err) => console.error("Error cargando SVG:", err));
-  </script>
-
-
-
 
 
   <script>
@@ -306,6 +267,75 @@
       });
     });
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Logo -->
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector(".secundary-brand");
+    fetch("/svg/indi-lab_Vertical_Animate.svg")
+      .then((response) => response.text())
+      .then((svgText) => {
+        container.innerHTML = svgText;
+      })
+      .catch((err) => console.error("Error cargando SVG:", err));
+  </script>
+
+
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+
+<div class="menu-placeholder" id="menu-placeholder"></div>
+
+<script>
+  fetch('/menu.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const placeholder = document.getElementById('menu-placeholder');
+      if (!placeholder) {
+        throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+      }
+      placeholder.innerHTML = data;
+
+      // Cargar el script después de que el menú esté en el DOM
+      const script = document.createElement('script');
+      script.src = "/js/demo4/menu.js";
+      script.onload = () => console.log("menu.js cargado correctamente ✅");
+      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+      document.body.appendChild(script);
+
+      // 👇 Re-aplicar traducción al menú
+      if (window.applyTranslations) {
+        window.applyTranslations();
+      }
+    })
+    .catch(error => {
+      console.error("Ocurrió un error al cargar el menú:", error);
+    });
+</script>
+
 </body>
 
 </html>

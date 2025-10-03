@@ -40,16 +40,16 @@
 
 .menu-fullscreen.show {
   opacity: 1;
-  pointer-events: auto;   /* abierto = clickeable */
-  transform: rotateY(0);  /* animación 3D */
+  pointer-events: auto; /* abierto = clickeable */
+  transform: rotateY(0); /* animación 3D */
 }
 /* wrapper para animación 3D */
 .menu-wrapper {
   position: fixed;
   inset: 0;
   perspective: 1200px;
-  z-index: 9999;         /* SIEMPRE arriba de todo */
-  pointer-events: none;  /* cerrado = no bloquea clics */
+  z-index: 9999; /* SIEMPRE arriba de todo */
+  pointer-events: none; /* cerrado = no bloquea clics */
 }
 
 #fullscreen-menu {
@@ -126,10 +126,6 @@
   z-index: 99999 !important;
 }
 
-
-
-
-
 /* ==============================
    BOTÓN DE CIERRE
 ============================== */
@@ -177,7 +173,6 @@
 /* ==============================
    REDES SOCIALES
 ============================== */
-
 
 /* ==============================
    BOTONES LATERALES
@@ -273,7 +268,6 @@
 .blog-item {
   display: flex;
   flex-direction: column;
-
 }
 .blog-thumb {
   width: 100%;
@@ -304,11 +298,9 @@
   text-decoration: none;
 }
 
-
-
 .blog-item a {
   text-decoration: none; /* ❌ quita subrayado del enlace */
-  color: inherit;        /* usa el color de su contenido */
+  color: inherit; /* usa el color de su contenido */
 }
 
 .blog-item a:visited,
@@ -363,7 +355,7 @@ svg {
   top: 1.5rem;
   left: 1rem;
   padding: 0px;
-  width: 80px; 
+  width: 80px;
   pointer-events: auto; /* clickeable */
 }
 
@@ -405,137 +397,39 @@ svg {
 }
 
 .menu-columns {
-
   align-items: top;
 }
 
-  .blog-heading {
-    position: relative;
-    top: -10px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.blog-heading {
+  position: relative;
+  top: -10px;
+}
 
 @media (max-width: 768px) {
-  .sidebar12 {
-    position: fixed; /* Siempre visible */
-
-    width: 100vw; /* ahora ocupa todo el ancho */
-    height: 100px; /* altura fija */
-    display: flex;
-    flex-direction: row; /* elementos en fila */
-    align-items: center; /* centrados verticalmente */
-    justify-content: space-between; /* repartidos a los lados */
-    padding: 0 20px; /* espacio interno horizontal */
+  .sidebar-buttons {
+    width: 100%; /* Ancho fijo */
+    height: 100px; /* Toda la pantalla */
+    position: fixed; /* no absolute */
+    top: 1rem;
+    right: 1rem;
+    left: auto !important; /* anulación fuerte */
+    bottom: auto;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    z-index: 12000; /* por encima de sidebar12 */
   }
 
-  /* ==============================
-   BOTONES EN TOP (no abajo)
-============================== */
-
-  /* Botón idioma */
-  .lang-btn,
-  .hamburger {
-    position: relative;
-    width: 60px; /* 🔹 más compacto en móvil */
-    height: 44px;
-    border-radius: 6px 0 6px 0;
-    color: #eee;
+  .sidebar12 {
+    width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-    box-sizing: border-box;
   }
 
   .lang-btn {
-    font-size: 0.85rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    order: 1; /* primero */
   }
 
   .hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
+    order: 2; /* segundo, a la derecha */
   }
-
-  .hamburger span {
-    height: 3px;
-    width: 40%;
-    background-color: #eee;
-    display: block;
-    border-radius: 2px 0 2px 0;
-    transition: all 0.3s ease;
-    transform-origin: center;
-  }
-
-  /* Hover con gradiente compartido */
-  .lang-btn::before,
-  .hamburger::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    border-radius: inherit;
-    background: linear-gradient(
-      var(--angle, 90deg),
-      #ffcd7000,
-      #ffcd7000,
-      #ff6f61,
-      #ffcc70
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    filter: drop-shadow(0 0 2px #ff6f61) drop-shadow(0 0 12px #ffcc70);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-  }
-
-  .lang-btn:hover,
-  .hamburger:hover {
-    border-color: transparent;
-  }
-
-  .lang-btn:hover::before,
-  .hamburger:hover::before {
-    opacity: 1;
-  }
-
-  /* Animación de hamburguesa activa */
-  .hamburger.is-active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  .hamburger.is-active span:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.is-active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
- }
+}

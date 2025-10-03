@@ -1,4 +1,23 @@
-let currentLang = "en"; // idioma por defecto al iniciar
+let currentLang = localStorage.getItem("indi-lang") || "es";
+let loadedTranslations = {}; // 👈 cache del último JSON cargado
+
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const translation = loadedTranslations[key] || key;
+
+    if (el.tagName === "IMG") {
+      el.alt = translation;
+    } else if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+      el.placeholder = translation;
+    } else {
+      el.innerHTML = translation;
+    }
+  });
+}
+
+// Hacer accesible globalmente
+window.applyTranslations = applyTranslations;
 
 function translatePage(lang = "en") {
   const elements = document.querySelectorAll("[data-i18n]");
@@ -7,7 +26,6 @@ function translatePage(lang = "en") {
     return;
   }
 
-  // Fade out
   gsap.to(elements, {
     opacity: 0,
     scale: 0.95,
@@ -20,95 +38,70 @@ function translatePage(lang = "en") {
           if (!res.ok) throw new Error("Archivo JSON no encontrado");
           return res.json();
         })
-        .then(translations => {
-          elements.forEach(el => {
-            const key = el.getAttribute("data-i18n");
-            const translation = translations[key] || key;
+        .then(json => {
+          loadedTranslations = json; // 👈 cachear traducciones
+          applyTranslations();
 
-            if (el.tagName === "IMG") {
-              el.alt = translation;
-            } else if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-              el.placeholder = translation;
-            } else {
-              el.innerHTML = translation;
-            }
-          });
-
-          // Fade in
           gsap.fromTo(
             elements,
             { opacity: 0, scale: 0.95 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              stagger: 0.02,
-              ease: "back.out(1.4)",
-            }
+            { opacity: 1, scale: 1, duration: 0.5, stagger: 0.02, ease: "back.out(1.4)" }
           );
 
           currentLang = lang;
+          localStorage.setItem("indi-lang", lang); // persistir idioma
+          updateButtonLabel();
         })
         .catch((err) => console.error("Error cargando idioma:", err));
     },
   });
 }
 
-// Cambio de idioma con animación del botón
-document.getElementById("lang-toggle")?.addEventListener("click", () => {
+function updateButtonLabel() {
   const btn = document.getElementById("lang-toggle");
-  const nextLang = currentLang === "en" ? "es" : "en";
+  if (!btn) return;
+  btn.textContent = currentLang === "es" ? "EN" : "ES";
+}
 
-  gsap.to(btn, {
-    scale: 0.8,
-    duration: 0.15,
-    onComplete: () => {
-      btn.textContent = nextLang.toUpperCase();
-      translatePage(nextLang);
-
-      gsap.to(btn, {
-        scale: 1,
-        duration: 0.15,
-        ease: "back.out(2)",
-      });
-    },
-  });
-});
-
-// 🚀 Ahora esperamos a que el menú esté cargado antes de traducir/animar
 window.addEventListener("DOMContentLoaded", () => {
-  fetch('/menu.html')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-      }
-      return response.text();
-    })
-    .then(data => {
-      const placeholder = document.getElementById('menu-placeholder');
-      if (!placeholder) throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-      placeholder.innerHTML = data;
+  translatePage(currentLang);
 
-      // Animación inicial cuando ya existen los [data-i18n]
-      gsap.from("[data-i18n]", {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.03,
-        ease: "power2.out",
+  gsap.from("[data-i18n]", {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+    stagger: 0.03,
+    ease: "power2.out",
+  });
+
+  // Observar si se inyecta el menú
+  const observer = new MutationObserver(() => {
+    const btn = document.getElementById("lang-toggle");
+    if (btn && !btn.dataset.listenerAdded) {
+      btn.dataset.listenerAdded = "true";
+      updateButtonLabel();
+
+      btn.addEventListener("click", () => {
+        const nextLang = currentLang === "es" ? "en" : "es";
+        gsap.to(btn, {
+          scale: 0.8,
+          duration: 0.15,
+          onComplete: () => {
+            translatePage(nextLang);
+            gsap.to(btn, { scale: 1, duration: 0.15, ease: "back.out(2)" });
+          },
+        });
       });
+    }
+  });
 
-      // Traducción inicial
-      translatePage(currentLang);
-
-      // Cargar el JS del menú después de insertarlo
-      const script = document.createElement('script');
-      script.src = "/js/demo4/menu.js";
-      script.onload = () => console.log("menu.js cargado correctamente ✅");
-      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-      document.body.appendChild(script);
-    })
-    .catch(error => {
-      console.error("Ocurrió un error al cargar el menú:", error);
-    });
+  const placeholder = document.getElementById("menu-placeholder");
+  if (placeholder) {
+    observer.observe(placeholder, { childList: true, subtree: true });
+  }
 });
+
+// --- Exponer funciones globales ---
+window.INDI = window.INDI || {};
+window.INDI.translatePage = translatePage;
+window.INDI.getCurrentLang = () => currentLang;

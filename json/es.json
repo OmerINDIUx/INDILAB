@@ -1,45 +1,94 @@
 {
-  "menu home": "INICIO",
-  "menu about": "INDI Lab",
-  "menu projects": "PROYECTOS",
-  "menu contact": "CONTACTO",
+  "menu home": "Nuestras Creencias",
+  "Our work": "Nuestro trabajo",
+  "menu about": "Quiénes somos",
+  "menu projects": "Qué hacemos",
+  "menu contact": "Nuestro Enfoque",
+
+  "menu homef": "INICIO→",
+  "menu aboutf": "INDI Lab→",
+  "menu projectsf": "PROYECTOS→",
+  "menu contactf": "CONTACTO→",
 
   "CDMX Traffic": "Tráfico CDMX",
   "hero_highlighted_text": "",
-  "hero_intro_text": "Las ciudades son inteligentes por definición, son la creación suprema de la humanidad: organismos vivos e inteligentes donde cada avance —sea tecnológico, artístico o visionario— cobra forma. En las ciudades se materializan las esperanzas y sueños colectivos, y donde la inteligencia compartida de sus habitantes converge en algo más grande que la suma de sus partes. En INDI Lab, imaginamos las ciudades como entidades vivas y en constante evolución. Creemos en un futuro donde las ciudades, impulsadas por tecnología de vanguardia y fortalecidas por la participación comunitaria, lleven a la humanidad hacia su máximo potencial.",
-  "icon_start_alt": "Ícono de inicio",
-  "icon_end_alt": "Ícono de fin",
+  "hero_intro_text": "Las ciudades son sistemas vivos donde convergen innovación, creatividad y posibilidades. En INDI Lab pensamos en ellas como entidades dinámicas que reflejan nuestro potencial colectivo. Creemos en un futuro donde tecnología y comunidad trabajan juntas para que la humanidad prospere.",
+  "icon_start_alt": "Icono inicio",
+  "icon_end_alt": "Icono fin",
+  "cdmx traffic page food1": "Viajes simulados diarios en CDMX por hora del día.",
+  "cdmx traffic page food2": "Cada punto grande son 100 viajes; cada punto chico, 50.",
+  "cdmx traffic page food3": "Análisis y visualización por INDI Lab.",
 
-  "Technology as a Force for": "La tecnología como ponteciador",
-  "Human Potential": " del potencial humano",
-  "text of Human Potential": "Así como las ciudades son crisoles de innovación, la tecnología es el catalizador que desata y amplifica el potencial humano. Cuando se utiliza con ética, la tecnología puede potenciar la vida urbana y empoderar a poblaciones históricamente marginadas. No es un fin en sí misma, sino una herramienta para que las ciudades cumplan su propósito último: mejorar la vida, fomentar la creatividad y detonar el progreso. Desde un enfoque experimental, buscamos crear herramientas tecnológicas que fortalezcan comunidades, hagan visibles las necesidades ignoradas y posibiliten decisiones más justas e informadas. Cuando se aplica con intención y conciencia, la tecnología abre puertas a oportunidades sin precedentes.",
+  "Technology as a Force for": "Tecnología como fuerza",
+  "Human Potential": "para el potencial humano",
+  "text of Human Potential": "Así como las ciudades son crisoles de innovación, la tecnología puede liberar y amplificar el potencial humano. Usada con ética, empodera comunidades, revela necesidades invisibles y guía decisiones justas.",
+  "text of Human Potential 2": "En INDI Lab la tecnología es un medio para mejorar la vida urbana, fomentar creatividad y generar progreso.",
 
   "Experimentation": "Experimentación:",
-  "The Pathway to Innovation": " el camino hacia la innovación",
-  "text of The Pathway to Innovation": "En INDI Lab adoptamos una mentalidad experimental, que privilegia ensayos a pequeña escala basados en datos. Nuestro enfoque es científico: formulamos hipótesis, creamos prototipos, los probamos en contextos reales y documentamos cada resultado con rigor. Para nosotros, el éxito no es solo llegar al resultado esperado: así como la ciencia avanza aprendiendo de sus errores, cada experimento urbano es una oportunidad de descubrimiento. Confirmar o refutar una hipótesis es, en ambos casos, un paso hacia una inteligencia urbana más robusta.",
+  "The Pathway to Innovation": "Camino a la innovación",
+  "text of The Pathway to Innovation": "Adoptamos una mentalidad experimental: hipótesis, prototipos, pruebas y documentación. Aprendemos tanto de los fracasos como de los logros. Cada experimento expande nuestra inteligencia urbana compartida.",
 
-  "Harnessing": "Activar:",
-  "Collective Wisdom": " la sabiduría colectiva",
-  "text of the Collective Wisdom": "El conocimiento incrustado en las comunidades urbanas es un recurso demasiado valioso para ser ignorado. Reconocemos el poder de la inteligencia colectiva y buscamos activarla mediante un diálogo profundo con quienes habitan, trabajan y crean la ciudad. Esta inteligencia muchas veces se manifiesta en los márgenes de lo oficial: dinámicas informales como los mercados callejeros son pilares de la vida urbana. Al reconocer y entrelazar estos sistemas no planeados, diseñamos soluciones que reflejan el carácter auténtico de las ciudades.",
+  "Harnessing": "Aprovechando",
+  "Collective Wisdom": "sabiduría colectiva",
+  "SUB Collective Wisdom": "La ciudad habla: escuchamos.",
+  "text of the Collective Wisdom": "El conocimiento de las comunidades es un recurso invaluable. Lo buscamos con quienes viven y crean en la ciudad. Muchas veces surge en mercados, redes de base y prácticas culturales. Al integrarlo diseñamos soluciones auténticas.",
+  "text of the Collective Wisdom 2": "La vida pública florece en los ritmos impredecibles de la calle.",
 
-  "Public-Private Cooperation": "Colaboración público-privada:",
-  "A Shared Responsibility": " una responsabilidad compartida",
-  "text of the A Shared Responsibility": "Vamos más allá de la dicotomía entre lo público y lo privado. Resolver los retos urbanos exige colaboración, donde cada actor aporte sus fortalezas. El sector público establece marcos regulatorios y visión de largo plazo; el privado aporta agilidad, innovación y modelos financieros sostenibles. Juntos, podemos lograr un bien común que beneficie a toda la sociedad. Creemos que el involucramiento del sector privado en retos públicos no es solo una responsabilidad ética: es una necesidad estratégica y una inversión en resiliencia colectiva.",
+  "Public-Private Cooperation": "Cooperación público-privada:",
+  "A Shared Responsibility": "Una responsabilidad compartida",
+  "text of the A Shared Responsibility": "Los retos urbanos requieren colaboración. Gobiernos dan marcos; el sector privado aporta agilidad e innovación. Juntos logramos más que por separado. No es solo ética: es inversión en resiliencia.",
 
   "A Fluid": "Una agenda",
-  "and Responsive Agenda": " fluida y receptiva",
-  "text of the and Responsive Agenda": "Los temas que abordamos son tan diversos y cambiantes como la vida urbana misma. En INDI Lab, nos mantenemos porosos a las tendencias emergentes y los desafíos urgentes, preparados para responder con la agilidad que exigen las ciudades contemporáneas. Nuestro enfoque cruza fronteras entre sostenibilidad, infraestructura, tecnología, movilidad, espacio público y más. Sabemos que una tecnología no puede ser trasplantada sin más: cada innovación debe estar enraizada en una comprensión profunda del lugar y su gente.",
+  "and Responsive Agenda": "fluida y adaptable",
+  "text of the and Responsive Agenda": "Nuestras prioridades cambian con la ciudad. Detectamos tendencias y necesidades para responder con agilidad. Cada innovación se basa en la realidad de la gente y el lugar.",
 
   "Collaboration": "Colaboración",
-  "and Partnership": " y alianza",
-  "text of and Partnership": "Nos alimentamos de la colaboración. Nuestro enfoque mezcla disciplinas y favorece lo transdisciplinario, permitiéndonos abordar lo urbano desde múltiples ángulos. Ya sea con universidades, startups tecnológicas o colectivos ciudadanos, buscamos crear redes que expandan nuestra capacidad de innovar. Al activar saberes urbanos, formar alianzas no convencionales y probar ideas audaces, amplificamos la experiencia humana de maneras que aún están por descubrirse.",
+  "and Partnership": "y alianzas",
+  "text of and Partnership": "Unimos disciplinas para enfrentar retos complejos. Desde laboratorios a startups y organizaciones cívicas, nuestras alianzas amplían la innovación y la experiencia humana.",
 
-  "An Identity Rooted": "Una identidad arraigada",
-  "in Innovation ": " en la innovación",
-  "text of the in Innovation ": "INDI Lab se posiciona como un nodo de acción y pensamiento en torno a la experimentación urbana. Heredamos la trayectoria de Grupo INDI, que ha llevado a cabo proyectos de ingeniería con impacto real a través de técnicas innovadoras. Nuestra misión es seguir ese camino, aprovechando tecnología y metodologías de última generación para maximizar nuestro impacto, no solo para nuestros clientes, sino también para las comunidades con las que colaboramos.",
+  "An Identity Rooted": "Una identidad",
+  "in Innovation": "en la innovación",
+  "text of the in Innovation": "INDI Lab busca ser centro de acción y líder en experimentación urbana. Basados en la trayectoria de Grupo INDI aplicamos herramientas de vanguardia para generar impacto en clientes y comunidades.",
 
-  "The Call ": "Llamado",
-  "to Action": " a la acción",
-  "text of the to Action": "En INDI Lab creemos que el futuro de las ciudades está en nuestras manos. Si abrazamos la experimentación, activamos la tecnología y fomentamos la colaboración, podemos transformar los espacios urbanos en verdaderos motores del potencial humano. Invitamos a innovadores, soñadores y agentes de cambio a sumarse a este viaje: uno que busca construir ciudades que inspiren, eleven y trasciendan.",
-  "text 2 of the to Action": "Construyamos juntos un futuro donde las ciudades sigan siendo la mayor invención de la humanidad."
+  "The Call": "El futuro de las ciudades",
+  "to Action": "es nuestro para crear",
+  "text of the to Action": "Al experimentar, aprovechar la tecnología y colaborar, podemos transformar espacios urbanos en centros de potencial humano. Invitamos a innovadores y agentes de cambio a construir ciudades que inspiren.",
+  "text 2 of the to Action": "“Aseguremos juntos que las ciudades sigan siendo el mayor invento humano.”",
+
+  "Get Involved": "Participa",
+  "See Our Projects ": "Ver proyectos",
+
+  "info phi": "La página de INDI Lab se adapta en tiempo real a clima, radiación, temperatura y tráfico de la CDMX; por eso rara vez la verás igual.",
+
+  "who we are": "Quiénes somos",
+  "who we are sub": "Innovación en la intersección de ciudades, infraestructura, tecnología y comunidad",
+
+  "who mwe are intro": "INDIx es el",
+  "who mwe are spam": "laboratorio y plataforma de innovación urbana",
+  "who we are text": "Un incubador e I+D que moviliza datos, infraestructura, capital y talento para escalar soluciones urbanas transformadoras.",
+
+  "We design prototype": "Diseñamos, prototipamos y probamos soluciones para los retos urbanos más urgentes.",
+  
+  "by into Grupo INDI’s": "Con el talento y experiencia de Grupo INDI respondemos a las necesidades cambiantes de clientes y aliados.",
+
+  "our approach": "Nuestro enfoque",
+  "our approach sub": "De la idea a la ejecución",
+  "we aim to": "Creamos plataformas, estrategias y estudios aplicados que informan políticas, mejoran diseño de proyectos e impulsan infraestructura más justa y comunitaria.",
+  "experimental +": "Enfoque experimental + datos",
+  "data driven": "Intervenciones a pequeña escala, medición de impacto",
+
+  "urban spaces": "Espacios urbanos",
+  "public spaces": "Espacios públicos + vida urbana",
+
+  "mobility": "Movilidad",
+  "road safety": "Seguridad vial, electromovilidad, urbanismo táctico",
+
+  "housing": "Vivienda",
+  "co-housing": "Cohousing, fideicomisos de suelo, vivienda modular",
+
+  "Materials and processes": "Materiales y procesos",
+  "Eco-friendly": "Materiales y construcción eco-innovadores",
+
+  "digital tools": "Herramientas digitales",
+  "data visualization": "Plataformas GIS, visión computacional, gemelos digitales"
 }

@@ -372,30 +372,48 @@
 
 
 
+ <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
 
-  <!-- Menú dinámico -->
-  <div id="menu-placeholder"></div>
-  <script>
-    fetch("/menu.html")
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            `Error al cargar el menú: ${response.status} ${response.statusText}`
-          );
-        return response.text();
-      })
-      .then((data) => {
-        const placeholder = document.getElementById("menu-placeholder");
-        placeholder.innerHTML = data;
 
-        const script = document.createElement("script");
-        script.src = "/js/demo4/menu.js";
-        document.body.appendChild(script);
-      })
-      .catch((error) =>
-        console.error("Ocurrió un error al cargar el menú:", error)
-      );
-  </script> <!-- Logo -->
+
+
+<div class="menu-placeholder" id="menu-placeholder"></div>
+
+<script>
+  fetch('/menu.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const placeholder = document.getElementById('menu-placeholder');
+      if (!placeholder) {
+        throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+      }
+      placeholder.innerHTML = data;
+
+      // Cargar el script después de que el menú esté en el DOM
+      const script = document.createElement('script');
+      script.src = "/js/demo4/menu.js";
+      script.onload = () => console.log("menu.js cargado correctamente ✅");
+      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+      document.body.appendChild(script);
+
+      // 👇 Vuelve a ejecutar traducción después de insertar el menú
+      if (window.applyTranslations) {
+        window.applyTranslations();
+      }
+    })
+    .catch(error => {
+      console.error("Ocurrió un error al cargar el menú:", error);
+    });
+</script>
+
+
   <a href="index.html">
     <div class="secundary-brand"></div>
   </a>

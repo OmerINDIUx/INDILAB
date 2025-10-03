@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Estilos -->
-
   <script type="module" src="js/demo4/traduction.js"></script>
 
   <!-- Clase JS activa en HTML -->
@@ -49,10 +48,10 @@
 
   <section class="intro">
     <p>
-    <span data-i18n="who mwe are intro"></span>
-    <span class="pdp" data-i18n="who mwe are spam"></span>
-    <span  data-i18n="who we are text"></span>
-  </p>
+      <span data-i18n="who mwe are intro"></span>
+      <span class="pdp" data-i18n="who mwe are spam"></span>
+      <span data-i18n="who we are text"></span>
+    </p>
 
     <div class="secundary-logo">
       <div class="indi-lab-logo" data-svg="svg/Secundary_Brand.svg"></div>
@@ -120,7 +119,7 @@
   <section class="statement">
     <div id="content-row">
       <div class="content-text">
-        <h2  data-i18n="We design prototype"></h2>
+        <h2 data-i18n="We design prototype"></h2>
         <div class="corner corner-bottom-left" data-svg="svg/cornner_bottom_left.svg"></div>
         <div class="corner corner-top-right" data-svg="svg/cornner_top_right.svg"></div>
       </div>
@@ -258,7 +257,7 @@
 
   <section class="list">
     <div class="phrase">
-      <span class="pdp" >Scalable solutions</span> that evolve into social
+      <span class="pdp">Scalable solutions</span> that evolve into social
       impact-generating public infrastructure programs, deployable across
       cities.
     </div>
@@ -368,7 +367,6 @@
   <!-- Otros scripts (si es necesario) -->
   <script src="/js/lenis.min.js"></script>
   <script src="/js/splitting.min.js"></script>
-  <script type="module" src="/js/demo4/traduction.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -405,29 +403,49 @@
       .catch((err) => console.error("Error cargando SVG:", err));
   </script>
 
-  <!-- Menú dinámico -->
-  <div id="menu-placeholder"></div>
-  <script>
-    fetch("/menu.html")
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            `Error al cargar el menú: ${response.status} ${response.statusText}`
-          );
-        return response.text();
-      })
-      .then((data) => {
-        const placeholder = document.getElementById("menu-placeholder");
-        placeholder.innerHTML = data;
 
-        const script = document.createElement("script");
-        script.src = "/js/demo4/menu.js";
-        document.body.appendChild(script);
-      })
-      .catch((error) =>
-        console.error("Ocurrió un error al cargar el menú:", error)
-      );
-  </script>
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+
+
+<div class="menu-placeholder" id="menu-placeholder"></div>
+
+<script>
+  fetch('/menu.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const placeholder = document.getElementById('menu-placeholder');
+      if (!placeholder) {
+        throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+      }
+      placeholder.innerHTML = data;
+
+      // Cargar el script después de que el menú esté en el DOM
+      const script = document.createElement('script');
+      script.src = "/js/demo4/menu.js";
+      script.onload = () => console.log("menu.js cargado correctamente ✅");
+      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+      document.body.appendChild(script);
+
+      // 👇 Vuelve a ejecutar traducción después de insertar el menú
+      if (window.applyTranslations) {
+        window.applyTranslations();
+      }
+    })
+    .catch(error => {
+      console.error("Ocurrió un error al cargar el menú:", error);
+    });
+</script>
+
+
 </body>
 
 </html>

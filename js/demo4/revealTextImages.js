@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-// ✅ Utilidades de log
+// ✅ Logs de depuración
 function logSuccess(msg) {
   console.log(`✅ %c${msg}`, "color: green; font-weight: bold;");
 }
@@ -14,50 +14,59 @@ function logError(msg, err) {
   console.error(`💥 ERROR: ${msg}`, err || "");
 }
 
-// ✅ Datos de las secciones
+// ✅ Datos de las secciones (solo claves, no textos directos)
 const allSectionsData = [
   [
     {
-      title: "Technology as a Force for Human Potential",
-      text: "Just as cities are crucibles of innovation, technology can be a catalyst that unlocks and amplifies human potential. When used ethically, it can empower overlooked communities, reveal invisible needs, and fuel just, informed decisions. At INDI Lab, technology is a means to a greater purpose: improving urban life, fostering creativity, and sparking progress.",
+      titleKey: "Technology as a Force for",
+      titleKey2: "Human Potential",
+      textKey: "text of Human Potential",
+      textKey2: "text of Human Potential 2",
       anim: "img/avance_tech.svg",
       type: "arrow"
     },
     {
-      title: "Experimentation: The Pathway to Innovation ",
-      text: "We embrace an experimental mindset, formulating hypotheses, prototyping, testing in real environments, and documenting every outcome. Success lies as much in what we learn from failure as in what we achieve. Each experiment—win or lose—expands our shared urban intelligence.",
+      titleKey: "Experimentation",
+      titleKey2: "The Pathway to Innovation",
+      textKey: "text of The Pathway to Innovation",
       anim: "img/experimentation.svg",
       type: "circle"
     },
     {
-      title: "Harnessing Collective Wisdom",
-      text: "Cities speak: we listen The knowledge embedded in communities is a resource too vast to ignore. We seek it out through engagement with those who live, work, and create in urban environments. Often, the most valuable insights emerge at the edges of official systems—in markets, grassroots networks, and cultural practices. By integrating these unplanned systems, we design solutions that reflect the authentic character of cities. Public life thrives in the unpredictable rhythms of the street.",
+      titleKey: "Harnessing",
+      titleKey2: "Collective Wisdom",
+      textKey: "text of the Collective Wisdom",
+      textKey2: "text of the Collective Wisdom 2",
       anim: "img/colective.svg",
       type: "circle"
     }
   ],
   [
     {
-      title: "Public-Private Cooperation: A Shared Responsibility",
-      text: "Urban challenges demand collaboration. Governments set the frameworks; the private sector brings agility, innovation, and sustainable models. Together, we achieve more than either could alone. The private sector’s role in public challenges isn’t just an ethical choice, it’s a long-term investment in resilience.",
+      titleKey: "Public-Private Cooperation",
+      titleKey2: "A Shared Responsibility",
+      textKey: "text of the A Shared Responsibility",
       anim: "img/colaboration.svg",
       type: "circle"
     },
     {
-      title: "A Fluid and Responsive Agenda",
-      text: "Our priorities evolve with the city. We track emerging trends and urgent needs, ready to respond with agility. From sustainability to infrastructure, mobility to public space, every innovation we create is rooted in the specific realities of people and place.",
+      titleKey: "A Fluid",
+      titleKey2: "and Responsive Agenda",
+      textKey: "text of the and Responsive Agenda",
       anim: "img/fluid.svg",
       type: "circle"
     },
     {
-      title: "Collaboration and Partnership",
-      text: "We unite disciplines and perspectives to tackle complex challenges. From academic labs to startups and civic organizations, our partnerships expand our capacity to innovate. Together, we form networks that test bold ideas and amplify the human experience.",
+      titleKey: "Collaboration",
+      titleKey2: "and Partnership",
+      textKey: "text of and Partnership",
       anim: "img/collavoration.svg",
       type: "circle"
     },
     {
-      title: "An Identity Rooted in Innovation",
-      text: "INDI Lab aims to be both an action hub and a thought leader in urban experimentation. Building on Grupo INDI’s legacy of transformative engineering, we now apply cutting-edge tools and methods to create impact for our clients and for the communities we serve.",
+      titleKey: "An Identity Rooted",
+      titleKey2: "in Innovation",
+      textKey: "text of the in Innovation",
       anim: "img/innovation.svg",
       type: "circle"
     }
@@ -79,7 +88,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
     const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
     const svgElement = svgDoc.documentElement;
 
-    // 🔧 SVG responsive
     svgElement.removeAttribute("width");
     svgElement.removeAttribute("height");
     svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -90,7 +98,7 @@ async function loadAndAnimateSVG(container, svgPath, type) {
     container.innerHTML = "";
     container.appendChild(svgElement);
 
-    // 🔁 Animaciones
+    // 🔁 Animaciones (igual que en tu código original)
     if (type === "arrow") {
       const basePath = svgElement.querySelector("#rotCircle");
       if (!basePath) return console.warn("⚠️ No se encontró #rotCircle");
@@ -100,7 +108,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
 
       basePath.style.transformBox = "fill-box";
       basePath.style.transformOrigin = "center";
-      basePath.style.transformStyle = "preserve-3d";
 
       for (let i = 1; i < numClones; i++) {
         const clone = basePath.cloneNode(true);
@@ -118,32 +125,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
         requestAnimationFrame(animate);
       }
       animate();
-
-      const line1 = svgElement.querySelector(".arrow1");
-      const line2 = svgElement.querySelector(".arrow2");
-
-      function animateArrowLine(line) {
-        if (!line) return;
-        const length = line.getTotalLength();
-        line.style.strokeDasharray = length;
-        line.style.strokeDashoffset = length;
-        let start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          const progress = (ts - start) / 2000;
-          line.style.strokeDashoffset = Math.max(length * (1 - progress), 0);
-          if (progress < 1) requestAnimationFrame(step);
-          else {
-            line.style.strokeDashoffset = length;
-            start = null;
-            requestAnimationFrame(step);
-          }
-        }
-        requestAnimationFrame(step);
-      }
-
-      if (line1) animateArrowLine(line1);
-      if (line2) animateArrowLine(line2);
     } else if (type === "circle") {
       const baseCircles = svgElement.querySelectorAll(".circle");
       const numClones = 12;
@@ -152,7 +133,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
       baseCircles.forEach((baseCircle, circleIndex) => {
         baseCircle.style.transformBox = "fill-box";
         baseCircle.style.transformOrigin = "center";
-        baseCircle.style.transformStyle = "preserve-3d";
 
         const clones = [baseCircle];
         for (let i = 1; i < numClones; i++) {
@@ -176,45 +156,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
         requestAnimationFrame(animateCircles);
       }
       animateCircles();
-
-      const lines = svgElement.querySelectorAll(".line");
-      const cubes = svgElement.querySelectorAll(".cube");
-      const circles = svgElement.querySelectorAll(".circle");
-
-      cubes.forEach((cube, i) => {
-        const line = lines[i % lines.length];
-        const length = line.getTotalLength();
-        const direction = Math.random() < 0.5 ? 1 : -1;
-        let startTime = null;
-        const duration = 10000 + Math.random() * 2000;
-
-        function animateCube(timestamp) {
-          if (!startTime) startTime = timestamp;
-          const elapsed = (timestamp - startTime) % duration;
-          const progress = elapsed / duration;
-          const pos = direction === 1 ? progress : 1 - progress;
-          const point = line.getPointAtLength(pos * length);
-          cube.setAttribute("x", point.x - 6);
-          cube.setAttribute("y", point.y - 6);
-
-          circles.forEach((circle) => {
-            const bbox = circle.getBBox();
-            const padding = 5;
-            const isNear =
-              point.x + 12 > bbox.x - padding &&
-              point.x < bbox.x + bbox.width + padding &&
-              point.y + 12 > bbox.y - padding &&
-              point.y < bbox.y + bbox.height + padding;
-            if (isNear && !circle.classList.contains("pulsing")) {
-              circle.classList.add("pulsing");
-              setTimeout(() => circle.classList.remove("pulsing"), 400);
-            }
-          });
-
-          requestAnimationFrame(animateCube);
-        }
-        requestAnimationFrame(animateCube);
-      });
     }
   } catch (err) {
     console.error("💥 Error al cargar o animar el SVG:", err);
@@ -224,8 +165,6 @@ async function loadAndAnimateSVG(container, svgPath, type) {
 // ✅ ScrollTrigger principal
 document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionIndex) => {
   logInfo(`Inicializando sección ${sectionIndex}`);
-
-  // ❌ Quitamos el set de ancho/margen para ocupar toda la pantalla
 
   const titleEl = sectionEl.querySelector(".text-column2 .title2");
   const textEl = sectionEl.querySelector(".text-column2 .text-content2");
@@ -260,23 +199,46 @@ document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionInd
           const data = slides[index];
           if (!data) return logWarn(`Slide vacío en sección ${sectionIndex}, índice ${index}`);
 
-          logInfo(`Sección ${sectionIndex}, mostrando slide ${index}: ${data.title}`);
+          logInfo(`Sección ${sectionIndex}, mostrando slide ${index}`);
 
           gsap.to([titleEl, textEl, imgContainer], {
             opacity: 0,
             y: 30,
             duration: 0.4,
             onComplete: () => {
-              titleEl.innerText = data.title || "";
-              textEl.innerText = data.text || "";
-              imgContainer.innerHTML = "";
+              // 👉 Ponemos data-i18n en lugar de texto fijo
+              if (data.titleKey2) {
+                titleEl.innerHTML = `
+                  <span data-i18n="${data.titleKey}"></span>
+                  <span data-i18n="${data.titleKey2}"></span>
+                `;
+              } else {
+                titleEl.setAttribute("data-i18n", data.titleKey || "");
+                titleEl.innerHTML = "";
+              }
 
+              if (data.textKey2) {
+                textEl.innerHTML = `
+                  <p data-i18n="${data.textKey}"></p>
+                  <p data-i18n="${data.textKey2}"></p>
+                `;
+              } else {
+                textEl.setAttribute("data-i18n", data.textKey || "");
+                textEl.innerHTML = "";
+              }
+
+              // SVG dinámico
+              imgContainer.innerHTML = "";
               const animDiv = document.createElement("div");
               animDiv.classList.add("content__img", "content__img--large");
               animDiv.id = `svg_anim_${sectionIndex}_${index}`;
               imgContainer.appendChild(animDiv);
-
               loadAndAnimateSVG(animDiv, data.anim, data.type);
+
+              // 👈 Re-traducir con el idioma actual usando traduccion.js expuesto en window
+              if (window.INDI?.translatePage) {
+                window.INDI.translatePage(window.INDI.getCurrentLang());
+              }
 
               gsap.fromTo(
                 [titleEl, textEl, imgContainer],

@@ -21,79 +21,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     const wrapper = document.getElementById("svg-wrapper");
     const wrapperRect = wrapper.getBoundingClientRect();
 
-    // 🔧 FACTORES DINÁMICOS según pantalla
     // 🔧 Escala inicial del logo cuadrado según tamaño de pantalla
     const scaleDesktop =
-      window.innerWidth > 1024
-        ? 0.25 // Si es DESKTOP → escala al 25% de su tamaño original
-        : window.innerWidth > 768
-        ? 0.18 // Si es TABLET → escala al 18%
-        : 0.5; // Si es MÓVIL → escala al 50% (lo hace más grande en pantallas chicas)
+      window.innerWidth > 1024 ? 0.2 : window.innerWidth > 768 ? 0.35 : 0.5;
 
-    // 🔧 Escala inicial del logo rectangular (objetivo de la animación)
+    // 🔧 Escala inicial del logo rectangular
     const scaleRect =
-      window.innerWidth > 1024
-        ? 0.15 // Desktop → 15%
-        : window.innerWidth > 768
-        ? 0.12 // Tablet → 12%
-        : 0.09; // Móvil → 9%
-
-    // 📍 Posiciones iniciales del grupo destino (rectángulo)
-    const targetX = wrapperRect.width * 0;
-    // → Mueve el rectángulo un 2% del ancho hacia la derecha
-
-    const targetY = wrapperRect.height * 0;
-    // → Mueve el rectángulo 200% hacia abajo (probablemente para posicionarlo muy abajo al inicio)
-
-    // 📍 Posición vertical inicial del grupo cuadrado (squareGroup)
-    const yInitial =
-      window.innerWidth < 768
-        ? "25%" // En MÓVIL → empieza un 15% más abajo
-        : "5%"; // En DESKTOP/TABLET → empieza solo un 5% más abajo
+      window.innerWidth > 1024 ? 0.15 : window.innerWidth > 768 ? 0.15 : 0.09;
 
     // ✅ Establecer posición y escala inicial del logo cuadrado
     gsap.set(squareGroup, {
       scale: scaleDesktop,
-      y: yInitial,
+      y: window.innerWidth < 768 ? "25%" : "15%",
       transformOrigin: "top center",
-      // → Aplica transformaciones tomando como referencia la parte superior central
     });
 
     // ✅ Establecer posición y escala inicial del logo rectangular
     gsap.set(rectGroup, {
       scale: scaleRect,
-      x: targetX,
-      y: targetY,
+      x: 0,
+      y: 0,
       transformOrigin: "top left",
-      // → Usa esquina superior izquierda como punto de referencia
     });
 
-    // 📏 Ajustes de animación (posición final del cuadrado)
+    // 📍 Posición final ABSOLUTA en el viewport
+    let finalX, finalY;
 
-    // xx → DESPLAZAMIENTO HORIZONTAL
-    const xx =
-      -wrapperRect.width *
-      (window.innerWidth > 1024
-        ? 0.235 // Desktop → lo mueve bastante a la izquierda
-        : window.innerWidth > 768
-        ? 0.25 // Tablet → lo mueve un poco menos
-        : 1); // Móvil → lo mueve todavía menos (para que no se salga de vista)
+    if (window.innerWidth > 1024) {
+      // Desktop grande
+      finalX = -455;
+      finalY = 10;
+    } else if (window.innerWidth > 768) {
+      // Tablet
+      finalX = -395;
+      finalY = 20;
+    } else {
+      // Móvil
+      finalX = -332;
+      finalY = -20;
+    }
 
-    // yx → DESPLAZAMIENTO VERTICAL
-    const yx =
-      wrapperRect.height *
-      (window.innerWidth > 1024
-        ? -.001 // Desktop → baja 1% del alto
-        : window.innerWidth > 768
-        ? 0.03 // Tablet → baja un poco más (3%)
-        : -0.01); // Móvil → baja aún más (6%) para dejar espacio visual
+    // Ajuste para que sea relativo al wrapper
+    const targetX = finalX - wrapperRect.left;
+    const targetY = finalY - wrapperRect.top;
 
+    // Escala final según dispositivo
     const xscale =
-      window.innerWidth > 1024
-        ? 0.040 // Desktop: escala final muy pequeña
-        : window.innerWidth > 768
-        ? 0.06 // Tablet: un poco más grande
-        : 0.2; // Móvil: aún más grande para compensar pantallas pequeñas
+      window.innerWidth > 1024 ? 0.04 : window.innerWidth > 768 ? 0.05 : 0.1;
 
     gsap.registerPlugin(ScrollTrigger);
     const tl = gsap.timeline({
@@ -106,6 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
     });
 
+    // 🔄 Animación de morphing de cada parte
     ids.forEach((id) => {
       const fromEl = squareSvg.querySelector(`#${id}`);
       const toEl = rectSvg.querySelector(`#${id}`);
@@ -135,11 +110,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
     });
 
+    // 🎯 Movimiento absoluto del grupo
     tl.to(
       squareGroup,
       {
-        x: xx,
-        y: yx,
+        x: targetX,
+        y: targetY,
         scale: xscale,
         duration: 0.5,
         transformOrigin: "top left",
@@ -148,6 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       0
     );
 
+    // 🔄 Fade out del keyButton
     const keyButton = squareSvg.querySelector("#keyButton");
     if (keyButton) {
       tl.to(
