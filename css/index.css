@@ -21,7 +21,7 @@ html {
   font-family: "Figtree", sans-serif;
   background-color: #1a1a1a;
   overflow-x: hidden;
-  position: relative;
+  /* position: relative; */
 }
 
 body {
@@ -715,30 +715,6 @@ Call to Action
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ===========================
 brands colors
 =========================== */
@@ -755,7 +731,9 @@ brands colors
 
 
 
-
+.top-spacer {
+  display: none;
+}
 
 
 
@@ -765,16 +743,46 @@ brands colors
 
 
 @media (max-width: 768px) {
-  #svg-wrapper {
-    height: 300vh; /* más espacio en móvil */
+body {
+  width: 100%;
+  margin: 0;
+  padding-left: 0;   /* 👈 desplaza TODO hacia la derecha */
+  background-color: #1a1a1a;
+}
+
+  
+.stay {
+    margin-left: 0;
+        padding: 0;       /* ✅ quitamos padding-left */
+
+}
+
+
+  #brand {
+    margin-left: 0;   /* ✅ eliminamos compensación */
+    width: 100%;
   }
 
-  .brand {
-    flex-direction: column;
-    justify-content: flex-start;
+  .main-content,
+  .layout {
+    flex-direction: column; /* ✅ apilar */
+    width: 100%;
+    height: auto;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    height: auto;
+    padding: 1rem; /* opcional para que respire */
+  }
+
+  /* Botones hamburguesa y lang a la derecha */
+  #site-header {
+    display: flex;
+    justify-content: flex-end;  /* ✅ mueve al lado derecho */
     align-items: center;
-    padding-top: 2rem; /* para que no quede pegado al borde superior */
-    height: 100vh;
+    padding: 1rem;
   }
 
   .text-large_w {
@@ -790,4 +798,69 @@ brands colors
     font-size: 1.2rem;
     margin-top: -1rem;
   }
+.mapa_video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+.video-footer {
+  bottom: 3.5rem;
+  max-width: 100%;
+  font-size: 0.75rem;}
+
+  .time-slider-box {
+  position: absolute;
+  bottom: 8rem;
+  right: 2rem;
+
+}
+
+ .text-image-section2 {
+    height: auto; /* ✅ ya no forzamos altura fija */
+    min-height: 100vh; /* opcional: que al menos ocupe la pantalla */
+  }
+
+  .container2 {
+    flex-direction: column; /* ✅ apila uno debajo del otro */
+    height: auto;
+  }
+
+  .text-column2,
+  .image-column2 {
+    flex: 1 1 100%; /* ✅ que ocupen todo el ancho */
+    height: auto;
+    padding: 2rem 1.5rem; /* ajusta padding para móvil */
+  }
+
+  .content__img-wrapper2 {
+    width: 80%; 
+    max-width: 80%; /* ✅ full ancho en móvil */
+    min-height: auto;
+  }
+
+  .text-column2 .title2 {
+    font-size: 1.8rem; /* un poco más pequeño para móvil */
+    text-align: center;
+  }
+
+  .text-column2 .text-content2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+.top-spacer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #43d7cd;
+  z-index: 10;  /* mucho más bajo */
+}
+
+
 }

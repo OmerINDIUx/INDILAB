@@ -40,16 +40,16 @@
 
 .menu-fullscreen.show {
   opacity: 1;
-  pointer-events: auto; /* abierto = clickeable */
-  transform: rotateY(0); /* animación 3D */
+  pointer-events: auto;   /* abierto = clickeable */
+  transform: rotateY(0);  /* animación 3D */
 }
 /* wrapper para animación 3D */
 .menu-wrapper {
   position: fixed;
   inset: 0;
   perspective: 1200px;
-  z-index: 9999; /* SIEMPRE arriba de todo */
-  pointer-events: none; /* cerrado = no bloquea clics */
+  z-index: 9999;         /* SIEMPRE arriba de todo */
+  pointer-events: none;  /* cerrado = no bloquea clics */
 }
 
 #fullscreen-menu {
@@ -126,6 +126,10 @@
   z-index: 99999 !important;
 }
 
+
+
+
+
 /* ==============================
    BOTÓN DE CIERRE
 ============================== */
@@ -173,6 +177,7 @@
 /* ==============================
    REDES SOCIALES
 ============================== */
+
 
 /* ==============================
    BOTONES LATERALES
@@ -268,6 +273,7 @@
 .blog-item {
   display: flex;
   flex-direction: column;
+
 }
 .blog-thumb {
   width: 100%;
@@ -298,9 +304,11 @@
   text-decoration: none;
 }
 
+
+
 .blog-item a {
   text-decoration: none; /* ❌ quita subrayado del enlace */
-  color: inherit; /* usa el color de su contenido */
+  color: inherit;        /* usa el color de su contenido */
 }
 
 .blog-item a:visited,
@@ -355,7 +363,7 @@ svg {
   top: 1.5rem;
   left: 1rem;
   padding: 0px;
-  width: 80px;
+  width: 80px; 
   pointer-events: auto; /* clickeable */
 }
 
@@ -397,22 +405,40 @@ svg {
 }
 
 .menu-columns {
+
   align-items: top;
 }
 
-.blog-heading {
-  position: relative;
-  top: -10px;
-}
+  .blog-heading {
+    position: relative;
+    top: -10px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 768px) {
-  .sidebar-buttons {
-    width: 100%; /* Ancho fijo */
-    height: 100px; /* Toda la pantalla */
-    position: fixed; /* no absolute */
+
+  
+   .sidebar-buttons {
+      width: 100%; /* Ancho fijo */
+  height: 100px; /* Toda la pantalla */
+    position: fixed;  /* no absolute */
     top: 1rem;
     right: 1rem;
-    left: auto !important; /* anulación fuerte */
+    left: auto !important;  /* anulación fuerte */
     bottom: auto;
     flex-direction: row;
     gap: 0.5rem;
@@ -421,7 +447,7 @@ svg {
   }
 
   .sidebar12 {
-    width: 0; /* "desactiva" la barra lateral en móvil */
+    width: 0;  /* "desactiva" la barra lateral en móvil */
     background: transparent;
   }
 
