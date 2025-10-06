@@ -5,10 +5,10 @@ const context = canvas.getContext("2d");
 
 // 🎞 Configuración de frames
 const frameStart = 1000;
-const frameEnd = 1689;
+const frameEnd = 1141;
 const frameCount = frameEnd - frameStart + 1;
 const currentFrame = (index) =>
-  `images/image_sequences/vivienda_${frameStart + index}.png`;
+  `images/image_sequences/vecteezy_workers-loading-a-prefabricated-modular-house-to-truck_53822182_${frameStart + index}.jpg`;
 
 const images = [];
 const imageSeq = { frame: 0 };
