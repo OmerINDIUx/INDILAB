@@ -1,28 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islas de Calor en CDMX 2020-2024</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islas de Calor en CDMX 2020-2024</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    /* Forzar que el control de capas siempre esté visible */
+    .leaflet-control-layers {
+      position: absolute !important;
+      top: 10px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 6px;
+      padding: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      width: 125px;
+      height: 280px;
+  overflow: visible !important; /* ✅ sin scroll interno */
+    }
+  </style>
 </head>
 <body>
-    <div id="map" style="height: 600px; width: 100%;"></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('map').setView([19.4326, -99.1332], 12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        var bounds = [[19.0461, -99.5386], [19.6003, -98.7906]];
-        var raster1 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2020%20UHI.png", bounds, { opacity: 0.65 });
-        var raster2 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2021%20UHI.png", bounds, { opacity: 0.65 });
-        var raster3 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2022%20UHI.png", bounds, { opacity: 0.65 });
-        var raster4 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2023%20UHI.png", bounds, { opacity: 0.65 });
-        var raster5 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.1%20UHI.png", bounds, { opacity: 0.65 });
-        var raster6 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.2%20UHI.png", bounds, { opacity: 0.65 });
-        var points = [
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    console.group("🗺️ Carga del mapa base");
+
+    // === Crear mapa con Positron ===
+    const map = L.map("map", {
+      zoomControl: true,
+      minZoom: 1,
+      maxZoom: 28
+    }).setView([19.35, -99.18], 11);
+
+    const positron = L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution: '© OpenStreetMap, © <a href="https://carto.com/">CARTO</a>'
+      }
+    ).addTo(map);
+
+    console.log("✅ Mapa creado correctamente.");
+
+    // === Capas de imágenes ===
+    const bounds = [[19.0461, -99.5386], [19.6003, -98.7906]];
+    const raster1 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2020%20UHI.png", bounds, { opacity: 0.65 });
+    const raster2 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2021%20UHI.png", bounds, { opacity: 0.65 });
+    const raster3 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2022%20UHI.png", bounds, { opacity: 0.65 });
+    const raster4 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2023%20UHI.png", bounds, { opacity: 0.65 });
+    const raster5 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.1%20UHI.png", bounds, { opacity: 0.65 });
+    const raster6 = L.imageOverlay("https://github.com/ErickM02/Rasters/raw/c35870712afc41b9e55c208d343e7790e2e0739a/2024.2%20UHI.png", bounds, { opacity: 0.65 });
+
+        const points = [
             {lat: 19.3889, lon: -99.1915, label: "Plaza Exhibimex"},
             {lat: 19.3633, lon: -99.2630, label: "Expo Santa Fé"},
             {lat: 19.3558, lon: -99.2147, label: "Campo de Futbol Las Águilas"},
@@ -104,21 +143,32 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             {lat: 19.2682, lon: -99.1270, label: "Almacenes SEDESOL"},
             {lat: 19.2619, lon: -99.1040, label: "Mercado de Xochimilco"}
         ];
-        var pointLayer = L.layerGroup();
-        points.forEach(function(point) {
-            var marker = L.marker([point.lat, point.lon]).addTo(pointLayer);
-            marker.bindPopup('<b>' + point.label + '</b>');
-        });
-        var overlays = {
-            "Puntos": pointLayer,
-            "Abril 2020": raster1,
-            "Abril 2021": raster2,
-            "Abril 2022": raster3,
-            "Abril 2023": raster4,
-            "Abril 2024": raster5,
-            "Mayo 2024": raster6
-        };
-        L.control.layers(null, overlays).addTo(map);
-    </script>
+
+    const pointLayer = L.layerGroup(points.map(p => {
+      const m = L.marker([p.lat, p.lon]);
+      m.bindPopup(`<b>${p.label}</b>`);
+      return m;
+    }));
+
+    // === Control de capas ===
+    const overlays = {
+      "Puntos": pointLayer,
+      "Abril 2020": raster1,
+      "Abril 2021": raster2,
+      "Abril 2022": raster3,
+      "Abril 2023": raster4,
+      "Abril 2024": raster5,
+      "Mayo 2024": raster6
+    };
+
+    const layerControl = L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+
+    // === Activar por defecto los puntos y Abril 2020 ===
+    pointLayer.addTo(map);
+    raster1.addTo(map);
+
+    console.log("🌡️ Mapa inicializado con puntos y Abril 2020 visibles.");
+    console.groupEnd();
+  </script>
 </body>
 </html>

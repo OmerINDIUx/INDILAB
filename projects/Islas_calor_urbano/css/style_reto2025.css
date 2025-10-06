@@ -8,26 +8,29 @@ html {
   position: relative;
 }
 
-/* Fondo noise global en el body */
-
 
 .gif-container {
   position: fixed;
-  width: 100%;
+  top: 0;
+  left: 100px;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
+  z-index: 0;
 }
 
 .gif-container img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  max-height: 100vh;
-  width: auto;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 🔥 rellena todo el espacio */
+  object-position: center;
   opacity: 0;
-  /* Todos ocultos por defecto */
+  transition: opacity 0.5s ease;
 }
+
 
 /* 🔹 El primero visible desde el inicio */
 #gif1 {
@@ -107,8 +110,7 @@ body::before {
 *[style*="background-color: #eee"]::before,
 *[style*="background-color: #eeeeee"]::before,
 #image-sequence::before,
-.insersion_mapas
-.card::before,
+.insersion_mapas .card::before,
 .TextLarge::before {
   content: "";
   position: absolute;
@@ -166,7 +168,6 @@ body::before {
 
 /* TEXTO */
 .TextLarge {
-
   text-align: center;
   font-size: 1rem;
   color: black;
