@@ -21,52 +21,6 @@
 <body>
 
 
-  <a href="index.html">
-    <div class="secundary-brand"></div>
-  </a>
-
-  <script>
-    const container = document.querySelector('.secundary-brand');
-    fetch('/svg/indi-lab_Vertical_Animate.svg')
-      .then(response => response.text())
-      .then(svgText => {
-        container.innerHTML = svgText; // Inserta el SVG como HTML
-      })
-      .catch(err => console.error('Error cargando SVG:', err));
-  </script>
-
-
-
-
-
-  <div id="menu-placeholder"></div>
-
-  <script>
-    fetch('/menu.html')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-        }
-        return response.text();
-      })
-      .then(data => {
-        const placeholder = document.getElementById('menu-placeholder');
-        if (!placeholder) {
-          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-        }
-        placeholder.innerHTML = data;
-
-        // Cargar el script después de que el menú esté en el DOM
-        const script = document.createElement('script');
-        script.src = "/js/demo4/menu.js";
-        script.onload = () => console.log("menu.js cargado correctamente ✅");
-        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-        document.body.appendChild(script);
-      })
-      .catch(error => {
-        console.error("Ocurrió un error al cargar el menú:", error);
-      });
-  </script>
 
 
 
@@ -86,7 +40,7 @@
   </div>
 
   <section>
-    <div class="card">
+    <div class="Title">
       <h2>Nota Conceptual de Proyecto </h2>
       <h1>Islas de Calor Urbano </h1>
       <h3>Diciembre 2025 </h3>
@@ -175,7 +129,7 @@
 
 
 
-
+<section class="insersion_mapas">
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
@@ -272,6 +226,8 @@
     </script>
   </div>
 
+
+  </section>
   <section class="TextLarge">
     <div>
       <h2 class="white">Contexto:</h2>
@@ -288,6 +244,58 @@
         accesibles, marcando un cambio de paradigma en la construcción. </p>
     </div>
   </section>
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+
+  <script>
+    const container = document.querySelector('.secundary-brand');
+    fetch('/svg/indi-lab_Vertical_Animate.svg')
+      .then(response => response.text())
+      .then(svgText => {
+        container.innerHTML = svgText; // Inserta el SVG como HTML
+      })
+      .catch(err => console.error('Error cargando SVG:', err));
+  </script>
+
+
+
+
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+
+
+    <div class="menu-placeholder" id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
 
   <script src="/js/gsap.min.js"></script>
   <script src="/js/ScrollTrigger.min.js"></script>
