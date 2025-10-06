@@ -2,10 +2,13 @@
 <html lang="es">
 
 <head>
-    <link id="menu-css" rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="css/style_electromovilidad.css">
+
+    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
 
     <meta charset="UTF-8">
-    <title>Vivienda Modular</title>
+    <title>Electromovilidad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -20,124 +23,134 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
 
-    <link rel="stylesheet" href="css/style_viviendamodular.css">
 
     <script src="/js/gsap.min.js"></script>
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
+    <script type="module" src="/js/demo4/traduction.js"></script>
+
+
+    <!-- Clase JS activa en HTML -->
+    <script>
+        document.documentElement.className = "js";
+    </script>
 
 
 </head>
 
+
+
+
+
+
+
+
+
+</header>
+
 <body>
-    <a href="index.html">
-        <div class="secundary-brand"></div>
-    </a>
-
-    <script>
-        const container = document.querySelector('.secundary-brand');
-        fetch('/svg/indi-lab_Vertical_Animate.svg')
-            .then(response => response.text())
-            .then(svgText => {
-                container.innerHTML = svgText; // Inserta el SVG como HTML
-            })
-            .catch(err => console.error('Error cargando SVG:', err));
-    </script>
 
 
 
-
-
-
-
-    <div id="menu-placeholder"></div>
-
-    <script>
-        fetch('/menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('menu-placeholder');
-                if (!placeholder) {
-                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-                }
-                placeholder.innerHTML = data;
-
-                // Cargar el script después de que el menú esté en el DOM
-                const script = document.createElement('script');
-                script.src = "/js/demo4/menu.js";
-                script.onload = () => console.log("menu.js cargado correctamente ✅");
-                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-                document.body.appendChild(script);
-            })
-            .catch(error => {
-                console.error("Ocurrió un error al cargar el menú:", error);
-            });
-    </script>
-
-
-
-
-
-    </header>
-
-
-
-    <div class="video-scroll-wrapper">
-        <div class="video-fullscreen">
-            <canvas id="image-sequence"></canvas>
-        </div>
-    </div>
 
 
     <!-- Cards -->
+
+
+
+    <div class="gif-container" id="fullscreen1">
+        <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Innovación Urbana 1" id="gif1">
+    </div>
     <section>
-        <div class="card">
+
+
+        <div class="Title">
             <h2>Nota Conceptual de Proyecto </h2>
-            <h1>Vivienda Modular </h1>
-            <h3>Diciembre 2024 </h3>
+            <h1>Electromovilidad </h1>
+            <h3>Octubre 2025 </h3>
         </div>
 
 
     </section>
 
-    <section>
-        <div class="card">
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Inicialmente, solo el primer gif visible
+        gsap.set("#gif1", { opacity: 1 });
+        gsap.set("#gif2, #gif3, #gif4, #gif5, #gif6", { opacity: 0 });
+
+        // Selecciona todas las secciones con id "cambio_gif"
+        const cambioSections = document.querySelectorAll("#cambio_gif");
+
+        // Para cada sección, muestra el gif correspondiente y oculta el anterior
+        cambioSections.forEach((section, i) => {
+            // Oculta el gif anterior
+            if (i > 0) {
+                gsap.to(`#gif${i}`, {
+                    opacity: 0,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top center",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            }
+            // Muestra el gif actual
+            gsap.to(`#gif${i + 1}`, {
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top center",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // Fade out cuando llega el texto
+            gsap.to("#fullscreen1", {
+                opacity: 0,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".TextLarge",
+                    start: "top top",
+                    end: "top center",
+                    scrub: true
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+    <section class="TextLarge">
+        <div>
             <p>Las viviendas prefabricadas, ampliamente utilizadas en países como Suecia y Japón, son una solución
                 eficiente y sostenible para abordar crisis habitacionales. Producidas en fábricas y ensambladas en el
                 sitio, optimizan recursos, reducen el impacto ambiental y se adaptan a normativas locales para contextos
                 urbanos o rurales. Este método puede reducir costos en un 20% y tiempos de construcción hasta en un 50%,
                 destacándose como una alternativa moderna y práctica frente a los métodos tradicionales 2.</p>
-        </div>
-    </section>
 
-    <section>
-        <div class="card">
             <p>Las viviendas modulares permiten construcciones rápidas y eficientes, además de integrarse con
                 estrategias como la reutilización de contenedores marítimos o el Cohousing. Estas opciones, combinadas,
                 conforman un ecosistema flexible de soluciones adaptables a distintos contextos urbanos y necesidades
                 habitacionales</p>
         </div>
+
     </section>
 
-    <section>
-        <div class="card">
+    <section class="TextLarge">
+        <div>
             <p>Esta nota conceptual expone argumentos sobre la viabilidad de las viviendas modulares como una
                 alternativa capaz de transformar los desafíos actuales en oportunidades de desarrollo social y
                 ambiental. Esta solución no solo cumple con las normativas vigentes, sino que también incorpora
                 elementos de sostenibilidad y adaptabilidad frente a riesgos geológicos, representando una opción
                 accesible y moderna para atender la creciente demanda de vivienda</p>
-        </div>
-    </section>
-
-
-    <section>
-        <div class="card">
             <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
                 marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
                 contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
@@ -164,9 +177,8 @@
     </section>
     <section>
         <div class="card">
-            <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Vivienda Modular"
-                style="max-width:100%; border-radius:1rem; box-shadow:0 4px 16px rgba(0,0,0,0.4); margin-bottom:1rem;">
-            <p>Ejemplo de vivienda modular: diseño moderno, eficiente y adaptable a distintos entornos.</p>
+
+            <h2>Ejemplo de vivienda modular: <br>diseño moderno, eficiente y adaptable a distintos entornos.</h2>
         </div>
     </section>
 
@@ -189,12 +201,75 @@
         </div>
     </section>
 
-    <script src="js/vivienda_modular.js"></script>
+
 
     <script src="/js/gsap.min.js"></script>
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
+
+
+
+
+
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+
+
+    <div class="menu-placeholder" id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+
+                // 👇 Vuelve a ejecutar traducción después de insertar el menú
+                if (window.applyTranslations) {
+                    window.applyTranslations();
+                }
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
+
+
+
+
+
+
+    <a href="index.html">
+        <div class="secundary-brand"></div>
+    </a>
+    <script>
+        const container = document.querySelector(".secundary-brand");
+        fetch("/svg/indi-lab_Vertical_Animate.svg")
+            .then((response) => response.text())
+            .then((svgText) => {
+                container.innerHTML = svgText;
+            })
+            .catch((err) => console.error("Error cargando SVG:", err));
+    </script>
 
 </body>
 

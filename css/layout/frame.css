@@ -111,7 +111,7 @@ _light";
   width: 100%;
   gap: 1rem 2rem;
   justify-items: start;
-  text-transform: uppercase;
+    /* text-transform: uppercase */;
   font-size: 12px;
 }
 
@@ -136,7 +136,7 @@ _light";
 .frame__heading h2 {
   margin: 0;
   line-height: 0.9;
-  text-transform: uppercase;
+    /* text-transform: uppercase */;
   margin-left: -0.065em;
   font-size: clamp(2.2rem, 9vw, 5rem);
   letter-spacing: 0.105em;

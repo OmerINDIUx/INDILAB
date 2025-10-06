@@ -1,42 +1,39 @@
-/* RESET Y BASE */
+/* Body */
+html,
+body {
+  overflow-x: hidden; /* corta cualquier desbordamiento horizontal */
+}
 
-/* CSS Base: Importar todos los estilos relacionados */
-@import url("../../../css/base/typography.css");
-
-html {
+body {
   margin: 0;
-  padding: 0;
   font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  background-color: #1a1a1a;
+  color: #eeeeee;
+  padding-left: 100px;
+  box-sizing: border-box;
+}
 
-  background-color: #eeeeee;
-  overflow-x: hidden;
+/* Secciones generales */
+section {
+  padding: 6rem 10%;
   position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-/* Fondo noise global en el body */
-body::before {
-  content: "";
-  position: fixed;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background-image: url("../../../img/noise.png");
-  background-repeat: repeat;
-  opacity: 0.3;
-  pointer-events: none;
-  animation: grain 8s steps(10) infinite;
-  z-index: 0;
-}
-
-/* Ruido automático en cualquier bloque con fondo #eee o #eeeeee */
+/* Ruido automático en bloques con fondo #eee */
 *[style*="background: #eee"],
 *[style*="background: #eeeeee"],
 *[style*="background-color: #eee"],
 *[style*="background-color: #eeeeee"],
 #image-sequence,
 .card,
-.TextLarge {
+.TextLarge,
+.image-section {
   position: relative;
   background-color: #eeeeee;
   overflow: hidden;
@@ -48,12 +45,13 @@ body::before {
 *[style*="background-color: #eeeeee"]::before,
 #image-sequence::before,
 .card::before,
-.TextLarge::before {
+.TextLarge::before,
+.image-section::before {
   content: "";
   position: absolute;
   top: -100%;
   left: -100%;
-  width: 300%;
+  /* width: 300%; */
   height: 300%;
   background-image: url("../../../img/noise.png");
   background-repeat: repeat;
@@ -68,57 +66,49 @@ body::before {
 .card > *,
 .TextLarge > * {
   position: relative;
-  z-index: 1;
 }
 
 /* VIDEO */
 .video-scroll-wrapper {
   position: relative;
-  /* width: 100%; */
-
+  width: 100%;
+  height: 100dvh; /* altura visible de pantalla */
+  left: 100px;
 }
 
 .video-fullscreen {
   position: fixed;
   top: 0;
-
-
-  z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  left: 0;
+  width: calc(100% - 100px);
+  left: 100px;
+  overflow: hidden; /* recorta el exceso de video */
+  margin-left: 50px;
+  box-sizing: border-box;
 }
 
 .video-fullscreen video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  left: 50%;
+  min-width: 100%; /* asegura que cubra el ancho */
+  min-height: 100%; /* asegura que cubra la altura */
+  transform: translate(-50%, -50%);
+  object-fit: cover; /* mantiene proporción y recorta lo sobrante */
+  object-position: center center; /* centra el recorte */
 }
-.video-scroll-wrapper,
-.video-fullscreen,
-.video-fullscreen video {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  margin-left: 50px;  /* solo espacio a la izquierda */
-  margin-right: 0;
-  box-sizing: border-box; /* para que el margen no afecte el ancho total */
-  
-}
-
 
 /* CANVAS */
 #image-sequence {
   display: block;
-  width: 100vw;
   height: 100vh;
+  left: 100px;
   background: #eeeeee;
 }
 
 /* TEXTO */
 .TextLarge {
-  margin-top: 12vh;
   text-align: center;
   font-size: 1rem;
   color: #1a1a1a;
@@ -126,37 +116,26 @@ body::before {
 }
 
 .TextLarge div {
-  max-width: 900px;
+  max-width: 800px;
   text-align: justify;
   color: black;
   line-height: 1.8;
 }
 
 .TextLarge h2 {
-   font-family: "Figtree", sans-serif;
-_bold";
-  text-transform: uppercase;
+  font-family: "Figtree", sans-serif;
+    /* text-transform: uppercase */;
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
   color: black;
 }
 
-/* SECCIONES */
-section {
-  min-height: 105vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
-}
-
 /* CARDS */
 .card {
   color: black;
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 0 2rem 0 2rem;
   max-width: 800px;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -170,9 +149,8 @@ section {
 }
 
 .card h1 {
-   font-family: "Figtree", sans-serif;
-_heavy";
-  text-transform: uppercase;
+  font-family: "Figtree", sans-serif;
+    /* text-transform: uppercase */;
   margin: 0.5rem 0;
 }
 
@@ -186,6 +164,29 @@ p {
 
 .black {
   color: black;
+}
+
+.image-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+}
+
+.card-image {
+  text-align: center; /* opcional, por si quieres centrar contenido */
+}
+
+.card-img {
+  max-width: 40%;
+  min-width: 20%;
+  border-radius: 0 2rem 0 2rem;
+  margin-bottom: 1rem;
 }
 
 /* ANIMACIÓN NOISE */
@@ -220,5 +221,174 @@ p {
   }
   90% {
     transform: translate(-10%, 10%);
+  }
+}
+
+/* TITLES */
+.Title {
+  width: 30vw;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 4vh auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  color: #eee;
+  background: transparent;
+}
+
+.Title h2,
+.Title h3 {
+  font-family: "Figtree", sans-serif;
+  color: #eee;
+  font-weight: 600;
+  text-shadow: 0 0 16px #000000a8;
+  margin: 0.5rem 0;
+}
+
+.Title h2 {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.Title h1 {
+  font-family: "Figtree", sans-serif;
+  font-weight: 700;
+  color: #eee;
+  font-size: 3rem;
+    /* text-transform: uppercase */;
+  text-shadow: 0 0 24px #000000a8;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.Title h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+.secundary-brand {
+  all: unset;
+  z-index: 0 !important;
+  position: fixed;
+  top: 0;
+  left: 10px;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+.secundary-brand {
+  all: unset;
+
+  position: fixed;
+  top: 0;
+  left: 10px;
+  z-index: 10;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+.secundary-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cuando el menú está abierto, oculta el logo */
+.menu-fullscreen.show ~ a .secundary-brand {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.gif-container {
+  position: fixed;
+  top: 0;
+  left: 100px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.gif-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 rellena todo el espacio */
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .video-fullscreen {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .card {
+    width: 85%;
+    max-width: 700px;
+  }
+
+  .TextLarge {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .Title {
+    width: 90%;
+    min-width: auto;
+    font-size: 1.5rem;
+  }
+
+  .Title h1 {
+    font-size: 2.2rem;
   }
 }
