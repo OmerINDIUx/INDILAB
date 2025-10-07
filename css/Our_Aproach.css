@@ -116,31 +116,33 @@ section {
 }
 
 /* List - sección 4: claro */
+
 .list {
   background-color: #eeeeee;
   color: #1a1a1a;
   height: 100vh;
+  display: flex;              /* ✅ centrado más preciso */
+  justify-content: center;    /* ✅ centrado horizontal */
+  align-items: center;        /* ✅ centrado vertical */
   text-align: center;
   overflow: hidden;
-  position: relative; /* referencia para absolute */
+  position: relative;
 }
 
 .list .phrase {
-  position: absolute;
-  top: 40%;        /* centrado vertical */
-  left: 50%;       /* centrado horizontal */
-  transform: translate(-50%, -50%); /* mueve al centro exacto */
   max-width: 800px;
   font-size: 1.6rem;
+  line-height: 1.5;
   opacity: 0;
-  color: inherit; /* hereda el color de la sección */
-  bottom: 50%;
+  color: inherit;
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  transition: opacity 0.6s ease;
 }
 
 .list span {
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  color: inherit; /* hereda el color de la sección */
+  font-weight: 400;           /* resalta la parte destacada */
+  color: inherit;
 }
 
 /* Closing - sección 5: oscuro */

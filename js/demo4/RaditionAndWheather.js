@@ -181,8 +181,8 @@ Promise.all([fetch(weatherUrl), fetch(airUrl), fetch(uvUrl)])
 
     let startColor, endColor;
     if (currentAQI <= 50) [startColor, endColor] = ["#18B2E8", "#01213E"];
-    else if (currentAQI <= 100) [startColor, endColor] = ["#FFC043", "#F86230"];
-    else if (currentAQI <= 150) [startColor, endColor] = ["#F677A7", "#9244D6"];
+    else if (currentAQI <= 100) [startColor, endColor] = ["#F677A7", "#9244D6"];
+    else if (currentAQI <= 150) [startColor, endColor] = ["#FFC043", "#F86230"];
     else [startColor, endColor] = ["#FFB9A1", "#A51C5B"];
 
     const mainSvg = document.querySelector("svg .colorkey")?.closest("svg");

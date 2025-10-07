@@ -120,5 +120,27 @@
     "Affordable housing"
   ],
 
-  "News +":"News + Updates"
+  "News +": "News + Updates",
+
+  "Scalable solutions": "Scalable solutions",
+  "Scalable solutions text": "that evolve into social impact-generating public infrastructure programs, deployable across cities.",
+
+  "Civic tech and gov tech ventures": "Civic tech and gov tech ventures",
+  "Civic tech and gov tech ventures text": "with the potential to spin off into public-private partnerships or commercial offerings.",
+
+  "Applied research, data analysis, and strategic studies": "Applied research, data analysis, and strategic studies",
+  "Applied research, data analysis, and strategic studies text": "that not only support implementation but also contribute to global urban discourse and policymaking.",
+  "infra_title": "Infrastructure-Backed Execution",
+  "infra_text": "Embedded within Grupo INDI, INDIx leverages national-scale construction capacity to reduce R&D risk and accelerate implementation through real-world projects.",
+
+  "pipeline_title": "Prototype–Deploy–Scale Pipeline",
+  "pipeline_text": "We turn concepts into pilots, and pilots into replicable solutions — heavy focus on data-driven scaling, and IP retention that can be licensed or scaled through public funding.",
+
+  "ecosystem_title": "Ecosystem Leverage",
+  "ecosystem_text": "Strategic partnerships with universities, non-profits, civic tech startups, and governments.",
+
+  "data_title": "Data & Collective Intelligence",
+  "data_text": "Our projects are both data-driven and guided by collective intelligence — combining quantitative analysis with community engagement strategies to ensure that every intervention is context-sensitive, socially grounded, and responsive to the needs of people and place."
+
+
 }

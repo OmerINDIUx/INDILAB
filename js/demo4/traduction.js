@@ -51,8 +51,15 @@ function translatePage(lang = "en") {
     })
     .catch(err => console.error("❌ Error cargando idioma:", err));
 }
+
+// 3.1️⃣ Registrar en el objeto global INDI
 window.INDI = window.INDI || {};
 window.INDI.translatePage = translatePage;
+
+// ✅ Agregamos la función solicitada (para revealTextImages.js)
+window.INDI.getCurrentLang = function () {
+  return window.currentLang || "es";
+};
 
 // 4️⃣ Actualizar botón de idioma
 function updateButtonLabel() {

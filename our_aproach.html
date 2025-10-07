@@ -48,70 +48,89 @@
   </section>
 
   <section class="list">
-    <div class="phrase">
-      <span>Infrastructure-Backed Executio</span> <br />Embedded within Grupo
-      INDI, INDIx leverages national-scale construction capacity to reduce R&D
-      risk and accelerate implementation through real-world projects
-    </div>
-    <div class="phrase">
-      <span>Prototype–Deploy–Scale Pipelin</span><br />
-      We turn concepts into pilots, and pilots into replicable solutions—heavy
-      focus on data driven scaling, and IP retention that can be licensed or
-      scaled through public funding.
-    </div>
-    <div class="phrase">
-      <span> Ecosystem Leverage​ </span><br />
-      Strategic partnerships with universities, non-profits, civic tech
-      startups, and governments.
-    </div>
+<div class="phrase">
+  <span class="pdp" data-i18n="infra_title"></span><br />
+  <span data-i18n="infra_text"></span>
+</div>
 
-    <div class="phrase">
-      <span> Data & Collective Intelligence​ </span><br />
-      Our projects are both data-driven and guided by collective
-      intelligence—combining quantitative analysis with community engagement
-      strategies to ensure that every intervention is context-sensitive,
-      socially grounded, and responsive to the needs of people and place.
-    </div>
+<div class="phrase">
+  <span class="pdp" data-i18n="pipeline_title"></span><br />
+  <span data-i18n="pipeline_text"></span>
+</div>
+
+<div class="phrase">
+  <span class="pdp" data-i18n="ecosystem_title"></span><br />
+  <span data-i18n="ecosystem_text"></span>
+</div>
+
+<div class="phrase">
+  <span class="pdp" data-i18n="data_title"></span><br />
+  <span data-i18n="data_text"></span>
+</div>
   </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
+  const phrases = gsap.utils.toArray(".list .phrase");
 
-    // Seleccionamos todas las frases
-    const phrases = gsap.utils.toArray(".list .phrase");
+  // Estado base: todas ocultas, pero la primera visible desde el inicio
+  gsap.set(phrases, { opacity: 0, y: 60, filter: "blur(6px)" });
+  if (phrases[0]) gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" });
 
-    // Timeline general
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".list",
-        start: "top top",
-        end: "+=" + phrases.length * window.innerHeight,
-        scrub: true,
-        pin: true,
-        snap: {
-          snapTo: 1 / (phrases.length - 1), // Divide el scroll en "pasos" iguales
-          duration: 0.5, // tiempo del "salto" automático
-          ease: "power1.inOut"
-        }
-      }
-    });
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".list",
+      start: "top top",
+      end: "+=" + phrases.length * window.innerHeight, // espacio por frase
+      scrub: 0.8,
+      pin: true,
+      anticipatePin: 1,
+      // Garantiza que la primera esté visible cuando se fija
+      onEnter: () => phrases[0] && gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" }),
+      onEnterBack: () => phrases[0] && gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" }),
+      // Snap a cada frase con precisión
+      snap: {
+        snapTo: (value) => {
+          const snaps = phrases.map((_, i) => i / (phrases.length - 1));
+          return snaps.reduce((a, b) => Math.abs(b - value) < Math.abs(a - value) ? b : a);
+        },
+        duration: 0.5,
+        ease: "power2.inOut"
+      },
+      markers: false
+    }
+  });
 
-    // Animamos cada frase
-    phrases.forEach((phrase, i) => {
-      tl.fromTo(
-        phrase,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-      )
-        .to(
-          phrase,
-          { opacity: 0, y: -50, duration: 0.8, ease: "power3.in" }
-        );
-    });
-  </script>
+  const D_IN = 0.6, D_HOLD = 0.3, D_OUT = 0.6;
+
+  phrases.forEach((phrase, i) => {
+    // La primera ya está visible: solo “hold” antes de salir
+    if (i === 0) {
+      tl.to({}, { duration: D_HOLD }); // pequeño respiro inicial
+    } else {
+      // Evita que la primera se renderice en 0 con immediateRender:false
+      tl.fromTo(phrase,
+        { opacity: 0, y: 60, filter: "blur(6px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: D_IN, ease: "power3.out", immediateRender: false }
+      );
+    }
+
+    // Todas menos la última se desvanecen para dar paso a la siguiente
+    if (i < phrases.length - 1) {
+      tl.to(phrase, { opacity: 0, y: -60, filter: "blur(6px)", duration: D_OUT, ease: "power3.in" }, "+=0.2");
+    }
+  });
+
+  // Mantenimiento
+  addEventListener("resize", () => ScrollTrigger.refresh());
+  addEventListener("beforeunload", () => {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    tl.kill();
+  });
+</script>
 
 
 
@@ -242,16 +261,16 @@
 
   <section class="list2">
     <div class="phrase2">
-      <span data-i18n="experimental +"></span> 
+      <span class="pdp"   data-i18n="experimental +"></span> 
 
       <p data-i18n="data driven"></p>
       <br /><br />
-      <span data-i18n="urban spaces"></span>
+      <span class="pdp" data-i18n="urban spaces"></span>
 
       <p data-i18n="public spaces"></p>
       <br /><br />
 
-      <span data-i18n="mobility"></span>
+      <span class="pdp" data-i18n="mobility"></span>
 
       <p data-i18n="road safety"></p>
 
@@ -260,7 +279,7 @@
     <div class="phrase2">
 
 
-      <span data-i18n="housing"></span> 
+      <span class="pdp" data-i18n="housing"></span> 
 
       <p data-i18n="co-housing"></p>
 
@@ -268,13 +287,13 @@
 
 
 
-      <span data-i18n="Materials and processes"></span> 
+      <span class="pdp" data-i18n="Materials and processes"></span> 
 
       <p data-i18n="Eco-friendly"></p>
 
       <br /><br />
 
-      <span data-i18n="digital tools"></span> 
+      <span class="pdp" data-i18n="digital tools"></span> 
 
       <p data-i18n="data visualization"></p>
     </div>
@@ -327,22 +346,27 @@
   <script src="/js/splitting.min.js"></script>
   <script type="module" src="/js/demo4/traduction.js"></script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Lista de colores posibles
-      const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 🎨 Lista de colores posibles
+    const colors = ["#18B2E8", "#F86230", "#A51C5B", "#9244D6"];
+    let lastColor = null; // guardamos el último color usado
 
-      // Seleccionamos todos los <span> y los <h2 class="white">
-      const elements = document.querySelectorAll("span, h2.white");
+    // Seleccionamos todos los <span> y los <h2 class="white">
+    const elements = document.querySelectorAll(".pdp, h2.white");
 
-      elements.forEach((el) => {
-        // Color aleatorio
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        el.style.color = randomColor;
-      });
+    elements.forEach((el) => {
+      let randomColor;
+      // Evita repetir el mismo color que el anterior
+      do {
+        randomColor = colors[Math.floor(Math.random() * colors.length)];
+      } while (randomColor === lastColor);
+
+      el.style.color = randomColor;
+      lastColor = randomColor;
     });
-  </script>
-
+  });
+</script>
 
 
 
