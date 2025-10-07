@@ -1,10 +1,16 @@
-let currentLang = localStorage.getItem("indi-lang") || "es";
-let loadedTranslations = {}; // 👈 cache del último JSON cargado
+// =============================
+// 🌐 Sistema de traducción global (corrigido)
+// =============================
 
+// 1️⃣ Variables globales unificadas
+window.loadedTranslations = window.loadedTranslations || {};
+window.currentLang = localStorage.getItem("indi-lang") || "es";
+
+// 2️⃣ Aplicar traducciones en el DOM
 function applyTranslations() {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    const translation = loadedTranslations[key] || key;
+    const translation = window.loadedTranslations[key] || key;
 
     if (el.tagName === "IMG") {
       el.alt = translation;
@@ -14,94 +20,83 @@ function applyTranslations() {
       el.innerHTML = translation;
     }
   });
+  console.log("🌍 Traducciones aplicadas:", window.currentLang);
 }
-
-// Hacer accesible globalmente
 window.applyTranslations = applyTranslations;
 
+// 3️⃣ Cargar archivo de idioma
 function translatePage(lang = "en") {
-  const elements = document.querySelectorAll("[data-i18n]");
-  if (elements.length === 0) {
-    console.warn("⚠️ No hay elementos [data-i18n] en el DOM todavía");
-    return;
-  }
+  console.log(`🌐 Cargando /json/${lang}.json ...`);
 
-  gsap.to(elements, {
-    opacity: 0,
-    scale: 0.95,
-    duration: 0.3,
-    stagger: 0.02,
-    ease: "power1.in",
-    onComplete: () => {
-      fetch(`/json/${lang}.json`)
-        .then(res => {
-          if (!res.ok) throw new Error("Archivo JSON no encontrado");
-          return res.json();
-        })
-        .then(json => {
-          loadedTranslations = json; // 👈 cachear traducciones
-          applyTranslations();
+  fetch(`/json/${lang}.json`)
+    .then(res => {
+      if (!res.ok) throw new Error(`No se encontró /json/${lang}.json`);
+      return res.json();
+    })
+    .then(json => {
+      // ⚙️ Guardar referencia global
+      window.loadedTranslations = json;
+      window.currentLang = lang;
+      localStorage.setItem("indi-lang", lang);
 
-          gsap.fromTo(
-            elements,
-            { opacity: 0, scale: 0.95 },
-            { opacity: 1, scale: 1, duration: 0.5, stagger: 0.02, ease: "back.out(1.4)" }
-          );
+      // Aplicar al DOM
+      applyTranslations();
 
-          currentLang = lang;
-          localStorage.setItem("indi-lang", lang); // persistir idioma
-          updateButtonLabel();
-        })
-        .catch((err) => console.error("Error cargando idioma:", err));
-    },
-  });
+      // 🔔 Avisar a scripts dependientes (carousel, etc.)
+      window.dispatchEvent(new Event("translationsLoaded"));
+
+      // Animación visual
+      gsap.fromTo("[data-i18n]", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.02 });
+      updateButtonLabel();
+    })
+    .catch(err => console.error("❌ Error cargando idioma:", err));
 }
+window.INDI = window.INDI || {};
+window.INDI.translatePage = translatePage;
 
+// 4️⃣ Actualizar botón de idioma
 function updateButtonLabel() {
   const btn = document.getElementById("lang-toggle");
   if (!btn) return;
-  btn.textContent = currentLang === "es" ? "EN" : "ES";
+  btn.textContent = window.currentLang === "es" ? "EN" : "ES";
+}
+window.updateButtonLabel = updateButtonLabel;
+
+// 5️⃣ Asignar funcionalidad al botón
+function setupLangButton() {
+  const btn = document.getElementById("lang-toggle");
+  if (!btn) return;
+  if (btn.dataset.listenerAdded === "true") return;
+
+  btn.dataset.listenerAdded = "true";
+  updateButtonLabel();
+
+  btn.addEventListener("click", () => {
+    const nextLang = window.currentLang === "es" ? "en" : "es";
+    gsap.to(btn, {
+      scale: 0.8,
+      duration: 0.15,
+      onComplete: () => {
+        translatePage(nextLang);
+        gsap.to(btn, { scale: 1, duration: 0.15, ease: "back.out(2)" });
+      },
+    });
+  });
+
+  console.log("🌐 Botón de idioma listo y enlazado");
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  translatePage(currentLang);
+// 6️⃣ Observar menú dinámico y DOM
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("🚀 DOM listo, idioma actual:", window.currentLang);
 
-  gsap.from("[data-i18n]", {
-    opacity: 0,
-    y: 20,
-    duration: 0.5,
-    stagger: 0.03,
-    ease: "power2.out",
-  });
+  // Cargar idioma actual
+  translatePage(window.currentLang);
 
-  // Observar si se inyecta el menú
-  const observer = new MutationObserver(() => {
-    const btn = document.getElementById("lang-toggle");
-    if (btn && !btn.dataset.listenerAdded) {
-      btn.dataset.listenerAdded = "true";
-      updateButtonLabel();
+  // Vigilar cambios (por carga dinámica del menú)
+  const observer = new MutationObserver(() => setupLangButton());
+  observer.observe(document.body, { childList: true, subtree: true });
 
-      btn.addEventListener("click", () => {
-        const nextLang = currentLang === "es" ? "en" : "es";
-        gsap.to(btn, {
-          scale: 0.8,
-          duration: 0.15,
-          onComplete: () => {
-            translatePage(nextLang);
-            gsap.to(btn, { scale: 1, duration: 0.15, ease: "back.out(2)" });
-          },
-        });
-      });
-    }
-  });
-
-  const placeholder = document.getElementById("menu-placeholder");
-  if (placeholder) {
-    observer.observe(placeholder, { childList: true, subtree: true });
-  }
+  // Intento inmediato
+  setupLangButton();
 });
-
-// --- Exponer funciones globales ---
-window.INDI = window.INDI || {};
-window.INDI.translatePage = translatePage;
-window.INDI.getCurrentLang = () => currentLang;

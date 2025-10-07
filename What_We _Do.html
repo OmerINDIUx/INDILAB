@@ -6,7 +6,8 @@
   <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
 
   <meta charset="UTF-8">
-  <title>Vivienda Modular</title>
+    <title data-i18n="menu projects"></title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -42,7 +43,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Blog</title>
+  <title data-i18n="menu projects"></title>
 
 
 
@@ -62,13 +63,12 @@
     </div>
 
     <div class="carousel-content">
-      <h3 id="carousel-phrase">
-        INDI Lab projects are as flexible and dynamic as urban life itself.
+      <h3 id="carousel-phrase" data-i18n="carrusel indi lab">
       </h3>
 
       <!-- 🔥 Línea de búsqueda con sugerencias -->
       <div class="search-line">
-        <label for="carousel-search">INDI Lab #</label>
+        <label for="carousel-search" data-i18n="INDI Lab #"></label>
         <div class="input-wrapper">
           <input id="carousel-search" type="text" autocomplete="off">
           <span id="carousel-suggestion">
@@ -79,15 +79,15 @@
 
   <!-- Blog -->
   <section class="blog-section1" id="blog">
-    <h2 class="blog-heading1">Our works</h2>
+    <h2 class="blog-heading1" data-i18n="Our work"></h2>
 
     <div class="blog-list1" id="blogList">
       <article class="blog-item1" data-tags="Vivienda">
         <a href="/projects/ViviendaModular/vivienda_modular.html">
           <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
           <div class="blog-info1">
-            <h3 class="blog-title1">Vivienda Modular</h3>
-            <p class="blog-date1">Diciembre 2024</p>
+            <h3 class="blog-title1" data-i18n="Modular Housing"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
           </div>
         </a>
       </article>
@@ -96,8 +96,8 @@
         <a href="/projects/ElectroMovilidad/electromovilidad.html">
           <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
           <div class="blog-info1">
-            <h3 class="blog-title1">Electromovilidad</h3>
-            <p class="blog-date1">Diciembre 2024</p>
+            <h3 class="blog-title1" data-i18n="Electromobility"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
           </div>
         </a>
       </article>
@@ -107,8 +107,8 @@
           <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
             class="blog-thumb">
           <div class="blog-info1">
-            <h3 class="blog-title1">Islas de Calor Urbanas</h3>
-            <p class="blog-date1">Diciembre 2024</p>
+            <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
           </div>
         </a>
       </article>
@@ -118,138 +118,17 @@
     <p id="noResults" style="display:none; color:#999; margin-top:1em;">No results found</p>
   </section>
 
-  <script>
-    // =============================
-    // 🎞 Carousel
-    // =============================
-    const images = document.querySelectorAll('.carousel-img');
-    const phrases = [
-      "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
-      "Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
-      "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.", "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
-      "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
-    ];
-    const phraseEl = document.getElementById('carousel-phrase');
-    let current = 0;
 
-    function showSlide(idx) {
-      images.forEach((img, i) => img.style.opacity = i === idx ? "1" : "0");
-      phraseEl.textContent = phrases[idx];
-    }
 
-    setInterval(() => {
-      current = (current + 1) % images.length;
-      showSlide(current);
-    }, 4000);
 
-    showSlide(current);
 
-    // =============================
-    // ⌨️ Search suggestions typing loop
-    // =============================
-    const suggestions = [
-      "Mobility solutions",
-      "Urban resilience",
-      "Digital tools",
-      "Sustainable materials",
-      "Affordable housing"
-    ];
 
-    const searchInput = document.getElementById('carousel-search');
-    const suggestionEl = document.getElementById('carousel-suggestion');
 
-    let suggestionIdx = 0;
-    let charIdx = 0;
-    let typing;
-    let isTyping = false;
 
-    function typeSuggestion() {
-      isTyping = true;
-      const currentText = suggestions[suggestionIdx];
-      if (charIdx <= currentText.length) {
-        suggestionEl.textContent = currentText.substring(0, charIdx);
-        charIdx++;
-        typing = setTimeout(typeSuggestion, 100); // velocidad de escritura
-      } else {
-        typing = setTimeout(eraseSuggestion, 1500); // espera antes de borrar
-      }
-    }
 
-    function eraseSuggestion() {
-      const currentText = suggestions[suggestionIdx];
-      if (charIdx >= 0) {
-        suggestionEl.textContent = currentText.substring(0, charIdx);
-        charIdx--;
-        typing = setTimeout(eraseSuggestion, 50); // velocidad de borrado
-      } else {
-        suggestionIdx = (suggestionIdx + 1) % suggestions.length;
-        typing = setTimeout(typeSuggestion, 500);
-      }
-    }
 
-    // 🔥 Inicia animación
-    suggestionEl.textContent = "";
-    typeSuggestion();
 
-    // =============================
-    // 📑 Filtrado de blog (multiidioma)
-    // =============================
-    const blogItems = document.querySelectorAll('.blog-item1');
-    const noResults = document.getElementById('noResults');
 
-    function filterBlog(query) {
-      const lowerQuery = query.toLowerCase();
-      let found = false;
-
-      blogItems.forEach(item => {
-        const title = item.querySelector('.blog-title1').textContent.toLowerCase();
-        const date = item.querySelector('.blog-date1').textContent.toLowerCase();
-        const tags = item.dataset.tags ? item.dataset.tags.toLowerCase() : "";
-        const alt = item.querySelector('img').alt.toLowerCase();
-        const fullText = item.textContent.toLowerCase(); // incluye todo lo que hay dentro
-
-        if (
-          title.includes(lowerQuery) ||
-          date.includes(lowerQuery) ||
-          tags.includes(lowerQuery) ||
-          alt.includes(lowerQuery) ||
-          fullText.includes(lowerQuery)
-        ) {
-          item.style.display = "block";
-          found = true;
-        } else {
-          item.style.display = "none";
-        }
-      });
-
-      noResults.style.display = found ? "none" : "block";
-    }
-
-    // Eventos del buscador
-    searchInput.addEventListener('input', () => {
-      const value = searchInput.value.trim();
-
-      if (value) {
-        clearTimeout(typing);
-        suggestionEl.style.display = 'none';
-        isTyping = false;
-      } else {
-        suggestionEl.style.display = 'block';
-        if (!isTyping) {
-          charIdx = 0;
-          typeSuggestion();
-        }
-      }
-
-      filterBlog(value);
-    });
-
-    suggestionEl.addEventListener('click', () => {
-      searchInput.value = suggestionEl.textContent;
-      suggestionEl.style.display = 'none';
-      filterBlog(searchInput.value);
-    });
-  </script>
 
 
 
@@ -334,7 +213,15 @@
     .catch(error => {
       console.error("Ocurrió un error al cargar el menú:", error);
     });
+
+
+
+
+
 </script>
+
+    <script src="js/carousel.js"></script>
+
 
 </body>
 

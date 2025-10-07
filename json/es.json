@@ -86,9 +86,34 @@
   "housing": "Vivienda",
   "co-housing": "Cohousing, fideicomisos de suelo, vivienda modular",
 
-  "Materials and processes": "Materiales y procesos",
-  "Eco-friendly": "Materiales y construcción eco-innovadores",
+"Modular Housing": "Vivienda modular",
+"Electromobility": "Electromovilidad",
 
-  "digital tools": "Herramientas digitales",
-  "data visualization": "Plataformas GIS, visión computacional, gemelos digitales"
+
+
+
+    "INDI Lab #": "INDI Lab #",
+
+  "Urban Heat Islands": "Islas de Calor Urbanas",
+  "December 2024": "Diciembre 2024",
+  "No results found": "No se encontraron resultados",
+
+  "phrases": [
+    "Vivienda. Investigamos modelos alternativos de vivienda asequible, propiedad y financiamiento para abordar las barreras estructurales del sistema habitacional y abrir caminos más inclusivos hacia el acceso a la vivienda.",
+    "Sensores Urbanos y Datos a Microescala. Probamos redes de sensores que capturan datos ambientales y de comportamiento a pequeña escala: calidad del aire, niveles de agua, microclimas, índice UV, ruido y flujos peatonales, para informar estrategias urbanas de salud pública y habitabilidad.",
+    "Diseño de Políticas y Estrategia Legislativa. Nuestro trabajo no termina en el prototipo: ayudamos a traducir pilotos exitosos en políticas aplicables y apoyamos la redacción de marcos legislativos que escalen la innovación de manera responsable.",
+    "Consultoría Organizacional. Ofrecemos servicios de consultoría personalizados enfocados en optimización de procesos, herramientas digitales y mejoras en políticas internas, fortaleciendo la colaboración entre sectores y disciplinas.",
+    "Exploramos materiales sostenibles e innovadores para mejorar la construcción urbana y el desempeño ambiental."
+  ],
+
+  "suggestions": [
+    "Soluciones de movilidad",
+    "Resiliencia urbana",
+    "Herramientas digitales",
+    "Materiales sostenibles",
+    "Vivienda asequible"
+  ]
+
+
+  
 }

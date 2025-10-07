@@ -1,6 +1,6 @@
 {
   "menu home": "Our Core Beliefs",
-    "Our work": "Our work",
+  "Our work": "Our work",
   "menu about": "Who We Are",
   "menu projects": "What We Do",
   "menu contact": "Our Approach",
@@ -66,19 +66,13 @@
   "who we are": "Who We Are",
   "who we are sub": "Innovation at the Intersection of Cities, Infrastructure, Technology, and Community",
 
-
-
   "who mwe are intro": "INDIx is Grupo INDI’s",
   "who mwe are spam": "urban innovation lab and venture platform,",
   "who we are text": "an incubator and R&D engine that mobilizes shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate execution and scale transformative urban solutions.",
-  
-  "We design prototype":"We design, prototype, and pilot solutions that address the most urgent urban challenges, positioned at the convergence of engineering, technology, and city life.",
-  
-  
-  
+
+  "We design prototype": "We design, prototype, and pilot solutions that address the most urgent urban challenges, positioned at the convergence of engineering, technology, and city life.",
+
   "by into Grupo INDI’s": "By tapping into Grupo INDI’s deep bench of talent and technical expertise, we’re able to respond fluidly to the evolving needs of our clients, partners, and collaborators, whether they require bold experimentation or operational precision.",
-
-
 
   "our approach": "Our Approach",
   "our approach sub": "Ideation Meets Real World Executiony",
@@ -99,7 +93,30 @@
   "Eco-friendly": "Eco-friendly, innovative materials and construction processes",
 
   "digital tools": "Digital Tools",
-  "data visualization": "GIS platforms, computer vision models, digital twins"
+  "data visualization": "GIS platforms, computer vision models, digital twins",
+
+  "Modular Housing": "Modular Housing",
+  "December 2024": "December 2024",
+  "Electromobility": "Electromobility",
+  "Urban Heat Islands": "Urban Heat Islands",
+  "carrusel indi lab": "INDI Lab projects are as flexible and dynamic as urban life itself.",
+  "INDI Lab #": "INDI Lab #",
+
+  "No results found": "No se encontraron resultados",
+
+  "phrases": [
+    "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
+    "Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
+    "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
+    "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
+    "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
+  ],
+
+  "suggestions": [
+    "Mobility solutions",
+    "Urban resilience",
+    "Digital tools",
+    "Sustainable materials",
+    "Affordable housing"
+  ]
 }
-
-
