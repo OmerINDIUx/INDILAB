@@ -1,14 +1,9 @@
 {
-  "menu home": "Nuestros Principios Fundamentales",
+  "menu home": "Nuestros Fundamentos",
   "Our work": "Nuestro trabajo",
   "menu about": "Quiénes Somos",
-  "menu projects": "Qué Hacemos",
+  "menu projects": "Nuestro trabajo",
   "menu contact": "Nuestro Enfoque",
-
-  "menu homef": "INICIO→",
-  "menu aboutf": "INDI Lab→",
-  "menu projectsf": "PROYECTOS→",
-  "menu contactf": "CONTACTO→",
 
   "CDMX Traffic": "Tráfico CDMX",
   "hero_highlighted_text": "",
