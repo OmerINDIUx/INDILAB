@@ -38,26 +38,8 @@ body {
   z-index: 1;
 }
 
-.carousel-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.8s;
-}
 
-.carousel-img.active {
-  opacity: 1;
-}
-/* 🔥 Pleca oscura */
-.hero-carousel-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #1a1a1a80; /* 15% */
-  z-index: 2; /* 👈 ahora encima de las imágenes */
-}
+
 /* Contenido centrado */
 .carousel-content {
   position: relative;
@@ -517,6 +499,47 @@ span {
 }
 .carousel-content {
   z-index: 2; /* textos dentro del hero */
+}
+/* ===================
+   Overlay oscuro sobre las imágenes del carrusel
+=================== */
+.carousel-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ✅ Capa de relleno (oscurecimiento al 15%) */
+.carousel-background .overlay {
+  position: absolute;
+  inset: 0; /* cubre toda el área del carrusel */
+  background-color: rgba(26, 26, 26, 0.50); /* #1a1a1a con 15% de opacidad */
+  z-index: 2; /* encima de las imágenes */
+  pointer-events: none; /* no bloquea clics */
+}
+
+/* Imágenes del fondo */
+.carousel-img {
+    width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.8s;
+  z-index: 1;
+}
+
+.carousel-img.active {
+  opacity: 1;
+}
+/* Imagen activa */
+
+
+/* Contenido (texto, búsqueda, etc.) */
+.carousel-content {
+  position: relative;
+  z-index: 3; /* siempre arriba del overlay */
 }
 
 

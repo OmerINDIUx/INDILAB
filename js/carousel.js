@@ -1,92 +1,49 @@
 // =============================
 // 🎠 Carrusel + Buscador + i18n sincronizado
 // =============================
-// === carousel.js ===
+"use strict";
 
-// Caché local para las traducciones del carrusel
-let carouselTranslations = null;
+// Refs (se asignan al iniciar)
+let images, phraseEl, searchInput, suggestionEl, blogItems, noResults;
 
-// Carga las traducciones solo una vez
-async function loadCarouselTranslations() {
-  if (carouselTranslations) {
-    // ✅ Ya cargadas: devuelve el caché
-    console.log("⚡ [i18n-carousel] Usando traducciones cacheadas");
-    return carouselTranslations;
-  }
-
-  console.log("📥 [i18n-carousel] Cargando traducciones...");
-  try {
-    const res = await fetch('/data/traductions.json');
-    carouselTranslations = await res.json();
-    console.log("✅ [i18n-carousel] Traducciones cargadas y cacheadas");
-  } catch (err) {
-    console.error("❌ Error al cargar traducciones del carrusel:", err);
-    carouselTranslations = {}; // fallback vacío
-  }
-
-  return carouselTranslations;
-}
-
-// Función que obtiene la frase traducida desde caché
-async function getCarouselPhrase(key) {
-  const translations = await loadCarouselTranslations();
-  return translations[key] || key; // usa el key como fallback
-}
-
-// Ejemplo de uso en el cambio de frases del carrusel
-async function updateCarouselText(nextKey) {
-  const phrase = await getCarouselPhrase(nextKey);
-  const element = document.querySelector(".carousel-text");
-  if (element) {
-    element.textContent = phrase;
-  }
-  console.log(`💬 [carousel] Frase mostrada: ${phrase}`);
-}
-
-// Simulación del cambio de frase cada 3s
-let phrases = ["Materials and processes", "Eco-friendly", "digital tools"];
-let index = 0;
-setInterval(() => {
-  index = (index + 1) % phrases.length;
-  updateCarouselText(phrases[index]);
-}, 3000);
-
-console.log("Idioma actual:", localStorage.getItem("indi-lang"));
-console.log("loadedTranslations =", window.loadedTranslations);
-
-const images       = document.querySelectorAll(".carousel-img");
-const phraseEl     = document.getElementById("carousel-phrase");
-const searchInput  = document.getElementById("carousel-search");
-const suggestionEl = document.getElementById("carousel-suggestion");
-const blogItems    = document.querySelectorAll(".blog-item1");
-const noResults    = document.getElementById("noResults");
-
+// Estado
 let current = 0;
 let suggestionIdx = 0;
 let charIdx = 0;
-let typing;
+let typing = null;
 let isTyping = false;
 let carouselTimer = null;
+let eventsBound = false;
 
+// ===== Utiles i18n (usan lo que cargó traduction.js) =====
 function getPhrases() {
   const p = window.loadedTranslations?.phrases || [];
   console.log("🗣️ getPhrases() →", p.length, "frases");
   return p;
 }
-
 function getSuggestions() {
   const s = window.loadedTranslations?.suggestions || [];
   console.log("💡 getSuggestions() →", s.length, "sugerencias");
   return s;
 }
 
-// === Carousel ===
+// ===== Carrusel de imágenes + texto =====
 function showSlide(idx) {
-  const phrases = getPhrases();
-  if (!phrases.length) return;
+  if (!images.length) return;
+
   images.forEach((img, i) => (img.style.opacity = i === idx ? "1" : "0"));
-  phraseEl.textContent = phrases[idx] || "";
-  console.log("🎞️ Mostrando frase", idx, "→", phrases[idx]);
+
+  const phrases = getPhrases();
+  if (phraseEl) {
+    if (phrases.length) {
+      const safe = idx % phrases.length;
+      phraseEl.textContent = phrases[safe] || "";
+      console.log("🎞️ Imagen", idx, "→ frase:", phrases[safe]);
+    } else {
+      phraseEl.textContent = "";
+      console.log("🎞️ Imagen", idx, "sin frase (aún no cargan)");
+    }
+  }
 }
 
 function resetCarousel() {
@@ -95,27 +52,29 @@ function resetCarousel() {
 }
 
 function startCarousel() {
-  const phrases = getPhrases();
-  if (!images.length || !phrases.length) {
-    console.warn("🚫 No se inicia carrusel (faltan imágenes o frases)");
+  if (!images.length) {
+    console.warn("🚫 No se inicia carrusel (sin imágenes)");
     return;
   }
   showSlide(0);
   carouselTimer = setInterval(() => {
-    current = (current + 1) % phrases.length;
+    current = (current + 1) % images.length;
     showSlide(current);
   }, 4000);
-  console.log("✅ Carrusel iniciado con", phrases.length, "frases");
+
+  const phrases = getPhrases();
+  console.log("✅ Carrusel iniciado con", images.length, "imágenes y", phrases.length, "frases");
 }
 
-// === Typing Loop ===
+// ===== Typing de sugerencias =====
 function typeSuggestion() {
   const suggestions = getSuggestions();
-  if (!suggestions.length) return console.warn("⚠️ No hay sugerencias cargadas");
+  if (!suggestions.length || !suggestionEl) return console.warn("⚠️ No hay sugerencias o falta el elemento");
+
   isTyping = true;
-  const currentText = suggestions[suggestionIdx];
-  if (charIdx <= currentText.length) {
-    suggestionEl.textContent = currentText.substring(0, charIdx);
+  const text = suggestions[suggestionIdx] || "";
+  if (charIdx <= text.length) {
+    suggestionEl.textContent = text.substring(0, charIdx);
     charIdx++;
     typing = setTimeout(typeSuggestion, 100);
   } else {
@@ -125,9 +84,11 @@ function typeSuggestion() {
 
 function eraseSuggestion() {
   const suggestions = getSuggestions();
-  const currentText = suggestions[suggestionIdx];
+  if (!suggestions.length || !suggestionEl) return;
+
+  const text = suggestions[suggestionIdx] || "";
   if (charIdx >= 0) {
-    suggestionEl.textContent = currentText.substring(0, charIdx);
+    suggestionEl.textContent = text.substring(0, charIdx);
     charIdx--;
     typing = setTimeout(eraseSuggestion, 50);
   } else {
@@ -138,10 +99,15 @@ function eraseSuggestion() {
 
 function resetTypingLoop() {
   clearTimeout(typing);
+  typing = null;
   suggestionIdx = 0;
   charIdx = 0;
   isTyping = false;
-  if (suggestionEl) suggestionEl.textContent = "";
+  if (suggestionEl) {
+    suggestionEl.textContent = "";
+    // Asegura que arranque visible
+    suggestionEl.style.display = "inline";
+  }
 }
 
 function startTypingLoop() {
@@ -155,22 +121,43 @@ function startTypingLoop() {
   typeSuggestion();
 }
 
-// === Filtro de blog ===
+// ===== Filtro de blog =====
 function filterBlog(query) {
-  const lower = query.toLowerCase();
+  if (!blogItems?.length || !noResults) return;
+  const lower = (query || "").toLowerCase();
   let found = false;
   blogItems.forEach(item => {
     const text = item.textContent.toLowerCase();
     if (text.includes(lower)) {
       item.style.display = "block";
       found = true;
-    } else item.style.display = "none";
+    } else {
+      item.style.display = "none";
+    }
   });
   noResults.style.display = found ? "none" : "block";
 }
 
-// === Eventos de búsqueda ===
-if (searchInput && suggestionEl) {
+// ===== Cachear DOM (después de que exista) =====
+function cacheDom() {
+  images       = document.querySelectorAll(".carousel-img");
+  phraseEl     = document.getElementById("carousel-phrase");
+  searchInput  = document.getElementById("carousel-search");
+  suggestionEl = document.getElementById("carousel-suggestion");
+  blogItems    = document.querySelectorAll(".blog-item1");
+  noResults    = document.getElementById("noResults");
+
+  // 🔸 FIX CLAVE: necesitas placeholder para que :placeholder-shown funcione
+  if (searchInput && !searchInput.hasAttribute("placeholder")) {
+    searchInput.setAttribute("placeholder", " "); // un espacio basta
+  }
+}
+
+// ===== Eventos de búsqueda (se enlazan cuando el DOM ya existe) =====
+function bindEventsOnce() {
+  if (eventsBound) return;
+  if (!(searchInput && suggestionEl)) return;
+
   searchInput.addEventListener("input", () => {
     const value = searchInput.value.trim();
     if (value) {
@@ -189,24 +176,46 @@ if (searchInput && suggestionEl) {
     suggestionEl.style.display = "none";
     filterBlog(searchInput.value);
   });
+
+  eventsBound = true;
 }
 
-// === Esperar traducciones ===
+// ===== Inicialización tras traducciones =====
+function iniciarUI() {
+  cacheDom();          // re-selecciona elementos cuando ya existen
+  bindEventsOnce();    // engancha listeners una sola vez
+
+  resetCarousel();
+  startCarousel();
+
+  // Arranca suggestions desde el inicio, visibles
+  resetTypingLoop();
+  startTypingLoop();
+}
+
+// ===== Orquestación de arranque =====
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 DOM listo, esperando traducciones...");
+  console.log("🚀 DOM listo, preparando carrusel...");
 
-  const iniciarUI = () => {
-    console.log("🟢 Traducciones detectadas, iniciando carrusel y sugerencias");
-    resetCarousel();   
-    startCarousel();
-    resetTypingLoop(); 
-    startTypingLoop();
-  };
-
-  if (window.loadedTranslations?.phrases?.length > 0) {
+  // Si ya hay traducciones cargadas, arranca
+  if (window.loadedTranslations?.phrases?.length) {
+    console.log("✅ Traducciones ya disponibles al iniciar");
     iniciarUI();
-  } else {
-    window.addEventListener("translationsLoaded", iniciarUI, { once: true });
-    console.log("⏳ Esperando evento translationsLoaded...");
+    return;
   }
+
+  // Espera a que traduccion.js avise
+  console.log("⏳ Esperando evento translationsLoaded...");
+  window.addEventListener("translationsLoaded", () => {
+    console.log("✅ Evento translationsLoaded detectado");
+    iniciarUI();
+  }, { once: true });
+
+  // Fallback por si el evento no llega (seguridad)
+  setTimeout(() => {
+    if (!window.loadedTranslations?.phrases?.length) {
+      console.warn("⚠️ No se recibieron traducciones; iniciando con texto vacío");
+      iniciarUI();
+    }
+  }, 2000);
 });
