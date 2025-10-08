@@ -3,15 +3,14 @@
    HEADER Y WRAPPERS
 ============================== */
 #site-header {
-  position: fixed;
-  inset: 0;
-  z-index: 1000; /* header base */
+  position: relative;
+  z-index: 1000;
 }
 /* ==============================
    MENÚ FULLSCREEN
 ============================== */
 
-.menu-fullscreen {
+/* .menu-fullscreen {
   position: fixed;
   inset: 0;
   display: flex;
@@ -34,22 +33,45 @@
   transform: rotateY(-90deg);
 
   opacity: 0;
-  pointer-events: none; /* cerrado = no clickeable */
+  pointer-events: none; /* cerrado = no clickeable 
+  transition: opacity 0.4s ease, transform 0.6s ease;
+} */
+
+.menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 6rem 4rem;
+  background: rgba(77, 77, 77, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s ease, transform 0.6s ease;
 }
 
 .menu-fullscreen.show {
   opacity: 1;
-  pointer-events: auto;   /* abierto = clickeable */
-  transform: rotateY(0);  /* animación 3D */
+  pointer-events: auto; /* abierto = clickeable */
+  transform: rotateY(0); /* animación 3D */
 }
 /* wrapper para animación 3D */
 .menu-wrapper {
   position: fixed;
   inset: 0;
   perspective: 1200px;
-  z-index: 9999;         /* SIEMPRE arriba de todo */
-  pointer-events: none;  /* cerrado = no bloquea clics */
+  z-index: 9999; /* SIEMPRE arriba de todo */
+  pointer-events: none; /* cerrado = no bloquea clics */
 }
 
 #fullscreen-menu {
@@ -126,16 +148,17 @@
   z-index: 99999 !important;
 }
 
-
-
-
-
 /* ==============================
    BOTÓN DE CIERRE
 ============================== */
+.close-menu,
+.hamburger,
+.lang-btn {
+  z-index: 12000 !important;
+}
 .close-menu {
   position: absolute;
-  top: 2rem;
+  top: 1.5rem;
   right: 2rem;
   width: 56px;
   height: 56px;
@@ -145,9 +168,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
 }
-
 .close-menu::before,
 .close-menu::after {
   content: "";
@@ -158,7 +179,6 @@
   border-radius: 2px;
   transition: transform 0.3s ease, background 0.3s ease;
 }
-
 .close-menu::before {
   transform: rotate(45deg);
 }
@@ -177,7 +197,6 @@
 /* ==============================
    REDES SOCIALES
 ============================== */
-
 
 /* ==============================
    BOTONES LATERALES
@@ -273,7 +292,6 @@
 .blog-item {
   display: flex;
   flex-direction: column;
-
 }
 .blog-thumb {
   width: 100%;
@@ -304,11 +322,9 @@
   text-decoration: none;
 }
 
-
-
 .blog-item a {
   text-decoration: none; /* ❌ quita subrayado del enlace */
-  color: inherit;        /* usa el color de su contenido */
+  color: inherit; /* usa el color de su contenido */
 }
 
 .blog-item a:visited,
@@ -363,7 +379,7 @@ svg {
   top: 1.5rem;
   left: 1rem;
   padding: 0px;
-  width: 80px; 
+  width: 80px;
   pointer-events: auto; /* clickeable */
 }
 
@@ -405,40 +421,28 @@ svg {
 }
 
 .menu-columns {
-
   align-items: top;
 }
 
-  .blog-heading {
-    position: relative;
-    top: -10px;
-  }
+.blog-heading {
+  position: relative;
+  top: -10px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+body.menu-open .secundary-brand {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
 @media (max-width: 768px) {
-
-  
-   .sidebar-buttons {
-      width: 100%; /* Ancho fijo */
-  height: 100px; /* Toda la pantalla */
-    position: fixed;  /* no absolute */
+  .sidebar-buttons {
+    width: 100%; /* Ancho fijo */
+    height: 100px; /* Toda la pantalla */
+    position: fixed; /* no absolute */
     top: 1rem;
     right: 1rem;
-    left: auto !important;  /* anulación fuerte */
+    left: auto !important; /* anulación fuerte */
     bottom: auto;
     flex-direction: row;
     gap: 0.5rem;
@@ -447,7 +451,7 @@ svg {
   }
 
   .sidebar12 {
-    width: 0;  /* "desactiva" la barra lateral en móvil */
+    width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
   }
 
@@ -459,13 +463,11 @@ svg {
     order: 2; /* segundo, a la derecha */
   }
 
-
-
-.menu-columns {
-    grid-template-columns: 1fr; 
+  .menu-columns {
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     width: 100%;
-    justify-items: start;   /* 👈 fuerza alinear al lado izquierdo */
+    justify-items: start; /* 👈 fuerza alinear al lado izquierdo */
   }
 
   .menu-links {
@@ -475,17 +477,17 @@ svg {
   .menu-blog {
     width: 100%;
     margin-top: 0;
-    text-align: left;       /* 👈 asegura alineación de textos a la izquierda */
+    text-align: left; /* 👈 asegura alineación de textos a la izquierda */
   }
 
   .blog-list {
     grid-template-columns: 1fr;
     gap: 1rem;
-    justify-items: start;   /* 👈 asegura que cada post se pegue a la izquierda */
+    justify-items: start; /* 👈 asegura que cada post se pegue a la izquierda */
   }
 
   .blog-item {
-    width: 100%;            /* 👈 que no se encoja al centro */
+    width: 100%; /* 👈 que no se encoja al centro */
   }
 
   .menu__item {
