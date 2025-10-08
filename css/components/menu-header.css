@@ -2,41 +2,29 @@
 /* ==============================
    HEADER Y WRAPPERS
 ============================== */
+
+.figtree-regular {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.figtree-bold {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body{
+  font-family: "Figtree", sans-serif;
+}
 #site-header {
   position: relative;
   z-index: 1000;
 }
-/* ==============================
-   MENÚ FULLSCREEN
-============================== */
-
-/* .menu-fullscreen {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 2rem;
-  padding: 6rem 4rem;
-
-  background: rgba(77, 77, 77, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  transform-origin: left center;
-  transform: rotateY(-90deg);
-
-  opacity: 0;
-  pointer-events: none; /* cerrado = no clickeable 
-  transition: opacity 0.4s ease, transform 0.6s ease;
-} */
-
 .menu-fullscreen {
   position: fixed;
   inset: 0;
@@ -70,7 +58,6 @@
   position: fixed;
   inset: 0;
   perspective: 1200px;
-  z-index: 9999; /* SIEMPRE arriba de todo */
   pointer-events: none; /* cerrado = no bloquea clics */
 }
 
@@ -90,7 +77,6 @@
    ITEMS DE MENÚ
 ============================== */
 .menu__item {
-  font-family: "Figtree", sans-serif;
   font-weight: 400;
   font-size: 1.5rem;
   color: #1a1a1a;
@@ -100,9 +86,8 @@
   width: fit-content;
   padding: 0 2rem;
   margin-left: 0;
-  margin-right: auto;
+  /* margin-right: auto; */
   text-align: left;
-
   opacity: 0;
   transform: translateY(-10px);
   transition: color 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
@@ -114,8 +99,8 @@
 .menu__item::after {
   content: "";
   position: absolute;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1rem;
+  height: 1rem;
   opacity: 0;
   border: 3px solid transparent;
   border-image: linear-gradient(135deg, #18b2e8, #01213e) 1;
@@ -145,63 +130,29 @@
 .menu-wrapper,
 .menu-fullscreen,
 #fullscreen-menu {
-  z-index: 99999 !important;
+  z-index: 99990 !important;
 }
 
-/* ==============================
-   BOTÓN DE CIERRE
-============================== */
-.close-menu,
-.hamburger,
-.lang-btn {
-  z-index: 12000 !important;
-}
-.close-menu {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.close-menu::before,
-.close-menu::after {
-  content: "";
-  position: absolute;
-  width: 32px;
-  height: 4px;
-  background: #1a1a1a;
-  border-radius: 2px;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.close-menu::before {
-  transform: rotate(45deg);
-}
-.close-menu::after {
-  transform: rotate(-45deg);
-}
-.close-menu:hover::before {
-  transform: rotate(135deg);
-  background: #ff6f61;
-}
-.close-menu:hover::after {
-  transform: rotate(-135deg);
-  background: #ff6f61;
-}
 
-/* ==============================
-   REDES SOCIALES
-============================== */
+
+
+
 
 /* ==============================
    BOTONES LATERALES
 ============================== */
-
+.sidebar12 {
+  position: fixed; /* Siempre visible */
+  top: 0;
+  left: 0;
+  width: 100px; /* Ancho fijo */
+  height: 100vh; /* Toda la pantalla */
+  background-color: #1a1a1a02;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
 .sidebar-buttons {
   position: absolute;
   bottom: 1rem;
@@ -276,83 +227,7 @@
   transition: background-color 0.3s ease;
 }
 
-/* ==============================
-   COLUMNAS DE MENÚ
-============================== */
 
-/* opcional: scroll más bonito */
-.menu-blog::-webkit-scrollbar {
-  width: 6px;
-}
-.menu-blog::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
-}
-
-.blog-item {
-  display: flex;
-  flex-direction: column;
-}
-.blog-thumb {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 0 12px 0 12px;
-}
-.blog-info {
-  display: flex;
-  flex-direction: column;
-}
-.blog-title {
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  font-size: 1.5rem;
-  margin: 0;
-  color: #1a1a1a;
-  text-decoration: none;
-}
-.blog-date {
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
-  color: #666;
-  text-decoration: none;
-}
-
-.blog-item a:hover .blog-title {
-  text-decoration: none;
-}
-
-.blog-item a {
-  text-decoration: none; /* ❌ quita subrayado del enlace */
-  color: inherit; /* usa el color de su contenido */
-}
-
-.blog-item a:visited,
-.blog-item a:active,
-.blog-item a:hover,
-.blog-item a:focus {
-  text-decoration: none; /* asegura que no reaparezca en hover/active */
-  color: inherit;
-}
-
-.sidebar12 {
-  position: fixed; /* Siempre visible */
-  top: 0;
-  left: 0;
-  width: 100px; /* Ancho fijo */
-  height: 100vh; /* Toda la pantalla */
-  background-color: #1a1a1a02;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-}
-
-.blog-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* las entradas en dos columnas */
-  gap: 2rem;
-}
 .secundary-brand2 .INDI path {
   fill: #1a1a1a;
 }
@@ -383,14 +258,6 @@ svg {
   pointer-events: auto; /* clickeable */
 }
 
-/* Close arriba a la derecha */
-.close-menu {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-}
 
 .menu-columns {
   display: grid;
@@ -424,16 +291,255 @@ svg {
   align-items: top;
 }
 
-.blog-heading {
-  position: relative;
-  top: -10px;
-}
-
 body.menu-open .secundary-brand {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================
+   BOTÓN DE CIERRE (X)
+============================== */
+.close-menu {
+  position: absolute;
+  top: 3rem;
+  right: 10rem;
+  width: 60px;
+  height: 44px;
+  border: none;
+  z-index: 1100;
+  transition: all 0.3s ease;
+   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+}
+
+.close-menu::before,
+.close-menu::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55%;
+  height: 3px;
+  background: #eee;
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.close-menu::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-menu::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+.close-menu {
+  position: absolute;
+  top: 3rem;
+  right: 10rem;
+  width: 60px;
+  height: 44px;
+  border: 2px solid transparent; /* necesario para ver el borde degradado */
+  border-radius: 0 8px 0 8px;
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  cursor: pointer;
+  z-index: 1100;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Líneas de la X */
+.close-menu::before,
+.close-menu::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 3px;
+  background: #eee; /* 👈 color fijo */
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.close-menu::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-menu::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Hover: animar borde y resplandor, pero mantener X blanca */
+.close-menu:hover {
+  box-shadow: 0 0 8px 1px #18b2e880,
+              0 0 16px 3px #ffc04380,
+              0 0 24px 4px #f677a780;
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+}
+
+/* Animación del borde degradado */
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
+
+
+/* ==============================
+   BLOG SECTION
+============================== */
+.menu-blog {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  z-index: 1040;
+}
+
+.blog-heading {
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  position: relative;
+  margin-top: 0rem;
+}
+
+.blog-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+
+
+/* ==============================
+   BLOG LIST & ITEMS
+============================== */
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.blog-item a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 2px solid transparent;
+  border-radius: 0 16px 0 16px;
+  box-shadow: 0 6px 20px #1a1a1a10;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-item a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #1a1a1a12;
+  animation: borderGradient 8s ease infinite;
+  /* background:
+    linear-gradient(#f7f7f7, #f1f1f1) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box; */
+  background-size: 400% 400%;
+}
+
+.blog-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 8px;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+.blog-item:hover .blog-thumb {
+  transform: scale(1.06);
+}
+
+.blog-info {
+  display: flex;
+  flex-direction: column; /* 👈 cambia a columna */
+  align-items: flex-start;
+  /* gap: 0.1rem; /* espacio entre título y fecha */
+  padding: 0.75rem; 
+}
+
+.blog-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a1a;
+  text-decoration: none; /* 👈 sin subrayado */
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #1a1a1a90;
+  opacity: 0.9;
+  text-decoration: none; /* 👈 por si acaso */
+}
+
+/* Asegura que los links del blog no tengan subrayado */
+.blog-item a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .blog-heading {
+    font-size: 2rem;
+  }
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
 @media (max-width: 768px) {
   .sidebar-buttons {
