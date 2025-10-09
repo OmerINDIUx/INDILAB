@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>    
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
 
     <link id="menu-css" rel="stylesheet" href="/css/index.css">
@@ -39,9 +39,22 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script type="module" src="js/demo4/traduction.js"></script>
 
+    <style>
+
+
+    </style>
 </head>
 
 <body>
+<script>
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      location.reload();
+    }, 300); // espera 300ms después de terminar el resize
+  });
+</script>
 
 
     <div class="top-spacer"></div>
@@ -265,10 +278,6 @@
     <div class="scroll-animation">
         <img src="img/Scroll Down.gif" alt="scroll down">
     </div>
-
-
-
-
 
 
 
