@@ -316,14 +316,14 @@ body::before {
 }
 .content--intro {
   z-index: 200;
-  /* background-color: #43d7cd; */
+  background-color: #43d7cd;
 }
 .corner {
   position: absolute;
   width: 30px;
   height: 30px;
   pointer-events: none;
-  /* background-color:  red; */
+  background-color:  red;
 }
 
 .corner-icon {
