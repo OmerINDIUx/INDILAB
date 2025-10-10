@@ -45,6 +45,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.6s ease;
+
 }
 
 .menu-fullscreen.show {
@@ -243,7 +244,7 @@ svg {
 }
 
 .secundary-brand2 {
-  position: absolute;
+  position: fixed;
   top: 1.5rem;
   left: 1rem;
   padding: 0px;
@@ -428,10 +429,14 @@ body.menu-open .secundary-brand {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
-  align-items: stretch;
   width: 100%;
+  flex: 1;
+  min-height: 0;                /* 🔥 evita que herede altura infinita */
+  max-height: calc(100vh - 20rem); /* ajusta según tu layout */
+  overflow-y: auto;             /* activa el scroll */
+  -webkit-overflow-scrolling: touch; /* scroll suave en móvil */
+  padding-right: 0.5rem;        /* evita corte por scrollbar */
 }
-
 .blog-item a {
   position: relative;
   display: flex;

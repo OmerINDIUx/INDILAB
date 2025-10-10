@@ -30,6 +30,10 @@ body {
   overflow-x: hidden;
   box-sizing: border-box;
 }
+body.menu-open {
+  overflow: hidden;
+  height: 100vh; /* evita rebote en iOS */
+}
 
 /* Fondo noise global en el body */
 body::before {
