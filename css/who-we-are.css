@@ -227,7 +227,6 @@ section[style*="background-color: #eeeeee"]::before {
 
 .secundary-brand {
   all: unset;
-
   position: fixed;
   top: 0;
   left: 10px;
@@ -349,22 +348,6 @@ section[style*="background-color: #eeeeee"]::before {
 }
 
 
-
-
-
-/* .statement {
-  position: relative;
-
-  background-color: #1a1a1a;
-  color: #eeeeee;
-  text-align: center;
-  padding: 4rem 10%;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  height: 200vh;
-} */
-
 .brand-icon-back {
   width: 1.2rem;
   height: 1.2rem;
@@ -372,31 +355,14 @@ section[style*="background-color: #eeeeee"]::before {
   display: block;
 }
 
-/* .corner {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  pointer-events: none;
-  background-color: red;
-  z-index: 50;
-} */
 
 .corner-icon {
   position: absolute;
-  z-index: 20;
 }
 
-/* .content-text {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: #fff;
-  position: relative;
-  background-color: blue;
-} */
 
 .statement {
-  position: relative;
+  /* position: relative; */
   height: 100vh; /* solo para que tengas scroll */
   background: #1a1a1a;
 }
@@ -414,12 +380,13 @@ section[style*="background-color: #eeeeee"]::before {
   width: 50px;
   height: 50px;
   pointer-events: none;
-  z-index: 50;
   /* background-color: red; */
 }
 
 
-
+.top-bar {
+  display: none;
+}
 @media (max-width: 768px) {
   body {
     margin: 0;
@@ -457,11 +424,21 @@ section[style*="background-color: #eeeeee"]::before {
     position: fixed;
     top: -0.5rem;
     left: 0.5;
-    z-index: 10;
     width: 80px;
     max-width: 90px;
     padding: 8px;
     background: transparent;
     pointer-events: none; /* Prevents interference with other elements */
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 10;
   }
 }

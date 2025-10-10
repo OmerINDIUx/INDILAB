@@ -10,7 +10,6 @@
   font-style: normal;
 }
 
-
 .figtree-bold {
   font-family: "Figtree", sans-serif;
   font-optical-sizing: auto;
@@ -18,7 +17,7 @@
   font-style: normal;
 }
 
-body{
+body {
   font-family: "Figtree", sans-serif;
 }
 #site-header {
@@ -133,11 +132,6 @@ body{
   z-index: 99990 !important;
 }
 
-
-
-
-
-
 /* ==============================
    BOTONES LATERALES
 ============================== */
@@ -227,7 +221,6 @@ body{
   transition: background-color 0.3s ease;
 }
 
-
 .secundary-brand2 .INDI path {
   fill: #1a1a1a;
 }
@@ -257,7 +250,6 @@ svg {
   width: 80px;
   pointer-events: auto; /* clickeable */
 }
-
 
 .menu-columns {
   display: grid;
@@ -297,24 +289,6 @@ body.menu-open .secundary-brand {
   transition: opacity 0.3s ease;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ==============================
    BOTÓN DE CIERRE (X)
 ============================== */
@@ -327,7 +301,7 @@ body.menu-open .secundary-brand {
   border: none;
   z-index: 1100;
   transition: all 0.3s ease;
-   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
+  border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
   background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
   color: #eee;
@@ -352,7 +326,6 @@ body.menu-open .secundary-brand {
 .close-menu::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
-
 
 .close-menu {
   position: absolute;
@@ -397,9 +370,8 @@ body.menu-open .secundary-brand {
 
 /* Hover: animar borde y resplandor, pero mantener X blanca */
 .close-menu:hover {
-  box-shadow: 0 0 8px 1px #18b2e880,
-              0 0 16px 3px #ffc04380,
-              0 0 24px 4px #f677a780;
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
   background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
   background-size: 400% 400%;
@@ -418,12 +390,6 @@ body.menu-open .secundary-brand {
     background-position: 0% 50%;
   }
 }
-
-
-
-
-
-
 
 /* ==============================
    BLOG SECTION
@@ -454,8 +420,6 @@ body.menu-open .secundary-brand {
   bottom: 0;
   left: 0;
 }
-
-
 
 /* ==============================
    BLOG LIST & ITEMS
@@ -508,7 +472,7 @@ body.menu-open .secundary-brand {
   flex-direction: column; /* 👈 cambia a columna */
   align-items: flex-start;
   /* gap: 0.1rem; /* espacio entre título y fecha */
-  padding: 0.75rem; 
+  padding: 0.75rem;
 }
 
 .blog-title {
@@ -530,6 +494,10 @@ body.menu-open .secundary-brand {
   text-decoration: none;
 }
 
+.top-bar {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .blog-heading {
     font-size: 2rem;
@@ -538,8 +506,6 @@ body.menu-open .secundary-brand {
     grid-template-columns: 1fr;
   }
 }
-
-
 
 @media (max-width: 768px) {
   .sidebar-buttons {
@@ -598,5 +564,16 @@ body.menu-open .secundary-brand {
 
   .menu__item {
     margin: 0;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 0;
   }
 }

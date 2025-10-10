@@ -135,19 +135,45 @@ body::before {
   align-items: center;
   position: relative;
   height: 100vh;
+  
 }
 
+/* Estado base */
 #svg-wrapper {
+  /* evita all: unset; te resetea cosas útiles */
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 200vh; /* o lo que necesites para el scroll */
-  overflow: hidden;
+  height: 200vh; /* tu altura para scroll */
+  z-index: 1;    /* menu debe tener >1 si va encima */
+  background: transparent;
   pointer-events: none;
-  z-index: 0; /* más bajo para que no tape todo */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s ease, visibility 0s linear .3s;
 }
 
+/* Opción A: con clase en body (recomendado) */
+body.menu-open #svg-wrapper {
+  opacity: 0;
+  visibility: hidden;      /* se aplica al final por la transición */
+  pointer-events: none;
+}
+
+/* Opción B: usando :has() (si no quieres tocar JS)
+   -> se oculta si el nav fullscreen tiene la clase .show */
+body:has(#fullscreen-menu.show) #svg-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+
 .svg-containedor {
+    all: unset;
+
   position: absolute;
   top: 0;
   left: 0;
@@ -694,6 +720,9 @@ brands colors
 }
 
 
+.top-bar {
+  display: none;
+}
 
 
 
@@ -805,6 +834,10 @@ brands colors
   .title2 {
     max-width: 80%;
   }
+  
+.top-bar {
+  display: none;
+}
 }
 
 
@@ -927,13 +960,27 @@ brands colors
   .title2 {
     max-width: 80%;
   }
-  .top-spacer {
+  .top-bar {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100px;
-    background: #43d7cd;
-    z-index: 10; /* mucho más bajo */
-  }
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 0;
+  } 
+
+  #svg-wrapper {
+  all: unset;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 200vh;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none; /* desactivar clics */
+  transition: opacity .3s ease, visibility 0s linear .3s;
+}
+
 }

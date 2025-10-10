@@ -29,6 +29,7 @@ body {
   position: relative;
   height: 33vh;
   overflow: hidden;
+  width: 100vw;
 }
 
 /* Fondo con imágenes */
@@ -37,8 +38,6 @@ body {
   inset: 0;
   z-index: 1;
 }
-
-
 
 /* Contenido centrado */
 .carousel-content {
@@ -486,9 +485,6 @@ span {
   align-items: center;
 }
 
-
-
-
 .hero-carousel-section {
   position: relative;
   z-index: 0 !important; /* base */
@@ -514,14 +510,14 @@ span {
 .carousel-background .overlay {
   position: absolute;
   inset: 0; /* cubre toda el área del carrusel */
-  background-color: rgba(26, 26, 26, 0.50); /* #1a1a1a con 15% de opacidad */
+  background-color: rgba(26, 26, 26, 0.5); /* #1a1a1a con 15% de opacidad */
   z-index: 2; /* encima de las imágenes */
   pointer-events: none; /* no bloquea clics */
 }
 
 /* Imágenes del fondo */
 .carousel-img {
-    width: 100%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   position: absolute;
@@ -535,14 +531,15 @@ span {
 }
 /* Imagen activa */
 
-
 /* Contenido (texto, búsqueda, etc.) */
 .carousel-content {
   position: relative;
   z-index: 3; /* siempre arriba del overlay */
 }
 
-
+.top-bar {
+  display: none;
+}
 /* ===================
    RESPONSIVE < 768px
 =================== */
@@ -628,4 +625,25 @@ span {
   .blog-list1 {
     position: relative;
   }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 0;
+  }
+
+  .hero-carousel-section {
+  position: relative;
+  height: 33vh;
+  overflow: hidden;
+  width: 100vw;
+}
+.hero-carousel-section h3 {
+  max-width: 80%;
+}
 }

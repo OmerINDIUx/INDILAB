@@ -46,18 +46,17 @@
 </head>
 
 <body>
-<script>
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      location.reload();
-    }, 300); // espera 300ms después de terminar el resize
-  });
-</script>
+    <script>
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                location.reload();
+            }, 300); // espera 300ms después de terminar el resize
+        });
+    </script>
 
 
-    <div class="top-spacer"></div>
 
 
     <section id="brand" class="brand">
@@ -67,8 +66,6 @@
             <!-- SVG destino (rectángulo, oculto al inicio) -->
             <div id="svg-rect" class="svg-containedor hidden"></div>
         </div>
-
-        <script class="branding" src="js/demo4/animation_brand.js"></script>
     </section>
 
 
@@ -208,12 +205,52 @@
                 <h3 data-i18n="Our work"></h3>
             </a>
         </div>
+        <div class="top-bar"></div>
+
     </section>
 
 
 
+    <!-- ---------------------aquí inicia esl código------------------------------------------- -->
 
 
+
+    <div class="navigation-arrows">
+        <a href="#map">
+            <div class="core-belive">
+                <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                <h3 data-i18n="menu home"></h3>
+            </div>
+        </a>
+
+        <a href="/What_We _Do.html">
+            <div class="our-projects">
+                <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
+                <h3 data-i18n="Our work"></h3>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="scroll-animation">
+        <img src="img/Scroll Down.gif" alt="scroll down">
+    </div>
+
+
+
+
+
+
+
+    <!-- ------js funcionales sin llamdos html---------- -->
+             <script class="branding" src="js/demo4/animation_brand.js"></script>
+
+    <script src="js/demo4/miniscritps.js"></script>
+
+    <script src="js/demo4/RaditionAndWheather.js"></script>
+
+    <script src="js/demo4/butoms_prueba.js"></script>
+    <script src="js/demo4/gsap-menu.js"></script>
 
 
 
@@ -248,55 +285,16 @@
                 script.onload = () => console.log("menu.js cargado correctamente ✅");
                 script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
                 document.body.appendChild(script);
+
+                // 👇 Vuelve a ejecutar traducción después de insertar el menú
+                if (window.applyTranslations) {
+                    window.applyTranslations();
+                }
             })
             .catch(error => {
                 console.error("Ocurrió un error al cargar el menú:", error);
             });
     </script>
-
-    <!-- ---------------------aquí inicia esl código------------------------------------------- -->
-
-
-
-    <div class="navigation-arrows">
-        <a href="#map">
-            <div class="core-belive">
-                <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
-                <h3 data-i18n="menu home"></h3>
-            </div>
-        </a>
-
-        <a href="/What_We _Do.html">
-            <div class="our-projects">
-                <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
-                <h3 data-i18n="Our work"></h3>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="scroll-animation">
-        <img src="img/Scroll Down.gif" alt="scroll down">
-    </div>
-
-
-
-
-
-
-
-    <!-- ------js funcionales sin llamdos html---------- -->
-    <script src="js/demo4/miniscritps.js"></script>
-
-    <script src="js/demo4/RaditionAndWheather.js"></script>
-
-    <script src="js/demo4/butoms_prueba.js"></script>
-    <script src="js/demo4/gsap-menu.js"></script>
-
-
-
-
-
 
 </body>
 
