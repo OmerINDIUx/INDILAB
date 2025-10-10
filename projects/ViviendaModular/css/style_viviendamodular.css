@@ -1,4 +1,10 @@
-/* Body */
+@font-face {
+  font-family: "PowerGrotesk";
+  src: url("/../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
+    url("/../fonts/power_grotesk-medium-webfont.woff") format("woff");
+  font-weight: 500; /* o el peso que corresponda */
+  font-style: normal;
+}
 body {
   margin: 0;
   font-family: "Figtree", sans-serif;
@@ -89,7 +95,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* 🔥 rellena todo el espacio */
+  object-fit: cover; /* 🔥 rellena todo el espacio */
   object-position: center;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -121,7 +127,7 @@ section {
 
 .TextLarge h2 {
   font-family: "Figtree", sans-serif;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -157,7 +163,7 @@ section {
 
 .card h1 {
   font-family: "Figtree", sans-serif;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   margin: 0.5rem 0;
 }
 
@@ -233,14 +239,12 @@ p {
 
 /* TITLES */
 .Title {
-  width: 30vw;
+  width: 50vw;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 4vh auto;
   padding: 2rem 1rem;
   text-align: center;
-  font-family: "Figtree", sans-serif;
-  font-weight: 600;
   color: #eee;
   background: transparent;
 }
@@ -260,11 +264,13 @@ p {
 }
 
 .Title h1 {
-  font-family: "Figtree", sans-serif;
-  font-weight: 700;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
   color: #eee;
   font-size: 3rem;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   text-shadow: 0 0 24px #000000a8;
   margin: 0.5rem 0 1rem 0;
 }
@@ -322,7 +328,6 @@ body {
   padding-left: 100px; /* reserva espacio para el menú sin romper ancho */
   box-sizing: border-box;
 }
-
 
 /* Cuando el menú está abierto, oculta el logo */
 .menu-fullscreen.show ~ a .secundary-brand {

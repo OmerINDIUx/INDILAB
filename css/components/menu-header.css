@@ -593,7 +593,7 @@ body.menu-open .secundary-brand {
   }
 
   .blog-item {
-    width: 100%; /* 👈 que no se encoja al centro */
+    width: 80%; /* 👈 que no se encoja al centro */
   }
 
   .menu__item {

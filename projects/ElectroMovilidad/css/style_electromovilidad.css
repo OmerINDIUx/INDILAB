@@ -124,7 +124,7 @@ section {
 
 .TextLarge h2 {
   font-family: "Figtree", sans-serif;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -150,7 +150,7 @@ section {
 
 .card h1 {
   font-family: "Figtree", sans-serif;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   margin: 0.5rem 0;
 }
 
@@ -226,7 +226,7 @@ p {
 
 /* TITLES */
 .Title {
-  width: 30vw;
+  width: 50vw;
   min-width: 300px;
   max-width: 600px;
   margin: 4vh auto;
@@ -253,11 +253,12 @@ p {
 }
 
 .Title h1 {
-  font-family: "Figtree", sans-serif;
-  font-weight: 700;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+
   color: #eee;
   font-size: 3rem;
-    /* text-transform: uppercase */;
+  /* text-transform: uppercase */
   text-shadow: 0 0 24px #000000a8;
   margin: 0.5rem 0 1rem 0;
 }

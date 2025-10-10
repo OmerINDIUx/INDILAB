@@ -1,81 +1,93 @@
+// ==================================================
+// ✨ ANIMACIÓN DE ESQUINAS CON GSAP + SCROLLTRIGGER
+// ==================================================
 window.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const bottomLeft = document.querySelector(".corner-bottom-left");
   const topRight = document.querySelector(".corner-top-right");
-  const content = document.querySelector(".content--intro");
 
   // ==================================================
-  // 🧩 CONFIGURACIONES POR BREAKPOINT
+  // 📱 BREAKPOINTS
+  // ==================================================
+  const breakpoints = {
+    largeDesktop: "(min-width: 1441px)",
+    desktop: "(min-width: 1081px) and (max-width: 1440px)",
+    laptop: "(min-width: 901px) and (max-width: 1080px)",
+    tablet: "(min-width: 769px) and (max-width: 900px)",
+    mobileLarge: "(min-width: 481px) and (max-width: 768px)",
+    mobileSmall: "(max-width: 480px)",
+  };
+
+  // ==================================================
+  // 🧩 COORDENADAS BASE (escala relativa)
   // ==================================================
   const cornerEndpoints = {
     largeDesktop: {
-      bottomLeft: { x: 46, y: 650 },
-      topRight: { x: 675, y: 400 },
-      centerOffset: { x: -400, y: 0 },
+      bottomLeft: { x: - 0.2, y: 0.58 },
+      topRight: { x: 0.25, y: 0.37 },
+      centerOffset: { x: -0.28, y: 0 },
     },
     desktop: {
-      bottomLeft: { x: 46, y: 650 },
-      topRight: { x: 675, y: 400 },
-      centerOffset: { x: -380, y: 0 },
+      bottomLeft: { x: - 0.3, y: 0.58 },
+      topRight: { x: 0.21, y: 0.37 },
+      centerOffset: { x: -0.26, y: 0 },
     },
     laptop: {
-      bottomLeft: { x: -230, y: 610 },
-      topRight: { x: 600, y: 445 },
-      centerOffset: { x: -360, y: 0 },
+      bottomLeft: { x: -0.05, y: 0.85 },
+      topRight: { x: 0.68, y: 0.50 },
+      centerOffset: { x: -0.24, y: 0 },
     },
     tablet: {
-      bottomLeft: { x: -190, y: 610 },
-      topRight: { x: 520, y: 445 },
-      centerOffset: { x: -340, y: 0 },
+      bottomLeft: { x: -0.10, y: 0.85 },
+      topRight: { x: 0.60, y: 0.50 },
+      centerOffset: { x: -0.22, y: 0 },
     },
     mobileLarge: {
-      bottomLeft: { x: -5, y: 640 },
-      topRight: { x: 430, y: 390 },
-      centerOffset: { x: -150, y: 0 },
+      bottomLeft: { x: 0.05, y: 0.90 },
+      topRight: { x: 0.55, y: 0.45 },
+      centerOffset: { x: -0.12, y: 0 },
     },
     mobileSmall: {
-      bottomLeft: { x: -55, y: 640 },
-      topRight: { x: 335, y: 400 },
-      centerOffset: { x: -260, y: 0 },
+      bottomLeft: { x: 0.02, y: 0.90 },
+      topRight: { x: 0.48, y: 0.45 },
+      centerOffset: { x: -0.18, y: 0 },
     },
   };
 
   // ==================================================
-  // 📐 FUNCIÓN PARA CALCULAR POSICIONES REALES
+  // 📐 CALCULAR POSICIONES REALES
   // ==================================================
   function getCornerPositions(context) {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    // Detecta el breakpoint activo
     const activeKey = Object.keys(cornerEndpoints).find((key) => context.conditions[key]);
     const cfg = cornerEndpoints[activeKey];
 
-    // Calcula coordenadas absolutas con offsets proporcionales al viewport
     return {
       bottomLeft: {
-        x: (-w / 4) + cfg.bottomLeft.x,
-        y: cfg.bottomLeft.y,
+        x: w * cfg.bottomLeft.x,
+        y: h * cfg.bottomLeft.y,
       },
       topRight: {
-        x: (-w / 4) + cfg.topRight.x,
-        y: cfg.topRight.y,
+        x: w * cfg.topRight.x,
+        y: h * cfg.topRight.y,
       },
       center: {
-        x: w / 4 + cfg.centerOffset.x,
-        y: h / 4 + cfg.centerOffset.y,
+        x: w * (0.5 + cfg.centerOffset.x),
+        y: h * 0.5 + cfg.centerOffset.y,
       },
     };
   }
 
   // ==================================================
-  // 🎬 FUNCIÓN DE ANIMACIÓN
+  // 🎬 ANIMACIÓN PRINCIPAL
   // ==================================================
   function animateCorners(context) {
     const pos = getCornerPositions(context);
 
-    // Posición inicial → centro de la pantalla
+    // Posición inicial → centro
     gsap.set([bottomLeft, topRight], {
       position: "absolute",
       x: pos.center.x,
@@ -83,19 +95,26 @@ window.addEventListener("DOMContentLoaded", () => {
       opacity: 0,
     });
 
-    // Timeline con ScrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#brand",
         start: "bottom center",
         end: "bottom top",
         scrub: true,
+        invalidateOnRefresh: true,
         // markers: true,
+        onRefresh: () => {
+          const newPos = getCornerPositions(context);
+          gsap.set([bottomLeft, topRight], {
+            x: newPos.center.x,
+            y: newPos.center.y,
+          });
+        },
         onLeaveBack: () => {
-          // Retorno suave al centro al volver hacia arriba
+          const newPos = getCornerPositions(context);
           gsap.to([bottomLeft, topRight], {
-            x: pos.center.x,
-            y: pos.center.y,
+            x: newPos.center.x,
+            y: newPos.center.y,
             opacity: 0,
             duration: 0.6,
             ease: "power2.out",
@@ -104,7 +123,6 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     });
 
-    // Animación simultánea de las esquinas
     tl.to(bottomLeft, {
       x: pos.bottomLeft.x,
       y: pos.bottomLeft.y,
@@ -125,34 +143,30 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==================================================
-  // 📱 MATCHMEDIA RESPONSIVO
+  // ⚙️ MATCHMEDIA RESPONSIVO
   // ==================================================
   const mm = gsap.matchMedia();
 
-  mm.add(
-    {
-      largeDesktop: "(min-width: 1441px)",
-      desktop: "(min-width: 1081px) and (max-width: 1440px)",
-      laptop: "(min-width: 901px) and (max-width: 1080px)",
-      tablet: "(min-width: 769px) and (max-width: 900px)",
-      mobileLarge: "(min-width: 481px) and (max-width: 768px)",
-      mobileSmall: "(max-width: 480px)",
-    },
-    (context) => {
-      animateCorners(context);
-    }
-  );
+  function initMatchMedia() {
+    mm.add(breakpoints, (context) => {
+      const tl = animateCorners(context);
+      ScrollTrigger.refresh();
+      return () => tl.kill(); // Limpieza cuando cambia el breakpoint
+    });
+  }
+
+  initMatchMedia();
 
   // ==================================================
-  // 🔄 REACCIÓN AL RESIZE (con debounce)
+  // 🔄 REFRESH AL RESIZE (con debounce)
   // ==================================================
   let resizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
+      mm.kill();
       ScrollTrigger.getAll().forEach((st) => st.kill());
-      mm.revert();
-      mm.refresh();
+      initMatchMedia();
     }, 300);
   });
 });
