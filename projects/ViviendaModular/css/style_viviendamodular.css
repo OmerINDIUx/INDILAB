@@ -1,34 +1,49 @@
+/* ===========================
+   FUENTE PERSONALIZADA
+=========================== */
 @font-face {
   font-family: "PowerGrotesk";
   src: url("/../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
     url("/../fonts/power_grotesk-medium-webfont.woff") format("woff");
-  font-weight: 500; /* o el peso que corresponda */
+  font-weight: 500;
   font-style: normal;
 }
+
+/* ===========================
+   BASE GENERAL
+=========================== */
+html,
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  /* width: calc(100% - 100px); */
-  /* margin-left: 100px; */
+  background-color: #1a1a1a;
+  color: #eee;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  background-color: #1a1a1a;
-  color: #eeeeee;
+  box-sizing: border-box;
+  padding-left: 50px; /* reserva espacio para el menú lateral */
 }
 
-/* Secciones generales */
+/* ===========================
+   SECCIONES GENERALES
+=========================== */
 section {
-  padding: 6rem 10%;
   position: relative;
   height: 100vh;
+  padding: 6rem 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-/* Ruido automático en bloques con fondo #eee */
+
+/* ===========================
+   RUIDO EN BLOQUES CLAROS
+=========================== */
 *[style*="background: #eee"],
 *[style*="background: #eeeeee"],
 *[style*="background-color: #eee"],
@@ -38,7 +53,7 @@ section {
 .TextLarge,
 .image-section {
   position: relative;
-  background-color: #eeeeee;
+  background-color: #eee;
   overflow: hidden;
 }
 
@@ -52,157 +67,24 @@ section {
 .image-section::before {
   content: "";
   position: absolute;
-  top: -100%;
-  left: -100%;
-  /* width: 300%; */
+  inset: -100%;
   height: 300%;
-  background-image: url("../../../img/noise.png");
-  background-repeat: repeat;
+  background: url("../../../img/noise.png") repeat;
   opacity: 0.3;
   pointer-events: none;
   animation: grain 8s steps(10) infinite;
   z-index: 0;
 }
 
-/* Contenido encima del ruido */
 #image-sequence > *,
 .card > *,
 .TextLarge > * {
   position: relative;
 }
 
-/* VIDEO */
-.video-scroll-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100dvh; /* altura visible de pantalla */
-  left: 100px;
-}
-
-.video-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 100px;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.video-fullscreen video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 🔥 rellena todo el espacio */
-  object-position: center;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-/* CANVAS */
-#image-sequence {
-  display: block;
-
-  height: 100vh;
-  left: 100px;
-  background: #eeeeee;
-}
-
-/* TEXTO */
-.TextLarge {
-  /* margin-top: 12vh; */
-  text-align: center;
-  font-size: 1rem;
-  color: #1a1a1a;
-  padding: 4rem 2rem;
-}
-
-.TextLarge div {
-  max-width: 800px;
-  text-align: justify;
-  color: black;
-  line-height: 1.8;
-}
-
-.TextLarge h2 {
-  font-family: "Figtree", sans-serif;
-  /* text-transform: uppercase */
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  color: black;
-}
-
-/* SECCIONES */
-/* section {
-  min-height: 105vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
-} */
-
-/* CARDS */
-.card {
-  color: black;
-  padding: 2rem;
-  border-radius: 0 2rem 0 2rem;
-  max-width: 800px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-.card h2,
-.card h3 {
-  font-family: "Figtree", sans-serif;
-  font-weight: 700;
-  margin: 0.5rem 0;
-}
-
-.card h1 {
-  font-family: "Figtree", sans-serif;
-  /* text-transform: uppercase */
-  margin: 0.5rem 0;
-}
-
-.card p {
-  line-height: 1.5;
-}
-
-p {
-  color: black;
-}
-
-.black {
-  color: black;
-}
-
-.image-section {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  scroll-snap-align: start;
-  background-color: #eee;
-  color: #1a1a1a;
-}
-
-.card-image {
-  text-align: center; /* opcional, por si quieres centrar contenido */
-}
-
-.card-img {
-  max-width: 40%;
-  min-width: 20%;
-  border-radius: 0 2rem 0 2rem;
-  margin-bottom: 1rem;
-}
-
-/* ANIMACIÓN NOISE */
+/* ===========================
+   ANIMACIÓN DE RUIDO
+=========================== */
 @keyframes grain {
   0%,
   100% {
@@ -237,72 +119,189 @@ p {
   }
 }
 
-/* TITLES */
-.Title {
-  width: 50vw;
-  min-width: 300px;
-  max-width: 800px;
-  margin: 4vh auto;
-  padding: 2rem 1rem;
-  text-align: center;
-  color: #eee;
-  background: transparent;
+/* ===========================
+   VIDEO FULLSCREEN
+=========================== */
+.video-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  left: 100px;
 }
 
-.Title h2,
-.Title h3 {
+.video-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 100px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.video-fullscreen video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* ===========================
+   SECUENCIA DE IMÁGENES
+=========================== */
+#image-sequence {
+  display: block;
+  height: 100vh;
+  left: 100px;
+  background: #eee;
+}
+
+/* ===========================
+   TEXTO GRANDE
+=========================== */
+.TextLarge {
+  text-align: center;
+  font-size: 1rem;
+  color: #1a1a1a;
+  padding: 4rem 2rem;
+  padding-top: 0;
+}
+
+.TextLarge div {
+  max-width: 80%;
+  text-align: justify;
+  color: #1a1a1a;
+  line-height: 1.8;
+}
+
+.TextLarge h2 {
+    text-align: center;
+
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 2rem;
+}
+
+/* ===========================
+   CARDS
+=========================== */
+.card {
+  color: #000;
+  padding: 2rem;
+  border-radius: 0 2rem 0 2rem;
+  max-width: 800px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card h1,
+.card h2,
+.card h3 {
   font-family: "Figtree", sans-serif;
-  color: #eee;
-  font-weight: 600;
-  text-shadow: 0 0 16px #000000a8;
   margin: 0.5rem 0;
 }
 
-.Title h2 {
-  font-size: 2rem;
-  letter-spacing: 0.05em;
+.card h2,
+.card h3 {
+  font-weight: 700;
+}
+
+.card p {
+  line-height: 1.5;
+}
+
+/* ===========================
+   IMAGEN SECCIÓN
+=========================== */
+.image-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+}
+
+.card-image {
+  text-align: center;
+}
+
+.card-img {
+  max-width: 40%;
+  min-width: 20%;
+  border-radius: 0 2rem 0 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   TÍTULOS PRINCIPALES
+=========================== */
+.Title {
+  width: 50vw;
+  max-width: 800px;
+  min-width: 300px;
+  margin: 4vh auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: transparent;
+  color: #eee;
 }
 
 .Title h1 {
   font-family: "PowerGrotesk", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-
-  color: #eee;
   font-size: 3rem;
-  /* text-transform: uppercase */
   text-shadow: 0 0 24px #000000a8;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 1rem;
 }
 
+.Title h2,
+.Title h3 {
+  font-family: "Figtree", sans-serif;
+  color: #eee;
+  text-shadow: 0 0 16px #000000a8;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.Title h2 {
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
 .Title h3 {
   font-size: 1.2rem;
   letter-spacing: 0.1em;
 }
 
+/* ===========================
+   LOGO SECUNDARIO
+=========================== */
 .secundary-brand {
-  all: unset;
-  z-index: 0 !important;
   position: fixed;
   top: 0;
   left: 10px;
-  background: transparent;
-  pointer-events: none; /* Prevents interference with other elements */
   width: 80px;
-  max-width: 80px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0 !important;
 }
 
 .secundary-brand img {
   width: 100%;
   height: auto;
   display: block;
-  pointer-events: auto; /* Allows interaction with the logo if needed */
+  pointer-events: auto;
 }
 
-.INDI path {
-  fill: #eee;
-}
-
+.INDI path,
 .LAB path {
   fill: #eee;
 }
@@ -311,25 +310,7 @@ p {
   fill: rgb(226, 70, 43);
 }
 
-html,
-body {
-  overflow-x: hidden; /* corta cualquier desbordamiento horizontal */
-}
-
-body {
-  margin: 0;
-  font-family: "Figtree", sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  background-color: #1a1a1a;
-  color: #eeeeee;
-
-  /* en lugar de margin-left: 100px */
-  padding-left: 100px; /* reserva espacio para el menú sin romper ancho */
-  box-sizing: border-box;
-}
-
-/* Cuando el menú está abierto, oculta el logo */
+/* Ocultar logo cuando el menú se muestra */
 .menu-fullscreen.show ~ a .secundary-brand {
   opacity: 0;
   visibility: hidden;
@@ -337,13 +318,30 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* RESPONSIVE */
+.top-bar {
+  display: none;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
 @media (max-width: 768px) {
-  .video-fullscreen {
-    margin-left: 0;
+  html,
+  body {
+    padding-left: 0; /* quitar espacio lateral */
+  }
+  .video-scroll-wrapper {
+    left: 0;
     width: 100%;
   }
-
+  .video-fullscreen {
+    left: 0;
+    width: 100%;
+  }
+  #image-sequence {
+    left: 0;
+    width: 100%;
+  }
   .card {
     width: 85%;
     max-width: 700px;
@@ -356,11 +354,26 @@ body {
 
   .Title {
     width: 90%;
-    min-width: auto;
     font-size: 1.5rem;
   }
 
   .Title h1 {
     font-size: 2.2rem;
+  }
+
+  .card-img {
+    max-width: 60%;
+
+    margin-bottom: 1rem;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
   }
 }

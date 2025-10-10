@@ -342,14 +342,14 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 }
 .content--intro {
   z-index: 200;
-  background-color: #43d7cd;
+  /* background-color: blue; */
 }
 .corner {
   position: absolute;
   width: 30px;
   height: 30px;
   pointer-events: none;
-  background-color:  red;
+  /* background-color:  red; */
 }
 
 .corner-icon {

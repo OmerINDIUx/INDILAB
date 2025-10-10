@@ -41,7 +41,6 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 10;
 }
 .insersion_mapas {
   background-color: #eee;
@@ -129,7 +128,7 @@ body::before {
 .card > *,
 .TextLarge > * {
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 /* VIDEO */
@@ -168,15 +167,15 @@ body::before {
 .TextLarge {
   text-align: center;
   font-size: 1rem;
-  color: black;
+  color: #1a1a1a;
   padding: 4rem 2rem;
   padding-top: 0;
 }
 
 .TextLarge div {
-  max-width: 900px;
+  max-width: 80%;
   text-align: justify;
-  color: black;
+  color: #1a1a1a;
   line-height: 1.8;
 }
 
@@ -380,10 +379,63 @@ body {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-
+.top-bar {
+  display: none;
+}
 @media (max-width: 768px) {
   .card {
     width: 85%;
     max-width: 700px;
+  }
+
+  html,
+  body {
+    padding-left: 0; /* quitar espacio lateral */
+  }
+  .gif-container {
+    left: 0;
+    width: 100%;
+  }
+  .video-fullscreen {
+    left: 0;
+    width: 100%;
+  }
+  #image-sequence {
+    left: 0;
+    width: 100%;
+  }
+  .card {
+    width: 85%;
+    max-width: 700px;
+  }
+
+  .TextLarge {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .Title {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+
+  .Title h1 {
+    font-size: 2.2rem;
+  }
+
+  .card-img {
+    max-width: 60%;
+
+    margin-bottom: 1rem;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
   }
 }
