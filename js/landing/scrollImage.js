@@ -30,7 +30,7 @@ const allSectionsData = [
     },
     {
       title: "Urban Heat Islands: Open Innovation Challenge",
-      text: "The first INDIx’ Urban Open Innovation Challenge invites architecture, urbanism, and design students to develop creative, actionable solutions that address one of the most pressing climate threats facing cities today. As climate change intensifies, urban heat islands (UHI) disproportionately affect vulnerable communities, impacting public health outcomes, and straining urban infrastructure. This challenge not only aims to surface innovative proposals that blend green and gray infrastructure—such as shading systems, vegetated surfaces, and heat-reflective materials—but also serves as a platform to engage the next generation of urban designers in shaping climate-resilient, equitable cities",
+      text: "The first INDI Lab’ Urban Open Innovation Challenge invites architecture, urbanism, and design students to develop creative, actionable solutions that address one of the most pressing climate threats facing cities today. As climate change intensifies, urban heat islands (UHI) disproportionately affect vulnerable communities, impacting public health outcomes, and straining urban infrastructure. This challenge not only aims to surface innovative proposals that blend green and gray infrastructure—such as shading systems, vegetated surfaces, and heat-reflective materials—but also serves as a platform to engage the next generation of urban designers in shaping climate-resilient, equitable cities",
       img: "../../img/landing/mapa-calor.png",
     },
 

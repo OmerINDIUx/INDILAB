@@ -10,10 +10,8 @@
   "hero_intro_text": "  Cities are living systems where innovation, creativity, and possibilities converge At INDI Lab, we think of cities as dynamic, ever-evolving entities that embody our collective potential. We believe in a future where technology and community work hand in hand to help humanity thrive in urban environments.",
   "icon_start_alt": "Start icon",
   "icon_end_alt": "End icon",
-  "cdmx traffic page food1": "Simulated daily vehicle trips in CDMX by time of day.  ",
-  "cdmx traffic page food2": "Each bold dot represents 100 trips, and each small dot represents 50 trips.",
+  "cdmx traffic page food1": "Simulated daily vehicle trips in CDMX by time of day. Each bold dot represents 100 trips, and each small dot represents 50 trips. Data analysis and visualization by INDI Lab.",
 
-  "cdmx traffic page food3": "Data analysis and visualization by INDI Lab.",
 
   "Technology as a Force for": " Technology as a Force ",
   "Human Potential": " for Human Potential",
@@ -61,7 +59,7 @@
   "who we are": "Who We Are",
   "who we are sub": "Innovation at the Intersection of Cities, Infrastructure, Technology, and Community",
 
-  "who mwe are intro": "INDIx is Grupo INDI’s",
+  "who mwe are intro": "INDI Lab is Grupo INDI’s",
   "who mwe are spam": "urban innovation lab and venture platform,",
   "who we are text": "an incubator and R&D engine that mobilizes shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate execution and scale transformative urban solutions.",
 
@@ -126,7 +124,7 @@
   "Applied research, data analysis, and strategic studies": "Applied research, data analysis, and strategic studies",
   "Applied research, data analysis, and strategic studies text": "that not only support implementation but also contribute to global urban discourse and policymaking.",
   "infra_title": "Infrastructure-Backed Execution",
-  "infra_text": "Embedded within Grupo INDI, INDIx leverages national-scale construction capacity to reduce R&D risk and accelerate implementation through real-world projects.",
+  "infra_text": "Embedded within Grupo INDI, INDI Lab leverages national-scale construction capacity to reduce R&D risk and accelerate implementation through real-world projects.",
 
   "pipeline_title": "Prototype–Deploy–Scale Pipeline",
   "pipeline_text": "We turn concepts into pilots, and pilots into replicable solutions — heavy focus on data-driven scaling, and IP retention that can be licensed or scaled through public funding.",
