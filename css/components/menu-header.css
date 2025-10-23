@@ -441,7 +441,7 @@ body.menu-open .secundary-brand {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
   border: 2px solid transparent;
   border-radius: 0 16px 0 16px;
   box-shadow: 0 6px 20px #1a1a1a10;
