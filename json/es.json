@@ -1,24 +1,30 @@
 {
-  "menu home": "Nuestros Fundamentos",
-  "Our work": "Nuestro trabajo",
+  "menu home": "Nuestra Visión",
+  "Our work": "Nuestro Trabajo",
   "menu about": "Quiénes Somos",
-  "menu projects": "Nuestro trabajo",
+  "menu projects": "Nuestro Trabajo",
   "menu contact": "Nuestro Enfoque",
 
   "CDMX Traffic": "Tráfico CDMX",
   "hero_highlighted_text": "",
-  "hero_intro_text": "Las ciudades son sistemas vivos donde convergen la innovación, la creatividad y las posibilidades. En INDI Lab, pensamos las ciudades como entidades dinámicas y en constante evolución que reflejan nuestro potencial colectivo. Creemos en un futuro donde la tecnología y la comunidad trabajen de la mano para que la humanidad prospere en los entornos urbanos.",
+  "hero_intro_text": "Las ciudades son sistemas vivos donde convergen la innovación, la creatividad y las posibilidades.",
+  
+  "hero_intro_text1": "En INDI Lab, pensamos las ciudades como entidades dinámicas y en constante evolución que reflejan nuestro potencial colectivo.",
+
+   "hero_intro_text2": "Creemos en un futuro donde la tecnología y la comunidad trabajen de la mano para que la humanidad prospere en los entornos urbanos.",
+  
+  
   "icon_start_alt": "Ícono inicial",
   "icon_end_alt": "Ícono final",
   "cdmx traffic page food1": "Viajes vehiculares diarios simulados en CDMX según la hora del día.",
   "cdmx traffic page food2": "Cada punto grande representa 100 viajes y cada punto pequeño representa 50 viajes.",
   "cdmx traffic page food3": "Análisis y visualización de datos por INDI Lab.",
 
-  "Technology as a Force for": "La tecnología como fuerza",
-  "Human Potential": " para el potencial humano",
-  "text of Human Potential": "Así como las ciudades son crisoles de innovación, la tecnología puede ser un catalizador que libere y amplifique el potencial humano. Cuando se usa de manera ética, puede empoderar a comunidades olvidadas, revelar necesidades invisibles y fomentar decisiones justas e informadas.",
-  "text of Human Potential 2": "En INDI Lab, la tecnología es un medio para un propósito mayor: mejorar la vida urbana, impulsar la creatividad y encender el progreso.",
+  "Technology as a Force for": "Tecnología para elevar",
+  "Human Potential": " el potencial humano",
+  "text of Human Potential": "Así como las ciudades son motores de innovación, la tecnología puede ser un catalizador que libere y amplifique el potencial humano. Cuando se usa de manera ética, puede empoderar a comunidades históricamente excluidas, revelar necesidades invisibles, y fomentar decisiones justas e informadas.",
 
+  "text of Human Potential 2": "En INDI Lab, la tecnología es un medio para un propósito mayor: mejorar la vida urbana, impulsar la creatividad y encender el progreso.",
   "Experimentation": "Experimentación:",
   "The Pathway to Innovation": " El camino hacia la innovación",
   "text of The Pathway to Innovation": "Adoptamos una mentalidad experimental, formulando hipótesis, creando prototipos, probando en entornos reales y documentando cada resultado. El éxito radica tanto en lo que aprendemos del error como en lo que logramos. Cada experimento —sea éxito o fracaso— amplía nuestra inteligencia urbana compartida.",
@@ -133,9 +139,9 @@
   "ecosystem_text": "Alianzas estratégicas con universidades, organizaciones sin fines de lucro, startups de tecnología cívica y gobiernos.",
 
   "data_title": "Datos e Inteligencia Colectiva",
-  "data_text": "Nuestros proyectos son tanto impulsados por datos como guiados por la inteligencia colectiva — combinando análisis cuantitativo con estrategias de participación comunitaria para garantizar que cada intervención sea sensible al contexto, socialmente fundamentada y responda a las necesidades de las personas y los lugares."
+  "data_text": "Nuestros proyectos son tanto impulsados por datos como guiados por la inteligencia colectiva — combinando análisis cuantitativo con estrategias de participación comunitaria para garantizar que cada intervención sea sensible al contexto, socialmente fundamentada y responda a las necesidades de las personas y los lugares.",
 
-
+"Co-creating the future":"Cocreando el futuro de las ciudades con datos, diseño y tecnología."
 
 
 }

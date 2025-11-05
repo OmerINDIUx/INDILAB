@@ -66,6 +66,9 @@
             <!-- SVG destino (rectángulo, oculto al inicio) -->
             <div id="svg-rect" class="svg-containedor hidden"></div>
         </div>
+        <div class="navigation-arrows2">
+            <h2 data-i18n="Co-creating the future"></h2>
+        </div>
     </section>
 
 
@@ -84,7 +87,9 @@
                         <div class="content--intro">
                             <p class="text-large_w">
                                 <!-- <mark class="hx hx-3" data-i18n="hero_highlighted_text"></mark> <br> -->
-                                <span data-i18n="hero_intro_text"></span>
+                                <span data-i18n="hero_intro_text"></span> <br>
+                                <span data-i18n="hero_intro_text1"></span><br>
+                                <span data-i18n="hero_intro_text2"></span>
                             </p>
                         </div>
                     </div>
@@ -152,20 +157,9 @@
         </div>
     </section>
 
-    <section class="text-image-section2">
-        <div class="container2">
-            <div class="image-column2">
-                <!-- <div class="color_brand content__img content__img--large" id="circle_arrow"></div> -->
-
-                <div class="content__img-wrapper2"></div>
-            </div>
-            <div class="text-column2">
-                <h2 class="title2"></h2>
-                <p class="text-content2"></p>
-            </div>
-        </div>
-
-    </section>
+<style>.title2 span {
+  display: block;
+}</style>
 
     <script src="js/demo4/revealTextImages.js">  </script>
 
@@ -190,6 +184,8 @@
             });
         </script>
 
+
+
         <div>
             <div class="content content--highlight content--outro section">
                 <p class="text-large_w" data-i18n="text of the to Action">
@@ -200,7 +196,7 @@
 
         <div class="navigation-arrows-whatwedo">
 
-            <a href="/What_We _Do.html" class="our-projects">
+            <a href="/What_We_Do.html" class="our-projects">
                 <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
                 <h3 data-i18n="Our work"></h3>
             </a>
@@ -214,8 +210,10 @@
     <!-- ---------------------aquí inicia esl código------------------------------------------- -->
 
 
-
     <div class="navigation-arrows">
+
+
+
         <a href="#map">
             <div class="core-belive">
                 <img src="svg/brand_icon_back.svg" alt="Brand Icon Back" class="brand-icon-back" />
@@ -223,7 +221,7 @@
             </div>
         </a>
 
-        <a href="/What_We _Do.html">
+        <a href="/What_We_Do.html">
             <div class="our-projects">
                 <img src="svg/brand_icon_right.svg" alt="Brand Icon Back" class="brand-icon-back" />
                 <h3 data-i18n="Our work"></h3>
@@ -243,7 +241,7 @@
 
 
     <!-- ------js funcionales sin llamdos html---------- -->
-             <script class="branding" src="js/demo4/animation_brand.js"></script>
+    <script class="branding" src="js/demo4/animation_brand.js"></script>
 
     <script src="js/demo4/miniscritps.js"></script>
 
@@ -294,6 +292,32 @@
             .catch(error => {
                 console.error("Ocurrió un error al cargar el menú:", error);
             });
+    </script>
+
+    <script>(function () {
+            let resizeTimeout;
+
+            window.addEventListener("resize", () => {
+                clearTimeout(resizeTimeout);
+
+                resizeTimeout = setTimeout(() => {
+                    // Guardar posición actual del scroll
+                    sessionStorage.setItem("scrollPosition", window.scrollY);
+
+                    // Recargar la página (sin cambiar URL ni sección)
+                    location.reload();
+                }, 300); // evita múltiples recargas durante el resize
+            });
+
+            // Al cargar la página, restaurar la posición
+            window.addEventListener("load", () => {
+                const scrollPos = sessionStorage.getItem("scrollPosition");
+                if (scrollPos !== null) {
+                    window.scrollTo(0, parseInt(scrollPos, 10));
+                    sessionStorage.removeItem("scrollPosition");
+                }
+            });
+        })();
     </script>
 
 </body>

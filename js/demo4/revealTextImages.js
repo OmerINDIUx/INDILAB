@@ -23,14 +23,14 @@ const allSectionsData = [
       textKey: "text of Human Potential",
       textKey2: "text of Human Potential 2",
       anim: "img/avance_tech.svg",
-      type: "arrow"
+      type: "arrow",
     },
     {
       titleKey: "Experimentation",
       titleKey2: "The Pathway to Innovation",
       textKey: "text of The Pathway to Innovation",
       anim: "img/experimentation.svg",
-      type: "circle"
+      type: "circle",
     },
     {
       titleKey: "Harnessing",
@@ -38,39 +38,38 @@ const allSectionsData = [
       textKey: "text of the Collective Wisdom",
       textKey2: "text of the Collective Wisdom 2",
       anim: "img/colective.svg",
-      type: "circle"
-    }
-  ],
-  [
+      type: "circle",
+    },
+
     {
       titleKey: "Public-Private Cooperation",
       titleKey2: "A Shared Responsibility",
       textKey: "text of the A Shared Responsibility",
       anim: "img/colaboration.svg",
-      type: "circle"
+      type: "circle",
     },
     {
       titleKey: "A Fluid",
       titleKey2: "and Responsive Agenda",
       textKey: "text of the and Responsive Agenda",
       anim: "img/fluid.svg",
-      type: "circle"
+      type: "circle",
     },
     {
       titleKey: "Collaboration",
       titleKey2: "and Partnership",
       textKey: "text of and Partnership",
       anim: "img/collavoration.svg",
-      type: "circle"
+      type: "circle",
     },
     {
       titleKey: "An Identity Rooted",
       titleKey2: "in Innovation",
       textKey: "text of the in Innovation",
       anim: "img/innovation.svg",
-      type: "circle"
-    }
-  ]
+      type: "circle",
+    },
+  ],
 ];
 
 /**
@@ -81,7 +80,8 @@ async function loadAndAnimateSVG(container, svgPath, type) {
 
   try {
     const response = await fetch(svgPath);
-    if (!response.ok) throw new Error(`No se pudo cargar el SVG: ${response.status}`);
+    if (!response.ok)
+      throw new Error(`No se pudo cargar el SVG: ${response.status}`);
 
     const svgText = await response.text();
     const parser = new DOMParser();
@@ -163,92 +163,88 @@ async function loadAndAnimateSVG(container, svgPath, type) {
 }
 
 // ✅ ScrollTrigger principal
-document.querySelectorAll(".text-image-section2").forEach((sectionEl, sectionIndex) => {
-  logInfo(`Inicializando sección ${sectionIndex}`);
+document
+  .querySelectorAll(".text-image-section2")
+  .forEach((sectionEl, sectionIndex) => {
+    logInfo(`Inicializando sección ${sectionIndex}`);
 
-  const titleEl = sectionEl.querySelector(".text-column2 .title2");
-  const textEl = sectionEl.querySelector(".text-column2 .text-content2");
-  const imgContainer = sectionEl.querySelector(".image-column2 .content__img-wrapper2");
+    const titleEl = sectionEl.querySelector(".text-column2 .title2");
+    const textEl = sectionEl.querySelector(".text-column2 .text-content2");
+    const imgContainer = sectionEl.querySelector(
+      ".image-column2 .content__img-wrapper2"
+    );
 
-  if (!titleEl || !textEl || !imgContainer) {
-    return logWarn(`Sección ${sectionIndex}: faltan elementos`);
-  }
+    if (!titleEl || !textEl || !imgContainer) {
+      return logWarn(`Sección ${sectionIndex}: faltan elementos`);
+    }
 
-  const slides = allSectionsData[sectionIndex];
-  if (!slides || !slides.length) {
-    return logWarn(`Sección ${sectionIndex}: no hay slides definidos`);
-  }
+    const slides = allSectionsData[sectionIndex];
+    let currentIndex = -1;
 
-  let currentIndex = -1;
+    gsap.to(
+      {},
+      {
+        scrollTrigger: {
+          trigger: sectionEl,
+          start: "top top", // ✅ se activa desde que entra al viewport
+          end: "+=" + slides.length * window.innerHeight,
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
 
-  gsap.to({}, {
-    scrollTrigger: {
-      trigger: sectionEl,
-      start: "top top",
-      end: "+=" + slides.length * window.innerHeight,
-      scrub: 1,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const index = Math.floor(progress * slides.length);
+          onUpdate: (self) => {
+            const index = Math.floor(self.progress * slides.length);
+            const data = slides[index];
 
-        if (index !== currentIndex) {
-          currentIndex = index;
-          const data = slides[index];
-          if (!data) return logWarn(`Slide vacío en sección ${sectionIndex}, índice ${index}`);
+            if (index === currentIndex || !data) return;
+            currentIndex = index;
 
-          logInfo(`Sección ${sectionIndex}, mostrando slide ${index}`);
+            // ✅ Alternar texto ↔ imagen (DEBE aplicar al contenedor interno)
+            const container = sectionEl.querySelector(".container2");
+            container.style.flexDirection =
+              index % 2 !== 0 ? "row-reverse" : "row";
 
-          gsap.to([titleEl, textEl, imgContainer], {
-            opacity: 0,
-            y: 30,
-            duration: 0.4,
-            onComplete: () => {
-              // 👉 Ponemos data-i18n en lugar de texto fijo
-              if (data.titleKey2) {
+            // ✅ Fade out
+            gsap.to([titleEl, textEl, imgContainer], {
+              opacity: 0,
+              y: 30,
+              duration: 0.4,
+              onComplete: () => {
+                // ✅ Render dinámico del título
                 titleEl.innerHTML = `
-                  <span data-i18n="${data.titleKey}"></span>
-                  <span data-i18n="${data.titleKey2}"></span>
-                `;
-              } else {
-                titleEl.setAttribute("data-i18n", data.titleKey || "");
-                titleEl.innerHTML = "";
-              }
+        <span data-i18n="${data.titleKey}"></span>
+        ${data.titleKey2 ? `<span data-i18n="${data.titleKey2}"></span>` : ""}
+      `;
 
-              if (data.textKey2) {
+                // ✅ Render dinámico del texto — BUG FIX
                 textEl.innerHTML = `
-                  <p data-i18n="${data.textKey}"></p>
-                  <p data-i18n="${data.textKey2}"></p>
-                `;
-              } else {
-                textEl.setAttribute("data-i18n", data.textKey || "");
-                textEl.innerHTML = "";
-              }
+        <p data-i18n="${data.textKey}"></p>
+        ${data.textKey2 ? `<p data-i18n="${data.textKey2}"></p>` : ""}
+      `;
 
-              // SVG dinámico
-              imgContainer.innerHTML = "";
-              const animDiv = document.createElement("div");
-              animDiv.classList.add("content__img", "content__img--large");
-              animDiv.id = `svg_anim_${sectionIndex}_${index}`;
-              imgContainer.appendChild(animDiv);
-              loadAndAnimateSVG(animDiv, data.anim, data.type);
+                // ✅ Cargar SVG animado
+                imgContainer.innerHTML = "";
+                const animDiv = document.createElement("div");
+                animDiv.classList.add("content__img", "content__img--large");
+                animDiv.id = `svg_anim_${sectionIndex}_${index}`;
+                imgContainer.appendChild(animDiv);
+                loadAndAnimateSVG(animDiv, data.anim, data.type);
 
-              // 👈 Re-traducir con el idioma actual usando traduccion.js expuesto en window
-              if (window.INDI?.translatePage) {
-                window.INDI.translatePage(window.INDI.getCurrentLang());
-              }
+                // ✅ Retraducir texto al idioma actual
+                if (window.INDI?.translatePage) {
+                  window.INDI.translatePage(window.INDI.getCurrentLang());
+                }
 
-              gsap.fromTo(
-                [titleEl, textEl, imgContainer],
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-              );
-            },
-          });
-        }
-      },
-    },
+                // ✅ Fade in
+                gsap.fromTo(
+                  [titleEl, textEl, imgContainer],
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+                );
+              },
+            });
+          },
+        },
+      }
+    );
   });
-});
