@@ -47,7 +47,10 @@
 
   <!-- Contenido principal -->
   <section class="hero">
-    <img src="/img/pexels-vividcafe-681335.jpg" alt="full image" />
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="/video/videoouraproach.mp4" type="video/mp4" />
+      Tu navegador no soporta el elemento de video.
+    </video>
     <div class="hero-text">
       <h1 data-i18n="our approach"> </h1>
       <h2 data-i18n="our approach sub"></h2>
@@ -80,64 +83,82 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
-  gsap.registerPlugin(ScrollTrigger);
+ gsap.registerPlugin(ScrollTrigger);
 
-  const phrases = gsap.utils.toArray(".list .phrase");
+// Selecciona las frases dentro del contenedor .list
+const phrases = gsap.utils.toArray(".list .phrase");
 
-  // Estado base: todas ocultas, pero la primera visible desde el inicio
-  gsap.set(phrases, { opacity: 0, y: 60, filter: "blur(6px)" });
-  if (phrases[0]) gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" });
+// Configuración inicial
+gsap.set(phrases, { opacity: 0, y: 60, filter: "blur(6px)" });
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".list",
-      start: "top top",
-      end: "+=" + phrases.length * window.innerHeight, // espacio por frase
-      scrub: 0.8,
-      pin: true,
-      anticipatePin: 1,
-      // Garantiza que la primera esté visible cuando se fija
-      onEnter: () => phrases[0] && gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" }),
-      onEnterBack: () => phrases[0] && gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" }),
-      // Snap a cada frase con precisión
-      snap: {
-        snapTo: (value) => {
-          const snaps = phrases.map((_, i) => i / (phrases.length - 1));
-          return snaps.reduce((a, b) => Math.abs(b - value) < Math.abs(a - value) ? b : a);
-        },
-        duration: 0.5,
-        ease: "power2.inOut"
+// La primera frase debe ser visible al inicio
+if (phrases[0]) gsap.set(phrases[0], { opacity: 1, y: 0, filter: "blur(0px)" });
+
+// Duraciones de animación
+const D_IN = 0.6,      // entrada
+      D_HOLD = 0.3,    // espera antes de que salga
+      D_OUT = 0.6;     // salida
+
+// Timeline principal controlado por el scroll
+const tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".list",
+    start: "top top",
+    end: "+=" + phrases.length * window.innerHeight, // espacio por frase
+    scrub: 0.85,
+    pin: true,
+    anticipatePin: 1,
+    snap: 1 / (phrases.length - 1),   // snap perfecto por frase
+  }
+});
+
+// Construcción de la secuencia
+phrases.forEach((phrase, i) => {
+
+  if (i === 0) {
+    // La primera ya está visible, solo hacemos hold
+    tl.to({}, { duration: D_HOLD });
+  } else {
+    // Animación de entrada (fade + blur + slide)
+    tl.fromTo(
+      phrase,
+      { opacity: 0, y: 60, filter: "blur(6px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: D_IN,
+        ease: "power3.out",
+        immediateRender: false  // ✅ FIX para permitir reverse
+      }
+    );
+  }
+
+  // Animación de salida (fade + slide up + blur)
+  if (i < phrases.length - 1) {
+    tl.to(
+      phrase,
+      {
+        opacity: 0,
+        y: -60,
+        filter: "blur(6px)",
+        duration: D_OUT,
+        ease: "power3.in",
+        immediateRender: false  // ✅ NECESARIO para scroll up
       },
-      markers: false
-    }
-  });
+      "+=0.25" // pequeño hold para ritmo
+    );
+  }
+});
 
-  const D_IN = 0.6, D_HOLD = 0.3, D_OUT = 0.6;
+// Refrescar el trigger cuando cambie el viewport
+addEventListener("resize", () => ScrollTrigger.refresh());
+addEventListener("beforeunload", () => {
+  ScrollTrigger.getAll().forEach(t => t.kill());
+  tl.kill();
+});
 
-  phrases.forEach((phrase, i) => {
-    // La primera ya está visible: solo “hold” antes de salir
-    if (i === 0) {
-      tl.to({}, { duration: D_HOLD }); // pequeño respiro inicial
-    } else {
-      // Evita que la primera se renderice en 0 con immediateRender:false
-      tl.fromTo(phrase,
-        { opacity: 0, y: 60, filter: "blur(6px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: D_IN, ease: "power3.out", immediateRender: false }
-      );
-    }
 
-    // Todas menos la última se desvanecen para dar paso a la siguiente
-    if (i < phrases.length - 1) {
-      tl.to(phrase, { opacity: 0, y: -60, filter: "blur(6px)", duration: D_OUT, ease: "power3.in" }, "+=0.2");
-    }
-  });
-
-  // Mantenimiento
-  addEventListener("resize", () => ScrollTrigger.refresh());
-  addEventListener("beforeunload", () => {
-    ScrollTrigger.getAll().forEach(t => t.kill());
-    tl.kill();
-  });
 </script>
 
 

@@ -64,7 +64,7 @@ section {
   overflow: hidden;
 }
 
-.hero img {
+.hero video {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -354,11 +354,6 @@ section[style*="background-color: #eeeeee"]::before {
   display: block;
 }
 
-
-
-
-
-
 .brand-icon-back {
   width: 1.2rem;
   height: 1.2rem;
@@ -366,12 +361,10 @@ section[style*="background-color: #eeeeee"]::before {
   display: block;
 }
 
-
 .corner-icon {
   position: absolute;
   z-index: 20;
 }
-
 
 .statement {
   position: relative;
@@ -402,9 +395,6 @@ section[style*="background-color: #eeeeee"]::before {
   color: #eee;
 }
 
-
-
-
 .list2 {
   background-color: #eeeeee;
   color: #1a1a1a;
@@ -430,10 +420,6 @@ section[style*="background-color: #eeeeee"]::before {
   font-weight: 400;
   color: inherit; /* hereda el color de la sección */
 }
-
-
-
-
 
 
 @media (max-width: 768px) {
