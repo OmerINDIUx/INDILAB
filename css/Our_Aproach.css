@@ -382,10 +382,15 @@ section[style*="background-color: #eeeeee"]::before {
 .content-text {
   max-width: 800px;
   margin: 0 auto;
-  color: #fff;
   /* background-color: aqua; */
   position: relative; /* MUY IMPORTANTE para calcular bien */
 }
+
+.content-text h2{
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+
+  }
 
 .corner {
   position: absolute;

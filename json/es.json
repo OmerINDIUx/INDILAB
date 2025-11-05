@@ -62,7 +62,9 @@
   "info phi": "La página de INDI Lab está diseñada y desarrollada para interactuar con información sobre clima, radiación, temperatura y tráfico de la Ciudad de México, adaptando su diseño en tiempo real; por eso, rara vez la verás igual.",
 
   "who we are": "Quiénes Somos",
-  "who we are sub": "Innovación en la intersección entre ciudades, infraestructura, tecnología y comunidad",
+  "who we are sub": "Innovación en la intersección entre ciudades,",
+    "who we are sub1": " infraestructura, tecnología y comunidad",
+
 
   "who mwe are intro": "INDI Lab es el",
   "who mwe are spam": "laboratorio de innovación urbana y plataforma de emprendimiento de Grupo INDI,",
@@ -130,10 +132,10 @@
 "Applied research, data analysis, and strategic studies text": "que no solo respaldan la implementación, sino que también aportan al discurso urbano global y a la formulación de políticas públicas.",
 
 "infra_title": "Ejecución con Respaldo en Infraestructura",
-  "infra_text": "Integrado dentro del Grupo INDI, INDI Lab aprovecha la capacidad constructiva a escala nacional para reducir el riesgo en I+D y acelerar la implementación a través de proyectos reales.",
+  "infra_text": "Integrado dentro de Grupo INDI, INDI Lab aprovecha la capacidad constructiva a escala nacional para reducir el riesgo en I+D y acelerar la implementación a través de proyectos reales.",
 
   "pipeline_title": "Prototipar–Implementar–Escalar",
-  "pipeline_text": "Convertimos conceptos en pilotos, y pilotos en soluciones replicables — con un fuerte enfoque en la expansión basada en datos y la retención de propiedad intelectual que puede licenciarse o escalarse mediante financiamiento público.",
+  "pipeline_text": "Convertimos conceptos en pilotos, y pilotos en soluciones replicables — con un fuerte enfoque en la expansión basada en datos.",
 
   "ecosystem_title": "Aprovechamiento del Ecosistema",
   "ecosystem_text": "Alianzas estratégicas con universidades, organizaciones sin fines de lucro, startups de tecnología cívica y gobiernos.",
