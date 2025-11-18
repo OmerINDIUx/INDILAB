@@ -42,7 +42,6 @@ body {
 
 /* Secciones generales */
 section {
-  padding: 6rem 10%;
   position: relative;
   height: 100vh;
   display: flex;

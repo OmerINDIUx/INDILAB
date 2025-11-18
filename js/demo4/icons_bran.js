@@ -13,30 +13,29 @@ window.addEventListener("DOMContentLoaded", () => {
   // -------------------------------------------------------------------
   // 📐 Obtener posiciones según modo (half-screen o full-screen)
   // -------------------------------------------------------------------
-function getPositions() {
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  const isHalf = w >= 1080;
+  function getPositions() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const isHalf = w >= 1080;
 
-  if (isHalf) {
-    // === HALF SCREEN (≥1080px) ===
+    if (isHalf) {
+      // === HALF SCREEN (≥1080px) ===
+      return {
+        mode: "half",
+        center: { x: w / 2, y: h / 2 }, // Punto inicial visible
+        bottomLeft: { x: w / 3, y: h / 3 + h / 4 + 15 },
+        topRight: { x: w / 1.6 + 35, y: h / 3 + 35 },
+      };
+    }
+
+    // === FULL SCREEN (≤1079px) ===
     return {
-      mode: "half",
+      mode: "full",
       center: { x: w / 2, y: h / 2 }, // Punto inicial visible
-      bottomLeft: { x: -w/6, y:  h /3 + h/4 +20 },
-      topRight: { x:w / 6 -10, y: h /3 + 10}
+      bottomLeft: { x: w / 3, y: h / 3 + h / 4 + 15 },
+      topRight: { x: w / 1.6 + 35, y: h / 3 + 35 },
     };
   }
-
-  // === FULL SCREEN (≤1079px) ===
-  return {
-    mode: "full",
-    center: { x: w / 2 - 25, y: h / 2 - 25 },
-    bottomLeft: { x: -w / 2 + 20, y: h / 2 + 50 },
-    topRight: { x: w / 3 - 20, y: h / 3 + 50 }
-  };
-}
-
 
   // -------------------------------------------------------------------
   // 🎬 Crear la animación según el modo activo

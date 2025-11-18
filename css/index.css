@@ -139,7 +139,6 @@ body::before {
   align-items: center;
   position: relative;
   height: 100vh;
-  
 }
 
 /* Estado base */
@@ -150,18 +149,18 @@ body::before {
   left: 0;
   width: 100%;
   height: 200vh; /* tu altura para scroll */
-  z-index: 1;    /* menu debe tener >1 si va encima */
+  z-index: 1; /* menu debe tener >1 si va encima */
   background: transparent;
   pointer-events: none;
   opacity: 1;
   visibility: visible;
-  transition: opacity .3s ease, visibility 0s linear .3s;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 /* Opción A: con clase en body (recomendado) */
 body.menu-open #svg-wrapper {
   opacity: 0;
-  visibility: hidden;      /* se aplica al final por la transición */
+  visibility: hidden; /* se aplica al final por la transición */
   pointer-events: none;
 }
 
@@ -173,10 +172,8 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   pointer-events: none;
 }
 
-
-
 .svg-containedor {
-    all: unset;
+  all: unset;
 
   position: absolute;
   top: 0;
@@ -203,13 +200,11 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   left: -20px;
 }
 
-
-
 .navigation-arrows2 {
-padding-top: 18%;
+  padding-top: 18%;
 }
 .navigation-arrows2 h2 {
-  color : #eee;
+  color: #eee;
 }
 
 .navigation-arrows .core-belive,
@@ -266,42 +261,44 @@ padding-top: 18%;
 /* ===========================
    1. LAYOUT GENERAL
 =========================== */
-.main-content {
-  display: flex;
-  flex-direction: row;
-}
-
+/* Contenedor principal en modo overlay */
 .layout {
-  display: flex;
-  flex-direction: row; /* lado a lado */
-  height: 100vh; /* ocupa toda la pantalla */
-  width: 100vw;
-}
-
-.left-column,
-.right-column {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
   position: relative;
-}
-
-/* Columna izquierda */
-.left-column {
-  flex-direction: column;
-  justify-content: space-between;
-  background: transparent;
-}
-
-/* Columna derecha */
-.right-column {
-  flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
   overflow: hidden;
 }
+
+/* ==== RIGHT COLUMN (MAPA / VIDEO) AL FONDO ==== */
+.right-column {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* atrás */
+  overflow: hidden;
+}
+
+.mapa_video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* el video se adapta sin deformarse */
+  opacity: 0.1; /* ajusta a tu estética */
+}
+
+/* ==== LEFT COLUMN (CONTENIDO) AL FRENTE ==== */
+.left-column {
+  position: relative;
+  z-index: 5; /* al frente */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0); /* transparente */
+}
+
+/* Aseguramos que el texto tenga un máximo de ancho */
 
 /* ===========================
    2. TEXTOS
@@ -319,7 +316,7 @@ padding-top: 18%;
   -ms-hyphens: none;
   overflow-wrap: normal;
   word-break: normal;
-  white-space: normal
+  white-space: normal;
 }
 
 .text-large_M {
@@ -360,15 +357,18 @@ padding-top: 18%;
   --color-highlight-end: var(--color-highlight-start-map, #e7e5d9);
 }
 .content--intro {
-  z-index: 200;
-  /* background-color: blue; */
+  /* --- GLASS EFFECT --- */
+  background: #1a1a1a01; /* azul translúcido (ajustable) */
+  backdrop-filter: blur(4px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  border-radius: 18px 0px 18px 0px;
+  max-width: 80%;
 }
 .corner {
   position: absolute;
   width: 30px;
   height: 30px;
   pointer-events: none;
-  /* background-color:  red; */
 }
 
 .corner-icon {
@@ -418,9 +418,11 @@ padding-top: 18%;
    5. MAPA Y CONTROLES
 =========================== */
 .mapa_video {
-  z-index: 10;
+  z-index: -1;
   height: 100%;
   width: auto;
+  opacity: 1;
+  display: block;
 }
 
 .time-ctrl {
@@ -445,7 +447,7 @@ padding-top: 18%;
   gap: 0.5rem;
   background: #1a1a1a;
   padding: 0.8rem 1rem;
-  border-radius: 10px;
+  border-radius: 10px 0 10px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 220;
 }
@@ -533,7 +535,6 @@ padding-top: 18%;
   justify-content: center; /* centra en X */
   align-items: center; /* centra en Y */
   height: 100vh; /* da el espacio total vertical */
-  gap: 1rem;
 }
 
 /* ===========================
@@ -549,7 +550,7 @@ padding-top: 18%;
   text-align: center;
   color: #eeeeee;
   font-size: 0.9rem;
-  z-index: 230;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -689,10 +690,6 @@ Call to Action
   height: auto;
 }
 
-.stay {
-  margin-left: 100px;
-}
-
 .text-large_w {
   font-family: "Figtree", sans-serif;
   font-optical-sizing: auto;
@@ -743,17 +740,9 @@ brands colors
   display: none;
 }
 
-
 .top-bar {
   display: none;
 }
-
-
-
-
-
-
-
 
 @media (max-width: 1080px) {
   .main-content,
@@ -763,37 +752,25 @@ brands colors
     height: auto;
   }
 
-  .left-column,
-  .right-column {
-    width: 100%;
-    height: auto;
-    padding: 0; /* opcional para que respire */
-  }
 
-  /* Botones hamburguesa y lang a la derecha */
-  #site-header {
-    display: flex;
-    justify-content: flex-end; /* ✅ mueve al lado derecho */
-    align-items: center;
-    padding: 1rem;
-  }
+
+
 
   .text-large_w {
-    max-width: 75%;
-    margin-left: 50px;
+    max-width: 80%;
   }
 
-  .left-column,
+  /* .left-column,
   .right-column {
     width: 100%;
     height: auto;
-  }
+  } */
   .hour {
     font-size: 1.2rem;
     margin-top: -1rem;
   }
   .mapa_video {
-    width: 100%;
+    width: auto;
     height: 100vh;
     object-fit: cover;
     display: block;
@@ -816,7 +793,6 @@ brands colors
     min-height: 100vh; /* opcional: que al menos ocupe la pantalla */
   }
 
-
   .container2 {
     flex-direction: column;
     height: auto;
@@ -824,16 +800,13 @@ brands colors
     justify-content: center;
   }
 
-
-
-
   .text-column2 {
     flex: 1 1 100%;
     height: auto;
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;     /* ⭐ centrado */
+    align-items: center; /* ⭐ centrado */
     justify-content: center; /* ⭐ centrado */
     text-align: center;
   }
@@ -858,22 +831,11 @@ brands colors
   .title2 {
     max-width: 80%;
   }
-  
-.top-bar {
-  display: none;
+
+  .top-bar {
+    display: none;
+  }
 }
-}
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 768px) {
   body {
@@ -895,24 +857,20 @@ brands colors
 
   .main-content,
   .layout {
-    flex-direction: column; /* ✅ apilar */
     width: 100%;
     height: auto;
   }
-
-  .left-column,
+  
+.left-column,
   .right-column {
     width: 100%;
     height: auto;
     padding: 0; /* opcional para que respire */
   }
 
-  /* Botones hamburguesa y lang a la derecha */
   #site-header {
-    display: flex;
-    justify-content: flex-end; /* ✅ mueve al lado derecho */
+
     align-items: center;
-    padding: 1rem;
   }
 
   .text-large_w {
@@ -993,18 +951,17 @@ brands colors
     height: 80px;
     background: #1a1a1a;
     z-index: 0;
-  } 
+  }
 
   #svg-wrapper {
-  all: unset;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 200vh;
-  z-index: 1;
-  background: transparent;
-  pointer-events: none; /* desactivar clics */
-  transition: opacity .3s ease, visibility 0s linear .3s;
-}
-
+    all: unset;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 200vh;
+    z-index: 1;
+    background: transparent;
+    pointer-events: none; /* desactivar clics */
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
 }

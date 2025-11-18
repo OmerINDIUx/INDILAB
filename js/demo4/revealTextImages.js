@@ -200,9 +200,18 @@ document
             currentIndex = index;
 
             // ✅ Alternar texto ↔ imagen (DEBE aplicar al contenedor interno)
+            // ✅ Alternar texto ↔ imagen dependiendo tamaño de pantalla
             const container = sectionEl.querySelector(".container2");
-            container.style.flexDirection =
-              index % 2 !== 0 ? "row-reverse" : "row";
+
+            if (window.innerWidth > 900) {
+              // Desktop (horizontal)
+              container.style.flexDirection =
+                index % 2 !== 0 ? "row-reverse" : "row";
+            } else {
+              // Mobile (vertical con alternancia arriba/abajo)
+              container.style.flexDirection =
+                index % 2 !== 0 ? "column-reverse" : "column";
+            }
 
             // ✅ Fade out
             gsap.to([titleEl, textEl, imgContainer], {

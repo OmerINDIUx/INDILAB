@@ -10,8 +10,8 @@
   "hero_intro_text": "Cities are living systems where innovation, creativity, and possibilities converge.",
   "hero_intro_text1": "At INDI Lab, we think of cities as dynamic, ever-evolving entities that embody our collective potential.",
 
-   "hero_intro_text2": "We believe in a future where technology and community work hand in hand to help humanity thrive in urban environments.",
- 
+  "hero_intro_text2": "We believe in a future where technology and community work hand in hand to help humanity thrive in urban environments.",
+
   "icon_start_alt": "Start icon",
   "icon_end_alt": "End icon",
   "cdmx traffic page food1": "Simulated daily vehicle trips in CDMX by time of day. Each bold dot represents 100 trips, and each small dot represents 50 trips. Data analysis and visualization by INDI Lab.",
@@ -61,8 +61,7 @@
 
   "who we are": "Who We Are",
   "who we are sub": "Innovation at the Intersection of Cities,",
-    "who we are sub1": "Infrastructure, Technology, and Community",
-
+  "who we are sub1": "Infrastructure, Technology, and Community",
 
   "who mwe are intro": "INDI Lab is Grupo INDI’s",
   "who mwe are spam": "urban innovation lab and venture platform,",
@@ -94,7 +93,7 @@
   "data visualization": "GIS platforms, computer vision models, digital twins",
 
   "Modular Housing": "Modular Housing",
-  "December 2024": "December 2024",
+  "December 2024": "Coming Soon",
   "Electromobility": "Electromobility",
   "Urban Heat Islands": "Urban Heat Islands",
   "carrusel indi lab": "INDI Lab projects are as flexible and dynamic as urban life itself.",
@@ -139,5 +138,11 @@
 
   "data_title": "Data & Collective Intelligence",
   "data_text": "Our projects are both data-driven and guided by collective intelligence — combining quantitative analysis with community engagement strategies to ensure that every intervention is context-sensitive, socially grounded, and responsive to the needs of people and place.",
-  "Co-creating the future": "Co-creating the future of cities through data, design, and technology. "
+  "Co-creating the future": "Co-creating the future of cities through data, design, and technology. ",
+
+  "Transit-Oriented Development": "Transit-Oriented Development",
+  "Bio-Responsive Infrastructure": "Bio-Responsive Infrastructure",
+  "Vulnerability of Public Spaces": "Vulnerability of Public Spaces",
+  "Computer Vision for Urban Life": "Computer Vision for Urban Life",
+  "Augmented Reality": "Augmented Reality"
 }

@@ -4,7 +4,7 @@
   const hourLabel = document.getElementById("hourLabel");
 
   // Ruta del video
-  video.src = "video/cdmx_trafico.mp4";
+  video.src = "video/trafico_cdmx.mp4";
 
   const TOTAL_HOURS = 24;
   const SECONDS_PER_HOUR = 10; // 10s = 1h
