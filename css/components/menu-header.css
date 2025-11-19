@@ -45,7 +45,6 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.6s ease;
-
 }
 
 .menu-fullscreen.show {
@@ -147,6 +146,8 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  z-index: 315;
+  
 }
 .sidebar-buttons {
   position: absolute;
@@ -431,11 +432,11 @@ body.menu-open .secundary-brand {
   gap: 1.25rem;
   width: 100%;
   flex: 1;
-  min-height: 0;                /* 🔥 evita que herede altura infinita */
+  min-height: 0; /* 🔥 evita que herede altura infinita */
   max-height: calc(100vh - 20rem); /* ajusta según tu layout */
-  overflow-y: auto;             /* activa el scroll */
+  overflow-y: auto; /* activa el scroll */
   -webkit-overflow-scrolling: touch; /* scroll suave en móvil */
-  padding-right: 0.5rem;        /* evita corte por scrollbar */
+  padding-right: 0.5rem; /* evita corte por scrollbar */
 }
 .blog-item a {
   position: relative;
@@ -499,10 +500,6 @@ body.menu-open .secundary-brand {
   text-decoration: none;
 }
 
-.top-bar {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .blog-heading {
     font-size: 2rem;
@@ -530,14 +527,17 @@ body.menu-open .secundary-brand {
   .sidebar12 {
     width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
+    z-index: 322;
   }
 
   .lang-btn {
     order: 1; /* primero */
+    z-index: 330;
   }
 
   .hamburger {
     order: 2; /* segundo, a la derecha */
+    z-index: 330;
   }
 
   .menu-columns {
@@ -579,6 +579,6 @@ body.menu-open .secundary-brand {
     width: 100vw;
     height: 80px;
     background: #1a1a1a;
-    z-index: 0;
+    z-index: 300;
   }
 }

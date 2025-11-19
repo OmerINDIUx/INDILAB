@@ -139,6 +139,9 @@ body::before {
   align-items: center;
   position: relative;
   height: 100vh;
+  z-index: 321;
+    pointer-events: none; /* deja pasar clics */
+
 }
 
 /* Estado base */
@@ -205,6 +208,10 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 }
 .navigation-arrows2 h2 {
   color: #eee;
+  text-align: center;
+    font-size: 1.2rem;
+
+
 }
 
 .navigation-arrows .core-belive,
@@ -244,7 +251,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   left: 50%;
   top: 90vh; /* 90% de la altura del viewport */
   transform: translateX(-50%) translateY(-50%); /* Centrado horizontal y ajuste vertical */
-  z-index: 100; /* Para que esté encima de otros elementos si es necesario */
+  z-index: 1; /* Para que esté encima de otros elementos si es necesario */
 }
 
 .scroll-animation img {
@@ -270,14 +277,19 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 
 /* ==== RIGHT COLUMN (MAPA / VIDEO) AL FONDO ==== */
 .right-column {
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
   position: absolute;
   top: 0;
-  left: 100px;
+  left: 100px;     /* quitamos 100px porque rompe el centrado */
   width: 100%;
   height: 100%;
-  z-index: 1; /* atrás */
+  z-index: 1;
   overflow: hidden;
 }
+
+
 
 .mapa_video {
   width: 100%;
@@ -295,6 +307,8 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+    pointer-events: none; /* deja pasar clics */
+
   background: rgba(0, 0, 0, 0); /* transparente */
 }
 
@@ -418,7 +432,6 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
    5. MAPA Y CONTROLES
 =========================== */
 .mapa_video {
-  z-index: -1;
   height: 100%;
   width: auto;
   opacity: 1;
@@ -437,19 +450,43 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 /* ===========================
    6. SLIDER HORA
 =========================== */
-/* Contenedor de hora + slider */
+/* Texto de abajo (frases) */
+.video-footer {
+  margin-top: 0.4rem;
+  text-align: center;
+  color: #eeeeee;
+  font-size: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 90%;
+  pointer-events: none;  /* no bloquea clics extra, solo muestra info */
+}
+
+.video-footer .map_food {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+}
 .time-slider-box {
   position: absolute;
-  bottom: 8rem;
+  bottom: 3rem;
   right: 10rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;      /* centra todo horizontalmente */
+  gap: 0.3rem;
   background: #1a1a1a;
-  padding: 0.8rem 1rem;
+  padding: 0.5rem .5rem;
   border-radius: 10px 0 10px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 220;
+  pointer-events: auto;     /* aquí SÍ quieres poder usar el slider */
+}
+
+/* Título "CDMX Traffic" u otro texto arriba */
+.time-slider-box .text-large_M {
+  margin: 0;
+  text-align: center;
 }
 
 /* Hora arriba del slider */
@@ -460,7 +497,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   text-align: center;
   margin: 0;
 }
-
+/* Slider estilizado */
 /* Slider estilizado */
 #hourSlider {
   width: 180px;
@@ -521,7 +558,6 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   color: transparent;
   height: 6px;
 }
-
 /* ===========================
    7. ESTADOS INICIALES
 =========================== */
@@ -542,28 +578,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 =========================== */
 
 /* Contenedor del pie de video */
-.video-footer {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: #eeeeee;
-  font-size: 0.9rem;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  max-width: 90%;
-  pointer-events: none; /* no bloquea clics en el video */
-}
 
-/* Texto de cada línea */
-.video-footer .map_food {
-  margin: 0;
-  font-family: "Figtree", sans-serif;
-  line-height: 1.3;
-}
 
 /* ===========================
    Section stiky
@@ -623,13 +638,13 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 .text-column2 .title2 {
   font-family: "Figtree", sans-serif;
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
   color: #1a1a1a;
 }
 
 .text-column2 .text-content2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -745,92 +760,7 @@ brands colors
 }
 
 @media (max-width: 1080px) {
-  .main-content,
-  .layout {
-    flex-direction: column; /* ✅ apilar */
-    width: 100%;
-    height: auto;
-  }
-
-
-
-
-
-  .text-large_w {
-    max-width: 80%;
-  }
-
-  /* .left-column,
-  .right-column {
-    width: 100%;
-    height: auto;
-  } */
-  .hour {
-    font-size: 1.2rem;
-    margin-top: -1rem;
-  }
-  .mapa_video {
-    width: auto;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
-  }
-
-  .video-footer {
-    bottom: 3.5rem;
-    max-width: 100%;
-    font-size: 0.75rem;
-  }
-
-  .time-slider-box {
-    position: absolute;
-    bottom: 8rem;
-    right: 10rem;
-  }
-
-  .text-image-section2 {
-    height: auto; /* ✅ ya no forzamos altura fija */
-    min-height: 100vh; /* opcional: que al menos ocupe la pantalla */
-  }
-
-  .container2 {
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .text-column2 {
-    flex: 1 1 100%;
-    height: auto;
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* ⭐ centrado */
-    justify-content: center; /* ⭐ centrado */
-    text-align: center;
-  }
-
-  .content__img-wrapper2 {
-    width: 80%;
-    max-width: 80%; /* ✅ full ancho en móvil */
-    min-height: auto;
-  }
-
-  .text-column2 .title2 {
-    font-size: 1.8rem; /* un poco más pequeño para móvil */
-    text-align: center;
-  }
-
-  .text-column2 .text-content2 {
-    font-size: 1rem;
-    text-align: center;
-    align-items: center;
-  }
-  .text-content2,
-  .title2 {
-    max-width: 80%;
-  }
+  
 
   .top-bar {
     display: none;
@@ -861,12 +791,12 @@ brands colors
     height: auto;
   }
   
-.left-column,
+/* .left-column,
   .right-column {
     width: 100%;
     height: auto;
-    padding: 0; /* opcional para que respire */
-  }
+    padding: 0; 
+  } */
 
   #site-header {
 
@@ -877,32 +807,21 @@ brands colors
     max-width: 400px;
   }
 
-  .left-column,
+  /* .left-column,
   .right-column {
     width: 100%;
     height: auto;
-  }
+  } */
   .hour {
     font-size: 1.2rem;
     margin-top: -1rem;
   }
-  .mapa_video {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
-  }
 
-  .video-footer {
-    bottom: 3.5rem;
-    max-width: 100%;
-    font-size: 0.75rem;
-  }
 
   .time-slider-box {
     position: absolute;
-    bottom: 8rem;
-    right: 2rem;
+    bottom: 5rem;
+    right: 8rem;
   }
 
   .text-image-section2 {
@@ -929,30 +848,24 @@ brands colors
   }
 
   .text-column2 .title2 {
+        text-align: center;
+    align-items: center;
     font-size: 1.8rem; /* un poco más pequeño para móvil */
-    text-align: center;
     max-width: 80%;
+      margin: 0 auto;   /* ⭐ Esto lo centra de verdad */
+
   }
 
   .text-column2 .text-content2 {
     font-size: 1rem;
     text-align: center;
+    align-items: center;
   }
-  .text-content2,
-  .title2 {
-    max-width: 80%;
-  }
-  .top-bar {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 80px;
-    background: #1a1a1a;
-    z-index: 0;
-  }
-
+.title2 {
+    text-align: center;
+    align-items: center;
+    }
+ 
   #svg-wrapper {
     all: unset;
     position: fixed;
@@ -961,7 +874,6 @@ brands colors
     height: 200vh;
     z-index: 1;
     background: transparent;
-    pointer-events: none; /* desactivar clics */
     transition: opacity 0.3s ease, visibility 0s linear 0.3s;
   }
 }
