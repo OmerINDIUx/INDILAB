@@ -10,7 +10,7 @@
 }
 
 /* ===========================
-   BASE GENERAL
+   SECCIONES GENERALES
 =========================== */
 html,
 body {
@@ -22,15 +22,13 @@ body {
   line-height: 1.6;
   background-color: #1a1a1a;
   color: #eee;
-  scroll-snap-type: y mandatory;
+  /* Si ves comportamiento raro de ScrollTrigger, prueba quitando esto: */
+  /* scroll-snap-type: y mandatory; */
   overflow-y: scroll;
   box-sizing: border-box;
-  padding-left: 50px; /* reserva espacio para el menú lateral */
+  padding-left: 50px;
 }
 
-/* ===========================
-   SECCIONES GENERALES
-=========================== */
 section {
   position: relative;
   height: 100vh;
@@ -40,6 +38,67 @@ section {
   justify-content: center;
   align-items: center;
 }
+
+#phrase-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+}
+
+.blog-scroll-strip__phrase {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.blog-scroll-strip {
+  width: 100%;
+  position: relative;
+}
+
+#run.blog-scroll-strip {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  padding: .1vh 0;
+  background-color: transparent;
+}
+
+.blog-scroll-strip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-scroll-strip__rail {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* campo de juego para las tarjetas */
+}
+
+.blog-scroll-card {
+  position: absolute;
+  max-width: 360px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  will-change: transform;
+}
+
+.blog-scroll-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1.03);
+  transition: transform 0.5s ease;
+}
+
+
 
 /* ===========================
    RUIDO EN BLOQUES CLAROS
@@ -125,39 +184,30 @@ section {
 .video-scroll-wrapper {
   position: relative;
   width: 100%;
-  height: 100dvh;
-  left: 100px;
+  height: auto;
 }
 
+/* Ocupa toda la pantalla, GSAP la fija y la pega a la izquierda */
 .video-fullscreen {
-  position: fixed;
+  position: fixed; /* o déjalo y GSAP lo sobrescribe igual */
   top: 0;
-  left: 100px;
+  left: 0;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   z-index: 0;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 👈 pegamos el canvas a la DERECHA */
 }
 
-.video-fullscreen video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-/* ===========================
-   SECUENCIA DE IMÁGENES
-=========================== */
+/* Canvas dentro, pegado a la derecha */
 #image-sequence {
   display: block;
+  width: calc(100vw - 100px); /* 👈 vídeo/seq ocupa todo menos 100px */
   height: 100vh;
-  left: 100px;
-  background: #eee;
+  background: #1a1a1a;
 }
 
 /* ===========================
@@ -165,9 +215,9 @@ section {
 =========================== */
 .TextLarge {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #1a1a1a;
-  padding: 4rem 2rem;
+  /* padding: 4rem 2rem; */
   padding-top: 0;
 }
 
@@ -176,25 +226,26 @@ section {
   text-align: justify;
   color: #1a1a1a;
   line-height: 1.8;
+  max-width: 70%;
 }
 
 .TextLarge h2 {
-    text-align: center;
+  text-align: left;
 
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #000;
-  margin-bottom: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
 }
 
 /* ===========================
    CARDS
 =========================== */
 .card {
-  color: #000;
+  color: #1a1a1a;
   padding: 2rem;
   border-radius: 0 2rem 0 2rem;
-  max-width: 800px;
+  max-width: 850px;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
@@ -204,6 +255,7 @@ section {
 .card h3 {
   font-family: "Figtree", sans-serif;
   margin: 0.5rem 0;
+  max-width: 700px;
 }
 
 .card h2,
@@ -221,6 +273,68 @@ section {
 .image-section {
   height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+  padding: 2rem;
+}
+
+.image-section p {
+  font-size: 1.5rem;
+}
+
+.image-section h2 {
+  font-size: 2.5rem;
+}
+.card-image {
+  display: flex;
+  align-items: top;
+  justify-content: top;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.img-wrapper {
+  flex: 1;
+}
+
+.text-wrapper {
+  flex: 1;
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 0 2rem 0 2rem;
+  object-fit: cover;
+}
+
+/* Responsivo — en móvil se apilan */
+@media (max-width: 768px) {
+  .card-image {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .img-wrapper,
+  .text-wrapper {
+    width: 100%;
+  }
+
+  .card-img {
+    max-width: 90%;
+  }
+}
+
+/* ===========================
+   IMAGEN SECCIÓN1
+=========================== */
+.image-section1 {
+  height: 100vh;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -229,16 +343,21 @@ section {
   color: #1a1a1a;
 }
 
-.card-image {
+.card-image1 {
   text-align: center;
 }
 
-.card-img {
-  max-width: 40%;
-  min-width: 20%;
+.card-img1 {
+  max-width: 85%;
+  min-width: 75%;
   border-radius: 0 2rem 0 2rem;
   margin-bottom: 1rem;
 }
+
+/* ===========================
+   BLOG COLLAGE
+=========================== */
+
 
 /* ===========================
    TÍTULOS PRINCIPALES
@@ -246,9 +365,9 @@ section {
 .Title {
   width: 50vw;
   max-width: 800px;
-  min-width: 300px;
-  margin: 4vh auto;
-  padding: 2rem 1rem;
+  min-width: 600px;
+  /* margin: 4vh auto;
+  padding: 2rem 1rem; */
   text-align: center;
   background: transparent;
   color: #eee;
@@ -259,7 +378,7 @@ section {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 3rem;
-  text-shadow: 0 0 24px #000000a8;
+  text-shadow: 0 0 24px #000000b7;
   margin: 0.5rem 0 1rem;
 }
 
@@ -267,13 +386,13 @@ section {
 .Title h3 {
   font-family: "Figtree", sans-serif;
   color: #eee;
-  text-shadow: 0 0 16px #000000a8;
+  text-shadow: 0 0 16px #000000c7;
   margin: 0.5rem 0;
   font-weight: 600;
 }
 
 .Title h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: 0.05em;
 }
 .Title h3 {

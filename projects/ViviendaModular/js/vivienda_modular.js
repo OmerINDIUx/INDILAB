@@ -25,29 +25,48 @@ for (let i = 0; i < frameCount; i++) {
 
 // Ajuste de tamaño del canvas
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // usa las dimensiones calculadas por CSS
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
   render();
 }
+
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
+
 
 // Función de renderizado aplicando zoom fijo
 function render() {
   const img = images[imageSeq.frame];
-  if (img && img.complete) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+  if (!img || !img.complete) return;
 
-    const scaledWidth = canvas.width * zoom.scale;
-    const scaledHeight = canvas.height * zoom.scale;
+  const cw = canvas.width;
+  const ch = canvas.height;
+  const iw = img.width;
+  const ih = img.height;
 
-    // Centrar imagen recortada
-    const offsetX = (canvas.width - scaledWidth) / 2;
-    const offsetY = (canvas.height - scaledHeight) / 2;
+  // ratio de imagen y de canvas
+  const imgRatio = iw / ih;
+  const canvasRatio = cw / ch;
 
-    context.drawImage(img, offsetX, offsetY, scaledWidth, scaledHeight);
-  }
+  // "cover": que llene el canvas sin deformarse
+  const baseScale = Math.max(cw / iw, ch / ih);
+  const scale = baseScale * zoom.scale;
+
+  const drawWidth = iw * scale;
+  const drawHeight = ih * scale;
+
+  // ⬅️ AQUÍ ESTABA EL TEMA
+  // Antes: centrado  -> (cw - drawWidth) / 2
+  // Ahora: pegado al lado derecho
+const offsetX = (cw - drawWidth) / 2;
+  const offsetY = (ch - drawHeight) / 2;    // centrada verticalmente
+
+  context.clearRect(0, 0, cw, ch);
+  context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 }
+
+
 
 // 📌 Pin de la secuencia
 ScrollTrigger.create({
