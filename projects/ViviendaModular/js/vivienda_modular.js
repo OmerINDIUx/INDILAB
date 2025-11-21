@@ -8,7 +8,9 @@ const frameStart = 100;
 const frameEnd = 487;
 const frameCount = frameEnd - frameStart + 1;
 const currentFrame = (index) =>
-  `images/vivienda_modular_sequence/contruccion_vivienda_modular${frameStart + index}.jpg`;
+  `images/vivienda_modular_sequence/contruccion_vivienda_modular${
+    frameStart + index
+  }.jpg`;
 
 const images = [];
 const imageSeq = { frame: 0 };
@@ -34,7 +36,6 @@ function resizeCanvas() {
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-
 // Función de renderizado aplicando zoom fijo
 function render() {
   const img = images[imageSeq.frame];
@@ -59,25 +60,23 @@ function render() {
   // ⬅️ AQUÍ ESTABA EL TEMA
   // Antes: centrado  -> (cw - drawWidth) / 2
   // Ahora: pegado al lado derecho
-const offsetX = (cw - drawWidth) / 2;
-  const offsetY = (ch - drawHeight) / 2;    // centrada verticalmente
+  const offsetX = (cw - drawWidth) / 2;
+  const offsetY = (ch - drawHeight) / 2; // centrada verticalmente
 
   context.clearRect(0, 0, cw, ch);
   context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 }
-
-
 
 // 📌 Pin de la secuencia
 ScrollTrigger.create({
   trigger: ".video-scroll-wrapper",
   start: "top top",
   endTrigger: ".TextLarge",
-  end: "top top",
+  end: "bottom top",
   pin: ".video-fullscreen",
   pinSpacing: false,
   scrub: false,
-  markers: false,
+  markers: true,
 });
 
 // 🎞 Animación de frames ligada al scroll
@@ -97,7 +96,7 @@ gsap.to(imageSeq, {
 
 // Fade out cuando llega el texto
 gsap.to(".video-fullscreen", {
-  opacity: 0,
+  opacity: 0.1,
   ease: "power2.out",
   scrollTrigger: {
     trigger: ".TextLarge",
