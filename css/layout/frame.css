@@ -1,0 +1,144 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+   font-family: "Figtree", sans-serif;
+_bold", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+} */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+
+
+#fullscreen-menu {
+    perspective: 1000px;
+
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+} 
+
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar fijo a la izquierda */
+.sidebar {
+  width: 5%; /* o 5% si prefieres, pero puede ser poco en pantallas grandes */
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Contenido que se adapta */
+
+
+
+
+
+main::before {
+  animation: grain 8s steps(10) infinite;
+  /* background-image: url(../../img/noise-white20x2-01.png); */
+  content: "";
+  height: 300%;
+  left: -50%;
+  opacity: 0.6;
+  position: fixed;
+  top: -100%;
+  width: 300%;
+    /* z-index: 10; */
+
+}
+
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+p {
+  font-family: "B612", sans-serif;
+  font-weight: 400;
+}
+
+span {
+   font-family: "Figtree", sans-serif;
+_light";
+  font-variation-settings: "slnt" 0, "wdth" 100, "wght" 400, "INKT" 400;
+}
+
+.frame {
+  padding: var(--page-padding);
+  position: relative;
+  display: grid;
+  width: 100%;
+  gap: 1rem 2rem;
+  justify-items: start;
+    /* text-transform: uppercase */;
+  font-size: 12px;
+}
+
+.frame--header {
+  height: 100%;
+  background-size: auto 80%;
+  background-position: 120% 50%;
+  background-repeat: no-repeat;
+  grid-template-areas: "title" "heading";
+}
+
+.frame__heading {
+  grid-area: heading;
+  align-self: center;
+  justify-self: start;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+.frame__heading h2 {
+  margin: 0;
+  line-height: 0.9;
+    /* text-transform: uppercase */;
+  margin-left: -0.065em;
+  font-size: clamp(2.2rem, 9vw, 5rem);
+  letter-spacing: 0.105em;
+  font-variation-settings: "slnt" 0, "wdth" 400, "wght" 900, "INKT" 400;
+}

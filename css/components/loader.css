@@ -1,0 +1,181 @@
+/* Fondo general */
+#loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Caja de carga */
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10001;
+  text-align: center;
+}
+
+.complment_loader {
+  font-family: work-sans, sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #eeeeee;
+  align-items: center;
+  text-align: center;
+}
+
+.text_load {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #eeeeee;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Texto animado */
+#text_parpadeando p {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #eeeeee;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  animation: blinkText 1.2s ease-in-out infinite;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blinkText {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Barra de carga opcional */
+#LoadSliderContainer {
+  width: 40%;
+  height: 4px;
+  background-color: #2c2c2c;
+  margin-top: 20px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#LoadSlider {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffcc, #0077ff);
+  transition: width 0.1s ease-in-out;
+}
+
+/* Íconos en las esquinas */
+.corner-icon1 {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 10001;
+}
+
+.top-left1 {
+  top: 0;
+  left: 0;
+}
+
+.bottom-right1 {
+  bottom: 0;
+  right: 0;
+}
+
+/* ---------- Responsive Tablets ---------- */
+@media (max-width: 1024px) {
+  .text_load {
+    font-size: 1.2rem;
+  }
+
+  .complment_loader {
+    font-size: 1.2rem;
+  }
+
+  #text_parpadeando p {
+    font-size: 1rem;
+  }
+
+  #LoadSliderContainer {
+    width: 60%; /* más ancho en tablet */
+  }
+
+  .corner-icon1 {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+/* ---------- Responsive Móviles ---------- */
+@media (max-width: 768px) {
+  .text_load {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .complment_loader {
+    font-size: 1rem;
+    padding: 0 1rem; /* margen lateral para evitar corte en pantallas muy pequeñas */
+  }
+.complment_loader,
+.text_load{
+  max-width: 80%;
+
+
+}
+  #text_parpadeando p {
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+  }
+
+  #LoadSliderContainer {
+    width: 80%; /* aún más ancho para móviles */
+    height: 3px;
+  }
+
+  .corner-icon1 {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Asegurar que el loader no quede apretado */
+  #loader-overlay {
+    padding: 1rem;
+  }
+}

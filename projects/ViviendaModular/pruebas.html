@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Image Sequence</title>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(234, 234, 234);
+            font-family: sans-serif;
+            overflow-x: hidden;
+        }
+
+        .blog-scroll-strip {
+            min-height: 260vh;
+            width: 100%;
+            padding: 8vh 5vw;
+            color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blog-scroll-strip__inner {
+            width: 100%;
+            /* 👉 ahora ocupa todo el ancho disponible */
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .blog-scroll-strip__phrase {
+            position: relative;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .blog-scroll-strip__phrase h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            text-align: center; /* ✔ texto centrado */
+        }
+
+        .blog-scroll-strip__phrase p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #333;
+            text-align: center; /* ✔ texto centrado */
+        }
+
+        .blog-scroll-strip__rail {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            padding-block: 10vh 20vh;
+            width: 100%;        /* ✔ se extiende en toda la página */
+        }
+        .blog-scroll-card {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            will-change: transform;
+            max-width: 360px;          /* ✔ reducimos tamaño */
+        }
+
+        .blog-scroll-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            transform: scale(1.03);
+            transition: transform 0.5s ease;
+        }
+
+        .blog-scroll-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .blog-scroll-strip__rail {
+    position: relative;
+    width: 100%;
+    height: 260vh; /* suficiente espacio vertical */
+}
+
+.blog-scroll-card {
+    position: absolute; /* 👉 ahora podemos distribuirlas libremente */
+}
+.blog-scroll-strip__phrase {
+    position: sticky;
+    transform: translateY(-100%);
+    z-index: 10;
+}
+
+
+        @media (max-width: 860px) {
+            .blog-scroll-strip {
+                min-height: auto;
+                padding: 4vh 5vw 8vh;
+            }
+
+            .blog-scroll-strip__inner {
+                gap: 2.5rem;
+            }
+
+            .blog-scroll-strip__phrase {
+                max-width: 100%;
+            }
+
+            .blog-scroll-strip__phrase h2,
+            .blog-scroll-strip__phrase p {
+                text-align: left;
+            }
+
+            .blog-scroll-strip__rail {
+                padding-block: 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<section class="blog-scroll-strip">
+    <div class="blog-scroll-strip__inner">
+
+        <!-- Texto fijo al centro visual -->
+        <div class="blog-scroll-strip__phrase">
+            <h2>La vivienda modular no se construye, se ensambla.</h2>
+            <p>
+                Una misma lógica, múltiples configuraciones: pieza por pieza, la ciudad puede adaptarse
+                al clima, al tiempo y a las personas.
+            </p>
+        </div>
+
+        <!-- Rail de imágenes -->
+        <div class="blog-scroll-strip__rail">
+            <figure class="blog-scroll-card">
+                <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Montaje de vivienda modular">
+            </figure>
+
+            <figure class="blog-scroll-card">
+                <img src="images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+                     alt="Vivienda modular con paneles solares">
+            </figure>
+
+            <figure class="blog-scroll-card">
+                <img src="images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+                     alt="Conjunto de vivienda modular">
+            </figure>
+        </div>
+    </div>
+</section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = document.querySelector(".blog-scroll-strip");
+    const phrase  = document.querySelector(".blog-scroll-strip__phrase");
+    const rail    = document.querySelector(".blog-scroll-strip__rail");
+
+    if (section && phrase && rail && !rail.dataset.enhanced) {
+        rail.dataset.enhanced = "true";
+
+        // Tarjetas originales
+        const originals = Array.from(rail.querySelectorAll(".blog-scroll-card"));
+
+        // Clonar 2 veces
+        for (let round = 0; round < 2; round++) {
+            originals.forEach((card) => {
+                const clone = card.cloneNode(true);
+                clone.classList.add("is-clone");
+                rail.appendChild(clone);
+            });
+        }
+
+        const allCards = gsap.utils.toArray(".blog-scroll-card");
+
+        // Distribuir las tarjetas aleatoriamente en X (ancho) y Y (a lo largo)
+        function distributeRandomPositions() {
+            const railWidth = rail.offsetWidth;
+            const cardWidth = 360; // coincide con tu max-width
+
+            allCards.forEach(card => {
+                const minX = 0;
+                const maxX = Math.max(railWidth - cardWidth, 0);
+
+                const randomX = gsap.utils.random(minX, maxX);
+                const randomYvh = gsap.utils.random(0, 200); // 👉 máximo 200 "de alto"
+
+                card.style.left = `${randomX}px`;
+                card.style.top  = `${randomYvh}vh`;
+            });
+        }
+
+        // Ejecutar al cargar
+        distributeRandomPositions();
+
+        // Recalcular en resize
+        window.addEventListener("resize", () => {
+            distributeRandomPositions();
+        });
+
+        allCards.forEach((card) => {
+            // Distancia de recorrido en Y (en % del propio elemento), máx 200%
+            const maxTravel = 200;
+            const minTravel = 60;
+            const travel = gsap.utils.random(minTravel, maxTravel);
+
+            const fromY = gsap.utils.random(-20, 20);    // posición relativa inicial
+            const toY   = fromY - travel;                // se mueve hacia arriba
+
+            // Velocidad de scrub random pero razonable
+            // más distancia = scrub un poquito mayor
+            const scrubSpeed = gsap.utils.mapRange(
+                minTravel, maxTravel,
+                0.6, 3.2,
+                travel
+            );
+
+            gsap.fromTo(card,
+                { yPercent: fromY },
+                {
+                    yPercent: toY,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: scrubSpeed
+                    }
+                }
+            );
+        });
+
+        // Pin del texto
+        if (window.innerWidth > 860) {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top center",
+                end: "bottom center",
+                pin: phrase,
+                pinSpacing: false
+            });
+        }
+    }
+</script>
+
+
+
+</body>
+</html>

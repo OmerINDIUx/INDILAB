@@ -1,0 +1,37 @@
+@media screen and (min-width: 63em) {
+  /* body {
+    --page-padding: 2rem 3rem;
+  } */
+  .frame--header {
+    height: 100vh;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "title heading" "title heading";
+  }
+  .frame__heading {
+    margin-top: 0;
+  }
+  .frame__heading h2 {
+    white-space: nowrap;
+  }
+  .content--grid,
+  .content--grid .content__inner {
+    grid-template-areas: "content-img content-title" "content-img content-text";
+    grid-template-columns: 30% auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .left-column, .right-column {
+    flex: 1 1 100%;
+  }
+  header nav.menu-right {
+    display: none; /* puedes mostrar menú hamburguesa */
+  }
+}
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+
+
+
+#prueba {
+  z-index: 810;
+}
+
+#svg-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  overflow: visible;
+}
+
+.icon1 {
+  color: var(--color-highlight-start-map, #e7e5d9);
+}
+

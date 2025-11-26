@@ -1,0 +1,48 @@
+.secundary-brand {
+      all: unset;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: transparent;
+    pointer-events: none; /* Prevents interference with other elements */
+    width: 50px;
+}
+
+.secundary-brand img {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+  .INDI path {
+    fill: #eee;
+  }
+
+  .LAB path {
+    fill: #eee;
+  }
+
+  .colorkey path {
+    fill: rgb(226, 70, 43);
+  }
+
+
+    @media (max-width: 768px) {
+
+.secundary-brand {
+    position: fixed;
+    top: -.5rem;
+    left: .5;
+    z-index: 9999;
+    width: 80px;
+    max-width: 90px;
+    padding: 8px;
+    background: transparent;
+    pointer-events: none; /* Prevents interference with other elements */
+}
+
+
+  }

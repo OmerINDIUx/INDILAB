@@ -1,0 +1,26 @@
+.svg-container {
+  position: absolute;
+  top: 10rem;
+  left: 15rem;
+  right: 0;
+  bottom: 0;
+  height: 150vh;
+  width: 150vw;
+}
+.corner-icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 200;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+

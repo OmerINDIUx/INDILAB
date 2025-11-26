@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+  <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
+
+  <meta charset="UTF-8">
+  <title>Vivienda Modular</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+  <script>document.documentElement.className = "js";</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+
+  <link rel="stylesheet" href="css/style_viviendamodular.css">
+
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/ScrollTrigger.min.js"></script>
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+  <script type="module" src="/js/demo4/traduction.js"></script>
+</head>
+
+<body>
+
+  <!-- <section class="video-scroll-wrapper"></section> -->
+    <div>
+      <div class="video-fullscreen">
+        <canvas id="image-sequence"></canvas>
+      </div>
+    </div>
+
+  <!-- Cards -->
+  <section>
+    <div class="Title">
+      <h2>Nota Conceptual | vivienda </h2>
+      <h1>Vivienda Modular </h1>
+      <h3>Diciembre 2024 </h3>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velitance"</h2>
+    </div>
+  </section>
+
+
+  <section class="TextLarge">
+    <div>
+      <h2 class="white">Subtitulo</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+        into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+        release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+        software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum."
+      </p>
+    </div>
+  </section>
+  <!-- SECTION DEL TEXTO, ESTÁTICO -->
+  <section id="phrase-section">
+    <div class="blog-scroll-strip__phrase">
+      <h2>La vivienda modular no se construye, se ensambla.</h2>
+      <p>
+        Una misma lógica, múltiples configuraciones: pieza por pieza, la ciudad puede adaptarse
+        al clima, al tiempo y a las personas.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION DE LAS IMÁGENES -->
+  <section id="run" class="blog-scroll-strip">
+    <div class="blog-scroll-strip__inner">
+      <div class="blog-scroll-strip__rail">
+        <figure class="blog-scroll-card">
+          <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Montaje de vivienda modular">
+        </figure>
+
+        <figure class="blog-scroll-card">
+          <img src="images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+            alt="Vivienda modular con paneles solares">
+        </figure>
+
+        <figure class="blog-scroll-card">
+          <img src="images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+            alt="Conjunto de vivienda modular">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION DE LAS IMÁGENES -->
+  <section id="run" class="blog-scroll-strip">
+    <div class="blog-scroll-strip__inner">
+      <div class="blog-scroll-strip__rail">
+        <figure class="blog-scroll-card">
+          <img src="images/pexels-david-olaniyi-1926688-10504890.jpg" alt="Montaje de vivienda modular">
+        </figure>
+
+        <figure class="blog-scroll-card">
+          <img src="images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+            alt="Vivienda modular con paneles solares">
+        </figure>
+
+        <figure class="blog-scroll-card">
+          <img src="images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+            alt="Conjunto de vivienda modular">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const phraseSection = document.querySelector("#phrase-section");
+    const runSection = document.querySelector("#run");
+    const rail = document.querySelector("#run .blog-scroll-strip__rail");
+    const cards = gsap.utils.toArray("#run .blog-scroll-card");
+
+    if (phraseSection && runSection && rail && cards.length) {
+
+      function distributeRandomPositions() {
+        const railRect = rail.getBoundingClientRect();
+        const railWidth = railRect.width;
+        const railHeight = railRect.height;
+        const cardWidth = 360;
+
+        cards.forEach(card => {
+          const x = gsap.utils.random(0, Math.max(railWidth - cardWidth, 0));
+          const y = gsap.utils.random(0, railHeight * 0.7);
+
+          // usamos x/y en vez de left/top para que GSAP controle todo
+          gsap.set(card, { x, y });
+        });
+
+        ScrollTrigger.refresh();
+      }
+
+      window.addEventListener("load", () => {
+        // 1) Primero colocamos aleatoriamente las tarjetas
+        distributeRandomPositions();
+
+        // 2) Animación de cada tarjeta al hacer scroll por #run
+        cards.forEach(card => {
+          const fromY = gsap.utils.random(10, 40);
+          const travel = gsap.utils.random(60, 140);
+          const toY = fromY - travel;
+
+          gsap.fromTo(card,
+            { yPercent: fromY },
+            {
+              yPercent: toY,
+              ease: "none",
+              scrollTrigger: {
+                trigger: runSection,       // 👈 ahora el tramo correcto es #run
+                start: "top bottom",       // cuando #run entra por abajo
+                end: "bottom top",         // hasta que #run sale por arriba
+                scrub: true,
+                // markers: true,          // actívalo si quieres debugear
+              }
+            }
+          );
+        });
+
+        // 3) Fijamos el texto mientras dura la sección #run
+        if (window.innerWidth > 860) {
+          ScrollTrigger.create({
+            trigger: runSection,          // tramo definido por #run
+            start: "top bottom",          // cuando #run entra por abajo
+            end: "bottom top",            // hasta que #run sale por arriba
+            pin: phraseSection,           // fijamos TODO el section del texto
+            pinSpacing: false,
+            // markers: true,
+          });
+        }
+      });
+
+      // Recalcular posiciones al redimensionar
+      window.addEventListener("resize", distributeRandomPositions);
+    }
+  </script>
+
+  <section class="TextLarge">
+    <div>
+      <h2 class="white">Contexto:</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+        into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+        release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+        software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum."
+      </p>
+    </div>
+  </section>
+
+  <script src="js/vivienda_modular.js"></script>
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/ScrollTrigger.min.js"></script>
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+
+
+  <div class="top-bar"></div>
+
+
+
+  <div class="menu-placeholder" id="menu-placeholder"></div>
+
+  <script>
+    fetch('/menu.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        const placeholder = document.getElementById('menu-placeholder');
+        if (!placeholder) {
+          throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+        }
+        placeholder.innerHTML = data;
+
+        // Cargar el script después de que el menú esté en el DOM
+        const script = document.createElement('script');
+        script.src = "/js/demo4/menu.js";
+        script.onload = () => console.log("menu.js cargado correctamente ✅");
+        script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+        document.body.appendChild(script);
+
+        // 👇 Vuelve a ejecutar traducción después de insertar el menú
+        if (window.applyTranslations) {
+          window.applyTranslations();
+        }
+      })
+      .catch(error => {
+        console.error("Ocurrió un error al cargar el menú:", error);
+      });
+  </script>
+
+
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector(".secundary-brand");
+    fetch("/svg/indi-lab_Vertical_Animate.svg")
+      .then((response) => response.text())
+      .then((svgText) => {
+        container.innerHTML = svgText;
+      })
+      .catch((err) => console.error("Error cargando SVG:", err));
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section class="contact-next-project">
+
+    <!-- Newsletter -->
+    <div class="newsletter-block">
+      <h2>Suscríbete al newsletter</h2>
+      <p>Recibe novedades, proyectos y recursos exclusivos.</p>
+
+      <form id="newsletter-form" novalidate>
+        <label for="nm-email">Correo electrónico</label>
+        <input id="nm-email" name="email" type="email" required placeholder="correo@ejemplo.com" />
+
+        <label for="nm-name">Nombre (opcional)</label>
+        <input id="nm-name" name="name" type="text" placeholder="Tu nombre" />
+
+        <div class="policy">
+          <input id="nm-policy" name="policy" type="checkbox" required />
+          <label for="nm-policy">
+            Acepto la
+            <a href="/politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>
+          </label>
+        </div>
+
+        <button type="submit" class="newsletter-btn">Suscribirse</button>
+
+        <p id="nm-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- Redes sociales -->
+      <div class="social" aria-label="Redes sociales">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Sugerencia del siguiente proyecto -->
+    <aside class="next-project-block">
+      <h3>Proyectos sugeridos</h3>
+
+      <article class="project-card">
+        <img src="/img/1x/Mesa de trabajo 3.png" alt="Miniatura proyecto siguiente">
+        <div class="project-card__body">
+          <h4>Computer Visión</h4>
+          <p>Configuraciones optimizadas para clima extremo y eficiencia energética.</p>
+          <a href="proyecto-siguiente.html" class="btn project-card__link">Ver proyecto</a>
+        </div>
+      </article>
+      <article class="project-card">
+        <img src="/img/1x/Mesa de trabajo 2.png" alt="Miniatura proyecto siguiente">
+        <div class="project-card__body">
+          <h4>Loroem Ipsum</h4>
+          <p>Configuraciones optimizadas para clima extremo y eficiencia energética.</p>
+          <a href="proyecto-siguiente.html" class="btn project-card__link">Ver proyecto</a>
+        </div>
+      </article>
+    </aside>
+
+    <script>
+      (function () {
+        const form = document.getElementById('newsletter-form');
+        const email = document.getElementById('nm-email');
+        const policy = document.getElementById('nm-policy');
+        const msg = document.getElementById('nm-message');
+
+        function show(message, ok = true) {
+          msg.textContent = message;
+          msg.style.color = ok ? '#0a0' : '#c00';
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          msg.textContent = '';
+
+          if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+            show('Introduce un correo válido.', false);
+            email.focus();
+            return;
+          }
+          if (!policy.checked) {
+            show('Debes aceptar la política de privacidad.', false);
+            return;
+          }
+
+          const payload = {
+            email: email.value.trim(),
+            name: (document.getElementById('nm-name').value || '').trim(),
+            acceptedPolicy: true,
+            source: window.location.pathname
+          };
+
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+            .then(resp => {
+              if (!resp.ok) throw new Error('network');
+              return resp.json().catch(() => ({}));
+            })
+            .then(() => {
+              show('Gracias por suscribirte. Revisa tu correo.', true);
+              form.reset();
+            })
+            .catch(() => {
+              try {
+                const pending = JSON.parse(localStorage.getItem('newsletter_pending') || '[]');
+                pending.push(payload);
+                localStorage.setItem('newsletter_pending', JSON.stringify(pending));
+              } catch (err) { }
+              show('Suscripción guardada localmente. Se intentará enviar cuando haya conexión.', true);
+              form.reset();
+            });
+        });
+      })();
+    </script>
+
+  </section>
+
+</body>
+
+</html>

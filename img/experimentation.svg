@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.line{fill:none;stroke:#000000;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="circle" d="M138.1,209.9c35,0,67.9,13.6,92.7,38.4s38.4,57.7,38.4,92.7s-13.6,67.9-38.4,92.7c-24.8,24.8-57.7,38.4-92.7,38.4
+		s-67.9-13.6-92.7-38.4C20.6,408.9,7,376,7,341s13.6-67.9,38.4-92.7C70.1,223.5,103.1,209.9,138.1,209.9 M138.1,208.7
+		C65,208.7,5.8,267.9,5.8,341S65,473.3,138.1,473.3S270.4,414.1,270.4,341S211.1,208.7,138.1,208.7L138.1,208.7z"/>
+</g>
+<g>
+	<path class="circle" d="M388.7,276.6c43.2,0,78.3,35.1,78.3,78.3s-35.1,78.3-78.3,78.3s-78.3-35.1-78.3-78.3S345.5,276.6,388.7,276.6 M388.7,275.6
+		c-43.8,0-79.3,35.5-79.3,79.3s35.5,79.3,79.3,79.3s79.3-35.5,79.3-79.3S432.5,275.6,388.7,275.6L388.7,275.6z"/>
+</g>
+<path class="line" d="M138,209V108.9c0-22.3,18.1-40.4,40.4-40.4h170.1c22.3,0,40.5,18.1,40.5,40.4V276"/>
+<rect  class="cube" x="281" y="62" width="12" height="12"/>
+<rect  class="cube" x="281" y="62" width="12" height="12"/>
+<rect  class="cube" x="281" y="62" width="12" height="12"/>
+<rect  class="cube" x="281" y="62" width="12" height="12"/>
+</svg>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>INDI Lab</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    /* =====================
+   BASE GENERAL
+===================== */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: #eee;
+      font-family: "Figtree", sans-serif;
+      overflow: hidden;
+    }
+
+    /* =====================
+   SECCIÓN PRINCIPAL
+===================== */
+    section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2.5rem;
+      position: relative;
+      transform: translateY(-10vh);
+      /* sube todo el bloque un poco */
+    }
+
+    /* =====================
+   LOGO SECUNDARIO
+===================== */
+    .secundary-logo {
+      width: 350px;
+      /* antes 180px — ahora más grande */
+      max-width: 100vw;
+      /* que no se pase de la pantalla */
+      height: auto;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      margin-bottom: 5rem;
+      /* separación del texto */
+    }
+
+    .indi-lab-logo svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .INDI path,
+    .LAB path {
+      fill: #eee;
+    }
+
+    /* =====================
+   HEADLINE (FRASES)
+===================== */
+    .headline {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      flex-direction: row;
+      gap: 0.2rem;
+      opacity: 0;
+      text-align: center;
+    }
+
+    .titulo {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .container {
+      position: relative;
+      display: inline-block;
+      perspective: 800px;
+      height: 2.6rem;
+      overflow: hidden;
+      vertical-align: middle;
+    }
+
+    .letter {
+      font-size: 1.6rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      white-space: nowrap;
+      font-weight: 400;
+      opacity: 0;
+      transform: rotateX(0deg);
+      line-height: 1.2;
+    }
+
+    /* =====================
+   COMING SOON
+===================== */
+    .coming-soon {
+      text-align: center;
+      opacity: 0.6;
+      margin-top: 1.5rem;
+    }
+
+    .coming-soon h1 {
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      font-weight: 400;
+    }
+
+    /* =====================
+   RESPONSIVE
+   ===================== */
+
+    @media (max-width: 1130px) {
+      .titulo {
+        font-size: 1.2rem;
+      }
+
+      .letter {
+        font-size: 1.2rem;
+      }
+
+      .coming-soon h1 {
+        font-size: 1rem;
+        /* .2rem es demasiado pequeño */
+      }
+    }
+
+
+
+    @media (max-width: 700px) {
+      section {
+        transform: translateY(-5vh);
+        gap: 2rem;
+      }
+
+      .secundary-logo {
+        width: 200px;
+      }
+
+      .titulo {
+        font-size: 1.6rem;
+      }
+
+      .container {
+        height: 2rem;
+      }
+
+      .coming-soon h1 {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="secundary-logo">
+      <div class="indi-lab-logo" data-svg="svg/INDI_LAB_P.svg"></div>
+    </div>
+    <!-- FRASES -->
+    <div class="headline">
+      <h1 class="titulo"></h1>
+      <div class="container">
+        <!-- 
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div> -->
+
+
+
+        <div class="letter">Cities are humanity’s greatest creation</div>
+        <div class="letter">Cities are the sum of countless small decisions, interactions, and exchanges.</div>
+        <div class="letter">Cities are spaces where public life thrives in the unpredictable rhythms of the street.</div>
+        <div class="letter">Cities are social products: created, contested, and transformed by those who inhabit them.</div>
+        <div class="letter">Cities are living laboratories for cooperation, conflict, and the negotiation of difference.</div>
+        <div class="letter">Cities are places where complexity is not a problem to solve, but a resource to embrace.</div>
+        <div class="letter">Cities are both fragile and resilient, capable of absorbing change while retaining their identity.
+        </div>
+        <div class="letter">Cities are a mirror of our collective values, ambitions, and inequalities.</div>
+      </div>
+    </div>
+    <!-- COMING SOON -->
+    <div class="coming-soon">
+      <h1>Coming Soon</h1>
+    </div>
+  </section>
+  <!-- ==========================================================
+       1️⃣ SCRIPT: CARGA DEL SVG
+  =========================================================== -->
+  <script>
+    document.querySelectorAll("[data-svg]").forEach(el => {
+      const svgPath = el.getAttribute("data-svg");
+      fetch(svgPath)
+        .then(res => res.text())
+        .then(svg => el.innerHTML = svg)
+        .catch(err => console.error("Error cargando SVG:", err));
+    });
+  </script>
+
+  <!-- ==========================================================
+       2️⃣ SCRIPT: ANIMACIÓN DE LAS TIPOGRAFÍAS (GSAP)
+  =========================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const logo = document.querySelector(".secundary-logo");
+      const titulo = document.querySelector(".titulo");
+      const container = document.querySelector(".container");
+      const letters = gsap.utils.toArray(".letter");
+
+      if (!letters.length) return;
+
+      const isMobile = window.matchMedia("(max-width: 600px)").matches;
+      const radius = isMobile ? 60 : 40;
+      const gap = 10;
+      const angleStep = 360 / letters.length;
+
+      // Distribuye las frases en un anillo 3D
+      letters.forEach((el, i) => {
+        gsap.set(el, {
+          transformOrigin: `50% 50% -${radius}px`,
+          rotationX: i * angleStep
+        });
+      });
+
+      // Encuentra la frase frontal
+      function getFrontIndex() {
+        let bestIdx = 0, bestScore = -Infinity;
+        letters.forEach((el, i) => {
+          let r = gsap.getProperty(el, "rotationX") % 360;
+          r = r < 0 ? r + 360 : r;
+          const score = (r <= 40) ? 40 - r : (r >= 320 ? r - 320 : -999);
+          if (score > bestScore) { bestScore = score; bestIdx = i; }
+        });
+        return bestIdx;
+      }
+      function updateVisibilityAndCenter() {
+        const idx = getFrontIndex();
+        letters.forEach((el, i) => el.style.opacity = i === idx ? 1 : 0);
+        const front = letters[idx];
+        const wTitle = titulo.getBoundingClientRect().width;
+        const wText = front.getBoundingClientRect().width;
+        container.style.width = `${wText}px`;
+
+        const total = wTitle + gap + wText;
+        const offset = -total / 0 + wTitle / 0;
+
+        // Centramos horizontalmente ambos, sin moverlos verticalmente
+        let yOffset = 0;
+
+        if (window.innerWidth > 1200) {
+          yOffset = -18;   // escritorio grande
+        } else if (window.innerWidth > 900) {
+          yOffset = -25;   // laptops medianas
+        } else if (window.innerWidth > 700) {
+          yOffset = -17;   // tablets horizontales
+        } else if (window.innerWidth > 500) {
+          yOffset = -10;   // tablets verticales
+        } else {
+          yOffset = -6;    // móviles
+        }
+
+        // Aplica posición adaptativa
+        gsap.set(titulo, { x: offset, y: yOffset });
+        gsap.set(container, { x: offset + wTitle + gap, y: 0 }); gsap.set(container, { x: offset + wTitle + gap, y: 0 });
+      }
+
+
+
+      // Timeline del carrusel tipográfico
+      const tl = gsap.timeline({
+        repeat: -1,
+        defaults: { ease: "power2.inOut" },
+        onUpdate: updateVisibilityAndCenter
+      });
+
+      for (let i = 0; i < letters.length; i++) {
+        tl.to(letters, { rotationX: `-=${angleStep}`, duration: 1.2 })
+          .to({}, { duration: 2.8 });
+      }
+
+      // Fade-in inicial del logo + arranque
+      gsap.timeline()
+        .to(logo, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" })
+        .add(() => updateVisibilityAndCenter(), "+=0.1")
+        .to(".headline", { opacity: 1, duration: 0.6 }, "<");
+
+      // Llamada inicial
+      updateVisibilityAndCenter();
+    });
+  </script>
+
+  <!-- ==========================================================
+       3️⃣ SCRIPT: RESIZE HANDLER
+  =========================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const titulo = document.querySelector(".titulo");
+      const container = document.querySelector(".container");
+      const letters = gsap.utils.toArray(".letter");
+
+      // La misma función usada en la animación
+      function getFrontIndex() {
+        let bestIdx = 0, bestScore = -Infinity;
+        letters.forEach((el, i) => {
+          let r = gsap.getProperty(el, "rotationX") % 360;
+          r = r < 0 ? r + 360 : r;
+          const score = (r <= 40) ? 40 - r : (r >= 320 ? r - 320 : -999);
+          if (score > bestScore) { bestScore = score; bestIdx = i; }
+        });
+        return bestIdx;
+      }
+
+      function updateVisibilityAndCenter() {
+        const idx = getFrontIndex();
+        const front = letters[idx];
+        const wTitle = titulo.getBoundingClientRect().width;
+        const wText = front.getBoundingClientRect().width;
+        container.style.width = `${wText}px`;
+
+        const total = wTitle + 10 + wText;
+        const leftX = (window.innerWidth - total) / 2;
+        gsap.set(titulo, { x: leftX, y: "-50%" });
+        gsap.set(container, { x: leftX + wTitle + 10, y: "-50%" });
+      }
+
+      // Recentrar al redimensionar ventana
+      let rAF;
+      window.addEventListener("resize", () => {
+        if (rAF) cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(updateVisibilityAndCenter);
+      });
+    });
+  </script>
+  <script src="js/color.js"></script>
+
+  <!-- Botón de regreso a Home -->
+  <a href="index.html" class="home-button">Regresar al Inicio</a>
+
+  <style>
+    .home-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #007bff; /* Example color, adjust as needed */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      position: absolute; /* Position it absolutely */
+      bottom: 2rem; /* 2rem from the bottom */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Adjust for perfect centering */
+      z-index: 100; /* Ensure it's above other elements if needed */
+    }
+
+    .home-button:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+    }
+
+    /* Adjust for responsiveness if needed */
+    @media (max-width: 700px) {
+      .home-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        bottom: 1.5rem;
+      }
+    }
+  </style>
+
+</body>
+
+</html>

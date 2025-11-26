@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>    
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+      <link id="menu-css" rel="stylesheet" href="/css/base.css">
+
+  <meta charset="UTF-8">
+  <title>Reto de Innovación Urbana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="css/style_reto2025.css">
+  
+</head>
+
+<body>
+
+
+      <a href="index.html">
+        <div class="secundary-brand"></div>
+    </a>
+
+    <script>
+        const container = document.querySelector('.secundary-brand');
+        fetch('/svg/indi-lab_Vertical_Animate.svg')
+            .then(response => response.text())
+            .then(svgText => {
+                container.innerHTML = svgText; // Inserta el SVG como HTML
+            })
+            .catch(err => console.error('Error cargando SVG:', err));
+    </script>
+
+
+
+
+
+        <div id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
+
+
+
+
+  <div class="gif-container">
+    <img src="images/mix-001-reto_1.gif" alt="Innovación Urbana 1" id="gif1">
+    <img src="images/aNCHOR-001-reto.gif" alt="Innovación Urbana 2" id="gif2">
+  </div>
+
+  <section>
+    <div class="card">
+      <h2>Nota Conceptual de Proyecto </h2>
+      <h1>Vivienda Modular </h1>
+      <h3>Diciembre 2024 </h3>
+    </div>
+
+
+  </section>
+
+  <section>
+    <div class="card">
+      <p>Las viviendas prefabricadas, ampliamente utilizadas en países como Suecia y Japón, son una solución
+        eficiente y sostenible para abordar crisis habitacionales. Producidas en fábricas y ensambladas en el
+        sitio, optimizan recursos, reducen el impacto ambiental y se adaptan a normativas locales para contextos
+        urbanos o rurales. Este método puede reducir costos en un 20% y tiempos de construcción hasta en un 50%,
+        destacándose como una alternativa moderna y práctica frente a los métodos tradicionales 2.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <p>Las viviendas modulares permiten construcciones rápidas y eficientes, además de integrarse con
+        estrategias como la reutilización de contenedores marítimos o el Cohousing. Estas opciones, combinadas,
+        conforman un ecosistema flexible de soluciones adaptables a distintos contextos urbanos y necesidades
+        habitacionales</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card" id="cambio_gif">
+      <p>Esta nota conceptual expone argumentos sobre la viabilidad de las viviendas modulares como una
+        alternativa capaz de transformar los desafíos actuales en oportunidades de desarrollo social y
+        ambiental. Esta solución no solo cumple con las normativas vigentes, sino que también incorpora
+        elementos de sostenibilidad y adaptabilidad frente a riesgos geológicos, representando una opción
+        accesible y moderna para atender la creciente demanda de vivienda</p>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="card">
+      <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
+        marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
+        contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
+        crear espacios habitables con un impacto ambiental reducido. Más allá del uso residencial, su
+        flexibilidad permite adaptarlos como oficinas, restaurantes u otros espacios funcionales.</p>
+    </div>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Gif1 se apaga al llegar a la sección con id #cambio_gif
+    gsap.to("#gif1", {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#cambio_gif",
+        start: "top center",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    // Gif2 aparece al mismo tiempo
+    gsap.to("#gif2", {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: "#cambio_gif",
+        start: "top center",
+        toggleActions: "play none none reverse"
+      }
+    });
+  </script>
+
+
+
+
+
+
+      <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+      <script type="module" src="/js/demo4/traduction.js"></script>
+
+</body>
+
+</html>

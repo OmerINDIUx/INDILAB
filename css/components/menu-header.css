@@ -1,0 +1,604 @@
+/* HEADER GLOBAL */
+/* ==============================
+   HEADER Y WRAPPERS
+============================== */
+
+.figtree-regular {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.figtree-bold {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  font-family: "Figtree", sans-serif;
+}
+#site-header {
+  position: relative;
+  z-index: 1000;
+}
+.menu-fullscreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 6rem 4rem;
+  background: rgba(77, 77, 77, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+
+.menu-fullscreen.show {
+  opacity: 1;
+  pointer-events: auto; /* abierto = clickeable */
+  transform: rotateY(0); /* animación 3D */
+}
+/* wrapper para animación 3D */
+.menu-wrapper {
+  position: fixed;
+  inset: 0;
+  perspective: 1200px;
+  pointer-events: none; /* cerrado = no bloquea clics */
+}
+
+#fullscreen-menu {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  pointer-events: auto;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  z-index: 3010; /* por encima del wrapper */
+}
+
+/* ==============================
+   ITEMS DE MENÚ
+============================== */
+.menu__item {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  width: fit-content;
+  padding: 0 2rem;
+  margin-left: 0;
+  /* margin-right: auto; */
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: color 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
+}
+
+/* Bordes decorativos */
+.menu__item::before,
+.menu__item::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  opacity: 0;
+  border: 3px solid transparent;
+  border-image: linear-gradient(135deg, #18b2e8, #01213e) 1;
+  border-image-slice: 1;
+  transition: transform 0.3s, opacity 0.3s;
+  transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
+  pointer-events: none;
+}
+
+.menu__item::before {
+  top: 0;
+  left: 0;
+  border-width: 8px 0 0 8px;
+  transform: translate3d(10px, 10px, 0);
+}
+.menu__item::after {
+  right: 0;
+  bottom: 0;
+  border-width: 0 8px 8px 0;
+  transform: translate3d(-10px, -10px, 0);
+}
+.menu__item:hover::before,
+.menu__item:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.menu-wrapper,
+.menu-fullscreen,
+#fullscreen-menu {
+  z-index: 99990 !important;
+}
+
+/* ==============================
+   BOTONES LATERALES
+============================== */
+.sidebar12 {
+  position: fixed; /* Siempre visible */
+  top: 0;
+  left: 0;
+  width: 100px; /* Ancho fijo */
+  height: 100vh; /* Toda la pantalla */
+  background-color: #1a1a1a02;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 315;
+  
+}
+.sidebar-buttons {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 3rem;
+  z-index: 1050; /* botones por encima de todo */
+}
+
+.lang-btn,
+.hamburger {
+  position: relative;
+  width: 60px;
+  height: 44px;
+  border: 2px solid transparent;
+  border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.4s ease;
+}
+
+/* 🔥 Resplandor degradado en hover */
+.lang-btn:hover,
+.hamburger:hover {
+  transform: scale(1);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+}
+
+/* Efecto extra: animar el gradiente del borde en hover */
+.lang-btn:hover,
+.hamburger:hover {
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+}
+
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hamburger {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 40%;
+  background-color: #eee;
+  display: block;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.secundary-brand2 .INDI path {
+  fill: #1a1a1a;
+}
+
+.secundary-brand2 .LAB path {
+  fill: #1a1a1a;
+}
+
+.secundary-brand2 .colorkey path {
+  fill: rgb(226, 177, 43);
+}
+
+a {
+  display: block;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+.secundary-brand2 {
+  position: fixed;
+  top: 1.5rem;
+  left: 1rem;
+  padding: 0px;
+  width: 80px;
+  pointer-events: auto; /* clickeable */
+}
+
+.menu-columns {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 0 5rem;
+  height: 100%;
+  width: 80%;
+  padding-top: 4rem;
+  align-items: top;
+  z-index: 1040; /* mismo nivel que items */
+}
+.menu-links {
+  grid-column: 1 / 2;
+  align-self: start;
+  z-index: 1040;
+}
+
+.menu-blog {
+  grid-column: 2;
+}
+
+.menu-blog {
+  display: grid;
+  gap: 1rem;
+  margin-top: -35rem;
+  height: auto;
+  z-index: 1040;
+}
+
+.menu-columns {
+  align-items: top;
+}
+
+body.menu-open .secundary-brand {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ==============================
+   BOTÓN DE CIERRE (X)
+============================== */
+.close-menu {
+  position: absolute;
+  top: 3rem;
+  right: 10rem;
+  width: 60px;
+  height: 44px;
+  border: none;
+  z-index: 1100;
+  transition: all 0.3s ease;
+  border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+}
+
+.close-menu::before,
+.close-menu::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55%;
+  height: 3px;
+  background: #eee;
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.close-menu::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-menu::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-menu {
+  position: absolute;
+  top: 3rem;
+  right: 10rem;
+  width: 60px;
+  height: 44px;
+  border: 2px solid transparent; /* necesario para ver el borde degradado */
+  border-radius: 0 8px 0 8px;
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  cursor: pointer;
+  z-index: 1100;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Líneas de la X */
+.close-menu::before,
+.close-menu::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 3px;
+  background: #eee; /* 👈 color fijo */
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.close-menu::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-menu::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Hover: animar borde y resplandor, pero mantener X blanca */
+.close-menu:hover {
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+}
+
+/* Animación del borde degradado */
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ==============================
+   BLOG SECTION
+============================== */
+.menu-blog {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  z-index: 1040;
+}
+
+.blog-heading {
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  position: relative;
+  margin-top: 0rem;
+}
+
+.blog-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* ==============================
+   BLOG LIST & ITEMS
+============================== */
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  flex: 1;
+  min-height: 0; /* 🔥 evita que herede altura infinita */
+  max-height: calc(100vh - 20rem); /* ajusta según tu layout */
+  overflow-y: auto; /* activa el scroll */
+  -webkit-overflow-scrolling: touch; /* scroll suave en móvil */
+  padding-right: 0.5rem; /* evita corte por scrollbar */
+}
+.blog-item a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  border: 2px solid transparent;
+  border-radius: 0 16px 0 16px;
+  box-shadow: 0 6px 20px #1a1a1a10;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-item a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #1a1a1a12;
+  animation: borderGradient 8s ease infinite;
+  /* background:
+    linear-gradient(#f7f7f7, #f1f1f1) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box; */
+  background-size: 400% 400%;
+}
+
+.blog-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 8px;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+.blog-item:hover .blog-thumb {
+  transform: scale(1.06);
+}
+
+.blog-info {
+  display: flex;
+  flex-direction: column; /* 👈 cambia a columna */
+  align-items: flex-start;
+  /* gap: 0.1rem; /* espacio entre título y fecha */
+  padding: 0.75rem;
+}
+
+.blog-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a1a;
+  text-decoration: none; /* 👈 sin subrayado */
+}
+
+.blog-date {
+  font-size: 0.85rem;
+  color: #1a1a1a90;
+  opacity: 0.9;
+  text-decoration: none; /* 👈 por si acaso */
+}
+
+/* Asegura que los links del blog no tengan subrayado */
+.blog-item a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .blog-heading {
+    font-size: 2rem;
+  }
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-buttons {
+    width: 100%; /* Ancho fijo */
+    height: 100px; /* Toda la pantalla */
+    position: fixed; /* no absolute */
+    top: 1rem;
+    right: 1rem;
+    left: auto !important; /* anulación fuerte */
+    bottom: auto;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    z-index: 12000; /* por encima de sidebar12 */
+  }
+
+  .sidebar12 {
+    width: 0; /* "desactiva" la barra lateral en móvil */
+    background: transparent;
+    z-index: 322;
+  }
+
+  .lang-btn {
+    order: 1; /* primero */
+    z-index: 330;
+  }
+
+  .hamburger {
+    order: 2; /* segundo, a la derecha */
+    z-index: 330;
+  }
+
+  .menu-columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    justify-items: start; /* 👈 fuerza alinear al lado izquierdo */
+  }
+
+  .menu-links {
+    width: 100%;
+  }
+
+  .menu-blog {
+    width: 100%;
+    margin-top: 0;
+    text-align: left; /* 👈 asegura alineación de textos a la izquierda */
+  }
+
+  .blog-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: start; /* 👈 asegura que cada post se pegue a la izquierda */
+  }
+
+  .blog-item {
+    width: 80%; /* 👈 que no se encoja al centro */
+  }
+
+  .menu__item {
+    margin: 0;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 300;
+  }
+}
+
+@media (max-width: 500px) {
+
+  
+.menu-fullscreen {
+
+  gap: 2rem;
+  padding: 3.5rem .2rem;
+}
+
+.blog-heading {
+  font-size: 1.5rem;
+}
+
+
+.menu__item {
+  font-size: 1.2rem;
+
+}
+}

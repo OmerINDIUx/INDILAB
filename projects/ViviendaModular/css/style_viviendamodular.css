@@ -1,0 +1,963 @@
+/* ===========================
+   FUENTE PERSONALIZADA
+=========================== */
+@font-face {
+  font-family: "PowerGrotesk";
+  src: url("/../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
+    url("/../fonts/power_grotesk-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* ===========================
+   SECCIONES GENERALES
+=========================== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  background-color: #1a1a1a;
+  color: #eee;
+  /* Si ves comportamiento raro de ScrollTrigger, prueba quitando esto: */
+  /* scroll-snap-type: y mandatory; */
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding-left: 50px;
+}
+
+section {
+  position: relative;
+  height: 100vh;
+  padding: 6rem 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#phrase-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+}
+
+.blog-scroll-strip__phrase {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.blog-scroll-strip {
+  width: 100%;
+  position: relative;
+}
+
+#run.blog-scroll-strip {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  padding: .1vh 0;
+  background-color: transparent;
+}
+
+.blog-scroll-strip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-scroll-strip__rail {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* campo de juego para las tarjetas */
+}
+
+.blog-scroll-card {
+  position: absolute;
+  max-width: 360px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  will-change: transform;
+}
+
+.blog-scroll-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1.03);
+  transition: transform 0.5s ease;
+}
+
+
+
+/* ===========================
+   RUIDO EN BLOQUES CLAROS
+=========================== */
+*[style*="background: #eee"],
+*[style*="background: #eeeeee"],
+*[style*="background-color: #eee"],
+*[style*="background-color: #eeeeee"],
+#image-sequence,
+.card,
+.TextLarge,
+.image-section {
+  position: relative;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+*[style*="background: #eee"]::before,
+*[style*="background: #eeeeee"]::before,
+*[style*="background-color: #eee"]::before,
+*[style*="background-color: #eeeeee"]::before,
+#image-sequence::before,
+.card::before,
+.TextLarge::before,
+.image-section::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+#image-sequence > *,
+.card > *,
+.TextLarge > * {
+  position: relative;
+}
+
+/* ===========================
+   ANIMACIÓN DE RUIDO
+=========================== */
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+/* ===========================
+   VIDEO FULLSCREEN
+=========================== */
+.video-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/* Ocupa toda la pantalla, GSAP la fija y la pega a la izquierda */
+.video-fullscreen {
+  position: fixed; /* o déjalo y GSAP lo sobrescribe igual */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 👈 pegamos el canvas a la DERECHA */
+}
+
+/* Canvas dentro, pegado a la derecha */
+#image-sequence {
+  display: block;
+  width: calc(100vw - 100px); /* 👈 vídeo/seq ocupa todo menos 100px */
+  height: 100vh;
+  background: #1a1a1a;
+}
+
+/* ===========================
+   TEXTO GRANDE
+=========================== */
+.TextLarge {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  /* padding: 4rem 2rem; */
+  padding-top: 0;
+}
+
+.TextLarge div {
+  max-width: 80%;
+  text-align: justify;
+  color: #1a1a1a;
+  line-height: 1.8;
+  max-width: 70%;
+}
+
+.TextLarge h2 {
+  text-align: left;
+
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
+}
+
+/* ===========================
+   CARDS
+=========================== */
+.card {
+  color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 0 2rem 0 2rem;
+  max-width: 850px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card h1,
+.card h2,
+.card h3 {
+  font-family: "Figtree", sans-serif;
+  margin: 0.5rem 0;
+  max-width: 700px;
+}
+
+.card h2,
+.card h3 {
+  font-weight: 700;
+}
+
+.card p {
+  line-height: 1.5;
+}
+
+/* ===========================
+   IMAGEN SECCIÓN
+=========================== */
+.image-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+  padding: 2rem;
+}
+
+.image-section p {
+  font-size: 1.5rem;
+}
+
+.image-section h2 {
+  font-size: 2.5rem;
+}
+.card-image {
+  display: flex;
+  align-items: top;
+  justify-content: top;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.img-wrapper {
+  flex: 1;
+}
+
+.text-wrapper {
+  flex: 1;
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 0 2rem 0 2rem;
+  object-fit: cover;
+}
+
+/* Responsivo — en móvil se apilan */
+@media (max-width: 768px) {
+  .card-image {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .img-wrapper,
+  .text-wrapper {
+    width: 100%;
+  }
+
+  .card-img {
+    max-width: 90%;
+  }
+}
+
+/* ===========================
+   IMAGEN SECCIÓN1
+=========================== */
+.image-section1 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+}
+
+.card-image1 {
+  text-align: center;
+}
+
+.card-img1 {
+  max-width: 85%;
+  min-width: 75%;
+  border-radius: 0 2rem 0 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   BLOG COLLAGE
+=========================== */
+
+
+/* ===========================
+   TÍTULOS PRINCIPALES
+=========================== */
+.Title {
+  width: 50vw;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 4vh auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  color: #eee;
+  background: transparent;
+}
+
+.Title h1 {
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 3rem;
+  text-shadow: 0 0 24px #000000b7;
+  margin: 0.5rem 0 1rem;
+}
+
+.Title h2,
+.Title h3 {
+  font-family: "Figtree", sans-serif;
+  color: #eee;
+  text-shadow: 0 0 16px #000000c7;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.Title h2 {
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+.Title h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+/* ===========================
+   LOGO SECUNDARIO
+=========================== */
+.secundary-brand {
+  position: fixed;
+  top: 0;
+  left: 10px;
+  width: 80px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0 !important;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto;
+}
+
+.INDI path,
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+/* Ocultar logo cuando el menú se muestra */
+.menu-fullscreen.show ~ a .secundary-brand {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.top-bar {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   CONTACTO + SIGUIENTE PROYECTO
+=========================== */
+section.contact-next-project {
+  /* Sobreescribimos el section genérico */
+  height: auto;
+  padding: 6rem 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 3rem;
+  background-color: #1a1a1a;
+}
+
+.contact-next-project > * {
+  flex: 1 1 0;
+  max-width: 600px;
+}
+
+/* Bloques tipo card clara con ruido (hereda la animación que ya tienes) */
+.newsletter-block,
+.next-project-block {
+  color: #eee;
+  padding: 2.2rem 2.4rem;
+}
+
+/* Títulos y textos */
+.newsletter-block h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.6rem;
+  margin: 0 0 .75rem 0;
+}
+
+.newsletter-block > p {
+  margin: 0 0 1.6rem 0;
+  font-size: 0.95rem;
+  color: #eee;
+  max-width: 26rem;
+}
+
+.next-project-block h3 {
+  font-family: "Figtree", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+  margin: 0 0 1.2rem 0;
+}
+
+
+
+/* FORMULARIO */
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#newsletter-form label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+}
+
+#newsletter-form input[type="email"],
+#newsletter-form input[type="text"] {
+  margin-top: 0.35rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  color: #1a1a1a;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease, transform 0.12s ease;
+}
+
+#newsletter-form input::placeholder {
+  color: #999;
+}
+
+
+
+
+
+
+
+#newsletter-form input[type="email"]:focus,
+#newsletter-form input[type="text"]:focus {
+  border-color: rgb(226, 70, 43);
+  box-shadow: 0 0 0 1px rgba(226, 70, 43, 0.35);
+  background-color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Política de privacidad */
+.policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.policy input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: rgb(226, 70, 43);
+}
+
+.policy a {
+  color: rgb(226, 70, 43);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.policy a:hover {
+  text-decoration-style: wavy;
+}
+
+/* Botón newsletter */
+.newsletter-btn {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #1a1a1a;
+  background-color: #1a1a1a;
+  color: #eee;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgb(226, 70, 43);
+  color: #1a1a1a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.newsletter-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Mensaje de estado del form */
+#nm-message {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* Redes sociales */
+.social {
+  margin-top: 1.6rem;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.social a {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+
+  border: 2px solid transparent; /* necesario para borde degradado */
+  background:
+    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+
+  color: #eee;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* HOVER → igual que .close-menu:hover */
+.social a:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 8px 1px #18b2e880,
+    0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background:
+    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+
+  color: #eee; /* ícono siempre claro */
+}
+
+
+/* Tarjeta "siguiente proyecto" */
+.project-card {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  padding-top: 10%;
+}
+
+.project-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 0 1.2rem 0 1.2rem;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.project-card__body h4 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.project-card__body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #eee;
+  max-width: 18rem;
+}
+
+/* Si ya tienes .btn global, esto es solo ajuste fino */
+.project-card__link {
+    text-decoration: none;
+
+  margin-top: 0.7rem;
+  display: inline-block;
+  padding: 0.55rem 1.4rem;
+
+  font-size: 0.8rem;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+
+  border-radius: 999px;
+  border: 2px solid transparent; /* necesario para el degradado */
+  background:
+    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+
+  color: #eee;
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Hover con el mismo lenguaje visual que .close-menu */
+.project-card__link:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 8px 1px #18b2e880,
+    0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background:
+    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+
+  color: #eee; /* texto claro, igual que los otros botones */
+}
+
+.project-card__link:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+
+
+#newsletter-form input[type="email"]:focus,
+#newsletter-form input[type="text"]:focus {
+  border: 1px solid transparent; /* necesario para ver el borde degradado */
+  background:
+    linear-gradient(#f7f7f7, #f7f7f7) padding-box, /* relleno claro del input */
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  box-shadow:
+    0 0 8px 1px #18b2e880,
+    0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+  transform: translateY(-1px);
+  outline: none;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+}
+
+
+.policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #333; /* sobre fondo claro */
+}
+
+.policy input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3px;
+  border: 1px solid #999;
+  accent-color: rgb(226, 70, 43); /* sigues usando tu naranja base */
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.policy input[type="checkbox"]:focus-visible {
+  outline: none;
+  border-color: transparent;
+  box-shadow:
+    0 0 6px 1px #18b2e880,
+    0 0 12px 2px #ffc04380;
+}
+
+.policy a {
+  color: rgb(226, 70, 43);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.policy a:hover {
+  color: #a51c5b;
+  text-decoration-style: wavy;
+  text-shadow:
+    0 0 6px #18b2e880,
+    0 0 10px #ffc04380;
+}
+
+.newsletter-btn {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.6rem;
+  border-radius: 0 8px 0 8px;
+  border: 2px solid transparent; /* igual que .close-menu */
+  background:
+    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Hover: mismo lenguaje visual que .close-menu:hover */
+.newsletter-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 8px 1px #18b2e880,
+    0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+  background:
+    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+  color: #eee; /* el texto se mantiene claro, igual que la X */
+}
+
+.newsletter-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  section.contact-next-project {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 8% 4rem;
+  }
+
+  .contact-next-project > * {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-card {
+    flex-direction: column;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .social {
+    flex-wrap: wrap;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  html,
+  body {
+    padding-left: 0; /* quitar espacio lateral */
+  }
+  .video-scroll-wrapper {
+    left: 0;
+    width: 100%;
+  }
+  .video-fullscreen {
+    left: 0;
+    width: 100%;
+  }
+  #image-sequence {
+    left: 0;
+    width: 100%;
+  }
+  .card {
+    width: 85%;
+    max-width: 700px;
+  }
+
+  .TextLarge {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .Title {
+    font-size: 1.5rem;
+  }
+
+  .Title h1 {
+    font-size: 2.2rem;
+  }
+
+  .card-img {
+    max-width: 60%;
+
+    margin-bottom: 1rem;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+  }
+}

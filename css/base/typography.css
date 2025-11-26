@@ -1,0 +1,14 @@
+/* Ejemplo válido */
+.figtree-bold {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* reemplaza <weight> por número o palabra */
+  font-style: normal;
+}
+
+.figtree-regular {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

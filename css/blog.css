@@ -1,0 +1,649 @@
+/* ===================
+   RESET
+=================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #eee;
+  position: relative;
+  width: calc(100% - 100px);
+  margin-left: 100px;
+}
+
+.sidebar12 {
+  background-color: #1a1a1a;
+}
+
+/* ===================
+   header
+=================== */
+
+.hero-carousel-section {
+  position: relative;
+  height: 33vh;
+  overflow: hidden;
+  width: 100vw;
+}
+
+/* Fondo con imágenes */
+.carousel-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Contenido centrado */
+.carousel-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #eee;
+}
+
+.carousel-content h2 {
+  color: #eee;
+  text-shadow: 0 2px 8px #1a1a1a;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* Caja de búsqueda */
+/* Línea de búsqueda minimalista */
+/* Línea de búsqueda minimalista */
+.search-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.1em;
+  color: #eee;
+  margin-top: 1em;
+}
+
+.search-line label {
+  font-weight: 600;
+  color: #eee;
+  text-shadow: 0 2px 6px #1a1a1a;
+}
+
+.hero-carousel-section h3 {
+  max-width: 800px;
+  text-align: center;
+  color: #eee;
+  font-size: 1.2em;
+  text-shadow: 0 2px 6px #1a1a1a;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+#carousel-search {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #eee;
+  padding: 0.3em 0;
+  font-size: 1em;
+  color: #eee;
+  outline: none;
+  text-shadow: 0 2px 6px #1a1a1a;
+}
+
+/* Sugerencia que se sobrepone al input */
+#carousel-suggestion {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.3em 0;
+  font-size: 1em;
+  color: #eeeeee90;
+  pointer-events: none;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* Cuando escribes, que la sugerencia se vea detrás del texto */
+#carousel-search:focus + #carousel-suggestion,
+#carousel-search:not(:placeholder-shown) + #carousel-suggestion {
+  display: none;
+}
+
+/* ===================
+   HERO
+=================== */
+.heroes {
+  background: #eee;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column; /* hijos uno debajo del otro */
+  align-items: center;
+  text-align: center;
+  gap: 20px; /* espacio entre divs */
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.heroes .text-container1 {
+  max-width: 800px;
+}
+
+/* ===================
+   FILTER BUTTONS
+=================== */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 10px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #eee;
+  transition: 0.3s;
+}
+
+.filter-buttons button.active {
+  background-color: #555;
+}
+
+/* ===================
+   BLOG
+=================== */
+.blog-section1 {
+  padding: 60px 10%;
+}
+
+.blog-heading1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.blog-list1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.blog-item1 {
+  max-width: 350px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.blog-item1:hover {
+  transform: translateY(-5px);
+}
+
+.blog-thumb {
+  width: 100%;
+  display: block;
+}
+
+.blog-info1 {
+  padding: 15px;
+}
+
+.blog-title1 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #eee;
+}
+
+.blog-date1 {
+  font-size: 0.9rem;
+  color: #eee;
+  font-weight: 400;
+}
+
+/* ===================
+   GRAIN / NOISE
+=================== */
+
+.heroes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: -1;
+}
+
+.heroes > * {
+  position: relative;
+  z-index: 1; /* texto y botones arriba del noise */
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+/* ===================
+   LINKS
+=================== */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+span {
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  color: inherit; /* hereda el color de la sección */
+}
+
+/* ===================
+   TEXT CONTAINERS EN HERO
+=================== */
+.heroes .text-container1 {
+  max-width: 800px; /* ancho máximo para que no sea muy largo */
+  margin-bottom: 20px; /* espacio entre textos */
+  padding: 0 10px; /* padding horizontal para móviles */
+  text-align: center; /* centrado del texto */
+}
+
+.heroes .text-container1 p {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: opacity 0.4s ease, transform 0.4s ease; /* para animar cambios si quieres fade */
+}
+
+/* Estilo especial para el segundo texto que cambia con los filtros */
+.heroes .text-container1 .textchange {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease; /* fade suave al cambiar */
+}
+
+/* Opcional: efecto fade cuando cambie el texto con JS */
+.textchange.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.textchange.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* HERO */
+.vm-hero {
+  background: #eee;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.vm-hero .vm-text-container1 {
+  max-width: 800px;
+}
+
+/* FILTER BUTTONS */
+.vm-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vm-filter-buttons button {
+  padding: 10px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.vm-filter-buttons button.vm-active {
+  background-color: #555;
+}
+
+/* BLOG */
+.vm-blog-section1 {
+  padding: 60px 10%;
+}
+
+.vm-blog-heading1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.vm-blog-list1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.vm-blog-item1 {
+  max-width: 350px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.vm-blog-item1:hover {
+  transform: translateY(-5px);
+}
+
+.vm-blog-thumb {
+  width: 100%;
+  display: block;
+}
+
+.vm-blog-info1 {
+  padding: 15px;
+}
+
+.vm-blog-title1 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #eee;
+}
+
+.vm-blog-date1 {
+  font-size: 0.9rem;
+  color: #eee;
+  font-weight: 400;
+}
+
+/* TEXTS IN HERO */
+.vm-hero .vm-text-container1 p {
+  font-weight: 400;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.vm-hero .vm-text-container1 .vm-textchange {
+  margin-top: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Fade effect */
+.vm-textchange.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.vm-textchange.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.secundary-brand {
+  all: unset;
+
+  position: fixed;
+  top: 0;
+  left: 10px;
+  z-index: 10;
+  background: transparent;
+  pointer-events: none; /* Prevents interference with other elements */
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto; /* Allows interaction with the logo if needed */
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+.secundary-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-carousel-section {
+  position: relative;
+  z-index: 0 !important; /* base */
+}
+
+.hero-carousel-section::before {
+  z-index: 1 !important; /* sombra solo sobre imágenes */
+}
+.carousel-content {
+  z-index: 2; /* textos dentro del hero */
+}
+/* ===================
+   Overlay oscuro sobre las imágenes del carrusel
+=================== */
+.carousel-background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ✅ Capa de relleno (oscurecimiento al 15%) */
+.carousel-background .overlay {
+  position: absolute;
+  inset: 0; /* cubre toda el área del carrusel */
+  background-color: rgba(26, 26, 26, 0.5); /* #1a1a1a con 15% de opacidad */
+  z-index: 2; /* encima de las imágenes */
+  pointer-events: none; /* no bloquea clics */
+}
+
+/* Imágenes del fondo */
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.8s;
+  z-index: 1;
+}
+
+.carousel-img.active {
+  opacity: 1;
+}
+/* Imagen activa */
+
+/* Contenido (texto, búsqueda, etc.) */
+.carousel-content {
+  position: relative;
+  z-index: 3; /* siempre arriba del overlay */
+}
+
+.top-bar {
+  display: none;
+}
+/* ===================
+   RESPONSIVE < 768px
+=================== */
+@media (max-width: 768px) {
+  /* ===== BODY ===== */
+  body {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 80px; /* deja espacio si hay header fijo */
+    padding: 0 10px;
+  }
+
+  /* ===== HERO ===== */
+  .heroes {
+    padding: 30px 10px;
+    gap: 15px;
+    min-height: auto;
+  }
+
+  .heroes .text-container1 p,
+  .heroes .text-container1 .textchange {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0 5px;
+  }
+
+  /* ===== FILTER BUTTONS ===== */
+  .filter-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .filter-buttons button {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  /* ===== BLOG SECTION ===== */
+  .blog-section1 {
+    padding: 40px 5%;
+  }
+
+  .blog-heading1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .blog-list1 {
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+    gap: 15px;
+    justify-items: center;
+  }
+
+  .blog-item1 {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .blog-title1 {
+    font-size: 1rem;
+  }
+
+  .blog-date1 {
+    font-size: 0.8rem;
+  }
+
+  /* ===== SVG BRAND ===== */
+
+  /* ===== NOISE / GRAIN ===== */
+  body::before,
+  .heroes::before {
+    opacity: 0.08; /* más tenue en móvil */
+  }
+
+  .filter-buttons {
+    position: relative;
+  }
+  .filter-buttons,
+  .blog-list1 {
+    position: relative;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+    z-index: 0;
+  }
+
+  .hero-carousel-section {
+  position: relative;
+  height: 33vh;
+  overflow: hidden;
+  width: 100vw;
+}
+.hero-carousel-section h3 {
+  max-width: 80%;
+}
+}

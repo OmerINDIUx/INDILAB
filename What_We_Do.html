@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>    
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+  
+  <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
+  <meta charset="UTF-8">
+    <title data-i18n="menu projects"></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+  <script>document.documentElement.className = "js";</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+
+
+  <script src="/js/gsap.min.js"></script>
+  <script src="/js/ScrollTrigger.min.js"></script>
+  <script src="/js/lenis.min.js"></script>
+  <script src="/js/splitting.min.js"></script>
+
+
+
+  <link id="menu-css" rel="stylesheet" href="/css/blog.css">
+  <!-- Cargar GSAP y plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+  <!-- Tu script de traducción -->
+  <script type="module" src="js/demo4/traduction.js"></script>
+
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="menu projects"></title>
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <!-- Hero -->
+  <section class="hero-carousel-section">
+    <div class="carousel-background">
+      <div class="overlay"></div>
+      <img src="/img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg" class="carousel-img active">
+      <img src="/img/What we do/pexels-susan-flores-232226967-12294911.jpg" class="carousel-img">
+      <img src="/img/What we do/pexels-victor-armas-262050668-12930992.jpg" class="carousel-img">
+    </div>
+
+    <div class="carousel-content">
+      <h3 id="carousel-phrase" data-i18n="carrusel indi lab">
+      </h3>
+
+      <!-- 🔥 Línea de búsqueda con sugerencias -->
+      <div class="search-line">
+        <label for="carousel-search" data-i18n="INDI Lab #"></label>
+        <div class="input-wrapper">
+          <input id="carousel-search" type="text" autocomplete="off">
+          <span id="carousel-suggestion"></span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  
+
+  <!-- Blog -->
+  <section class="blog-section1" id="blog">
+    <h2 class="blog-heading1" data-i18n="Our work"></h2>
+
+    <div class="blog-list1" id="blogList">
+      <article class="blog-item1" data-tags="Vivienda">
+        <a href="/projects/ViviendaModular/vivienda_modular.html">
+          <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1" data-i18n="Modular Housing"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="blog-item1" data-tags="Movilidad">
+        <a href="/projects/ElectroMovilidad/electromovilidad.html">
+          <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1" data-i18n="Electromobility"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="blog-item1" data-tags="Resiliencia">
+        <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+          <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
+            class="blog-thumb">
+          <div class="blog-info1">
+            <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
+            <p class="blog-date1" data-i18n="December 2024"></p>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Mensaje si no hay resultados -->
+    <p id="noResults" style="display:none; color:#999; margin-top:1em;">No results found</p>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("[data-svg]").forEach(el => {
+        const svgPath = el.getAttribute("data-svg");
+        fetch(svgPath)
+          .then(res => res.text())
+          .then(svgContent => {
+            el.innerHTML = svgContent;
+          })
+          .catch(err => console.error("Error cargando SVG:", err));
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Logo -->
+  <a href="index.html">
+    <div class="secundary-brand"></div>
+  </a>
+  <script>
+    const container = document.querySelector(".secundary-brand");
+    fetch("/svg/indi-lab_Vertical_Animate.svg")
+      .then((response) => response.text())
+      .then((svgText) => {
+        container.innerHTML = svgText;
+      })
+      .catch((err) => console.error("Error cargando SVG:", err));
+  </script>
+
+
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+
+        <div class="top-bar"></div>
+
+<div class="menu-placeholder" id="menu-placeholder"></div>
+
+<script>
+  fetch('/menu.html')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+      }
+      return response.text();
+    })
+    .then(data => {
+      const placeholder = document.getElementById('menu-placeholder');
+      if (!placeholder) {
+        throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+      }
+      placeholder.innerHTML = data;
+
+      // Cargar el script después de que el menú esté en el DOM
+      const script = document.createElement('script');
+      script.src = "/js/demo4/menu.js";
+      script.onload = () => console.log("menu.js cargado correctamente ✅");
+      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+      document.body.appendChild(script);
+
+      // 👇 Re-aplicar traducción al menú
+      if (window.applyTranslations) {
+        window.applyTranslations();
+      }
+    })
+    .catch(error => {
+      console.error("Ocurrió un error al cargar el menú:", error);
+    });
+
+
+
+
+
+</script>
+
+    <script src="js/carousel.js"></script>
+
+
+</body>
+
+</html>

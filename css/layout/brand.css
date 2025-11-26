@@ -1,0 +1,74 @@
+/* ===========================
+   SECCIÓN BRAND
+=========================== */
+
+/* ===========================
+   WRAPPER & CONTENEDORES
+=========================== */
+
+
+
+
+
+
+
+/* Oculta el segundo SVG pero permite medirlo */
+
+
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.IndiGrup {
+  width: 100%;
+  height: auto;
+}
+
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.colorkey path {
+  fill: var(--air-gradient, linear-gradient(180deg, #ccc, #999));
+}
+
+/* ===========================
+   RESPONSIVE ADAPTACIONES
+=========================== */
+@media (max-width: 1024px) {
+  #svg-wrapper {
+    height: 220vh; /* un poco más de scroll en tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  #svg-wrapper {
+    height: 300vh; /* más espacio en móvil */
+  }
+
+
+  svg {
+    max-width: 90%; /* evita que el SVG se desborde en pantallas pequeñas */
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  #svg-wrapper {
+    height: 180vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #svg-wrapper {
+    height: 250vh;
+    z-index: 20005;
+  }
+}

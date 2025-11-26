@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1080 1080" style="enable-background:new 0 0 1080 1080;" xml:space="preserve">
+<style type="text/css">
+	.arrow1{fill:none;stroke:#000000;}
+	.arrow2{fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;stroke-dasharray:20,20;}
+</style>
+<g>
+	<path id="rotCircle" d="M540,93c60.3,0,118.9,11.8,174,35.1c53.2,22.5,101,54.7,142.1,95.8c41,41.1,73.3,88.9,95.8,142.1
+		c23.3,55.1,35.1,113.6,35.1,174s-11.8,118.9-35.1,174c-22.5,53.2-54.7,101-95.8,142.1c-41,41-88.9,73.3-142.1,95.8
+		C658.9,975.2,600.3,987,540,987s-118.9-11.8-174-35.1c-53.2-22.5-101-54.7-142.1-95.8c-41.1-41-73.3-88.9-95.8-142.1
+		C104.8,658.9,93,600.3,93,540s11.8-118.9,35.1-174c22.5-53.2,54.7-101,95.8-142.1s88.9-73.3,142.1-95.8
+		C421.1,104.8,479.6,93,540,93 M540,89C290.9,89,89,290.9,89,540s201.9,451,451,451s451-201.9,451-451S789.1,89,540,89L540,89z"/>
+</g>
+<g>
+	<line class="arrow1" x1="146.5" y1="933.5" x2="933.5" y2="146.5"/>
+	<g>
+		<line class="arrow2" x1="146.5" y1="933.5" x2="903.1" y2="176.9"/>
+		<g>
+			<polygon points="918,204.3 933.5,146.5 875.7,162 			"/>
+		</g>
+	</g>
+</g>
+</svg>

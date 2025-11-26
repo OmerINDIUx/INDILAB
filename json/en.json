@@ -1,0 +1,150 @@
+{
+  "menu home": "Our Core Beliefs",
+  "Our work": "Our work",
+  "menu about": "Who We Are",
+  "menu projects": "What We Do",
+  "menu contact": "Our Approach",
+
+  "CDMX Traffic": "CDMX Traffic",
+  "hero_highlighted_text": "",
+  "hero_intro_text": "Cities are living systems where innovation, creativity, and possibilities converge.",
+  "hero_intro_text1": "At INDI Lab, we think of cities as dynamic, ever-evolving entities that embody our collective potential.",
+
+  "hero_intro_text2": "We believe in a future where technology and community work hand in hand to help humanity thrive in urban environments.",
+
+  "icon_start_alt": "Start icon",
+  "icon_end_alt": "End icon",
+  "cdmx traffic page food1": "Simulated daily vehicle trips in CDMX by time of day.",
+  "cdmx traffic page food2": "Each bold dot represents 100 trips, and each small dot represents 50 trips.",
+  "cdmx traffic page food3": "Data analysis and visualization by INDI Lab.",
+
+  "Technology as a Force for": " Technology as a Force",
+  "Human Potential": " for Human Potential",
+  "text of Human Potential": "Just as cities are engines of innovation, technology can be a catalyst that unlocks and amplifies human potential. When used ethically, it can empower overlooked communities, reveal invisible needs, and fuel just, informed decisions.",
+  "text of Human Potential 2": "At INDI Lab, technology is a means to a greater purpose: improving urban life, fostering creativity, and sparking progress.",
+
+  "Experimentation": "Experimentation:",
+  "The Pathway to Innovation": " The Pathway to Innovation",
+  "text of The Pathway to Innovation": "We embrace an experimental mindset, formulating hypotheses, prototyping, testing in real environments, and documenting every outcome. Success lies as much in what we learn from failure as in what we achieve. Each experiment—win or lose—expands our shared urban intelligence.",
+
+  "Harnessing": "Harnessing",
+  "Collective Wisdom": " Collective Wisdom",
+  "SUB Collective Wisdom": "Cities speak: we listen.",
+  "text of the Collective Wisdom": "The knowledge embedded in communities is a resource too vast to ignore. We seek it out through engagement with those who live, work, and create in urban environments. Often, the most valuable insights emerge at the edges of official systems—in markets, grassroots networks, and cultural practices. By integrating these unplanned systems, we design solutions that reflect the authentic character of cities. ",
+  "text of the Collective Wisdom 2": "Public life thrives in the unpredictable rhythms of the street.",
+
+  "Public-Private Cooperation": "Public-Private Cooperation:",
+  "A Shared Responsibility": "A Shared Responsibility",
+  "text of the A Shared Responsibility": " Urban challenges demand collaboration. Governments set the frameworks; the private sector brings agility, innovation, and sustainable models. Together, we achieve more than either could alone. The private sector’s role in public challenges isn’t just an ethical choice, it’s a long-term investment in resilience.",
+
+  "A Fluid": "A Fluid",
+  "and Responsive Agenda": " and Responsive Agenda",
+  "text of the and Responsive Agenda": " Our priorities evolve with the city. We track emerging trends and urgent needs, ready to respond with agility. From sustainability to infrastructure, mobility to public space, every innovation we create is rooted in the specific realities of people and place.",
+
+  "Collaboration": "Collaboration",
+  "and Partnership": "  and Partnership",
+  "text of and Partnership": " We unite disciplines and perspectives to tackle complex challenges. From academic labs to startups and civic organizations, our partnerships expand our capacity to innovate. Together, we form networks that test bold ideas and amplify the human experience.",
+
+  "An Identity Rooted": "An Identity Rooted",
+  "in Innovation": " in Innovation ",
+  "text of the in Innovation": " INDI Lab aims to be both an action hub and a thought leader in urban experimentation. Building on Grupo INDI’s legacy of transformative engineering, we now apply cutting-edge tools and methods to create impact for our clients and for the communities we serve.",
+
+  "The Call": " The Future of Cities",
+  "to Action": "  Is Ours to Shape ",
+  "text of the to Action": " By embracing experimentation, harnessing technology, and fostering collaboration, we can transform urban spaces into thriving hubs of human potential. We invite innovators, dreamers, and changemakers to join us in building cities that inspire, uplift, and endure.",
+
+  "text 2 of the to Action": "“Together, let’s ensure that cities remain humanity’s greatest invention.”",
+
+  "Get Involved": "Get Involved",
+
+  "See Our Projects ": "See Our Projects",
+
+  "info phi": "La página de INDI Lab está diseñada y desarrollada para interactuar con información sobre clima, radiación, temperatura y tráfico de la Ciudad de México, adaptando su diseño en tiempo real; por eso, rara vez la verás igual.",
+
+  "who we are": "Who We Are",
+  "who we are sub": "Innovation at the Intersection of Cities,",
+  "who we are sub1": "Infrastructure, Technology, and Community",
+
+  "who mwe are intro": "INDI Lab is Grupo INDI’s",
+  "who mwe are spam": "urban innovation lab and venture platform,",
+  "who we are text": "an incubator and R&D engine that mobilizes shared resources such as data, infrastructure, capital, talent, and institutional knowledge to accelerate execution and scale transformative urban solutions.",
+
+  "We design prototype": "We design, prototype, and pilot solutions that address the most urgent urban challenges, positioned at the convergence of engineering, technology, and city life.",
+
+  "by into Grupo INDI’s": "By tapping into Grupo INDI’s deep bench of talent and technical expertise, we’re able to respond fluidly to the evolving needs of our clients, partners, and collaborators, whether they require bold experimentation or operational precision.",
+
+  "our approach": "Our Approach",
+  "our approach sub": "Ideation Meets Real World Execution",
+  "we aim to": "Our objective is to develop urban analytics platforms, engagement strategies, and applied research that inform public policy, improve project design, and foster more equitable, data-driven, and community-centered infrastructure solutions.",
+  "experimental +": "Experimental + Data Driven Approach",
+  "data driven": "Data driven, small scale interventions, impact assessment",
+
+  "urban spaces": "Urban Spaces",
+  "public spaces": "Public Spaces + urban life",
+
+  "mobility": "Mobility",
+  "road safety": "Road safety, electromobility, tactical urbanism",
+
+  "housing": "Housing",
+  "co-housing": "Co-housing, land trusts, modular housing",
+
+  "Materials and processes": "Materials and processes",
+  "Eco-friendly": "Eco-friendly, innovative materials and construction processes",
+
+  "digital tools": "Digital Tools",
+  "data visualization": "GIS platforms, computer vision models, digital twins",
+
+  "Modular Housing": "Modular Housing",
+  "December 2024": "Coming Soon",
+  "Electromobility": "Electromobility",
+  "Urban Heat Islands": "Urban Heat Islands",
+  "carrusel indi lab": "INDI Lab projects are as flexible and dynamic as urban life itself.",
+  "INDI Lab #": "INDI Lab #",
+
+  "No results found": "No se encontraron resultados",
+
+  "phrases": [
+    "Housing. We’re doing research around alternative models of affordable housing, ownership, and financing to address structural barriers in the housing system and unlock more inclusive pathways to home access.",
+    "Urban Sensors and Micro-Scale Data. We’re testing sensor networks that capture environmental and behavioral small-scale data: air quality, water levels, microclimates, UV index, noise, and pedestrian flows, to inform citywide strategies for public health and urban livability.",
+    "Policy Design and Legislative Strategy. Our work doesn’t stop at the prototype: we help translate successful pilots into actionable policy and support the drafting of legislative frameworks that can scale innovation responsibly.",
+    "Organizational Consulting. We provide tailored consulting services focused on process optimization, digital tools, and internal policy improvements, enhancing how teams work across sectors and domains.",
+    "Exploring sustainable and innovative materials to improve urban construction and environmental performance."
+  ],
+
+  "suggestions": [
+    "Mobility solutions",
+    "Urban resilience",
+    "Digital tools",
+    "Sustainable materials",
+    "Affordable housing"
+  ],
+
+  "News +": "News + Updates",
+
+  "Scalable solutions": "Scalable solutions",
+  "Scalable solutions text": "that evolve into social impact-generating public infrastructure programs, deployable across cities.",
+
+  "Civic tech and gov tech ventures": "Civic tech and gov tech ventures",
+  "Civic tech and gov tech ventures text": "with the potential to spin off into public-private partnerships or commercial offerings.",
+
+  "Applied research, data analysis, and strategic studies": "Applied research, data analysis, and strategic studies",
+  "Applied research, data analysis, and strategic studies text": "that not only support implementation but also contribute to global urban discourse and policymaking.",
+  "infra_title": "Infrastructure-Backed Execution",
+  "infra_text": "Embedded within Grupo INDI, INDI Lab leverages national-scale construction capacity to reduce R&D risk and accelerate implementation through real-world projects.",
+
+  "pipeline_title": "Prototype–Deploy–Scale Pipeline",
+  "pipeline_text": "We turn concepts into pilots, and pilots into replicable solutions — heavy focus on data-driven scaling, and IP retention that can be licensed or scaled through public funding.",
+
+  "ecosystem_title": "Ecosystem Leverage",
+  "ecosystem_text": "Strategic partnerships with universities, non-profits, civic tech startups, and governments.",
+
+  "data_title": "Data & Collective Intelligence",
+  "data_text": "Our projects are both data-driven and guided by collective intelligence — combining quantitative analysis with community engagement strategies to ensure that every intervention is context-sensitive, socially grounded, and responsive to the needs of people and place.",
+  "Co-creating the future": "Co-creating the future of cities through data, design, and technology. ",
+
+  "Transit-Oriented Development": "Transit-Oriented Development",
+  "Bio-Responsive Infrastructure": "Bio-Responsive Infrastructure",
+  "Vulnerability of Public Spaces": "Vulnerability of Public Spaces",
+  "Computer Vision for Urban Life": "Computer Vision for Urban Life",
+  "Augmented Reality": "Augmented Reality"
+}

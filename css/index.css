@@ -1,0 +1,932 @@
+.figtree-regular {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.figtree-bold {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Figtree", sans-serif;
+  background-color: #1a1a1a;
+  overflow-x: hidden;
+  /* position: relative; */
+}
+
+body {
+  width: 100%; /* full viewport width */
+  margin: 0;
+  padding-left: 100px; /* 👈 desplaza TODO el contenido 100px */
+  background-color: #1a1a1a;
+  font-family: "Figtree", sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+body.menu-open {
+  overflow: hidden;
+  height: 100vh; /* evita rebote en iOS */
+}
+
+/* Fondo noise global en el body */
+body::before {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background-image: url("../../../img/noise.png");
+  background-repeat: repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+/* Ruido automático en bloques con fondo #eee */
+*[style*="background: #eee"],
+*[style*="background: #eeeeee"],
+*[style*="background-color: #eee"],
+*[style*="background-color: #eeeeee"],
+#image-sequence,
+.TextLarge {
+  position: relative;
+  background-color: #eeeeee;
+  overflow: hidden;
+}
+
+*[style*="background: #eee"]::before,
+*[style*="background: #eeeeee"]::before,
+*[style*="background-color: #eee"]::before,
+*[style*="background-color: #eeeeee"]::before,
+#image-sequence::before,
+.TextLarge::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background-image: url("../../../img/noise.png");
+  background-repeat: repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+/* Contenido encima del ruido */
+#image-sequence > *,
+.TextLarge > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ANIMACIÓN NOISE */
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+/* ===========================
+   Section BRAND
+=========================== */
+#brand {
+  margin-left: -100px; /* 👈 compensa el padding global */
+  width: 100vw; /* vuelve a ocupar todo el viewport */
+}
+
+.brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  z-index: 321;
+  pointer-events: none; /* deja pasar clics */
+}
+
+/* Estado base */
+#svg-wrapper {
+  /* evita all: unset; te resetea cosas útiles */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh; /* tu altura para scroll */
+  z-index: 1; /* menu debe tener >1 si va encima */
+  background: transparent;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+/* Opción A: con clase en body (recomendado) */
+body.menu-open #svg-wrapper {
+  opacity: 0;
+  visibility: hidden; /* se aplica al final por la transición */
+  pointer-events: none;
+}
+
+/* Opción B: usando :has() (si no quieres tocar JS)
+   -> se oculta si el nav fullscreen tiene la clase .show */
+body:has(#fullscreen-menu.show) #svg-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.svg-containedor {
+  all: unset;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  /* z-index: 10000; */
+}
+
+.navigation-arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  position: fixed;
+  top: 75vh;
+  left: -20px;
+}
+
+.navigation-arrows2 {
+  padding-top: 18%;
+}
+.navigation-arrows2 h2 {
+  color: #eee;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.navigation-arrows .core-belive,
+.navigation-arrows .our-projects {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.navigation-arrows h3 {
+  font-family: work-sans, sans-serif;
+  font-weight: 600;
+
+  color: #eee;
+  font-size: 1.2rem;
+  margin: 0.3rem;
+  font-weight: 500;
+}
+
+.navigation-arrows a {
+  text-decoration: none;
+}
+
+.navigation-arrows .brand-icon-back {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  display: block;
+}
+
+.navigation-arrows.hidden {
+  opacity: 0;
+}
+
+.scroll-animation {
+  position: fixed; /* o absolute si prefieres dentro de un contenedor */
+  left: 50%;
+  top: 90vh; /* 90% de la altura del viewport */
+  transform: translateX(-50%) translateY(-50%); /* Centrado horizontal y ajuste vertical */
+  z-index: 1; /* Para que esté encima de otros elementos si es necesario */
+}
+
+.scroll-animation img {
+  width: 22px;
+  height: auto;
+  opacity: 0.9;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* ===========================
+   Section Hero
+=========================== */
+
+/* ===========================
+   1. LAYOUT GENERAL
+=========================== */
+/* Contenedor principal en modo overlay */
+.layout {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ==== RIGHT COLUMN (MAPA / VIDEO) AL FONDO ==== */
+.right-column {
+  display: flex;
+  justify-content: center; /* horizontal */
+  align-items: center; /* vertical */
+  position: absolute;
+  top: 0;
+  left: 100px; /* quitamos 100px porque rompe el centrado */
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mapa_video {
+  width: 100vw;
+  height: auto;
+  object-fit: cover; /* el video se adapta sin deformarse */
+  opacity: 0.1; /* ajusta a tu estética */
+}
+
+/* ==== LEFT COLUMN (CONTENIDO) AL FRENTE ==== */
+.left-column {
+  position: relative;
+  z-index: 5; /* al frente */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none; /* deja pasar clics */
+  background: rgba(0, 0, 0, 0); /* transparente */
+}
+
+/* Aseguramos que el texto tenga un máximo de ancho */
+
+/* ===========================
+   2. TEXTOS
+=========================== */
+
+.text-large_w {
+  color: var(--color-white-brand, #efefef);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  max-width: 600px;
+  margin: 0 0 0.85em 0;
+  line-height: 1.2;
+  text-align: center;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+}
+
+.text-large_M {
+  color: var(--color-white-brand, #eee);
+  font-size: clamp(0.7rem, 1rem, 2.7rem);
+  max-width: 900px;
+  margin: 0 0 1.5em 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.hour {
+  font-family: "Figtree", sans-serif;
+  font-size: 1.5rem;
+  margin-top: -1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-white-brand, #efefef);
+  z-index: 210;
+}
+
+/* ===========================
+   3. MARCADORES / DECORACIÓN
+=========================== */
+.hx {
+  background: none;
+  color: var(--color-highlight-start);
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+}
+
+.hx-1 {
+  background: none;
+  color: var(--color-highlight-start-map, #e7e5d9);
+}
+
+.hx-2 {
+  --color-highlight-end: var(--color-highlight-start-map, #e7e5d9);
+}
+.content--intro {
+  /* --- GLASS EFFECT --- */
+  background: #1a1a1a01; /* azul translúcido (ajustable) */
+  backdrop-filter: blur(4px) saturate(100%);
+  -webkit-backdrop-filter: blur(10px) saturate(100%);
+  border-radius: 18px 0px 18px 0px;
+  max-width: 80%;
+}
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+}
+
+.corner-icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: 20;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* ===========================
+   4. ANIMACIONES Y SCROLL
+=========================== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.scroll-animation {
+  position: fixed;
+  left: 50%;
+  top: 90vh;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.scroll-animation.hidden {
+  opacity: 0;
+}
+
+/* ===========================
+   5. MAPA Y CONTROLES
+=========================== */
+.mapa_video {
+  height: 100%;
+  width: auto;
+  opacity: 1;
+  display: block;
+}
+
+.time-ctrl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text, #eee);
+  position: relative;
+  z-index: 220;
+}
+
+/* ===========================
+   6. SLIDER HORA
+=========================== */
+/* Texto de abajo (frases) */
+.video-footer {
+  margin-top: 0.4rem;
+  text-align: center;
+  color: #eeeeee;
+  font-size: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 90%;
+  pointer-events: none; /* no bloquea clics extra, solo muestra info */
+}
+
+.video-footer .map_food {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+}
+.time-slider-box {
+  position: absolute;
+  bottom: 3rem;
+  right: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centra todo horizontalmente */
+  gap: 0.3rem;
+  background: #1a1a1a;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px 0 10px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 220;
+  pointer-events: auto; /* aquí SÍ quieres poder usar el slider */
+}
+
+/* Título "CDMX Traffic" u otro texto arriba */
+.time-slider-box .text-large_M {
+  margin: 0;
+  text-align: center;
+}
+
+/* Hora arriba del slider */
+.time-slider-box .hour {
+  font-family: "Figtree", sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+/* Slider estilizado */
+/* Slider estilizado */
+#hourSlider {
+  width: 180px;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  outline: none;
+  appearance: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* WebKit */
+#hourSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #eee;
+  border-radius: 50%;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+#hourSlider::-webkit-slider-runnable-track {
+  background: #eee;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Firefox */
+#hourSlider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffd90250;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+#hourSlider::-moz-range-track {
+  background: #d9e7e50f;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Edge */
+#hourSlider::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: #43d7cd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#hourSlider::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  height: 6px;
+}
+/* ===========================
+   7. ESTADOS INICIALES
+=========================== */
+#content-row,
+#maping-contorler {
+  opacity: 0; /* Ocultos por defecto */
+}
+
+#content-row {
+  display: flex;
+  justify-content: center; /* centra en X */
+  align-items: center; /* centra en Y */
+  height: 100vh; /* da el espacio total vertical */
+}
+
+/* ===========================
+   8. footer video
+=========================== */
+
+/* Contenedor del pie de video */
+
+/* ===========================
+   Section stiky
+=========================== */
+.text-image-section2 .container2 {
+  display: flex;
+}
+
+.text-column2,
+.image-column2 {
+  flex: 1;
+}
+.text-image-section2 {
+  position: relative;
+  /* width: calc(100% - 100px);
+  left: 100px; */
+  height: 100vh; /* sección ocupa toda la altura de viewport */
+
+  display: flex;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+.text-column2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: #1a1a1a;
+  background-color: #eee;
+  z-index: 10;
+}
+/* Fondo con grano */
+.text-column2::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: url("../../../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+/* Contenedor general */
+.container2 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Columna de texto */
+
+.text-column2 .title2 {
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.text-column2 .text-content2 {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Columna de imagen */
+.image-column2 {
+  flex: 0 0 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Contenedor para el SVG */
+.content__img-wrapper2 {
+  width: 85%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; /* mantiene el espacio incluso antes de cargar */
+  margin: 0 auto;
+}
+
+/* SVG: escalable y centrado */
+.content__img-wrapper2 svg {
+  width: 100%;
+  max-width: 1000px; /* ✅ tamaño mayor en desktop */
+  height: auto;
+  display: block;
+}
+
+/* ===========================
+Call to Action
+=========================== */
+.calltoaction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  color: #eeeeee;
+  gap: 2rem; /* Espaciado uniforme entre elementos */
+}
+
+.secundary-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indi-lab-logo {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+}
+
+.text-large_w {
+  font-family: "Figtree", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2vw, 1.5rem); /* Escala responsiva */
+  line-height: 1.4;
+}
+
+.navigation-arrows-whatwedo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.our-projects {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.our-projects:hover {
+  transform: scale(1.05);
+  color: #eeeeee;
+}
+
+.brand-icon-back {
+  width: 28px;
+  height: 28px;
+}
+
+/* ===========================
+brands colors
+=========================== */
+.INDI path {
+  fill: #eee;
+}
+
+.LAB path {
+  fill: #eee;
+}
+
+.top-spacer {
+  display: none;
+}
+
+.top-bar {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .top-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    width: 100%;
+    margin: 0;
+    padding-left: 0; /* 👈 desplaza TODO hacia la derecha */
+    background-color: #1a1a1a;
+  }
+
+  .stay {
+    margin-left: 0;
+    padding: 0; /* ✅ quitamos padding-left */
+  }
+
+  #brand {
+    margin-left: 0; /* ✅ eliminamos compensación */
+    width: 100%;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 0; /* ✅ quitamos padding-left */
+  }
+
+  .layout {
+    width: 100vw;
+    height: auto;
+    padding-right: -250px;
+  }
+
+  .right-column {
+    left: 10px; /* quitamos 100px porque rompe el centrado */
+  }
+  /* .left-column,
+  .right-column {
+    width: 100%;
+    height: auto;
+    padding: 0; 
+  } */
+
+  #site-header {
+    align-items: center;
+  }
+
+  .text-large_w {
+    max-width: 400px;
+  }
+
+  /* .left-column,
+  .right-column {
+    width: 100%;
+    height: auto;
+  } */
+  .hour {
+    font-size: 1.2rem;
+    margin-top: -1rem;
+  }
+
+  .time-slider-box {
+    position: absolute;
+    bottom: 5rem;
+    left: 8rem;
+  }
+
+  .text-image-section2 {
+    height: auto; /* ✅ ya no forzamos altura fija */
+    min-height: 100vh; /* opcional: que al menos ocupe la pantalla */
+  }
+
+  .container2 {
+    flex-direction: column; /* ✅ apila uno debajo del otro */
+    height: auto;
+  }
+
+  .text-column2,
+  .image-column2 {
+    flex: 1 1 100%; /* ✅ que ocupen todo el ancho */
+    height: auto;
+    padding: 2rem 1.5rem; /* ajusta padding para móvil */
+  }
+
+  .content__img-wrapper2 {
+    width: 80%;
+    max-width: 80%; /* ✅ full ancho en móvil */
+    min-height: auto;
+  }
+
+  .text-column2 .title2 {
+    text-align: center;
+    align-items: center;
+    font-size: 1.8rem; /* un poco más pequeño para móvil */
+    max-width: 80%;
+    margin: 0 auto; /* ⭐ Esto lo centra de verdad */
+  }
+
+  .text-column2 .text-content2 {
+    font-size: 1rem;
+    text-align: center;
+    align-items: center;
+  }
+  .title2 {
+    text-align: center;
+    align-items: center;
+  }
+
+  #svg-wrapper {
+    all: unset;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 200vh;
+    z-index: 1;
+    background: transparent;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+}
+
+@media (max-width: 500px) {
+  .navigation-arrows {
+    gap: 1rem;
+    width: 100%;
+    left: 5px;
+  }
+
+  .brand h2 {
+    font-size: 1.2rem;
+    max-width: 350px;
+  }
+
+  .text-large_w {
+    font-size: 1rem;
+    max-width: 300px;
+  }
+
+  .text-image-section2 h2 {
+    font-size: 1.2rem;
+    max-width: 350px;
+  }
+
+  .text-image-section2 p {
+    font-size: 1rem;
+    max-width: 400px;
+    transform: center;
+  }
+  .container2 {
+    padding-top: 15%;
+  }
+
+  .indi-lab-logo {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+  }
+  .calltoaction-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .text-column2 {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    display: block; /* Make span a block element to allow margin: auto for centering */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .time-slider-box {
+    padding: 0.3rem 0.3rem;
+    gap: 0.2rem;
+    bottom: 2rem;
+    right: 3rem;
+  }
+}

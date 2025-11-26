@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+
+    <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
+
+    <meta charset="UTF-8">
+    <title>Reto de Innovación Urbana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="css/style_electromovilidad.css">
+
+    <script type="module" src="/js/demo4/traduction.js"></script>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+    <div class="gif-container" id="fullscreen1">
+        <video id="gif1" class="bg-video" autoplay muted loop playsinline preload="auto"
+            poster="images/bioresponsabilitvideo-poster.jpg">
+            <source src="images/bioresponsabilitvideo.mov" type="video/quicktime">
+            <!-- fallback opcional si tienes una versión mp4 -->
+            <source src="images/bioresponsabilitvideo.mov" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+    </div>
+
+  
+    <section>
+        <div class="Title">
+            <h2>Nota Conceptual de Proyecto </h2>
+            <h1>Infraestructura Bioresponsiva</h1>
+            <h3>Diciembre 2025 </h3>
+        </div>
+
+
+    </section>
+
+    <section>
+        <div class="card" id="cambio_gif">
+            <h2>"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velitance"</h2>
+        </div>
+    </section>
+
+    
+
+    <section class="TextLarge">
+        <div>
+            <h2 class="white">Contexto:</h2>
+            <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
+                rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
+                población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
+                Comisión Nacional de Vivienda en 2020</p>
+            <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
+                la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
+                situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
+                que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
+            <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
+                vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
+                accesibles, marcando un cambio de paradigma en la construcción. </p>
+        </div>
+    </section>
+
+
+
+    <section class="insersion_mapas">
+        <style>
+            .mapa-card {
+                width: 100%;
+                max-width: 80%;
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                border-radius: 12px;
+                color: #1a1a1a;
+            }
+            .mapa-card figure { margin: 0; width: 48%; }
+            .mapa-card img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 8px;
+                object-fit: cover;
+                border: 1px solid rgba(255,255,255,0.06);
+            }
+            .mapa-text {
+                width: 52%;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            @media (max-width: 820px) {
+                .mapa-card { flex-direction: column; text-align: left; }
+                .mapa-card figure, .mapa-text { width: 100%; }
+                .mapa-text h2 { font-size: 1.3rem; }
+            }
+        </style>
+
+        <div class="mapa-card" role="region" aria-label="Imagen y descripción del proyecto">
+            <figure>
+                <img src="images/bird-s-eye-view-of-the-building-roofs-and-river-su-2025-02-11-17-51-59-utc.jpg"
+                     alt="Vista aérea de edificios y río desde arriba" loading="lazy">
+            </figure>
+
+            <div class="mapa-text">
+                <h2>Perspectiva aérea del emplazamiento</h2>
+                <p>
+                    Lorem ipsum dolor sit amet,consectetur adipiscing elit. Integer
+                    vehicula, nunc at congue facilisis, urna nisl vulputate sapien, a vulputate
+                    sapien sem id justo. Curabitur et risus a arcu interdum posuere. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis egestas.
+                </p>
+                <p>
+                    Fusce sit amet massa non ipsum interdum gravida. Vivamus suscipit risus ac
+                    sapien vulputate, sed dictum lacus fermentum. Phasellus lacinia, sapien non faucibus dictum, augue
+                    eros cursus augue, eu dictum nibh tortor at nibh.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <section class="TextLarge">
+        <div>
+            <h2 class="white">Contexto:</h2>
+            <p>México tiene un déficit de vivienda, con alrededor de 8.5 millones de viviendas las que se encuentran en
+                rezago habitacional. De 34.8 millones de viviendas que hay en México, aproximadamente el 26.6 % de la
+                población vive en algún tipo de riesgo o hacinamiento, esto de acuerdo con datos oficiales de la
+                Comisión Nacional de Vivienda en 2020</p>
+            <p>Es urgente plantear la problemática de la vivienda en México desde una perspectiva integral que contemple
+                la rentabilidad, la sostenibilidad y el cumplimiento de las normativas mexicanas vigentes. Ante esta
+                situación, surge la oportunidad de explorar soluciones que no solo aborden el déficit habitacional, sino
+                que lo hagan de manera sostenible, eficiente y adaptada a las necesidades del entorno. </p>
+            <p>Ante este panorama, es necesario adoptar estrategias que desafíen el esquema tradicional de vivienda. La
+                vivienda modular, la reutilización de contenedores y el Cohousing ofrecen soluciones flexibles y
+                accesibles, marcando un cambio de paradigma en la construcción. </p>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+
+    <div class="top-bar"></div>
+
+
+
+    <div class="menu-placeholder" id="menu-placeholder"></div>
+
+    <script>
+        fetch('/menu.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('menu-placeholder');
+                if (!placeholder) {
+                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
+                }
+                placeholder.innerHTML = data;
+
+                // Cargar el script después de que el menú esté en el DOM
+                const script = document.createElement('script');
+                script.src = "/js/demo4/menu.js";
+                script.onload = () => console.log("menu.js cargado correctamente ✅");
+                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
+                document.body.appendChild(script);
+
+                // 👇 Vuelve a ejecutar traducción después de insertar el menú
+                if (window.applyTranslations) {
+                    window.applyTranslations();
+                }
+            })
+            .catch(error => {
+                console.error("Ocurrió un error al cargar el menú:", error);
+            });
+    </script>
+
+
+    <a href="index.html">
+        <div class="secundary-brand"></div>
+    </a>
+    <script>
+        const container = document.querySelector(".secundary-brand");
+        fetch("/svg/indi-lab_Vertical_Animate.svg")
+            .then((response) => response.text())
+            .then((svgText) => {
+                container.innerHTML = svgText;
+            })
+            .catch((err) => console.error("Error cargando SVG:", err));
+    </script>
+
+
+
+    <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+    <section class="contact-next-project">
+
+        <!-- Newsletter -->
+        <div class="newsletter-block">
+            <h2>Suscríbete al newsletter</h2>
+            <p>Recibe novedades, proyectos y recursos exclusivos.</p>
+
+            <form id="newsletter-form" novalidate>
+                <label for="nm-email">Correo electrónico</label>
+                <input id="nm-email" name="email" type="email" required placeholder="correo@ejemplo.com" />
+
+                <label for="nm-name">Nombre (opcional)</label>
+                <input id="nm-name" name="name" type="text" placeholder="Tu nombre" />
+
+                <div class="policy">
+                    <input id="nm-policy" name="policy" type="checkbox" required />
+                    <label for="nm-policy">
+                        Acepto la
+                        <a href="/politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="newsletter-btn">Suscribirse</button>
+
+                <p id="nm-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <!-- Redes sociales -->
+            <div class="social" aria-label="Redes sociales">
+                <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sugerencia del siguiente proyecto -->
+        <aside class="next-project-block">
+            <h3>Proyectos sugeridos</h3>
+
+            <article class="project-card">
+                <img src="/img/1x/Mesa de trabajo 3.png" alt="Miniatura proyecto siguiente">
+                <div class="project-card__body">
+                    <h4>Computer Visión</h4>
+                    <p>Configuraciones optimizadas para clima extremo y eficiencia energética.</p>
+                    <a href="proyecto-siguiente.html" class="btn project-card__link">Ver proyecto</a>
+                </div>
+            </article>
+            <article class="project-card">
+                <img src="/img/1x/Mesa de trabajo 2.png" alt="Miniatura proyecto siguiente">
+                <div class="project-card__body">
+                    <h4>Loroem Ipsum</h4>
+                    <p>Configuraciones optimizadas para clima extremo y eficiencia energética.</p>
+                    <a href="proyecto-siguiente.html" class="btn project-card__link">Ver proyecto</a>
+                </div>
+            </article>
+        </aside>
+
+        <script>
+            (function () {
+                const form = document.getElementById('newsletter-form');
+                const email = document.getElementById('nm-email');
+                const policy = document.getElementById('nm-policy');
+                const msg = document.getElementById('nm-message');
+
+                function show(message, ok = true) {
+                    msg.textContent = message;
+                    msg.style.color = ok ? '#0a0' : '#c00';
+                }
+
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    msg.textContent = '';
+
+                    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+                        show('Introduce un correo válido.', false);
+                        email.focus();
+                        return;
+                    }
+                    if (!policy.checked) {
+                        show('Debes aceptar la política de privacidad.', false);
+                        return;
+                    }
+
+                    const payload = {
+                        email: email.value.trim(),
+                        name: (document.getElementById('nm-name').value || '').trim(),
+                        acceptedPolicy: true,
+                        source: window.location.pathname
+                    };
+
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    })
+                        .then(resp => {
+                            if (!resp.ok) throw new Error('network');
+                            return resp.json().catch(() => ({}));
+                        })
+                        .then(() => {
+                            show('Gracias por suscribirte. Revisa tu correo.', true);
+                            form.reset();
+                        })
+                        .catch(() => {
+                            try {
+                                const pending = JSON.parse(localStorage.getItem('newsletter_pending') || '[]');
+                                pending.push(payload);
+                                localStorage.setItem('newsletter_pending', JSON.stringify(pending));
+                            } catch (err) { }
+                            show('Suscripción guardada localmente. Se intentará enviar cuando haya conexión.', true);
+                            form.reset();
+                        });
+                });
+            })();
+        </script>
+
+    </section>
+</body>
+
+</html>

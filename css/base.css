@@ -1,0 +1,36 @@
+/* BASE */
+@import url("./base/cursor.css");
+@import url("./base/typography.css");
+@import url("./base/reset.css");
+@import url("./base/variables.css");
+
+/* LAYOUT */
+@import url("./layout/frame.css");
+@import url("./layout/hero.css");
+
+/* Css del logo inicial */
+@import url("./layout/brand.css"); 
+@import url("./layout/secundary-brand.css"); 
+@import url("./layout/scroll_down.css");
+@import url("./layout/layout-columns.css");
+@import url("./layout/map&watch.css");
+@import url("./layout/svg_iconbrand.css");
+@import url("./layout/sliders.css");
+@import url("./layout/footer.css");
+
+
+/* COMPONENTS */
+@import url("./components/loader.css");
+@import url("./components/menu-header.css");
+@import url("./components/directions_arrows.css");
+@import url("./components/phi.css");
+
+@import url("./components/svg-container.css");
+@import url("./components/time-slider.css");
+
+
+
+/* UTILS */
+@import url("./utils/helpers.css");
+@import url("./utils/responsive.css");
+
