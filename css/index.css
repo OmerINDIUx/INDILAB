@@ -568,12 +568,6 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 }
 
 /* ===========================
-   8. footer video
-=========================== */
-
-/* Contenedor del pie de video */
-
-/* ===========================
    Section stiky
 =========================== */
 .text-image-section2 .container2 {
@@ -928,5 +922,10 @@ brands colors
     gap: 0.2rem;
     bottom: 2rem;
     right: 3rem;
+  }
+
+  .mapa_video {
+    height: 75%;
+    width: auto;
   }
 }
