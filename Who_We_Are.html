@@ -166,7 +166,7 @@
             <input id="nm-policy" name="policy" type="checkbox" required />
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
-              <a href="/politica-privacidad.html" target="_blank" rel="noopener" data-i18n="newsletter_policy_link"></a>
+              <a href="https://www.grupoindi.com.mx/avisodeprivacidad.html" target="_blank" rel="noopener" data-i18n="newsletter_policy_link"></a>
             </label>
           </div>
 
@@ -248,7 +248,7 @@
             source: window.location.pathname
           };
 
-          fetch('/api/subscribe', {
+          fetch('/mail.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -267,8 +267,7 @@
                 pending.push(payload);
                 localStorage.setItem('newsletter_pending', JSON.stringify(pending));
               } catch (err) { }
-              show('Suscripción Enviada
-', true);
+              show('Suscripción Enviada', true);
               form.reset();
             });
         });

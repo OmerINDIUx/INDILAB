@@ -260,7 +260,7 @@
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
               <a
-                href="/politica-privacidad.html"
+                href="https://www.grupoindi.com.mx/avisodeprivacidad.html"
                 target="_blank"
                 rel="noopener"
                 data-i18n="newsletter_policy_link"
@@ -360,7 +360,7 @@
               source: window.location.pathname,
             };
 
-            fetch("/api/subscribe", {
+            fetch("/mail.php", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
