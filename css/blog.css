@@ -1,3 +1,4 @@
+@import url("./components/contact-next-project.css");
 /* ===================
    RESET
 =================== */
@@ -193,11 +194,20 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  border: 2px solid transparent; /* Required for border-box gradient */
 }
 
 .blog-item1:hover {
   transform: translateY(-5px);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
 }
 
 .blog-thumb {
@@ -453,9 +463,9 @@ span {
   position: fixed;
   top: 0;
   left: 10px;
-  z-index: 10;
+  z-index: 10001;
   background: transparent;
-  pointer-events: none; /* Prevents interference with other elements */
+  pointer-events: auto; /* Allows clicking on the logo */
   width: 80px;
   max-width: 80px;
 }
@@ -638,12 +648,12 @@ span {
   }
 
   .hero-carousel-section {
-  position: relative;
-  height: 33vh;
-  overflow: hidden;
-  width: 100vw;
-}
-.hero-carousel-section h3 {
-  max-width: 80%;
-}
+    position: relative;
+    height: 33vh;
+    overflow: hidden;
+    width: 100vw;
+  }
+  .hero-carousel-section h3 {
+    max-width: 80%;
+  }
 }

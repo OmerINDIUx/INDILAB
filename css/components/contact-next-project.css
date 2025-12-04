@@ -1,0 +1,320 @@
+/* ===========================
+   CONTACTO + SIGUIENTE PROYECTO
+=========================== */
+section.contact-next-project {
+  /* Sobreescribimos el section genérico */
+  height: auto;
+  padding: 6rem 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 3rem;
+  background-color: #1a1a1a;
+}
+
+.contact-next-project > * {
+  flex: 1 1 0;
+  max-width: 600px;
+}
+
+/* Bloques tipo card clara con ruido (hereda la animación que ya tienes) */
+.newsletter-block,
+.next-project-block {
+  color: #eee;
+  padding: 2.2rem 2.4rem;
+}
+
+/* Títulos y textos */
+.newsletter-block h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.6rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.newsletter-block > p {
+  margin: 0 0 1.6rem 0;
+  font-size: 0.95rem;
+  color: #eee;
+  max-width: 26rem;
+}
+
+.next-project-block h3 {
+  font-family: "Figtree", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+  margin: 0 0 1.2rem 0;
+}
+
+/* FORMULARIO */
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#newsletter-form label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+}
+
+#newsletter-form input[type="email"],
+#newsletter-form input[type="text"] {
+  margin-top: 0.35rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  color: #1a1a1a;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background-color 0.16s ease, transform 0.12s ease;
+}
+
+#newsletter-form input::placeholder {
+  color: #999;
+}
+
+#newsletter-form input[type="email"]:focus,
+#newsletter-form input[type="text"]:focus {
+  border-color: rgb(226, 70, 43);
+  box-shadow: 0 0 0 1px rgba(226, 70, 43, 0.35);
+  background-color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Política de privacidad */
+.policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.policy input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: rgb(226, 70, 43);
+}
+
+.policy a {
+  color: rgb(226, 70, 43);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.policy a:hover {
+  text-decoration-style: wavy;
+}
+
+/* Botón newsletter */
+.newsletter-btn {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #1a1a1a;
+  background-color: #1a1a1a;
+  color: #eee;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgb(226, 70, 43);
+  color: #1a1a1a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.newsletter-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Mensaje de estado del form */
+#nm-message {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* Redes sociales */
+.social {
+  margin-top: 1.6rem;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.social a {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+
+  border: 2px solid transparent; /* necesario para borde degradado */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+
+  color: #eee;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  cursor: pointer;
+
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* HOVER → igual que .close-menu:hover */
+.social a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+
+  color: #eee; /* ícono siempre claro */
+}
+
+/* Tarjeta "siguiente proyecto" */
+.project-card {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  padding-top: 10%;
+}
+
+.project-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 0 1.2rem 0 1.2rem;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.project-card__body h4 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.project-card__body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #eee;
+  max-width: 18rem;
+}
+
+/* Si ya tienes .btn global, esto es solo ajuste fino */
+.project-card__link {
+  text-decoration: none;
+
+  margin-top: 0.7rem;
+  display: inline-block;
+  padding: 0.55rem 1.4rem;
+
+  font-size: 0.8rem;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+
+  border-radius: 999px;
+  border: 2px solid transparent; /* necesario para el degradado */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+
+  color: #eee;
+  cursor: pointer;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Hover con el mismo lenguaje visual que .close-menu */
+.project-card__link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+
+  color: #eee; /* texto claro, igual que los otros botones */
+}
+
+.project-card__link:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  section.contact-next-project {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 5%;
+  }
+
+  .contact-next-project > * {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  section.contact-next-project {
+    padding: 3rem 1rem; /* Reduce padding significantly */
+  }
+
+  .newsletter-block,
+  .next-project-block {
+    padding: 1.5rem 1rem; /* Reduce internal block padding */
+  }
+
+  .project-card {
+    flex-direction: column; /* Stack image and text */
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .project-card img {
+    width: 100%; /* Full width image */
+    height: auto;
+    max-width: 200px; /* Limit max width */
+    border-radius: 1rem; /* Uniform radius */
+  }
+
+  .project-card__body p {
+    max-width: 100%; /* Allow text to use full width */
+  }
+
+  #newsletter-form input[type="email"],
+  #newsletter-form input[type="text"] {
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
+    width: 100%;
+  }
+}

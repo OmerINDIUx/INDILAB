@@ -1,14 +1,19 @@
 :root {
   font-size: 16px;
   --page-padding: 1.5rem;
-  --color-text: #EFEFEF;
+  --color-text: #efefef;
   --color-link: rgba(255, 0, 0, 0.6);
-  --color-link-hover: #EFEFEF;
+  --color-link-hover: #efefef;
   --color-bg-3: var(--color-bg-1);
   --color-bg-4: var(--color-bg-2);
   --color-bg-5: var(--color-bg-1);
   --color-bg-6: var(--color-bg-2);
   --color-bg-7: var(--color-bg-1);
+
+  /* Common Colors */
+  --color-bg-dark: #1a1a1a;
+  --color-bg-light: #eeeeee;
+  --color-bg-light-alt: #eee;
 }
 
 .demo-4 {
@@ -16,6 +21,5 @@
   --color-bg: #000000;
   --color-link: rgba(14, 14, 14, 0.6);
   --color-link-hover: #000;
-  --color-white-brand: #EFEFEF;
-  
+  --color-white-brand: #efefef;
 }

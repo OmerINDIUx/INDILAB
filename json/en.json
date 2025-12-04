@@ -146,5 +146,17 @@
   "Bio-Responsive Infrastructure": "Bio-Responsive Infrastructure",
   "Vulnerability of Public Spaces": "Vulnerability of Public Spaces",
   "Computer Vision for Urban Life": "Computer Vision for Urban Life",
-  "Augmented Reality": "Augmented Reality"
+  "Augmented Reality": "Augmented Reality",
+
+  "newsletter_title": "Subscribe to our newsletter",
+  "newsletter_desc": "Receive news, projects, and exclusive resources.",
+  "newsletter_email_label": "Email address",
+  "newsletter_email_placeholder": "email@example.com",
+  "newsletter_name_label": "Name (optional)",
+  "newsletter_name_placeholder": "Your name",
+  "newsletter_policy_accept": "I accept the ",
+  "newsletter_policy_link": "privacy policy",
+  "newsletter_btn": "Subscribe",
+  "suggested_projects_title": "Suggested projects",
+  "project_card_link": "Coming Soon"
 }

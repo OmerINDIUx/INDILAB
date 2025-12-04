@@ -1,22 +1,12 @@
-.figtree-regular {
-  font-family: "Figtree", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.figtree-bold {
-  font-family: "Figtree", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
+@import url("./base/variables.css");
+@import url("./base/animations.css");
+@import url("./components/contact-next-project.css");
 
 html {
   margin: 0;
   padding: 0;
   font-family: "Figtree", sans-serif;
-  background-color: #1a1a1a;
+  background-color: var(--color-bg-dark);
   overflow-x: hidden;
   /* position: relative; */
 }
@@ -25,7 +15,7 @@ body {
   width: 100%; /* full viewport width */
   margin: 0;
   padding-left: 100px; /* 👈 desplaza TODO el contenido 100px */
-  background-color: #1a1a1a;
+  background-color: var(--color-bg-dark);
   font-family: "Figtree", sans-serif;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -53,20 +43,20 @@ body::before {
 
 /* Ruido automático en bloques con fondo #eee */
 *[style*="background: #eee"],
-*[style*="background: #eeeeee"],
+*[style*="background: var(--color-bg-light)"],
 *[style*="background-color: #eee"],
-*[style*="background-color: #eeeeee"],
+*[style*="background-color: var(--color-bg-light)"],
 #image-sequence,
 .TextLarge {
   position: relative;
-  background-color: #eeeeee;
+  background-color: var(--color-bg-light);
   overflow: hidden;
 }
 
 *[style*="background: #eee"]::before,
-*[style*="background: #eeeeee"]::before,
+*[style*="background: var(--color-bg-light)"]::before,
 *[style*="background-color: #eee"]::before,
-*[style*="background-color: #eeeeee"]::before,
+*[style*="background-color: var(--color-bg-light)"]::before,
 #image-sequence::before,
 .TextLarge::before {
   content: "";
@@ -91,39 +81,7 @@ body::before {
 }
 
 /* ANIMACIÓN NOISE */
-@keyframes grain {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -10%);
-  }
-  20% {
-    transform: translate(-15%, 5%);
-  }
-  30% {
-    transform: translate(7%, -25%);
-  }
-  40% {
-    transform: translate(-5%, 25%);
-  }
-  50% {
-    transform: translate(-15%, 10%);
-  }
-  60% {
-    transform: translate(15%, 0%);
-  }
-  70% {
-    transform: translate(0%, 15%);
-  }
-  80% {
-    transform: translate(3%, 35%);
-  }
-  90% {
-    transform: translate(-10%, 10%);
-  }
-}
+/* ANIMACIÓN NOISE (Imported from animations.css) */
 
 /* ===========================
    Section BRAND
@@ -366,7 +324,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 }
 .content--intro {
   /* --- GLASS EFFECT --- */
-  background: #1a1a1a01; /* azul translúcido (ajustable) */
+  background: var(--color-bg-dark) 01; /* azul translúcido (ajustable) */
   backdrop-filter: blur(4px) saturate(100%);
   -webkit-backdrop-filter: blur(10px) saturate(100%);
   border-radius: 18px 0px 18px 0px;
@@ -448,7 +406,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 .video-footer {
   margin-top: 0.4rem;
   text-align: center;
-  color: #eeeeee;
+  color: var(--color-bg-light);
   font-size: 0.6rem;
   display: flex;
   flex-direction: column;
@@ -469,7 +427,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   flex-direction: column;
   align-items: center; /* centra todo horizontalmente */
   gap: 0.3rem;
-  background: #1a1a1a;
+  background: var(--color-bg-dark);
   padding: 0.5rem 0.5rem;
   border-radius: 10px 0 10px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -594,7 +552,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   flex-direction: column;
   justify-content: center;
   padding: 4rem;
-  color: #1a1a1a;
+  color: var(--color-bg-dark);
   background-color: #eee;
   z-index: 10;
 }
@@ -627,7 +585,7 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   font-weight: 600;
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #1a1a1a;
+  color: var(--color-bg-dark);
 }
 
 .text-column2 .text-content2 {
@@ -675,8 +633,8 @@ Call to Action
   text-align: center;
   min-height: 100vh;
   padding: 2rem;
-  background-color: #1a1a1a;
-  color: #eeeeee;
+  background-color: var(--color-bg-dark);
+  color: var(--color-bg-light);
   gap: 2rem; /* Espaciado uniforme entre elementos */
 }
 
@@ -719,7 +677,7 @@ Call to Action
 
 .our-projects:hover {
   transform: scale(1.05);
-  color: #eeeeee;
+  color: var(--color-bg-light);
 }
 
 .brand-icon-back {
@@ -757,7 +715,7 @@ brands colors
     width: 100%;
     margin: 0;
     padding-left: 0; /* 👈 desplaza TODO hacia la derecha */
-    background-color: #1a1a1a;
+    background-color: var(--color-bg-dark);
   }
 
   .stay {

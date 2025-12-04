@@ -1,3 +1,7 @@
+@import url("./base/variables.css");
+@import url("./base/animations.css");
+@import url("./components/contact-next-project.css");
+
 section {
   position: relative;
   height: 100vh;
@@ -36,8 +40,8 @@ body {
   margin-left: 100px;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  background-color: #1a1a1a;
-  color: #eeeeee;
+  background-color: var(--color-bg-dark);
+  color: var(--color-bg-light);
 }
 
 /* Secciones generales */
@@ -53,7 +57,7 @@ section {
 
 /* Hero - sección 1: oscuro */
 .hero {
-  color: #eeeeee;
+  color: var(--color-bg-light);
   height: 100vh;
   position: relative;
   display: flex;
@@ -82,8 +86,8 @@ section {
 
 /* Intro - sección 2: claro */
 .intro {
-  background-color: #eeeeee;
-  color: #1a1a1a;
+  background-color: var(--color-bg-light);
+  color: var(--color-bg-dark);
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -100,8 +104,8 @@ section {
 
 /* Statement - sección 3: oscuro */
 .statement {
-  background-color: #1a1a1a;
-  color: #eeeeee;
+  background-color: var(--color-bg-dark);
+  color: var(--color-bg-light);
   text-align: center;
   padding: 4rem 10%;
   align-items: center;
@@ -114,8 +118,8 @@ section {
 }
 
 .list {
-  background-color: #eeeeee;
-  color: #1a1a1a;
+  background-color: var(--color-bg-light);
+  color: var(--color-bg-dark);
   height: 100vh;
   display: flex; /* ✅ centrado más preciso */
   justify-content: center; /* ✅ centrado horizontal */
@@ -143,14 +147,14 @@ section {
 
 /* Closing - sección 5: oscuro */
 .closing {
-  background-color: #1a1a1a;
+  background-color: var(--color-bg-dark);
   text-align: center;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 .closing p {
-  color: #eeeeee;
+  color: var(--color-bg-light);
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -167,11 +171,11 @@ section {
   line-height: 1.4;
 }
 
-/* Efecto noise para todos los fondos claros (#eee / #eeeeee) */
+/* Efecto noise para todos los fondos claros (#eee / var(--color-bg-light)) */
 .intro::before,
 .list::before,
 section[style*="background-color: #eee"]::before,
-section[style*="background-color: #eeeeee"]::before {
+section[style*="background-color: var(--color-bg-light)"]::before {
   content: "";
   position: absolute;
   top: -100%;
@@ -188,48 +192,16 @@ section[style*="background-color: #eeeeee"]::before {
 /* Asegurar que el contenido esté encima del noise */
 
 /* Animación grain existente */
-@keyframes grain {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -10%);
-  }
-  20% {
-    transform: translate(-15%, 5%);
-  }
-  30% {
-    transform: translate(7%, -25%);
-  }
-  40% {
-    transform: translate(-5%, 25%);
-  }
-  50% {
-    transform: translate(-15%, 10%);
-  }
-  60% {
-    transform: translate(15%, 0%);
-  }
-  70% {
-    transform: translate(0%, 15%);
-  }
-  80% {
-    transform: translate(3%, 35%);
-  }
-  90% {
-    transform: translate(-10%, 10%);
-  }
-}
+/* Animación grain (Imported from animations.css) */
 
 .secundary-brand {
   all: unset;
   position: fixed;
   top: 0;
   left: 10px;
-  z-index: 10;
+  z-index: 10001;
   background: transparent;
-  pointer-events: none; /* Prevents interference with other elements */
+  pointer-events: auto; /* Allows clicking on the logo */
   width: 80px;
   max-width: 80px;
 }
@@ -296,11 +268,11 @@ section[style*="background-color: #eeeeee"]::before {
 }
 
 .intro .secundary-logo .indi-lab-logo svg .INDI path {
-  fill: #1a1a1a; /* Cambia INDI */
+  fill: var(--color-bg-dark); /* Cambia INDI */
 }
 
 .intro .secundary-logo .indi-lab-logo svg .LAB path {
-  fill: #1a1a1a; /* Cambia LAB */
+  fill: var(--color-bg-dark); /* Cambia LAB */
 }
 
 .navigation-arrows-whatwedo {
@@ -322,7 +294,7 @@ section[style*="background-color: #eeeeee"]::before {
 
 .our-projects:hover {
   transform: scale(1.05);
-  color: #eeeeee;
+  color: var(--color-bg-light);
 }
 
 .brand-icon-back {
@@ -345,7 +317,7 @@ section[style*="background-color: #eeeeee"]::before {
 .statement {
   /* position: relative; */
   height: 100vh; /* solo para que tengas scroll */
-  background: #1a1a1a;
+  background: var(--color-bg-dark);
 }
 
 .content-text {

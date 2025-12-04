@@ -385,6 +385,199 @@
     <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
     <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
 
+    <section class="contact-next-project">
+      <!-- Newsletter -->
+      <div class="newsletter-block">
+        <h2 data-i18n="newsletter_title"></h2>
+        <p data-i18n="newsletter_desc"></p>
+
+        <form id="newsletter-form" novalidate>
+          <label for="nm-email" data-i18n="newsletter_email_label"></label>
+          <input
+            id="nm-email"
+            name="email"
+            type="email"
+            required
+            data-i18n="newsletter_email_placeholder"
+          />
+
+          <label for="nm-name" data-i18n="newsletter_name_label"></label>
+          <input
+            id="nm-name"
+            name="name"
+            type="text"
+            data-i18n="newsletter_name_placeholder"
+          />
+
+          <div class="policy">
+            <input id="nm-policy" name="policy" type="checkbox" required />
+            <label for="nm-policy">
+              <span data-i18n="newsletter_policy_accept"></span>
+              <a
+                href="/politica-privacidad.html"
+                target="_blank"
+                rel="noopener"
+                data-i18n="newsletter_policy_link"
+              ></a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="newsletter-btn"
+            data-i18n="newsletter_btn"
+          ></button>
+
+          <p id="nm-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Redes sociales -->
+        <div class="social" aria-label="Redes sociales">
+          <a
+            href="https://instagram.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a
+            href="https://linkedin.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sugerencia del siguiente proyecto -->
+      <aside class="next-project-block">
+        <h3 data-i18n="suggested_projects_title"></h3>
+
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 3.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Computer Visión</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 2.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Loroem Ipsum</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+      </aside>
+
+      <script>
+        (function () {
+          const form = document.getElementById("newsletter-form");
+          const email = document.getElementById("nm-email");
+          const policy = document.getElementById("nm-policy");
+          const msg = document.getElementById("nm-message");
+
+          function show(message, ok = true) {
+            msg.textContent = message;
+            msg.style.color = ok ? "#0a0" : "#c00";
+          }
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            msg.textContent = "";
+
+            if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+              show("Introduce un correo válido.", false);
+              email.focus();
+              return;
+            }
+            if (!policy.checked) {
+              show("Debes aceptar la política de privacidad.", false);
+              return;
+            }
+
+            const payload = {
+              email: email.value.trim(),
+              name: (document.getElementById("nm-name").value || "").trim(),
+              acceptedPolicy: true,
+              source: window.location.pathname,
+            };
+
+            fetch("/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            })
+              .then((resp) => {
+                if (!resp.ok) throw new Error("network");
+                return resp.json().catch(() => ({}));
+              })
+              .then(() => {
+                show("Gracias por suscribirte. Revisa tu correo.", true);
+                form.reset();
+              })
+              .catch(() => {
+                try {
+                  const pending = JSON.parse(
+                    localStorage.getItem("newsletter_pending") || "[]"
+                  );
+                  pending.push(payload);
+                  localStorage.setItem(
+                    "newsletter_pending",
+                    JSON.stringify(pending)
+                  );
+                } catch (err) {}
+                show(
+                  "Suscripción guardada localmente. Se intentará enviar cuando haya conexión.",
+                  true
+                );
+                form.reset();
+              });
+          });
+        })();
+      </script>
+    </section>
+
     <div class="top-bar"></div>
 
     <div class="menu-placeholder" id="menu-placeholder"></div>

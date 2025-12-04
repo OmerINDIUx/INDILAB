@@ -8,12 +8,11 @@
   "CDMX Traffic": "Tráfico CDMX",
   "hero_highlighted_text": "",
   "hero_intro_text": "Las ciudades son sistemas vivos donde convergen la innovación, la creatividad y las posibilidades.",
-  
+
   "hero_intro_text1": "En INDI Lab, pensamos las ciudades como entidades dinámicas y en constante evolución que reflejan nuestro potencial colectivo.",
 
-   "hero_intro_text2": "Creemos en un futuro donde la tecnología y la comunidad trabajen de la mano para que la humanidad prospere en los entornos urbanos.",
-  
-  
+  "hero_intro_text2": "Creemos en un futuro donde la tecnología y la comunidad trabajen de la mano para que la humanidad prospere en los entornos urbanos.",
+
   "icon_start_alt": "Ícono inicial",
   "icon_end_alt": "Ícono final",
   "cdmx traffic page food1": "Viajes vehiculares diarios simulados en CDMX según la hora del día.",
@@ -63,8 +62,7 @@
 
   "who we are": "Quiénes Somos",
   "who we are sub": "Innovación en la intersección entre ciudades,",
-    "who we are sub1": " infraestructura, tecnología y comunidad",
-
+  "who we are sub1": " infraestructura, tecnología y comunidad",
 
   "who mwe are intro": "INDI Lab es el",
   "who mwe are spam": "laboratorio de innovación urbana y plataforma de emprendimiento de Grupo INDI,",
@@ -123,15 +121,15 @@
   "News +": "Noticias + Actualizaciones",
 
   "Scalable solutions": "Soluciones escalables",
-"Scalable solutions text": "que evolucionan en programas de infraestructura pública que generan impacto social, implementables en distintas ciudades.",
+  "Scalable solutions text": "que evolucionan en programas de infraestructura pública que generan impacto social, implementables en distintas ciudades.",
 
-"Civic tech and gov tech ventures": "Emprendimientos de tecnología cívica y gubernamental",
-"Civic tech and gov tech ventures text": "con potencial para transformarse en alianzas público-privadas o iniciativas comerciales.",
+  "Civic tech and gov tech ventures": "Emprendimientos de tecnología cívica y gubernamental",
+  "Civic tech and gov tech ventures text": "con potencial para transformarse en alianzas público-privadas o iniciativas comerciales.",
 
-"Applied research, data analysis, and strategic studies": "Investigación aplicada, análisis de datos y estudios estratégicos",
-"Applied research, data analysis, and strategic studies text": "que no solo respaldan la implementación, sino que también aportan al discurso urbano global y a la formulación de políticas públicas.",
+  "Applied research, data analysis, and strategic studies": "Investigación aplicada, análisis de datos y estudios estratégicos",
+  "Applied research, data analysis, and strategic studies text": "que no solo respaldan la implementación, sino que también aportan al discurso urbano global y a la formulación de políticas públicas.",
 
-"infra_title": "Ejecución con Respaldo en Infraestructura",
+  "infra_title": "Ejecución con Respaldo en Infraestructura",
   "infra_text": "Integrado dentro de Grupo INDI, INDI Lab aprovecha la capacidad constructiva a escala nacional para reducir el riesgo en I+D y acelerar la implementación a través de proyectos reales.",
 
   "pipeline_title": "Prototipar–Implementar–Escalar",
@@ -143,11 +141,23 @@
   "data_title": "Datos e Inteligencia Colectiva",
   "data_text": "Nuestros proyectos son tanto impulsados por datos como guiados por la inteligencia colectiva — combinando análisis cuantitativo con estrategias de participación comunitaria para garantizar que cada intervención sea sensible al contexto, socialmente fundamentada y responda a las necesidades de las personas y los lugares.",
 
-"Co-creating the future":"Cocreando el futuro de las ciudades con datos, diseño y tecnología.",
+  "Co-creating the future": "Cocreando el futuro de las ciudades con datos, diseño y tecnología.",
 
-"Transit-Oriented Development": "Desarrollo Orientado al Transporte",
+  "Transit-Oriented Development": "Desarrollo Orientado al Transporte",
   "Bio-Responsive Infrastructure": "Infraestructura Biorresponsiva",
   "Vulnerability of Public Spaces": "Vulnerabilidad de los Espacios Públicos",
   "Computer Vision for Urban Life": "Visión por Computadora para la Vida Urbana",
-  "Augmented Reality": "Realidad Aumentada"
+  "Augmented Reality": "Realidad Aumentada",
+
+  "newsletter_title": "Suscríbete al newsletter",
+  "newsletter_desc": "Recibe novedades, proyectos y recursos exclusivos.",
+  "newsletter_email_label": "Correo electrónico",
+  "newsletter_email_placeholder": "correo@ejemplo.com",
+  "newsletter_name_label": "Nombre (opcional)",
+  "newsletter_name_placeholder": "Tu nombre",
+  "newsletter_policy_accept": "Acepto la ",
+  "newsletter_policy_link": "política de privacidad",
+  "newsletter_btn": "Suscribirse",
+  "suggested_projects_title": "Proyectos sugeridos",
+  "project_card_link": "Próximamente"
 }

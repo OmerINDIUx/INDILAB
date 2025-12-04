@@ -1,3 +1,6 @@
+@import url("../base/variables.css");
+@import url("../base/animations.css");
+
 /* HEADER GLOBAL */
 /* ==============================
    HEADER Y WRAPPERS
@@ -63,7 +66,7 @@ body {
 #fullscreen-menu {
   width: 100%;
   height: 100%;
-  background: #eee;
+  background: var(--color-bg-light);
   transform-style: preserve-3d;
   backface-visibility: hidden;
   pointer-events: auto;
@@ -78,7 +81,7 @@ body {
 .menu__item {
   font-weight: 400;
   font-size: 1.5rem;
-  color: #1a1a1a;
+  color: var(--color-bg-dark);
   text-decoration: none;
   position: relative;
   display: block;
@@ -141,13 +144,12 @@ body {
   left: 0;
   width: 100px; /* Ancho fijo */
   height: 100vh; /* Toda la pantalla */
-  background-color: #1a1a1a02;
+  background-color: rgba(26, 26, 26, 0.02);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 315;
-  
+  z-index: 10000;
 }
 .sidebar-buttons {
   position: absolute;
@@ -167,9 +169,16 @@ body {
   height: 44px;
   border: 2px solid transparent;
   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
-    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
-  color: #eee;
+  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
+      padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-bg-dark),
+        var(--color-bg-dark),
+        var(--color-bg-dark)
+      )
+      border-box;
+  color: var(--color-bg-light);
   cursor: pointer;
   box-sizing: border-box;
   padding: 0;
@@ -197,17 +206,7 @@ body {
   animation: borderGradient 4s ease infinite;
 }
 
-@keyframes borderGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+/* Animation borderGradient (Imported from animations.css) */
 
 .hamburger {
   flex-direction: column;
@@ -217,18 +216,18 @@ body {
 .hamburger span {
   height: 3px;
   width: 40%;
-  background-color: #eee;
+  background-color: var(--color-bg-light);
   display: block;
   border-radius: 2px;
   transition: background-color 0.3s ease;
 }
 
 .secundary-brand2 .INDI path {
-  fill: #1a1a1a;
+  fill: var(--color-bg-dark);
 }
 
 .secundary-brand2 .LAB path {
-  fill: #1a1a1a;
+  fill: var(--color-bg-dark);
 }
 
 .secundary-brand2 .colorkey path {
@@ -304,9 +303,16 @@ body.menu-open .secundary-brand {
   z-index: 1100;
   transition: all 0.3s ease;
   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
-    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
-  color: #eee;
+  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
+      padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-bg-dark),
+        var(--color-bg-dark),
+        var(--color-bg-dark)
+      )
+      border-box;
+  color: var(--color-bg-light);
 }
 
 .close-menu::before,
@@ -317,7 +323,7 @@ body.menu-open .secundary-brand {
   left: 50%;
   width: 55%;
   height: 3px;
-  background: #eee;
+  background: var(--color-bg-light);
   border-radius: 2px;
   transform-origin: center;
 }
@@ -337,9 +343,16 @@ body.menu-open .secundary-brand {
   height: 44px;
   border: 2px solid transparent; /* necesario para ver el borde degradado */
   border-radius: 0 8px 0 8px;
-  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
-    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
-  color: #eee;
+  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
+      padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-bg-dark),
+        var(--color-bg-dark),
+        var(--color-bg-dark)
+      )
+      border-box;
+  color: var(--color-bg-light);
   cursor: pointer;
   z-index: 1100;
   transition: all 0.3s ease;
@@ -357,7 +370,7 @@ body.menu-open .secundary-brand {
   left: 50%;
   width: 50%;
   height: 3px;
-  background: #eee; /* 👈 color fijo */
+  background: var(--color-bg-light); /* 👈 color fijo */
   border-radius: 2px;
   transform-origin: center;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -411,7 +424,7 @@ body.menu-open .secundary-brand {
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
-  color: #1a1a1a;
+  color: var(--color-bg-dark);
   position: relative;
   margin-top: 0rem;
 }
@@ -445,14 +458,14 @@ body.menu-open .secundary-brand {
   height: auto;
   border: 2px solid transparent;
   border-radius: 0 16px 0 16px;
-  box-shadow: 0 6px 20px #1a1a1a10;
+  box-shadow: 0 6px 20px var(--color-bg-dark) 10;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .blog-item a:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px #1a1a1a12;
+  box-shadow: 0 12px 30px var(--color-bg-dark) 12;
   animation: borderGradient 8s ease infinite;
   /* background:
     linear-gradient(#f7f7f7, #f1f1f1) padding-box,
@@ -484,13 +497,13 @@ body.menu-open .secundary-brand {
 .blog-title {
   font-weight: 700;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: var(--color-bg-dark);
   text-decoration: none; /* 👈 sin subrayado */
 }
 
 .blog-date {
   font-size: 0.85rem;
-  color: #1a1a1a90;
+  color: var(--color-bg-dark) 90;
   opacity: 0.9;
   text-decoration: none; /* 👈 por si acaso */
 }
@@ -527,7 +540,7 @@ body.menu-open .secundary-brand {
   .sidebar12 {
     width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
-    z-index: 322;
+    z-index: 10000;
   }
 
   .lang-btn {
@@ -576,29 +589,24 @@ body.menu-open .secundary-brand {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 80px;
-    background: #1a1a1a;
+    background: var(--color-bg-dark);
     z-index: 300;
   }
 }
 
 @media (max-width: 500px) {
+  .menu-fullscreen {
+    gap: 2rem;
+    padding: 3.5rem 0.2rem;
+  }
 
-  
-.menu-fullscreen {
+  .blog-heading {
+    font-size: 1.5rem;
+  }
 
-  gap: 2rem;
-  padding: 3.5rem .2rem;
-}
-
-.blog-heading {
-  font-size: 1.5rem;
-}
-
-
-.menu__item {
-  font-size: 1.2rem;
-
-}
+  .menu__item {
+    font-size: 1.2rem;
+  }
 }

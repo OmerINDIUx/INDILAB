@@ -1,167 +1,367 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-<head>    
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link id="menu-css" rel="stylesheet" href="/css/base.css" />
 
+    <meta charset="UTF-8" />
+    <title>Reto de Innovación Urbana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <link id="menu-css" rel="stylesheet" href="/css/base.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <meta charset="UTF-8">
-  <title>Reto de Innovación Urbana</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style_reto2025.css" />
+  </head>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <link rel="stylesheet" href="css/style_reto2025.css">
-  
-</head>
-
-<body>
-
-
-      <a href="index.html">
-        <div class="secundary-brand"></div>
+  <body>
+    <a href="../../index.html">
+      <div class="secundary-brand"></div>
     </a>
 
     <script>
-        const container = document.querySelector('.secundary-brand');
-        fetch('/svg/indi-lab_Vertical_Animate.svg')
-            .then(response => response.text())
-            .then(svgText => {
-                container.innerHTML = svgText; // Inserta el SVG como HTML
-            })
-            .catch(err => console.error('Error cargando SVG:', err));
+      const container = document.querySelector(".secundary-brand");
+      fetch("/svg/indi-lab_Vertical_Animate.svg")
+        .then((response) => response.text())
+        .then((svgText) => {
+          container.innerHTML = svgText; // Inserta el SVG como HTML
+        })
+        .catch((err) => console.error("Error cargando SVG:", err));
     </script>
 
-
-
-
-
-        <div id="menu-placeholder"></div>
+    <div id="menu-placeholder"></div>
 
     <script>
-        fetch('/menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('menu-placeholder');
-                if (!placeholder) {
-                    throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-                }
-                placeholder.innerHTML = data;
+      fetch("/menu.html")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `Error al cargar el menú: ${response.status} ${response.statusText}`
+            );
+          }
+          return response.text();
+        })
+        .then((data) => {
+          const placeholder = document.getElementById("menu-placeholder");
+          if (!placeholder) {
+            throw new Error(
+              "Elemento con id 'menu-placeholder' no encontrado en el DOM"
+            );
+          }
+          placeholder.innerHTML = data;
 
-                // Cargar el script después de que el menú esté en el DOM
-                const script = document.createElement('script');
-                script.src = "/js/demo4/menu.js";
-                script.onload = () => console.log("menu.js cargado correctamente ✅");
-                script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-                document.body.appendChild(script);
-            })
-            .catch(error => {
-                console.error("Ocurrió un error al cargar el menú:", error);
-            });
+          // Cargar el script después de que el menú esté en el DOM
+          const script = document.createElement("script");
+          script.src = "/js/demo4/menu.js";
+          script.onload = () => console.log("menu.js cargado correctamente ✅");
+          script.onerror = () =>
+            console.error("Error al cargar /js/demo4/menu.js ❌");
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error al cargar el menú:", error);
+        });
     </script>
 
-
-
-
-  <div class="gif-container">
-    <img src="images/mix-001-reto_1.gif" alt="Innovación Urbana 1" id="gif1">
-    <img src="images/aNCHOR-001-reto.gif" alt="Innovación Urbana 2" id="gif2">
-  </div>
-
-  <section>
-    <div class="card">
-      <h2>Nota Conceptual de Proyecto </h2>
-      <h1>Vivienda Modular </h1>
-      <h3>Diciembre 2024 </h3>
+    <div class="gif-container">
+      <img
+        src="images/mix-001-reto_1.gif"
+        alt="Innovación Urbana 1"
+        id="gif1"
+      />
+      <img
+        src="images/aNCHOR-001-reto.gif"
+        alt="Innovación Urbana 2"
+        id="gif2"
+      />
     </div>
 
+    <section>
+      <div class="card">
+        <h2>Nota Conceptual de Proyecto</h2>
+        <h1>Vivienda Modular</h1>
+        <h3>Diciembre 2024</h3>
+      </div>
+    </section>
 
-  </section>
+    <section>
+      <div class="card">
+        <p>
+          Las viviendas prefabricadas, ampliamente utilizadas en países como
+          Suecia y Japón, son una solución eficiente y sostenible para abordar
+          crisis habitacionales. Producidas en fábricas y ensambladas en el
+          sitio, optimizan recursos, reducen el impacto ambiental y se adaptan a
+          normativas locales para contextos urbanos o rurales. Este método puede
+          reducir costos en un 20% y tiempos de construcción hasta en un 50%,
+          destacándose como una alternativa moderna y práctica frente a los
+          métodos tradicionales 2.
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <div class="card">
-      <p>Las viviendas prefabricadas, ampliamente utilizadas en países como Suecia y Japón, son una solución
-        eficiente y sostenible para abordar crisis habitacionales. Producidas en fábricas y ensambladas en el
-        sitio, optimizan recursos, reducen el impacto ambiental y se adaptan a normativas locales para contextos
-        urbanos o rurales. Este método puede reducir costos en un 20% y tiempos de construcción hasta en un 50%,
-        destacándose como una alternativa moderna y práctica frente a los métodos tradicionales 2.</p>
-    </div>
-  </section>
+    <section>
+      <div class="card">
+        <p>
+          Las viviendas modulares permiten construcciones rápidas y eficientes,
+          además de integrarse con estrategias como la reutilización de
+          contenedores marítimos o el Cohousing. Estas opciones, combinadas,
+          conforman un ecosistema flexible de soluciones adaptables a distintos
+          contextos urbanos y necesidades habitacionales
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <div class="card">
-      <p>Las viviendas modulares permiten construcciones rápidas y eficientes, además de integrarse con
-        estrategias como la reutilización de contenedores marítimos o el Cohousing. Estas opciones, combinadas,
-        conforman un ecosistema flexible de soluciones adaptables a distintos contextos urbanos y necesidades
-        habitacionales</p>
-    </div>
-  </section>
+    <section>
+      <div class="card" id="cambio_gif">
+        <p>
+          Esta nota conceptual expone argumentos sobre la viabilidad de las
+          viviendas modulares como una alternativa capaz de transformar los
+          desafíos actuales en oportunidades de desarrollo social y ambiental.
+          Esta solución no solo cumple con las normativas vigentes, sino que
+          también incorpora elementos de sostenibilidad y adaptabilidad frente a
+          riesgos geológicos, representando una opción accesible y moderna para
+          atender la creciente demanda de vivienda
+        </p>
+      </div>
+    </section>
 
-  <section>
-    <div class="card" id="cambio_gif">
-      <p>Esta nota conceptual expone argumentos sobre la viabilidad de las viviendas modulares como una
-        alternativa capaz de transformar los desafíos actuales en oportunidades de desarrollo social y
-        ambiental. Esta solución no solo cumple con las normativas vigentes, sino que también incorpora
-        elementos de sostenibilidad y adaptabilidad frente a riesgos geológicos, representando una opción
-        accesible y moderna para atender la creciente demanda de vivienda</p>
-    </div>
-  </section>
+    <section>
+      <div class="card">
+        <p>
+          Las viviendas modulares se pueden adaptar de distintas maneras, tal
+          como las viviendas en contenedores marítimos que es una técnica que ha
+          ganado reconocimiento por su versatilidad y sostenibilidad. Estos
+          contenedores, diseñados originalmente para el transporte de
+          mercancías, pueden ser reutilizados para crear espacios habitables con
+          un impacto ambiental reducido. Más allá del uso residencial, su
+          flexibilidad permite adaptarlos como oficinas, restaurantes u otros
+          espacios funcionales.
+        </p>
+      </div>
+    </section>
 
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
 
-  <section>
-    <div class="card">
-      <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
-        marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
-        contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
-        crear espacios habitables con un impacto ambiental reducido. Más allá del uso residencial, su
-        flexibilidad permite adaptarlos como oficinas, restaurantes u otros espacios funcionales.</p>
-    </div>
-  </section>
+      // Gif1 se apaga al llegar a la sección con id #cambio_gif
+      gsap.to("#gif1", {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: "#cambio_gif",
+          start: "top center",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
+      // Gif2 aparece al mismo tiempo
+      gsap.to("#gif2", {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: "#cambio_gif",
+          start: "top center",
+          toggleActions: "play none none reverse",
+        },
+      });
+    </script>
 
-    // Gif1 se apaga al llegar a la sección con id #cambio_gif
-    gsap.to("#gif1", {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#cambio_gif",
-        start: "top center",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    // Gif2 aparece al mismo tiempo
-    gsap.to("#gif2", {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: "#cambio_gif",
-        start: "top center",
-        toggleActions: "play none none reverse"
-      }
-    });
-  </script>
-
-
-
-
-
-
-      <script src="/js/gsap.min.js"></script>
+    <script src="/js/gsap.min.js"></script>
     <script src="/js/ScrollTrigger.min.js"></script>
     <script src="/js/lenis.min.js"></script>
     <script src="/js/splitting.min.js"></script>
-      <script type="module" src="/js/demo4/traduction.js"></script>
+    <script type="module" src="/js/demo4/traduction.js"></script>
+    <section class="contact-next-project">
+      <!-- Newsletter -->
+      <div class="newsletter-block">
+        <h2 data-i18n="newsletter_title"></h2>
+        <p data-i18n="newsletter_desc"></p>
 
-</body>
+        <form id="newsletter-form" novalidate>
+          <label for="nm-email" data-i18n="newsletter_email_label"></label>
+          <input
+            id="nm-email"
+            name="email"
+            type="email"
+            required
+            data-i18n="newsletter_email_placeholder"
+          />
 
+          <label for="nm-name" data-i18n="newsletter_name_label"></label>
+          <input
+            id="nm-name"
+            name="name"
+            type="text"
+            data-i18n="newsletter_name_placeholder"
+          />
+
+          <div class="policy">
+            <input id="nm-policy" name="policy" type="checkbox" required />
+            <label for="nm-policy">
+              <span data-i18n="newsletter_policy_accept"></span>
+              <a
+                href="/politica-privacidad.html"
+                target="_blank"
+                rel="noopener"
+                data-i18n="newsletter_policy_link"
+              ></a>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="newsletter-btn"
+            data-i18n="newsletter_btn"
+          ></button>
+
+          <p id="nm-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Redes sociales -->
+        <div class="social" aria-label="Redes sociales">
+          <a
+            href="https://instagram.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a
+            href="https://linkedin.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sugerencia del siguiente proyecto -->
+      <aside class="next-project-block">
+        <h3 data-i18n="suggested_projects_title"></h3>
+
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 3.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Computer Visión</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 2.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Loroem Ipsum</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+      </aside>
+
+      <script>
+        (function () {
+          const form = document.getElementById("newsletter-form");
+          const email = document.getElementById("nm-email");
+          const policy = document.getElementById("nm-policy");
+          const msg = document.getElementById("nm-message");
+
+          function show(message, ok = true) {
+            msg.textContent = message;
+            msg.style.color = ok ? "#0a0" : "#c00";
+          }
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            msg.textContent = "";
+
+            if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+              show("Introduce un correo válido.", false);
+              email.focus();
+              return;
+            }
+            if (!policy.checked) {
+              show("Debes aceptar la política de privacidad.", false);
+              return;
+            }
+
+            const payload = {
+              email: email.value.trim(),
+              name: (document.getElementById("nm-name").value || "").trim(),
+              acceptedPolicy: true,
+              source: window.location.pathname,
+            };
+
+            fetch("/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            })
+              .then((resp) => {
+                if (!resp.ok) throw new Error("network");
+                return resp.json().catch(() => ({}));
+              })
+              .then(() => {
+                show("Gracias por suscribirte. Revisa tu correo.", true);
+                form.reset();
+              })
+              .catch(() => {
+                try {
+                  const pending = JSON.parse(
+                    localStorage.getItem("newsletter_pending") || "[]"
+                  );
+                  pending.push(payload);
+                  localStorage.setItem(
+                    "newsletter_pending",
+                    JSON.stringify(pending)
+                  );
+                } catch (err) {}
+                show(
+                  "Suscripción guardada localmente. Se intentará enviar cuando haya conexión.",
+                  true
+                );
+                form.reset();
+              });
+          });
+        })();
+      </script>
+    </section>
+  </body>
 </html>

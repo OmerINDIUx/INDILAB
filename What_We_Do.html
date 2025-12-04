@@ -1,237 +1,470 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-<head>    
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link
+      id="menu-css"
+      rel="stylesheet"
+      href="/css/components/menu-header.css"
+    />
 
-
-  
-  <link id="menu-css" rel="stylesheet" href="/css/components/menu-header.css">
-
-  <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title data-i18n="menu projects"></title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+    <script>
+      document.documentElement.className = "js";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
-  <script>document.documentElement.className = "js";</script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="/js/gsap.min.js"></script>
+    <script src="/js/ScrollTrigger.min.js"></script>
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
 
+    <link id="menu-css" rel="stylesheet" href="/css/blog.css" />
+    <!-- Cargar GSAP y plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
 
+    <!-- Tu script de traducción -->
+    <script type="module" src="js/demo4/traduction.js"></script>
 
-  <script src="/js/gsap.min.js"></script>
-  <script src="/js/ScrollTrigger.min.js"></script>
-  <script src="/js/lenis.min.js"></script>
-  <script src="/js/splitting.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="menu projects"></title>
+  </head>
 
+  <body>
+    <!-- Hero -->
+    <section class="hero-carousel-section">
+      <div class="carousel-background">
+        <div class="overlay"></div>
+        <img
+          src="/img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg"
+          class="carousel-img active"
+        />
+        <img
+          src="/img/What we do/pexels-susan-flores-232226967-12294911.jpg"
+          class="carousel-img"
+        />
+        <img
+          src="/img/What we do/pexels-victor-armas-262050668-12930992.jpg"
+          class="carousel-img"
+        />
+      </div>
 
+      <div class="carousel-content">
+        <h3 id="carousel-phrase" data-i18n="carrusel indi lab"></h3>
 
-  <link id="menu-css" rel="stylesheet" href="/css/blog.css">
-  <!-- Cargar GSAP y plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
-
-  <!-- Tu script de traducción -->
-  <script type="module" src="js/demo4/traduction.js"></script>
-
-
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="menu projects"></title>
-
-
-
-
-
-</head>
-
-<body>
-
-
-  <!-- Hero -->
-  <section class="hero-carousel-section">
-    <div class="carousel-background">
-      <div class="overlay"></div>
-      <img src="/img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg" class="carousel-img active">
-      <img src="/img/What we do/pexels-susan-flores-232226967-12294911.jpg" class="carousel-img">
-      <img src="/img/What we do/pexels-victor-armas-262050668-12930992.jpg" class="carousel-img">
-    </div>
-
-    <div class="carousel-content">
-      <h3 id="carousel-phrase" data-i18n="carrusel indi lab">
-      </h3>
-
-      <!-- 🔥 Línea de búsqueda con sugerencias -->
-      <div class="search-line">
-        <label for="carousel-search" data-i18n="INDI Lab #"></label>
-        <div class="input-wrapper">
-          <input id="carousel-search" type="text" autocomplete="off">
-          <span id="carousel-suggestion"></span>
+        <!-- 🔥 Línea de búsqueda con sugerencias -->
+        <div class="search-line">
+          <label for="carousel-search" data-i18n="INDI Lab #"></label>
+          <div class="input-wrapper">
+            <input id="carousel-search" type="text" autocomplete="off" />
+            <span id="carousel-suggestion"></span>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-  </section>
+    <!-- Blog -->
+    <section class="blog-section1" id="blog">
+      <h2 class="blog-heading1" data-i18n="Our work"></h2>
 
+      <div class="blog-list1" id="blogList">
+        <article class="blog-item1" data-tags="Vivienda">
+          <a href="/projects/ViviendaModular/vivienda_modular.html">
+            <img
+              src="/projects/ViviendaModular/images/11viviendamodular-01.png"
+              alt="Post 1"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3 class="blog-title1" data-i18n="Modular Housing"></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
 
-  
+        <article class="blog-item1" data-tags="Movilidad">
+          <a href="/projects/ElectroMovilidad/electromovilidad.html">
+            <img
+              src="/projects/ViviendaModular/images/electromovilidad.png"
+              alt="Post 1"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3 class="blog-title1" data-i18n="Electromobility"></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
 
-  <!-- Blog -->
-  <section class="blog-section1" id="blog">
-    <h2 class="blog-heading1" data-i18n="Our work"></h2>
+        <article class="blog-item1" data-tags="Resiliencia">
+          <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+            <img
+              src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
+              alt="Post 1"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
+        <article class="blog-item1" data-tags="Urbanismo">
+          <a href="/Coming_Soom.html">
+            <img
+              src="/img/1x/Mesa de trabajo 2.png"
+              alt="Transit-Oriented Development"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3
+                class="blog-title1"
+                data-i18n="Transit-Oriented Development"
+              ></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
 
-    <div class="blog-list1" id="blogList">
-      <article class="blog-item1" data-tags="Vivienda">
-        <a href="/projects/ViviendaModular/vivienda_modular.html">
-          <img src="/projects/ViviendaModular/images/11viviendamodular-01.png" alt="Post 1" class="blog-thumb">
-          <div class="blog-info1">
-            <h3 class="blog-title1" data-i18n="Modular Housing"></h3>
-            <p class="blog-date1" data-i18n="December 2024"></p>
-          </div>
-        </a>
-      </article>
+        <article class="blog-item1" data-tags="Infraestructura">
+          <a href="/Coming_Soom.html">
+            <img
+              src="/img/1x/Mesa de trabajo 4.png"
+              alt="Bio-Responsive Infrastructure"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3
+                class="blog-title1"
+                data-i18n="Bio-Responsive Infrastructure"
+              ></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item1" data-tags="Movilidad">
-        <a href="/projects/ElectroMovilidad/electromovilidad.html">
-          <img src="/projects/ViviendaModular/images/electromovilidad.png" alt="Post 1" class="blog-thumb">
-          <div class="blog-info1">
-            <h3 class="blog-title1" data-i18n="Electromobility"></h3>
-            <p class="blog-date1" data-i18n="December 2024"></p>
-          </div>
-        </a>
-      </article>
+        <article class="blog-item1" data-tags="Tecnología">
+          <a href="/Coming_Soom.html">
+            <img
+              src="/img/1x/Mesa de trabajo 3.png"
+              alt="Computer Vision for Urban Life"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3
+                class="blog-title1"
+                data-i18n="Computer Vision for Urban Life"
+              ></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
 
-      <article class="blog-item1" data-tags="Resiliencia">
-        <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
-          <img src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png" alt="Post 1"
-            class="blog-thumb">
-          <div class="blog-info1">
-            <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
-            <p class="blog-date1" data-i18n="December 2024"></p>
-          </div>
-        </a>
-      </article>
-    </div>
+        <article class="blog-item1" data-tags="Tecnología">
+          <a href="/Coming_Soom.html">
+            <img
+              src="/IMG/1x/Mesa de trabajo 1.png"
+              alt="Augmented Reality"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3 class="blog-title1" data-i18n="Augmented Reality"></h3>
+              <p class="blog-date1" data-i18n="December 2024"></p>
+            </div>
+          </a>
+        </article>
+      </div>
 
-    <!-- Mensaje si no hay resultados -->
-    <p id="noResults" style="display:none; color:#999; margin-top:1em;">No results found</p>
-  </section>
+      <!-- Mensaje si no hay resultados -->
+      <p id="noResults" style="display: none; color: #999; margin-top: 1em">
+        No results found
+      </p>
+    </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll("[data-svg]").forEach(el => {
-        const svgPath = el.getAttribute("data-svg");
-        fetch(svgPath)
-          .then(res => res.text())
-          .then(svgContent => {
-            el.innerHTML = svgContent;
-          })
-          .catch(err => console.error("Error cargando SVG:", err));
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("[data-svg]").forEach((el) => {
+          const svgPath = el.getAttribute("data-svg");
+          fetch(svgPath)
+            .then((res) => res.text())
+            .then((svgContent) => {
+              el.innerHTML = svgContent;
+            })
+            .catch((err) => console.error("Error cargando SVG:", err));
+        });
       });
-    });
-  </script>
+    </script>
 
+    <!-- Logo -->
+    <a href="index.html">
+      <div class="secundary-brand"></div>
+    </a>
+    <script>
+      const container = document.querySelector(".secundary-brand");
+      fetch("/svg/indi-lab_Vertical_Animate.svg")
+        .then((response) => response.text())
+        .then((svgText) => {
+          container.innerHTML = svgText;
+        })
+        .catch((err) => console.error("Error cargando SVG:", err));
+    </script>
 
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+    <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
 
+    <section class="contact-next-project">
+      <!-- Newsletter -->
+      <div class="newsletter-block">
+        <h2 data-i18n="newsletter_title"></h2>
+        <p data-i18n="newsletter_desc"></p>
 
+        <form id="newsletter-form" novalidate>
+          <label for="nm-email" data-i18n="newsletter_email_label"></label>
+          <input
+            id="nm-email"
+            name="email"
+            type="email"
+            required
+            data-i18n="newsletter_email_placeholder"
+          />
 
+          <label for="nm-name" data-i18n="newsletter_name_label"></label>
+          <input
+            id="nm-name"
+            name="name"
+            type="text"
+            data-i18n="newsletter_name_placeholder"
+          />
 
+          <div class="policy">
+            <input id="nm-policy" name="policy" type="checkbox" required />
+            <label for="nm-policy">
+              <span data-i18n="newsletter_policy_accept"></span>
+              <a
+                href="/politica-privacidad.html"
+                target="_blank"
+                rel="noopener"
+                data-i18n="newsletter_policy_link"
+              ></a>
+            </label>
+          </div>
 
+          <button
+            type="submit"
+            class="newsletter-btn"
+            data-i18n="newsletter_btn"
+          ></button>
 
+          <p id="nm-message" role="status" aria-live="polite"></p>
+        </form>
 
+        <!-- Redes sociales -->
+        <div class="social" aria-label="Redes sociales">
+          <a
+            href="https://instagram.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a
+            href="https://linkedin.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
 
+      <!-- Sugerencia del siguiente proyecto -->
+      <aside class="next-project-block">
+        <h3 data-i18n="suggested_projects_title"></h3>
 
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 3.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Computer Visión</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+        <article class="project-card">
+          <img
+            src="/img/1x/Mesa de trabajo 2.png"
+            alt="Miniatura proyecto siguiente"
+          />
+          <div class="project-card__body">
+            <h4>Loroem Ipsum</h4>
+            <p>
+              Configuraciones optimizadas para clima extremo y eficiencia
+              energética.
+            </p>
+            <a
+              href="#"
+              class="btn project-card__link"
+              data-i18n="project_card_link"
+            ></a>
+          </div>
+        </article>
+      </aside>
 
+      <script>
+        (function () {
+          const form = document.getElementById("newsletter-form");
+          const email = document.getElementById("nm-email");
+          const policy = document.getElementById("nm-policy");
+          const msg = document.getElementById("nm-message");
 
+          function show(message, ok = true) {
+            msg.textContent = message;
+            msg.style.color = ok ? "#0a0" : "#c00";
+          }
 
-  <!-- Logo -->
-  <a href="index.html">
-    <div class="secundary-brand"></div>
-  </a>
-  <script>
-    const container = document.querySelector(".secundary-brand");
-    fetch("/svg/indi-lab_Vertical_Animate.svg")
-      .then((response) => response.text())
-      .then((svgText) => {
-        container.innerHTML = svgText;
-      })
-      .catch((err) => console.error("Error cargando SVG:", err));
-  </script>
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            msg.textContent = "";
 
+            if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+              show("Introduce un correo válido.", false);
+              email.focus();
+              return;
+            }
+            if (!policy.checked) {
+              show("Debes aceptar la política de privacidad.", false);
+              return;
+            }
 
-  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
-  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
-  <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
+            const payload = {
+              email: email.value.trim(),
+              name: (document.getElementById("nm-name").value || "").trim(),
+              acceptedPolicy: true,
+              source: window.location.pathname,
+            };
 
+            fetch("/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            })
+              .then((resp) => {
+                if (!resp.ok) throw new Error("network");
+                return resp.json().catch(() => ({}));
+              })
+              .then(() => {
+                show("Gracias por suscribirte. Revisa tu correo.", true);
+                form.reset();
+              })
+              .catch(() => {
+                try {
+                  const pending = JSON.parse(
+                    localStorage.getItem("newsletter_pending") || "[]"
+                  );
+                  pending.push(payload);
+                  localStorage.setItem(
+                    "newsletter_pending",
+                    JSON.stringify(pending)
+                  );
+                } catch (err) {}
+                show(
+                  "Suscripción guardada localmente. Se intentará enviar cuando haya conexión.",
+                  true
+                );
+                form.reset();
+              });
+          });
+        })();
+      </script>
+    </section>
 
-        <div class="top-bar"></div>
+    <div class="top-bar"></div>
 
-<div class="menu-placeholder" id="menu-placeholder"></div>
+    <div class="menu-placeholder" id="menu-placeholder"></div>
 
-<script>
-  fetch('/menu.html')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Error al cargar el menú: ${response.status} ${response.statusText}`);
-      }
-      return response.text();
-    })
-    .then(data => {
-      const placeholder = document.getElementById('menu-placeholder');
-      if (!placeholder) {
-        throw new Error("Elemento con id 'menu-placeholder' no encontrado en el DOM");
-      }
-      placeholder.innerHTML = data;
+    <script>
+      fetch("/menu.html")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `Error al cargar el menú: ${response.status} ${response.statusText}`
+            );
+          }
+          return response.text();
+        })
+        .then((data) => {
+          const placeholder = document.getElementById("menu-placeholder");
+          if (!placeholder) {
+            throw new Error(
+              "Elemento con id 'menu-placeholder' no encontrado en el DOM"
+            );
+          }
+          placeholder.innerHTML = data;
 
-      // Cargar el script después de que el menú esté en el DOM
-      const script = document.createElement('script');
-      script.src = "/js/demo4/menu.js";
-      script.onload = () => console.log("menu.js cargado correctamente ✅");
-      script.onerror = () => console.error("Error al cargar /js/demo4/menu.js ❌");
-      document.body.appendChild(script);
+          // Cargar el script después de que el menú esté en el DOM
+          const script = document.createElement("script");
+          script.src = "/js/demo4/menu.js";
+          script.onload = () => console.log("menu.js cargado correctamente ✅");
+          script.onerror = () =>
+            console.error("Error al cargar /js/demo4/menu.js ❌");
+          document.body.appendChild(script);
 
-      // 👇 Re-aplicar traducción al menú
-      if (window.applyTranslations) {
-        window.applyTranslations();
-      }
-    })
-    .catch(error => {
-      console.error("Ocurrió un error al cargar el menú:", error);
-    });
-
-
-
-
-
-</script>
+          // 👇 Re-aplicar traducción al menú
+          if (window.applyTranslations) {
+            window.applyTranslations();
+          }
+        })
+        .catch((error) => {
+          console.error("Ocurrió un error al cargar el menú:", error);
+        });
+    </script>
 
     <script src="js/carousel.js"></script>
-
-
-</body>
-
+  </body>
 </html>
