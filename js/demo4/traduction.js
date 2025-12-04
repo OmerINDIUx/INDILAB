@@ -8,7 +8,7 @@ window.currentLang = localStorage.getItem("indi-lang") || "es";
 
 // 2️⃣ Aplicar traducciones en el DOM
 function applyTranslations() {
-  document.querySelectorAll("[data-i18n]").forEach(el => {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     const translation = window.loadedTranslations[key] || key;
 
@@ -29,11 +29,11 @@ function translatePage(lang = "en") {
   console.log(`🌐 Cargando /json/${lang}.json ...`);
 
   fetch(`/json/${lang}.json`)
-    .then(res => {
+    .then((res) => {
       if (!res.ok) throw new Error(`No se encontró /json/${lang}.json`);
       return res.json();
     })
-    .then(json => {
+    .then((json) => {
       // ⚙️ Guardar referencia global
       window.loadedTranslations = json;
       window.currentLang = lang;
@@ -46,10 +46,14 @@ function translatePage(lang = "en") {
       window.dispatchEvent(new Event("translationsLoaded"));
 
       // Animación visual
-      gsap.fromTo("[data-i18n]", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.02 });
+      gsap.fromTo(
+        "[data-i18n]",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, stagger: 0.02 }
+      );
       updateButtonLabel();
     })
-    .catch(err => console.error("❌ Error cargando idioma:", err));
+    .catch((err) => console.error("❌ Error cargando idioma:", err));
 }
 
 // 3.1️⃣ Registrar en el objeto global INDI

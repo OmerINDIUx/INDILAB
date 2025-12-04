@@ -1,5 +1,6 @@
 @import url("./base/variables.css");
 @import url("./base/animations.css");
+@import url("./base/typography.css");
 @import url("./components/contact-next-project.css");
 
 section {

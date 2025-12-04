@@ -1,4 +1,5 @@
 @import url("./components/contact-next-project.css");
+@import url("./base/typography.css");
 .hero {
   height: 100vh;
   position: relative;
