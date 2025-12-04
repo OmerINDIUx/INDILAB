@@ -733,6 +733,11 @@ brands colors
     width: 100%;
   }
 
+  .navigation-arrows2 {
+    margin-left: 0;
+    width: 100%;
+  }
+
   .main-content {
     margin-left: 0;
     padding: 0; /* ✅ quitamos padding-left */
