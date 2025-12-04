@@ -609,4 +609,9 @@ body.menu-open .secundary-brand {
   .menu__item {
     font-size: 1.2rem;
   }
+
+  .close-menu {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
 }

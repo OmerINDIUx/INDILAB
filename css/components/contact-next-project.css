@@ -119,28 +119,40 @@ section.contact-next-project {
 }
 
 /* Botón newsletter */
+/* Botón newsletter */
 .newsletter-btn {
   margin-top: 0.4rem;
   align-self: flex-start;
   padding: 0.65rem 1.6rem;
-  border-radius: 999px;
-  border: 1px solid #1a1a1a;
-  background-color: #1a1a1a;
-  color: #eee;
+
   font-family: "PowerGrotesk", sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+
+  border-radius: 999px;
+  border: 2px solid transparent; /* necesario para el degradado */
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+
+  color: #eee;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.18s ease,
-    background-color 0.18s ease, color 0.18s ease;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
+    color 0.3s ease;
 }
 
 .newsletter-btn:hover {
   transform: translateY(-1px);
-  background-color: rgb(226, 70, 43);
-  color: #1a1a1a;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+
+  color: #eee;
 }
 
 .newsletter-btn:active {
