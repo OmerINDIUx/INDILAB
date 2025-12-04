@@ -163,6 +163,10 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 
 .navigation-arrows2 {
   padding-top: 18%;
+  width: 100vw;
+  margin-left: -100px;
+  display: flex;
+  justify-content: center;
 }
 .navigation-arrows2 h2 {
   color: #eee;
