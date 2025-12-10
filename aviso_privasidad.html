@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aviso de Privacidad | INDI Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Scripts y Estilos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link id="menu-css" rel="stylesheet" href="/css/base.css" />
+    <link
+      id="menu-header-css"
+      rel="stylesheet"
+      href="/css/components/menu-header.css"
+    />
+
+    <script type="module" src="js/demo4/traduction.js"></script>
+    <script>
+      document.documentElement.className = "js";
+    </script>
+
+    <style>
+      .sidebar12 {
+        background-color: #1a1a1a;
+      }
+      .privacy-content {
+        padding: 120px 20px 80px;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .privacy-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: #1a1a1a;
+      }
+      .privacy-content strong {
+        color: var(--color-title);
+      }
+      .privacy-content p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+      /* Ajuste para el menú sticky si es necesario */
+      body {
+        background-color: #eeeeee;
+        color: #1a1a1a;
+      }
+
+      h1 {
+        color: #1a1a1a;
+      }
+      /* Ajuste del logo secundario */
+      .secundary-brand {
+        width: 15vw;
+        max-width: 80px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 9999; /* Ensure it's on top of everything */
+        display: block;
+      }
+      .secundary-brand svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .secundary-brand svg path {
+        fill: #1a1a1a !important;
+      }
+
+      /* OVERRIDES FOR SIMPLIFIED HEADER */
+      /* Transform Sidebar into Top Bar */
+      .sidebar12 {
+        width: 100% !important;
+        height: 100px !important;
+        flex-direction: row !important;
+        background-color: #eeeeee !important;
+        z-index: 9000 !important; /* Below logo */
+        box-shadow: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+
+      /* Position Buttons to Top Right */
+      .sidebar-buttons {
+        position: fixed !important; /* Changed from absolute to fixed relative to viewport/bar */
+        top: 28px !important;
+        right: 40px !important;
+        left: auto !important;
+        bottom: auto !important;
+        flex-direction: row !important;
+        padding-bottom: 0 !important;
+        gap: 0 !important;
+        width: auto !important;
+        height: auto !important;
+      }
+
+      /* Hide Language Button */
+      #lang-toggle,
+      .lang-btn {
+        display: none !important;
+      }
+
+      /* Ensure Hamburger fits */
+      .hamburger {
+        margin: 0 !important;
+        border-color: #1a1a1a !important; /* Update border to match theme */
+      }
+      .hamburger span {
+        background-color: #eee !important; /* Update standard strokes */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo -->
+    <!-- Logo -->
+    <a href="index.html">
+      <div class="secundary-brand">
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 1920 1920"
+          style="enable-background: new 0 0 1920 1920"
+          xml:space="preserve"
+        >
+          <g class="IndiGrup" id="IndiGrup">
+            <g class="colorkey">
+              <path
+                class="keyTop colorkey"
+                id="keyTop"
+                d="M1915,370.5l0,588.9h-129.9l0-438.8c0-18.3,8.7-38.1,21.3-50.8l-0.8-0.8c-12.6,12.7-32.3,21.4-50.4,21.4l-427.9,0V370.5 L1915,370.5z"
+              />
+            </g>
+            <g class="LAB" id="LAB">
+              <path
+                d="M1033.4,1549.5V1250h70.6v218.6c0,9.8-4.7,20.5-11.5,27.4l0.4,0.4c6.8-6.8,17.5-11.5,27.4-11.5h161.3v64.6H1033.4z"
+              />
+              <path
+                d="M1414.9,1250h91.1l112.9,299.4h-75.7l-24-56.5h-118.9l-21.8,56.5H1302L1414.9,1250z M1419.2,1435.2 c32.9,0,47.5-0.4,61.2,4.3c13.7,4.3,25.7,25.2,35.9,43.2l-56.9-152.7L1419.2,1435.2z"
+              />
+              <path
+                d="M1638.2,1549.5V1250h154.4c65,0,106.9,22.7,106.9,74.9c0,14.5-12.8,34.6-39.4,45.8c-6.4,3-15.8,3.8-23.1,4.3v0.9 c7.3-0.4,16.7-0.4,23.5,1.7c41.5,11.5,54.3,37.6,54.3,81.7c0,63.7-41.1,90.3-109.5,90.3H1638.2z M1709.2,1374.1h97.1 c24.8,0,36.8-9.4,36.8-30.8c0-21.4-20.5-30.4-43.2-30.4h-90.7V1374.1z M1709.2,1485.3h103.1c21,0,36.8-11.5,36.8-31.2 c0-16.7-12.4-27.4-32.9-27.4h-106.9V1485.3z"
+              />
+            </g>
+            <g class="INDI" id="INDI">
+              <path d="M5,370.5h130.7v554.6H5V370.5z" />
+              <path
+                d="M183.3,370.5h136.3l264.6,331.2c13.5,16.6,26.1,41.2,33.3,61.8l1.6-0.8c-7.1-19.8-12.7-47.5-12.7-68.9V370.5h130.7v554.6 H600.8L337,596.4c-13.5-16.6-26.9-42-34.1-61.8h-1.6c7.1,20.6,12.7,48.3,12.7,69.7v320.9H183.3V370.5z"
+              />
+              <path
+                d="M279.2,992.5c154.5,0,282.1,88.7,282.1,277.3s-127.6,277.3-282.1,277.3H5V992.5H279.2z M136.5,1138.3 c0,22.2,0,182.2,0,289.2h153.7c57,0,139.5-46.7,139.5-157.7c0-107-81.6-157.7-139.5-157.7h-229 C90.6,1112.2,136.5,1113.7,136.5,1138.3z"
+              />
+              <path d="M608,992.5h130.7v554.6H608V992.5z" />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </a>
+
+    <section class="privacy-content">
+      <h1>Aviso de Privacidad</h1>
+
+      <p>
+        <strong>GRUPO INDI, S.A. DE C.V.</strong> (en lo sucesivo
+        <strong>GRUPO INDI</strong>) con domicilio ubicado en: Boulevard de los
+        Virreyes 135, Colonia Lomas de Chapultepec IV Secc., C.P. 11000,
+        Alcaldía Miguel Hidalgo, Ciudad de México, hace de su conocimiento que
+        en cumplimiento a lo previsto en la Ley Federal de Protección de Datos
+        Personales en Posesión de los Particulares (en lo sucesivo la Ley) le
+        informa que es responsable del tratamiento de los datos personales de
+        los visitantes de nuestro sitio web, mismos que son tratados de forma
+        confidencial, para garantizar la privacidad y el derecho a la
+        autodeterminación informativa de los titulares que de manera libre y
+        voluntaria proporcionen datos personales. La obtención, tratamiento,
+        transferencia y ejercicio de los derechos derivados de dichos datos
+        personales, se hace mediante un uso adecuado, legítimo y lícito,
+        salvaguardando y atendiendo a los principios de licitud, consentimiento,
+        información, calidad, finalidad, lealtad, proporcionalidad y
+        responsabilidad previstos y tutelados por el artículo 6º de la Ley, su
+        Reglamento y demás leyes aplicables.
+      </p>
+      <p>
+        El tratamiento de los datos personales del Titular será efectuado de
+        conformidad con los términos establecidos en el presente aviso de
+        privacidad, por lo que, desde este momento se entiende que el Titular
+        otorga su consentimiento para dicho tratamiento.
+      </p>
+      <p>
+        En <strong>GRUPO INDI</strong> protegeremos la privacidad de sus datos
+        personales. En razón de lo anterior, a continuación señalamos los datos
+        personales que podremos recabar de usted al momento de visitar nuestro
+        sitio web:
+      </p>
+      <p>(i) Correo electrónico.</p>
+      <p>(ii)Nombre Completo.</p>
+      <p>(iii)Lugar de donde nos contacta.</p>
+      <p>
+        Le informamos que <strong>GRUPO INDI</strong> no recabará información
+        considerada como sensible de los visitantes de nuestro sitio web,
+        conforme a lo establecido en la Ley y su Reglamento. Con respecto de los
+        datos personales antes mencionados, se garantiza un tratamiento,
+        directamente a través de <strong>GRUPO INDI</strong> para las
+        finalidades que dieron origen y son necesarias para la existencia,
+        mantenimiento y cumplimiento de la relación establecida con los
+        visitantes de nuestro sitio web, mismas que se señalan a continuación:
+      </p>
+      <p>
+        <strong>I.-FINALIDADES DEL TRATAMIENTO DE LOS DATOS PERSONALES</strong>
+      </p>
+      <p>
+        <strong>GRUPO INDI</strong> recabará sus Datos Personales, para las
+        finalidades que se refieren a continuación:
+      </p>
+      <p>1.- Realizar denuncias.</p>
+      <p>2.- Quejas y sugerencias sobre nuestros servicios.</p>
+      <p>
+        En caso de que usted desee proporcionarnos información adicional que no
+        le hayamos requerido directamente, <strong>GRUPO INDI</strong>
+      </p>
+      <p><strong>II.- SEGURIDAD</strong></p>
+      <p>
+        <strong>GRUPO INDI</strong> cuenta con las medidas de seguridad
+        administrativas, técnicas y físicas que nos permiten proteger los datos
+        personales que nos son proporcionados contra daño, pérdida, alteración,
+        destrucción o el uso, acceso o tratamiento no autorizado.
+      </p>
+      <p><strong>III.- TRANSFERENCIA</strong></p>
+      <p>
+        Le informamos que los datos personales que sean recabados por
+        <strong>GRUPO INDI</strong> no serán transferidos a terceros, salvo
+        cuando sea necesario en los casos señalados en el presente Aviso y de
+        conformidad con lo dispuesto en la Ley y su Reglamento. En razón de lo
+        anterior, <strong>GRUPO INDI</strong> le informa que en términos de lo
+        dispuesto por el artículo 37 de la Ley, no se requerirá de su
+        consentimiento para transferir sus datos personales a terceros, en los
+        siguientes casos:
+      </p>
+      <p>
+        1.- Cuando la transferencia esté prevista en una Ley o Tratado en los
+        que México sea parte.
+      </p>
+      <p>
+        2.- Cuando la transferencia sea necesaria para la prevención o el
+        diagnóstico médico, la prestación de asistencia sanitaria, tratamiento
+        médico o la gestión de servicios sanitarios.
+      </p>
+      <p>
+        3.- Cuando la transferencia sea efectuada a sociedades controladoras,
+        subsidiarias o afiliadas bajo el control común del responsable, o a una
+        sociedad matriz o a cualquier sociedad del mismo grupo de
+        <strong>GRUPO INDI</strong> que opere bajo los mismos procesos y
+        políticas internas.
+      </p>
+      <p>
+        4.- Cuando la transferencia sea necesaria por virtud de un contrato
+        celebrado o por celebrar en interés del titular de datos, por
+        <strong>GRUPO INDI</strong> y un tercero.
+      </p>
+      <p>
+        5.- Cuando la transferencia sea necesaria o legalmente exigida para la
+        salvaguarda de un interés público o para la procuración o administración
+        de justicia.
+      </p>
+      <p>
+        6.- Cuando la transferencia sea precisa para el reconocimiento,
+        ejercicio o defensa de un derecho en un proceso judicial.
+      </p>
+      <p>
+        7.- Cuando la transferencia sea precisa para el mantenimiento o
+        cumplimiento de una relación jurídica entre GRUPO INDI y el titular de
+        datos.
+      </p>
+      <p>
+        <strong
+          >IV.- MEDIOS PARA EJERCER LOS DERECHOS DE ACCESO, RECTIFICACIÓN,
+          CANCELACIÓN U OPOSICIÓN (DERECHOS ARCO)</strong
+        >
+      </p>
+      <p>
+        <strong>GRUPO INDI</strong> hace de su conocimiento que el titular de
+        los datos personales o a través de su representante legal o apoderado
+        puede revocar el consentimiento que nos haya otorgado para el
+        tratamiento de sus datos personales en cualquier momento; sin embargo,
+        es importante que tenga en cuenta que no en todos los casos podremos
+        atender su solicitud, ya que es posible que por alguna obligación legal
+        requiramos seguir tratando sus datos personales. Si usted desea limitar
+        el uso del tratamiento de sus datos personales, puede enviarnos un
+        correo electrónico a la dirección:
+        <strong>contacto@grupondi.com</strong>, donde con gusto le informaremos
+        sobre la procedencia de su petición, así como los procedimientos que
+        tenemos instrumentados para ello.
+      </p>
+      <p>
+        Para revocar su consentimiento, deberá indicar por escrito o a la
+        dirección de correo electrónico:
+        <strong>contacto@grupondi.com</strong> de manera precisa el
+        consentimiento que desea revocar.
+      </p>
+      <p>
+        Cualquier titular, o en su caso su representante legal, podrá revocar el
+        consentimiento que haya otorgado para el tratamiento de sus datos, así
+        como podrá ejercer los derechos de acceso, rectificación, cancelación y
+        oposición previstos en la ley, siendo requisito indispensable agregar a
+        dicha solicitud (escrita o electrónica) el documento que acredite su
+        identidad (identificación oficial) o en su caso, acreditar la
+        personalidad de quien legalmente le represente. En este sentido los
+        titulares tienen derecho a acceder a sus datos personales que obren en
+        poder de
+        <strong>GRUPO INDI (Acceso)</strong>; a rectificarlos cuando sean
+        inexactos o incompletos <strong>(Rectificación)</strong>; tendrá en todo
+        momento el derecho a cancelar sus datos personales
+        <strong>(Cancelación)</strong>. La cancelación de datos personales dará
+        lugar a un periodo de bloqueo tras el cual se procederá a la supresión
+        del dato; o bien, oponerse al uso de sus datos personales para fines
+        específicos <strong>(Oposición)</strong>, en los casos en que la Ley,
+        así lo permita; el ejercicio de cualquiera de los derechos antes citados
+        de ellos no es requisito previo ni impide el ejercicio de otro derecho.
+      </p>
+      <p>
+        En el caso de solicitudes de rectificación de datos personales, el
+        titular deberá indicar, además de la documentación con la que acredite
+        su personalidad, las modificaciones a realizarse y aportar la
+        documentación que sustente su petición.
+      </p>
+      <p>
+        <strong>GRUPO INDI</strong> atenderá su petición en los tiempos
+        establecidos en las leyes aplicables y le informará por escrito y/o a
+        través del correo electrónico que proporcione para tales efectos, las
+        consecuencias que deban producirse con motivo del ejercicio de sus
+        derechos. La entrega de los datos personales será gratuita, debiendo
+        cubrir el titular únicamente los gastos justificados de envío o con el
+        costo de reproducción en copias u otros formatos.
+      </p>
+      <p>
+        Para conocer puntualmente el procedimiento establecido por
+        <strong>GRUPO INDI</strong> para la revocación del consentimiento
+        respecto del tratamiento de sus datos personales y/o respecto del
+        ejercicio de los derechos <strong>ARCO</strong>, usted podrá acudir
+        personalmente a nuestras oficinas, directamente en nuestro:
+        <strong>“Departamento de Datos Personales”</strong>, así como contactar
+        al responsable a través del correo electrónico:
+        <strong>contacto@grupondi.com</strong>, donde le informaremos sobre los
+        detalles del procedimiento y requisitos para el ejercicio de sus
+        derechos.
+      </p>
+      <p>
+        Con fundamento en el artículo 45 de la Ley, si considera que no ha
+        recibido una respuesta de <strong>GRUPO INDI</strong> o bien, la
+        respuesta que se le dio no es satisfactoria, usted tiene derecho de
+        acudir al
+        <strong
+          >Instituto Nacional de Transparencia, Acceso a la Información y
+          Protección de Datos Personales (INAI)</strong
+        >
+        a presentar una
+        <strong>“Solicitud de Protección de Datos Personales”</strong>
+        dentro de los 15 (quince días) siguientes a la fecha en la que se
+        comunique la respuesta al Titular por parte de
+        <strong>GRUPO INDI</strong> o a la fecha en que venza el plazo para que
+        <strong>GRUPO INDI</strong> de respuesta a su solicitud de conformidad
+        con la Ley y su Reglamento, así como del procedimiento que hemos
+        instaurado para ello.
+      </p>
+      <p>
+        <strong>GRUPO INDI</strong> le informa que, para recabar los datos
+        personales que se detallan en el presente documento,
+        <strong>no utilizará</strong> mecanismos en medios remotos o locales de
+        comunicación electrónica, óptica u otra tecnología, que permitan recabar
+        sus datos personales de manera automática y simultánea al tiempo que
+        usted hace contacto con los mismos.
+      </p>
+      <p>
+        <strong>MODIFICACIONES AL AVISO DE PRIVACIDAD</strong>
+      </p>
+      <p>
+        Cualquier cambio o modificación al presente Aviso de Privacidad,
+        <strong>GRUPO INDI</strong> lo comunicará a través de este mismo medio.
+      </p>
+      <p>
+        Si desea conocer más detalles sobre la Política de Privacidad de
+        <strong>GRUPO INDI</strong> usted puede contactar al oficial de Datos
+        Personales a la dirección de correo electrónico:
+        <strong>contacto@grupondi.com</strong>; comunicarse al número de
+        teléfono <strong>(55) 5540 - 6750</strong> o acudir directamente a
+        nuestras oficinas ubicadas en el domicilio señalado en el presente
+        documento.
+      </p>
+    </section>
+
+    <!-- Menu placeholder -->
+    <div class="menu-placeholder" id="menu-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/js/lenis.min.js"></script>
+    <script src="/js/splitting.min.js"></script>
+    <script src="/js/global.js"></script>
+  </body>
+</html>

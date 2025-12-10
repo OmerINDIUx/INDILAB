@@ -2,7 +2,10 @@
   // ===============================
   // 1) Registro mínimo y seguro
   // ===============================
-  if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") {
+  if (
+    typeof window.gsap === "undefined" ||
+    typeof window.ScrollTrigger === "undefined"
+  ) {
     console.warn(
       "⚠️ GSAP o ScrollTrigger no están disponibles al cargar revealTextImages.js"
     );
@@ -133,7 +136,9 @@
         function animate() {
           angle += 0.4;
           clones.forEach((path, i) => {
-            path.style.transform = `rotateY(${angle + (360 / numClones) * i}deg)`;
+            path.style.transform = `rotateY(${
+              angle + (360 / numClones) * i
+            }deg)`;
           });
           requestAnimationFrame(animate);
         }
@@ -252,8 +257,8 @@
                   imgContainer.appendChild(animDiv);
                   loadAndAnimateSVG(animDiv, data.anim, data.type);
 
-                  if (window.INDI?.translatePage) {
-                    window.INDI.translatePage(window.INDI.getCurrentLang());
+                  if (window.applyTranslations) {
+                    window.applyTranslations();
                   }
 
                   gsap.fromTo(

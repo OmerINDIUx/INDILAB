@@ -8,10 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSVGs();
   initResizeHandler();
 
-  // Initialize translations if available
   if (window.applyTranslations) {
     window.applyTranslations();
   }
+
+  // Load Cookie Consent
+  const cookieScript = document.createElement("script");
+  cookieScript.src = "/js/cookie-consent.js";
+  document.body.appendChild(cookieScript);
 });
 
 /**
@@ -92,15 +96,10 @@ function initResizeHandler() {
     // Avoid reloading on mobile to prevent UX issues
     if (isMobileDevice()) return;
 
-    clearTimeout(resizeTimeout);
-
-    resizeTimeout = setTimeout(() => {
-      // Save current scroll position
-      sessionStorage.setItem("scrollPosition", window.scrollY);
-
-      // Reload page
-      location.reload();
-    }, 300);
+    // Reloading on resize is generally bad practice.
+    // We removed the location.reload() call here to prevent the page
+    // from refreshing (and re-triggering the cookie popup) on every resize.
+    // Layout adjustments should be handled via CSS or specific JS updates.
   });
 
   // Restore scroll position on load

@@ -159,5 +159,11 @@
   "newsletter_policy_link": "privacy policy",
   "newsletter_btn": "Subscribe",
   "suggested_projects_title": "Suggested projects",
-  "project_card_link": "Coming Soon"
+  "project_card_link": "Coming Soon",
+  "cookie_title": "Cookie Usage",
+  "cookie_text": "We use our own and third-party cookies to improve your experience and analyze traffic. If you close this message or continue browsing, you accept their use.",
+  "cookie_accept": "Accept all",
+  "cookie_necessary": "Necessary only",
+  "cookie_reject": "I do not accept",
+  "cookie_close": "Close"
 }
