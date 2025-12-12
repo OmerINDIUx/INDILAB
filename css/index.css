@@ -242,11 +242,24 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
   align-items: center; /* vertical */
   position: absolute;
   top: 0;
-  left: 100px; /* quitamos 100px porque rompe el centrado */
+  /*left: 100px;  quitamos 100px porque rompe el centrado */
   width: 100%;
   height: 100%;
   z-index: 1;
   overflow: hidden;
+}
+
+.right-column::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Degrado circular: transparente en el centro, #eeeeee en los bordes */
+  background: radial-gradient(circle, transparent 20%, #1a1a1a 80%);
+  pointer-events: none; /* permite clic en controles/mapa si es necesario */
+  z-index: 2; /* encima del video (z-index auto/1) pero debajo de controles (z-index 220) */
 }
 
 .mapa_video {
@@ -713,6 +726,10 @@ brands colors
   .top-bar {
     display: none;
   }
+}
+
+.main-content {
+  margin-left: -100px;
 }
 
 @media (max-width: 768px) {
