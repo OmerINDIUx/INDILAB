@@ -71,22 +71,74 @@
       </div>
     </section>
 
-    <section class="TextLarge">
-      <div>
-        <!-- <h2 class="white">Contexto:</h2> -->
-
+    <!-- SECTION DEL TEXTO, ESTÁTICO -->
+    <section id="phrase-section">
+      <div class="blog-scroll-strip__phrase">
         <h2>
-          "Al ser el calentamiento global un fenómeno sistémico, ¿qué pasaría si
-          las ciudades pudieran operar como organismos reguladores, capaces de
-          absorber, modular y redistribuir la temperatura de forma inteligente?"
+          ¿Qué pasaría si nuestras ciudades pudieran adaptarse en tiempo real a
+          distintas condiciones climáticas y choques externos?
         </h2>
       </div>
     </section>
+    <!-- SECTION DE LAS IMÁGENES -->
+    <section id="run1" class="blog-scroll-strip">
+      <div class="blog-scroll-strip__inner">
+        <div class="blog-scroll-strip__rail">
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/pexels-david-olaniyi-1926688-10504890.jpg"
+              alt="Montaje de vivienda modular"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              alt="Vivienda modular con paneles solares"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              alt="Conjunto de vivienda modular"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION DE LAS IMÁGENES -->
+    <section id="run2" class="blog-scroll-strip">
+      <div class="blog-scroll-strip__inner">
+        <div class="blog-scroll-strip__rail">
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/pexels-david-olaniyi-1926688-10504890.jpg"
+              alt="Montaje de vivienda modular"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              alt="Vivienda modular con paneles solares"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="../Infraestructura-bioresponsiva/images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              alt="Conjunto de vivienda modular"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="TextLarge">
       <div>
-        <h2 class="white">
-          El calor urbano como síntoma y decisión por diseño
-        </h2>
+        <h2>El calor urbano como síntoma y decisión por diseño</h2>
         <p>
           Las islas de calor urbano son zonas donde la temperatura del aire y de
           la superficie es entre 1 y 12 °C más alta que en áreas urbanas
@@ -608,18 +660,6 @@
               toggleActions: "play none none reverse",
             },
           });
-
-          // Fade out cuando llega el texto
-          gsap.to("#fullscreen1", {
-            opacity: 0,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: ".TextLarge",
-              start: "top top",
-              end: "top center",
-              scrub: true,
-            },
-          });
         });
       });
     </script>
@@ -686,6 +726,83 @@
     <script src="../../js/ScrollTrigger.min.js"></script>
     <script src="../../js/lenis.min.js"></script>
     <script src="../../js/splitting.min.js"></script>
+
+    <script>
+      // Scroll Strip Logic (moved to end to ensure gsap is loaded)
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const phraseSection = document.querySelector("#phrase-section");
+
+        function initScrollStrip(sectionId) {
+          const runSection = document.querySelector(sectionId);
+          if (!runSection) return;
+
+          const rail = runSection.querySelector(".blog-scroll-strip__rail");
+          const cards = gsap.utils.toArray(".blog-scroll-card", rail);
+
+          if (!rail || !cards.length) return;
+
+          function distributeRandomPositions() {
+            const railRect = rail.getBoundingClientRect();
+            const railWidth = railRect.width || rail.offsetWidth;
+            const railHeight = railRect.height || rail.offsetHeight;
+            const cardWidth = 360;
+
+            cards.forEach((card) => {
+              const x = gsap.utils.random(
+                0,
+                Math.max(railWidth - cardWidth, 0)
+              );
+              const y = gsap.utils.random(0, railHeight * 0.7);
+              gsap.set(card, { x, y });
+            });
+
+            ScrollTrigger.refresh();
+          }
+
+          distributeRandomPositions();
+          window.addEventListener("resize", distributeRandomPositions);
+
+          cards.forEach((card) => {
+            const fromY = gsap.utils.random(10, 40);
+            const travel = gsap.utils.random(60, 140);
+            const toY = fromY - travel;
+
+            gsap.fromTo(
+              card,
+              { yPercent: fromY },
+              {
+                yPercent: toY,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: runSection,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          });
+        }
+
+        // Initialize
+        initScrollStrip("#run1");
+        initScrollStrip("#run2");
+
+        // Pinning logic
+        const pinTrigger = document.querySelector("#run1");
+        if (window.innerWidth > 860 && pinTrigger && phraseSection) {
+          ScrollTrigger.create({
+            trigger: pinTrigger,
+            start: "top bottom",
+            end: "bottom top",
+            pin: phraseSection,
+            pinSpacing: false,
+          });
+        }
+      });
+    </script>
 
     <section class="contact-next-project">
       <!-- Newsletter -->
