@@ -8,6 +8,15 @@ html {
   position: relative;
 }
 
+/* Z-INDEX LAYERING STRATEGY
+   --------------------------
+   -10: Background GIFs (.gif-container)
+   0:   Base background elements (noise, secondary brand)
+   10:  Content containers (sections, .card, .TextLarge)
+   20:  Interactive overlays (map fullscreen button)
+   100: Top Navigation / Menu
+*/
+
 .gif-container {
   position: fixed;
   top: 0;
@@ -15,7 +24,8 @@ html {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  z-index: 0;
+  z-index: -10; /* 🔥 FIXED: Behind everything */
+  pointer-events: none;
 }
 
 .gif-container img {
@@ -24,7 +34,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 🔥 rellena todo el espacio */
+  object-fit: cover;
   object-position: center;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -41,33 +51,65 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 10; /* 🔥 FIXED: Content above background */
 }
 
+/* GLASSMORPHISM CARD STYLE */
+.card {
+  color: #1a1a1a; /* Dark text for readability */
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 800px;
+  text-align: center;
 
-.insersion_mapas p {
-  text-align: left;
-  font-size: 1.2rem;
-  color: #1a1a1a;
-  /* padding: 4rem 2rem; */
-  padding-top: 0;
+  /* Glassmorphism */
+  background: rgba(238, 238, 238, 0.85); /* Semi-transparent White */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+
+  margin: 0 1rem; /* Prevent touching edges on mobile */
+  position: relative;
+  z-index: 10;
 }
 
+.card h1,
+.card h2,
+.card h3 {
+  margin: 0.5rem 0 1rem;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+}
 
+.card p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.insersion_mapas {
+  background-color: transparent; /* Allow background to show through if desired, or keep #eee */
+  background: #eeeeee; /* Keep solid for map section clarity */
+  padding: 60px 0;
+  position: relative;
+  z-index: 10;
+}
 
 .insersion_mapas h2 {
   text-align: left;
-
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.5rem;
+  font-family: "PowerGrotesk", sans-serif;
   color: #1a1a1a;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
-
-
-.insersion_mapas {
-  background-color: #eee;
-  padding: 40px 0;
+.insersion_mapas p {
+  text-align: left;
+  font-size: 1.15rem;
+  color: #333;
+  line-height: 1.6;
 }
 
 .sub {
@@ -83,71 +125,110 @@ section {
 /* Contenedor general: mapa izquierda + texto derecha */
 .mapas-layout {
   display: flex;
-  gap: 40px;
-  align-items: stretch; /* Importante para que ambas columnas midan lo mismo */
+  gap: 60px; /* More breathing room */
+  align-items: flex-start; /* Align top */
 }
 
 /* Columna del mapa */
 .mapa-col {
-  flex: 1 1 50%;
+  flex: 1 1 60%; /* Map takes more space */
 }
 
-/* Ajuste de altura REAL del mapa */
+/* Columna derecha: título + texto */
+.texto-col {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
 #islasdecalor-erick-placeholder {
   width: 100%;
-  height: 900px;        /* <-- Ajusta aquí la altura del mapa */
-  min-height: 380px;
-  border-radius: 12px;
+  height: 100%;
+  /* min-height handled by wrapper */
   overflow: hidden;
 }
 
-/* Columna derecha: título + texto al fondo */
-.texto-col {
-  flex: 1 1 50%;
+.map-container-wrapper {
+  position: relative;
+  width: 100%;
+  /* Responsive height */
+  height: min(80vh, 700px);
+  min-height: 500px;
+
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: #e0e0e0; /* Placeholder color */
+}
+
+/* Floating Fullscreen Button */
+.map-fullscreen-btn {
+  position: absolute;
+  bottom: 20px; /* 🔥 FIXED: Bottom right */
+  right: 20px;
+  z-index: 999; /* High Z-index within map context */
+  background-color: rgba(26, 26, 26, 0.9);
+  color: #eeeeee;
+  border: none;
+  border-radius: 50%; /* Circle button looks more modern */
+  width: 44px;
+  height: 44px;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* <-- Esto empuja tu texto hasta abajo */
-  padding-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.map-fullscreen-btn:hover {
+  background-color: rgb(226, 70, 43);
+  transform: scale(1.1) rotate(90deg); /* Subtle interaction */
+  box-shadow: 0 8px 20px rgba(226, 70, 43, 0.4);
+}
+
+.map-fullscreen-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .mapas-layout {
+    flex-direction: column-reverse; /* Text on top, map on bottom or vice versa? Normal: Column */
     flex-direction: column;
+    gap: 30px;
   }
 
+  .mapa-col,
   .texto-col {
-    justify-content: flex-start; /* en mobile ya no lo pegamos abajo */
+    flex: 1 1 auto;
+    width: 100%;
   }
 
-  #islasdecalor-erick-placeholder {
-    height: 300px;
-    min-height: 300px;
+  .map-container-wrapper {
+    height: 60vh;
+    min-height: 400px;
   }
 }
 
+@media (max-width: 600px) {
+  .card {
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+  }
 
+  .map-container-wrapper {
+    height: 50vh;
+  }
 
-
-
-/* CARDS */
-.card {
-  color: black;
-  padding: 2rem;
-  border-radius: 0 2rem 0 2rem;
-  max-width: 800px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-.card h1,
-.card h2,
-.card h3 {
-  margin: 0.5rem 0;
-}
-
-.card p {
-  line-height: 1.5;
+  .insersion_mapas h2 {
+    font-size: 2rem;
+  }
 }
 
 p {
@@ -157,6 +238,8 @@ p {
 .black {
   color: black;
 }
+
+/* NOISE OVERLAY - Z-INDEX UPDATE */
 .insersion_mapas::before,
 body::before {
   content: "";
@@ -170,7 +253,7 @@ body::before {
   opacity: 0.3;
   pointer-events: none;
   animation: grain 8s steps(10) infinite;
-  z-index: 0;
+  z-index: 0; /* Behind content, above background color */
 }
 
 /* Ruido automático en cualquier bloque con fondo #eee o #eeeeee */
@@ -183,10 +266,11 @@ body::before {
 .card,
 .TextLarge {
   position: relative;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; -> Controlled individually */
   overflow: hidden;
 }
 
+/* Ensure noise is correctly z-indexed relative to parent content */
 *[style*="background: #eee"]::before,
 *[style*="background: #eeeeee"]::before,
 *[style*="background-color: #eee"]::before,
@@ -194,17 +278,6 @@ body::before {
 #image-sequence::before,
 .insersion_mapas .card::before,
 .TextLarge::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background-image: url("../../../img/noise.png");
-  background-repeat: repeat;
-  opacity: 0.3;
-  pointer-events: none;
-  animation: grain 8s steps(10) infinite;
   z-index: 0;
 }
 
@@ -213,7 +286,7 @@ body::before {
 .card > *,
 .TextLarge > * {
   position: relative;
-  z-index: 0;
+  z-index: 2; /* Ensure text is above noise */
 }
 
 /* VIDEO */
@@ -273,6 +346,26 @@ body::before {
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 0.2rem;
+}
+
+.TextLarge span {
+  display: block;
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid #1a1a1a;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 0.05) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0 8px 8px 0;
 }
 
 .Title {
@@ -402,9 +495,9 @@ body::before {
   letter-spacing: 0.1em;
 }
 
-.secundary-brand {
+.secondary-brand {
   all: unset;
-  z-index: 0 !important;
+  z-index: 10001 !important;
   position: fixed;
   top: 0;
   left: 10px;
@@ -414,7 +507,7 @@ body::before {
   max-width: 80px;
 }
 
-.secundary-brand img {
+.secondary-brand img {
   width: 100%;
   height: auto;
   display: block;
@@ -443,7 +536,7 @@ body {
   font-family: "Figtree", sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; REMOVED to show images/gifs behind */
   color: #eeeeee;
 
   /* en lugar de margin-left: 100px */
@@ -452,7 +545,7 @@ body {
 }
 
 /* Cuando el menú está abierto, oculta el logo */
-.menu-fullscreen.show ~ a .secundary-brand {
+.menu-fullscreen.show ~ a .secondary-brand {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -462,9 +555,32 @@ body {
   display: none;
 }
 
+/* ===========================
+   HORIZONTAL SCROLL SECTION
+=========================== */
+.horizontal-scroll-section {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Fix start position */
+  will-change: transform;
+  /* position: relative;  <-- GSAP pin will handle positioning */
+  background-color: #1a1a1a; /* Dark background to contrast with white text */
+}
 
-
-
+.carousel-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 80vh; /* Occupy most of the viewport height */
+  align-items: center;
+  padding-left: 10vw; /* Initial padding */
+  padding-right: 10vw; /* End padding for balance */
+  gap: 5vw; /* Space between items */
+  will-change: transform;
+  background-color: #1a1a1a; /* Dark background to contrast with white text */
+}
 
 /* ===========================
    CONTACTO + SIGUIENTE PROYECTO
@@ -499,7 +615,7 @@ section.contact-next-project {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 1.6rem;
-  margin: 0 0 .75rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .newsletter-block > p {
@@ -517,8 +633,6 @@ section.contact-next-project {
   color: #eee;
   margin: 0 0 1.2rem 0;
 }
-
-
 
 /* FORMULARIO */
 #newsletter-form {
@@ -545,18 +659,13 @@ section.contact-next-project {
   color: #1a1a1a;
   font: inherit;
   outline: none;
-  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease, transform 0.12s ease;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background-color 0.16s ease, transform 0.12s ease;
 }
 
 #newsletter-form input::placeholder {
   color: #999;
 }
-
-
-
-
-
-
 
 #newsletter-form input[type="email"]:focus,
 #newsletter-form input[type="text"]:focus {
@@ -607,7 +716,8 @@ section.contact-next-project {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+  transition: transform 0.14s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease;
 }
 
 .newsletter-btn:hover {
@@ -641,8 +751,7 @@ section.contact-next-project {
   border-radius: 999px;
 
   border: 2px solid transparent; /* necesario para borde degradado */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
 
   color: #eee;
@@ -653,23 +762,17 @@ section.contact-next-project {
   font-size: 1rem;
   cursor: pointer;
 
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease,
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
 /* HOVER → igual que .close-menu:hover */
 .social a:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
 
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
 
   background-size: 400% 400%;
@@ -677,7 +780,6 @@ section.contact-next-project {
 
   color: #eee; /* ícono siempre claro */
 }
-
 
 /* Tarjeta "siguiente proyecto" */
 .project-card {
@@ -711,7 +813,7 @@ section.contact-next-project {
 
 /* Si ya tienes .btn global, esto es solo ajuste fino */
 .project-card__link {
-    text-decoration: none;
+  text-decoration: none;
 
   margin-top: 0.7rem;
   display: inline-block;
@@ -724,30 +826,23 @@ section.contact-next-project {
 
   border-radius: 999px;
   border: 2px solid transparent; /* necesario para el degradado */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
 
   color: #eee;
   cursor: pointer;
 
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
     color 0.3s ease;
 }
 
 /* Hover con el mismo lenguaje visual que .close-menu */
 .project-card__link:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
 
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
@@ -760,25 +855,19 @@ section.contact-next-project {
   box-shadow: none;
 }
 
-
-
-
 #newsletter-form input[type="email"]:focus,
 #newsletter-form input[type="text"]:focus {
   border: 1px solid transparent; /* necesario para ver el borde degradado */
-  background:
-    linear-gradient(#f7f7f7, #f7f7f7) padding-box, /* relleno claro del input */
-    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  background: linear-gradient(#f7f7f7, #f7f7f7) padding-box,
+    /* relleno claro del input */
+      linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
   transform: translateY(-1px);
   outline: none;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
 }
-
 
 .policy {
   display: flex;
@@ -802,9 +891,7 @@ section.contact-next-project {
 .policy input[type="checkbox"]:focus-visible {
   outline: none;
   border-color: transparent;
-  box-shadow:
-    0 0 6px 1px #18b2e880,
-    0 0 12px 2px #ffc04380;
+  box-shadow: 0 0 6px 1px #18b2e880, 0 0 12px 2px #ffc04380;
 }
 
 .policy a {
@@ -818,9 +905,7 @@ section.contact-next-project {
 .policy a:hover {
   color: #a51c5b;
   text-decoration-style: wavy;
-  text-shadow:
-    0 0 6px #18b2e880,
-    0 0 10px #ffc04380;
+  text-shadow: 0 0 6px #18b2e880, 0 0 10px #ffc04380;
 }
 
 .newsletter-btn {
@@ -829,8 +914,7 @@ section.contact-next-project {
   padding: 0.65rem 1.6rem;
   border-radius: 0 8px 0 8px;
   border: 2px solid transparent; /* igual que .close-menu */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
   color: #eee;
   font-family: "PowerGrotesk", sans-serif;
@@ -841,22 +925,16 @@ section.contact-next-project {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
     color 0.3s ease;
 }
 
 /* Hover: mismo lenguaje visual que .close-menu:hover */
 .newsletter-btn:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
@@ -867,9 +945,6 @@ section.contact-next-project {
   transform: translateY(0);
   box-shadow: none;
 }
-
-
-
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -898,26 +973,6 @@ section.contact-next-project {
     flex-wrap: wrap;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width: 768px) {
   .card {
@@ -975,4 +1030,165 @@ section.contact-next-project {
     height: 80px;
     background: #1a1a1a;
   }
+}
+
+/* ===========================
+   HORIZONTAL SCROLL SECTION
+=========================== */
+.horizontal-scroll-section {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #1a1a1a; /* Dark background to contrast with white text */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Fix start position */
+  will-change: transform;
+}
+
+.carousel-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 80vh; /* Occupy most of the viewport height */
+  align-items: center;
+  padding-left: 10vw; /* Initial padding */
+  padding-right: 10vw; /* End padding for balance */
+  gap: 5vw; /* Space between items */
+  will-change: transform;
+}
+
+/* RESPONSIVE VERTICAL STACK REMOVED - KEEPING HORIZONTAL SCROLL */
+
+.carousel-item {
+  flex: 0 0 auto; /* Don't shrink or grow unexpectedly */
+  flex-shrink: 0; /* Reinforce */
+  width: 40vw; /* Adjust width as needed */
+  max-width: 600px;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  /* border: 2px solid red;  Debug border */
+}
+
+/* Specific styling for the first text item */
+.carousel-item.text-item {
+  color: #eeeeee;
+  width: 30vw;
+  min-width: 300px;
+  margin-right: 5vw; /* Extra spacing if gap fails */
+  background-color: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.white {
+  color: #eeeeee !important;
+}
+
+.carousel-item.text-item h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: #eeeeee; /* Force white color */
+}
+
+.carousel-item.text-item p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #eeeeee;
+}
+
+/* Styling for card items (image + text) */
+.carousel-item.card-item {
+  background: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: #eeeeee;
+  text-align: left;
+
+  /* GRID LAYOUT: Image Left | Content Right */
+  /* GRID LAYOUT: Image Left | Content Right */
+  display: grid;
+  grid-template-columns: 35% 1fr; /* 35% image, rest text */
+  grid-template-rows: auto auto; /* Title, then Paragraph */
+  grid-template-areas:
+    "image title"
+    "image text";
+  gap: 0 2rem; /* Gap between columns */
+
+  width: 90vw; /* Occupy 90% of screen width */
+  max-width: 1600px; /* Increase max-width to allow large format */
+  align-items: center; /* Align content to center vertically if desired, or start */
+}
+
+.carousel-item.card-item img.carrucel-imagen {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3; /* Vertical portrait format */
+  max-height: 80vh; /* Constrain height */
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 0; /* No margin needed in grid */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item.card-item h2 {
+  grid-area: title;
+  font-family: "PowerGrotesk", sans-serif; /* Match title font */
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.carousel-item.card-item p {
+  grid-area: text;
+  color: #eeeeee;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%; /* Ensure text doesn't hit the very edge */
+}
+
+/* RESPONSIVE: Stack vertically on smaller screens */
+@media (max-width: 900px) {
+  .carousel-item.card-item {
+    display: flex;
+    flex-direction: column;
+    width: 85vw; /* Fuller width on mobile */
+    max-width: 500px;
+    gap: 1.5rem;
+  }
+
+  .carousel-item.card-item img.carrucel-imagen {
+    height: 300px; /* Fixed height again for mobile consistency */
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-item.card-item h2 {
+    font-size: 1.5rem;
+  }
+}
+/* ===========================
+   LENIS SMOOTH SCROLL
+   =========================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }

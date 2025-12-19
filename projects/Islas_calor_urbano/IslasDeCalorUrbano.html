@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
 
     <link
       id="menu-css"
       rel="stylesheet"
-      href="/css/components/menu-header.css"
+      href="../../css/components/menu-header.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
     <meta charset="UTF-8" />
     <title>Reto de Innovación Urbana</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- GSAP loaded at the end of body -->
 
     <link rel="stylesheet" href="css/style_islas-calor.css" />
 
-    <script type="module" src="/js/demo4/traduction.js"></script>
+    <script>
+      window.rootPath = "../../";
+    </script>
+    <script type="module" src="../../js/demo4/traduction.js"></script>
     <meta
       name="google-site-verification"
       content="aAM5tigcEfaCe8zQagC7uLQgQrQ1Pcs2EfJi_JwAAsM"
@@ -36,53 +42,6 @@
       <img src="images/calor_CDMX-06.png" alt="Innovación Urbana 6" id="gif6" />
     </div>
 
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Inicialmente, solo el primer gif visible
-      gsap.set("#gif1", { opacity: 1 });
-      gsap.set("#gif2, #gif3, #gif4, #gif5, #gif6", { opacity: 0 });
-
-      // Selecciona todas las secciones con id "cambio_gif"
-      const cambioSections = document.querySelectorAll("#cambio_gif");
-
-      // Para cada sección, muestra el gif correspondiente y oculta el anterior
-      cambioSections.forEach((section, i) => {
-        // Oculta el gif anterior
-        if (i > 0) {
-          gsap.to(`#gif${i}`, {
-            opacity: 0,
-            scrollTrigger: {
-              trigger: section,
-              start: "top center",
-              toggleActions: "play none none reverse",
-            },
-          });
-        }
-        // Muestra el gif actual
-        gsap.to(`#gif${i + 1}`, {
-          opacity: 1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top center",
-            toggleActions: "play none none reverse",
-          },
-        });
-
-        // Fade out cuando llega el texto
-        gsap.to("#fullscreen1", {
-          opacity: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".TextLarge",
-            start: "top top",
-            end: "top center",
-            scrub: true,
-          },
-        });
-      });
-    </script>
-
     <section>
       <div class="Title">
         <h2>Nota Conceptual de Proyecto</h2>
@@ -94,86 +53,131 @@
     <section>
       <div class="card" id="cambio_gif">
         <h2>
-          "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-          consectetur, adipisci velitance"
+          "Ciudades que enfrían: rediseñar el clima urbano para mitigar las
+          Islas de Calor Urbano"
         </h2>
       </div>
     </section>
-
-    <!-- <section>
-    <div class="card" id="cambio_gif">
-      <p>Las viviendas modulares permiten construcciones rápidas y eficientes, además de integrarse con
-        estrategias como la reutilización de contenedores marítimos o el Cohousing. Estas opciones, combinadas,
-        conforman un ecosistema flexible de soluciones adaptables a distintos contextos urbanos y necesidades
-        habitacionales</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card" id="cambio_gif">
-      <p>Esta nota conceptual expone argumentos sobre la viabilidad de las viviendas modulares como una
-        alternativa capaz de transformar los desafíos actuales en oportunidades de desarrollo social y
-        ambiental. Esta solución no solo cumple con las normativas vigentes, sino que también incorpora
-        elementos de sostenibilidad y adaptabilidad frente a riesgos geológicos, representando una opción
-        accesible y moderna para atender la creciente demanda de vivienda</p>
-    </div>
-  </section>
-
-
-  <section>
-    <div class="card" id="cambio_gif">
-      <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
-        marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
-        contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
-        crear espacios habitables con un impacto ambiental reducido. Más allá del uso residencial, su
-        flexibilidad permite adaptarlos como oficinas, restaurantes u otros espacios funcionales.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card" id="cambio_gif">
-      <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
-        marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
-        contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
-        crear espacios habitables con un impacto ambiental reducido. Más allá del uso residencial, su
-        flexibilidad permite adaptarlos como oficinas, restaurantes u otros espacios funcionales.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card" id="cambio_gif">
-      <p>Las viviendas modulares se pueden adaptar de distintas maneras, tal como las viviendas en contenedores
-        marítimos que es una técnica que ha ganado reconocimiento por su versatilidad y sostenibilidad. Estos
-        contenedores, diseñados originalmente para el transporte de mercancías, pueden ser reutilizados para
-        crear espacios habitables con un impacto ambiental reducido. Más allá del uso residencial, su
-        flexibilidad permite adaptarlos como oficinas, restaurantes u otros espacios funcionales.</p>
-    </div> 
-  </section>-->
+    <section>
+      <div class="card" id="cambio_gif">
+        <p>
+          Las islas de calor urbano intensifican las temperaturas en las
+          ciudades y afectan la salud y calidad de vida de sus habitantes. Este
+          texto explora por qué ocurre este fenómeno urbano, qué tecnologías y
+          metodologías existen para su medición, y qué estrategias globales y
+          locales están transformando el calor urbano extremo en oportunidades
+          para rediseñar ciudades más habitables y resilientes.
+        </p>
+      </div>
+    </section>
 
     <section class="TextLarge">
       <div>
-        <h2 class="white">Contexto:</h2>
+        <!-- <h2 class="white">Contexto:</h2> -->
+
+        <h2>
+          "Al ser el calentamiento global un fenómeno sistémico, ¿qué pasaría si
+          las ciudades pudieran operar como organismos reguladores, capaces de
+          absorber, modular y redistribuir la temperatura de forma inteligente?"
+        </h2>
+      </div>
+    </section>
+    <section class="TextLarge">
+      <div>
+        <h2 class="white">
+          El calor urbano como síntoma y decisión por diseño
+        </h2>
         <p>
-          México tiene un déficit de vivienda, con alrededor de 8.5 millones de
-          viviendas las que se encuentran en rezago habitacional. De 34.8
-          millones de viviendas que hay en México, aproximadamente el 26.6 % de
-          la población vive en algún tipo de riesgo o hacinamiento, esto de
-          acuerdo con datos oficiales de la Comisión Nacional de Vivienda en
-          2020
+          Las islas de calor urbano son zonas donde la temperatura del aire y de
+          la superficie es entre 1 y 12 °C más alta que en áreas urbanas
+          aledañas, según la Environmental Protection Agency. Este fenómeno es
+          producto de una combinación de factores inherentes a la forma en la
+          que concebimos y construimos las ciudades actualmente: materiales que
+          absorben calor, alta densidad, escasez de vegetación y actividades
+          humanas que emiten calor residual.
         </p>
         <p>
-          Es urgente plantear la problemática de la vivienda en México desde una
-          perspectiva integral que contemple la rentabilidad, la sostenibilidad
-          y el cumplimiento de las normativas mexicanas vigentes. Ante esta
-          situación, surge la oportunidad de explorar soluciones que no solo
-          aborden el déficit habitacional, sino que lo hagan de manera
-          sostenible, eficiente y adaptada a las necesidades del entorno.
+          Los impactos son profundos. La Organización Mundial de la Salud estima
+          que el calor extremo será uno de los mayores riesgos ambientales para
+          la salud urbana en este siglo. En 2023, un estudio liderado por el
+          Instituto de Salud Global de Barcelona registró cerca de 48,000
+          muertes por calor en Europa. En Estados Unidos, los Centros para el
+          Control y la Prevención de Enfermedades reportan un promedio de 702
+          muertes anuales relacionadas con el calor entre 2004 y 2018. En Asia,
+          un metaanálisis que cubre 88 ciudades encontró diferencias de hasta 11
+          °C dentro de un mismo centro urbano, con un promedio de 4.1 °C de
+          diferencia entre las zonas más templadas y las ICU identificadas en
+          estas ciudades.
         </p>
         <p>
-          Ante este panorama, es necesario adoptar estrategias que desafíen el
-          esquema tradicional de vivienda. La vivienda modular, la reutilización
-          de contenedores y el Cohousing ofrecen soluciones flexibles y
-          accesibles, marcando un cambio de paradigma en la construcción.
+          En América Latina, la urbanización acelerada y la informalidad
+          intensifican los riesgos. El INEGI estima que más del 80 por ciento de
+          la población mexicana vive en ciudades, muchas con baja cobertura
+          vegetal, alta exposición solar y superficies de asfalto oscuro. En un
+          análisis de INDI Lab con datos satelitales de la NASA, se
+          identificaron puntos críticos de calor superficial en corredores como
+          Iztapalapa y el oriente de la Zona Metropolitana del Valle de México,
+          donde las temperaturas pueden superar los 50 °C en superficie
+          terrestre durante los meses más cálidos.
+        </p>
+        <p>
+          El resto de la CDMX, y ciudades como Monterrey, Guadalajara y Mérida
+          muestran patrones similares. Las colonias con menos áreas verdes por
+          habitante presentan temperaturas más altas y mayor vulnerabilidad
+          sanitaria. En muchos casos, estas zonas coinciden con barrios de
+          menores ingresos e históricamente marginados de inversión pública,
+          convirtiendo al calor urbano extremo en un desafío de justicia
+          climática.
+        </p>
+        <p>
+          Estas tendencias exigen nuevas estrategias urbanas, políticas públicas
+          robustas y capacidades tecnológicas para medir, modelar y mitigar el
+          calor extremo.
+        </p>
+      </div>
+    </section>
+
+    <section class="TextLarge">
+      <div>
+        <h2>¿Cómo se forman y cómo se miden las ICU?</h2>
+        <p>
+          Las islas de calor urbano surgen por una combinación de factores
+          físicos, ambientales y antrópicos. Los materiales tradicionales
+          urbanos como asfalto, concreto y ladrillo tienen alta capacidad de
+          absorción térmica y liberan calor lentamente durante la noche. La
+          densidad urbana, la forma y orientación de los edificios reducen la
+          ventilación, atrapando aire caliente en lo que se conoce como efecto
+          cañón urbano. La reducción de vegetación disminuye la
+          evapotranspiración, proceso mediante el cual las plantas enfrían el
+          aire al liberar humedad. A esto se suman las emisiones térmicas de
+          vehículos, industrias, equipos de aire acondicionado y procesos de
+          enfriamiento en edificios.
+        </p>
+        <span
+          >"En conjunto, la manera en que urbanizamos amplifica este fenómeno,
+          aunque también abre la posibilidad de imaginar futuros urbanos
+          distintos."</span
+        >
+
+        <p>
+          Medir las ICU requiere una combinación de sensores satelitales,
+          estaciones meteorológicas y análisis geoespacial. Para el estudio de
+          temperatura superficial, satélites como Landsat 8 y Landsat 9 permiten
+          obtener datos térmicos de la superficie terrestre con resoluciones
+          entre 30 y 100 metros. Estos datos pueden procesarse mediante índices
+          como NDVI para vegetación, NDBI para áreas construidas y LST para
+          temperatura superficial terrestre. Su análisis conjunto permite
+          identificar patrones espaciales en centros urbanos y determinar la
+          existencia de Islas de Calor.
+        </p>
+        <p>
+          A nivel de modelación urbana, técnicas avanzadas permiten proyectar
+          escenarios térmicos. El uso de simulaciones Monte Carlo, distribución
+          beta PERT para tasas de absorción térmica y modelos urbanos tipo
+          ENVI-met ayudan a evaluar cómo distintas intervenciones afectan la
+          temperatura. Estos modelos permiten comparar escenarios de pavimentos
+          reflectantes, techos fríos, corredores verdes o cambios en la
+          proporción de sombra urbana a distintas horas del día.
         </p>
       </div>
     </section>
@@ -183,30 +187,52 @@
         <div class="mapas-layout">
           <!-- Mapa (izquierda) -->
           <div class="mapa-col">
-            <div id="islasdecalor-erick-placeholder"></div>
+            <div class="map-container-wrapper">
+              <div id="islasdecalor-erick-placeholder"></div>
+              <button
+                id="fullscreen-btn"
+                class="map-fullscreen-btn"
+                title="Pantalla Completa"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
           </div>
 
           <!-- Texto (derecha) -->
           <div class="texto-col">
-            <h2 class="sub">Subtitulo:</h2>
+            <h2 class="sub">Mapas de las ICU</h2>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              En INDI Lab, utilizamos estas y otras metodologías para integrar
+              indicadores socioecónomicos y otros datos demográficos en el
+              estudio de las Islas de Calor, con el objetivo de identificar
+              puntos críticos en la Ciudad de México y prototipar posibles
+              intervenciones en lugares óptimos. En este sentido, el uso
+              combinado de herramientas y métodos de ciencia de datos, diseño
+              urbano y justicia climática abre nuevas posibilidades para crear
+              ciudades más frescas y saludables.
             </p>
           </div>
         </div>
 
         <!-- Tu script de fetch permanece igual -->
         <script>
-          fetch("/inserciones/islasdecalor/islasdecalor-erick.html")
+          fetch("../../inserciones/islasdecalor/islasdecalor-erick.html")
             .then((response) => {
               if (!response.ok) {
                 throw new Error(
@@ -243,6 +269,26 @@
                 });
               }
 
+              // Fullscreen Logic
+              const fsBtn = document.getElementById("fullscreen-btn");
+              const mapWrapper = document.querySelector(
+                ".map-container-wrapper"
+              );
+
+              fsBtn.addEventListener("click", () => {
+                if (!document.fullscreenElement) {
+                  mapWrapper
+                    .requestFullscreen()
+                    .catch((err) =>
+                      console.error(
+                        `Error attempting to enable fullscreen: ${err.message}`
+                      )
+                    );
+                } else {
+                  document.exitFullscreen();
+                }
+              });
+
               console.log("islasdecalor-erick.html cargado correctamente ✅");
             })
             .catch((err) =>
@@ -252,33 +298,331 @@
       </div>
     </section>
 
+    <section id="horizontal-scroll" class="horizontal-scroll-section">
+      <div class="carousel-wrapper">
+        <div class="carousel-item text-item">
+          <h2 class="white">
+            Metodologías, innovaciones y que están cambiando el calor urbano
+          </h2>
+          <p>
+            Dado su origen multifactorial, la mitigación efectiva de ICU no
+            depende de una sola solución, sino de un conjunto de intervenciones
+            físicas, normativas, tecnológicas y sociales. A nivel internacional
+            destacan ciertas prácticas que logran combinar satisfactoriamente
+            infraestructura verde, materiales reflectantes y rediseños urbanos
+            para mitigar la acumulación de calor en contextos urbanos:
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/aerial-view-of-empty-stadium-surrounded-by-green-t-2025-02-09-22-15-52-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>Infraestructura verde urbana</h2>
+          <p>
+            Distintos estudios muestran que por cada 10 por ciento adicional de
+            cobertura vegetal en una superficie construida, se puede reducir
+            entre 0.5 y 1.5°C la temperatura del área en cuestión. <br />
+            • Es por esto que ciudades como Singapur han impulsado normativas
+            estableciendo techos verdes obligatorios en nuevos desarrollos, lo
+            que ha reducido hasta 2°C la temperatura superficial en áreas
+            específicas.<br />
+            • Los corredores verdes de Medellín, reconocidos por ONU Habitat,
+            lograron disminuir hasta 3°C la temperatura en zonas intervenidas
+            mediante vegetación endémica y un manejo hídrico adecuado. <br />•
+            En la Ciudad de México, se ofrecen incentivos fiscales para
+            propietarios de edificios nuevos y existentes en los que se instalen
+            azoteas verdes.
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>Materiales urbanos de nueva generación</h2>
+          <p>
+            A pesar de no existir un dato preciso, se estima que cerca del 40%
+            de las superficies urbanas en Estados Unidos está cubierta por
+            pavimento. El pavimento tradicional, compuesto principalmente por
+            mezclas asfálticas con valores de albedo típicamente bajos (0.04 a
+            0.12), absorbe hasta 90 por ciento de la radiación solar incidente,
+            almacenándola en su masa térmica y liberándola lentamente durante la
+            noche; este proceso eleva la temperatura superficial del suelo entre
+            10 y 20 °C respecto a zonas vegetadas y contribuye directamente al
+            incremento de la temperatura del aire en la zona inmediata. Los
+            llamados pavimentos fríos o reflectantes se presentan como una
+            alternativa sin efectos negativos al estar compuestos de materiales
+            que aumentan el albedo urbano y reducen la absorción de energía
+            solar. En Los Ángeles, la aplicación de pavimento reflectante redujo
+            hasta en 5.6 °C la temperatura superficial del suelo en calles del
+            programa piloto “Cool Streets LA” impulsado por la Oficina de
+            Servicios Viales de la ciudad.
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>Diseño táctico Hiper-local</h2>
+          <p>
+            El diseño táctico a nivel de barrio se presenta como una alternativa
+            local para mejorar los microclimas urbanos. Distintas ciudades del
+            mundo usan pintura reflectante, mobiliario modular y vegetación de
+            bajo mantenimiento para transformar calles y cambiar la sensación
+            térmica a nivel peatonal, con beneficios adicionales como menor
+            exposición a contaminantes y ruido urbano. Barcelona, por ejemplo,
+            ha promovido la creación de supermanzanas como parte del programa
+            “Superilles”, que reorganiza bloques de manzanas para reducir hasta
+            90 por ciento el tráfico vehicular de paso, mejorar la calidad del
+            aire y habilitar más espacio peatonal con vegetación, mobiliario y
+            zonas de sombra permanentes y temporales. En el barrio de Sant
+            Antoni, por ejemplo, se registraron reducciones significativas de
+            ruido y NO₂, como producto de las nuevas áreas verdes que a su vez
+            generan microclimas más frescos. En Tokio, las estrategias de
+            enfriamiento urbano incluyen programas de sombra con lonas térmicas,
+            estructuras ligeras y el uso de pavimentos fríos y recubrimientos de
+            barrera térmica impulsados por el gobierno metropolitano. Estas
+            intervenciones buscan disminuir la temperatura superficial del suelo
+            y crear microclimas más confortables, especialmente en calles,
+            plazas y zonas vulnerables al calor. .
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>Gestores Hídricos</h2>
+          <p>
+            La ciudad danesa de Copenhague lanzó el programa “Cloudburst
+            Management Plan” después de una temporada de lluvias extremas en el
+            año 2011, cuando llegaron a caer cerca de 200 mm en pocas horas y
+            los daños superaron los 900 millones de dólares. El plan combina
+            infraestructura gris con soluciones azul-verde para captar, desviar
+            y almacenar agua pluvial en el espacio público. Este programa
+            incluye más de 300 intervenciones distribuidas por toda la ciudad:
+            calles diseñadas para conducir agua hacia parques inundables,
+            superficies permeables, canales abiertos, plazas que se convierten
+            en reservorios temporales y sistemas subterráneos complementarios.
+            Espacios públicos como el parque Enghaveparken pueden almacenar más
+            de 22 000 m³ de agua, equivalente a 10 albercas olímpicas, durante
+            tormentas extremas. El programa no solo reduce riesgo de
+            inundaciones entre 30 y 50 %, sino que también genera beneficios
+            colaterales: más áreas verdes, enfriamiento urbano, biodiversidad y
+            espacios públicos de mayor calidad.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <section class="TextLarge">
       <div>
-        <h2 class="white">Contexto:</h2>
+        <h2>Implicaciones para México y Latinoamérica</h2>
         <p>
-          México tiene un déficit de vivienda, con alrededor de 8.5 millones de
-          viviendas las que se encuentran en rezago habitacional. De 34.8
-          millones de viviendas que hay en México, aproximadamente el 26.6 % de
-          la población vive en algún tipo de riesgo o hacinamiento, esto de
-          acuerdo con datos oficiales de la Comisión Nacional de Vivienda en
-          2020
+          Para México y la región, la mitigación de ICU implica fortalecer la
+          gobernanza climática urbana y actualizar las normas sobre materiales,
+          vegetación y diseño de calles. Muchas ciudades carecen de lineamientos
+          claros sobre albedo mínimo en pavimentos y techos, densidad vegetal
+          mínima por hectárea o índices de sombra urbana por vialidad. Incluir
+          estos parámetros en reglamentos de construcción y normas técnicas
+          urbanas puede reducir el calor extremo sin requerir grandes
+          inversiones.
+        </p>
+
+        <p>
+          En muchos países en desarrollo, gran parte del crecimiento urbano
+          proviene de la autoconstrucción y la informalidad, donde la falta de
+          regulación y asistencia técnica produce viviendas densas con
+          materiales de alta absorción térmica. Este contexto limita la eficacia
+          de las soluciones convencionales de enfriamiento y requiere tácticas
+          adaptadas a estas realidades urbanas: materiales reflectivos
+          asequibles, techos fríos comunitarios, vegetación nativa modular, y
+          sistemas de sombreado autoconstruibles. Diseñar para este entorno
+          implica reconocer la agencia comunitaria, promover intervenciones
+          abiertas y replicables, y habilitar modelos de cofinanciamiento que
+          escalen sin desplazar a la población.
         </p>
         <p>
-          Es urgente plantear la problemática de la vivienda en México desde una
-          perspectiva integral que contemple la rentabilidad, la sostenibilidad
-          y el cumplimiento de las normativas mexicanas vigentes. Ante esta
-          situación, surge la oportunidad de explorar soluciones que no solo
-          aborden el déficit habitacional, sino que lo hagan de manera
-          sostenible, eficiente y adaptada a las necesidades del entorno.
+          Aunado a estas soluciones territoriales, a nivel sistémico los planes
+          parciales de desarrollo deben integrar mapas térmicos, priorizando
+          intervenciones en zonas vulnerables por densidad, edad, salud o
+          vulnerabilidad. Con un análisis de datos a nivel AGEB, por ejemplo, es
+          posible diseñar corredores verdes, techos fríos o pavimentos
+          reflectantes en colonias donde la carga térmica afecta más a población
+          sensible.
         </p>
         <p>
-          Ante este panorama, es necesario adoptar estrategias que desafíen el
-          esquema tradicional de vivienda. La vivienda modular, la reutilización
-          de contenedores y el Cohousing ofrecen soluciones flexibles y
-          accesibles, marcando un cambio de paradigma en la construcción.
+          La infraestructura verde puede escalarse con especies endémicas y
+          sistemas hídricos como zanjas de infiltración o jardines de lluvia.
+          Las ciudades deben considerar financiamiento climático para
+          implementar estas soluciones. Fondos como el Green Climate Fund o los
+          Bonos Verdes ofrecen oportunidades de inversión y financiamiento
+          alternativo al presupuesto público.
+        </p>
+
+        <p>
+          La tecnología y el aprovechamiento de la gran cantidad de datos
+          urbanos con los que se cuenta es un componente clave. La capacidad de
+          mapear ICU, analizarlas con modelos térmicos y priorizar soluciones
+          con base en datos permite gobernar el calor como un servicio urbano
+          más. La combinación de satélites, sensores climáticos y modelos de
+          simulación permiten tomar decisiones basadas en evidencia.
         </p>
       </div>
     </section>
+
+    <section class="TextLarge">
+      <div>
+        <h2>
+          Actuar ahora para reimaginar ciudades más frescas, equitativas y
+          habitables
+        </h2>
+        <p>
+          Para México y la región, la mitigación de ICU implica fortalecer la
+          gobernanza climática urbana y actualizar las normas sobre materiales,
+          vegetación y diseño de calles. Muchas ciudades carecen de lineamientos
+          claros sobre albedo mínimo en pavimentos y techos, densidad vegetal
+          mínima por hectárea o índices de sombra urbana por vialidad. Incluir
+          estos parámetros en reglamentos de construcción y normas técnicas
+          urbanas puede reducir el calor extremo sin requerir grandes
+          inversiones.
+        </p>
+      </div>
+    </section>
+
+    <!-- Script for Horizontal Scroll -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Inicialización de Lenis para scroll suave
+        const initSmooth = () => {
+          if (typeof Lenis !== "undefined") {
+            const lenis = new Lenis({
+              lerp: 0.1,
+              smoothWheel: true,
+            });
+
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+              lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+            console.log("✅ Lenis inicializado en IslasDeCalorUrbano");
+          } else {
+            console.error(
+              "❌ Lenis no está definido. Falló la carga del script."
+            );
+          }
+        };
+
+        // Registrar GSAP Plugins (Check if GSAP loaded)
+        if (typeof gsap !== "undefined") {
+          gsap.registerPlugin(ScrollTrigger);
+        } else {
+          console.error("❌ GSAP no está definido.");
+        }
+
+        // Iniciar Lenis
+        initSmooth();
+
+        const section = document.querySelector(".horizontal-scroll-section");
+        const wrapper = document.querySelector(".carousel-wrapper");
+
+        if (section && wrapper) {
+          // Esperar a que las imágenes carguen para calcular el ancho correctamente
+          window.addEventListener("load", () => {
+            function getScrollAmount() {
+              let wrapperWidth = wrapper.scrollWidth;
+              // Add a small buffer (e.g., 200px or 10vw) to ensure we reach the absolute end
+              return Math.min(0, -(wrapperWidth - window.innerWidth + 100));
+            }
+
+            // Horizontal Scroll Logic (Universal)
+            const tween = gsap.to(wrapper, {
+              x: getScrollAmount,
+              duration: 3,
+              ease: "none",
+            });
+
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top top",
+              end: () => `+=${Math.abs(getScrollAmount())}`,
+              pin: true,
+              animation: tween,
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true, // Critical for mobile resize
+            });
+
+            // Forzar refresh de ScrollTrigger una vez cargado todo
+            ScrollTrigger.refresh();
+          });
+        }
+      });
+    </script>
+
+    <!-- Script de cambio de GIFs (Moved to bottom) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Asegurarse de que GSAP y ScrollTrigger estén listos
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Inicialmente, solo el primer gif visible
+        gsap.set("#gif1", { opacity: 1 });
+        gsap.set("#gif2, #gif3, #gif4, #gif5, #gif6", { opacity: 0 });
+
+        // Selecciona todas las secciones con id "cambio_gif"
+        const cambioSections = document.querySelectorAll("#cambio_gif");
+
+        if (cambioSections.length === 0) {
+          console.warn("⚠️ No se encontraron secciones con id #cambio_gif");
+        }
+
+        // Para cada sección, muestra el gif correspondiente y oculta el anterior
+        cambioSections.forEach((section, i) => {
+          // Oculta el gif anterior
+          if (i > 0) {
+            gsap.to(`#gif${i}`, {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: section,
+                start: "top center",
+                toggleActions: "play none none reverse",
+              },
+            });
+          }
+          // Muestra el gif actual
+          gsap.to(`#gif${i + 1}`, {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: section,
+              start: "top center",
+              toggleActions: "play none none reverse",
+            },
+          });
+
+          // Fade out cuando llega el texto
+          gsap.to("#fullscreen1", {
+            opacity: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".TextLarge",
+              start: "top top",
+              end: "top center",
+              scrub: true,
+            },
+          });
+        });
+      });
+    </script>
 
     <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
     <!-- --^^^^^^^^^^^^^^^^^^^^^^^^^^--<todo esto es el menu>--^^^^^^^^^^^^^^^^^^^^^^^^^^^^-- -->
@@ -289,7 +633,7 @@
     <div class="menu-placeholder" id="menu-placeholder"></div>
 
     <script>
-      fetch("/menu.html")
+      fetch("../../menu.html")
         .then((response) => {
           if (!response.ok) {
             throw new Error(
@@ -309,10 +653,10 @@
 
           // Cargar el script después de que el menú esté en el DOM
           const script = document.createElement("script");
-          script.src = "/js/demo4/menu.js";
+          script.src = "../../js/demo4/menu.js";
           script.onload = () => console.log("menu.js cargado correctamente ✅");
           script.onerror = () =>
-            console.error("Error al cargar /js/demo4/menu.js ❌");
+            console.error("Error al cargar ../../js/demo4/menu.js ❌");
           document.body.appendChild(script);
 
           // 👇 Vuelve a ejecutar traducción después de insertar el menú
@@ -326,11 +670,11 @@
     </script>
 
     <a href="../../index.html">
-      <div class="secundary-brand"></div>
+      <div class="secondary-brand"></div>
     </a>
     <script>
-      const container = document.querySelector(".secundary-brand");
-      fetch("/svg/indi-lab_Vertical_Animate.svg")
+      const container = document.querySelector(".secondary-brand");
+      fetch("../../svg/indi-lab_Vertical_Animate.svg")
         .then((response) => response.text())
         .then((svgText) => {
           container.innerHTML = svgText;
@@ -338,10 +682,10 @@
         .catch((err) => console.error("Error cargando SVG:", err));
     </script>
 
-    <script src="/js/gsap.min.js"></script>
-    <script src="/js/ScrollTrigger.min.js"></script>
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
+    <script src="../../js/gsap.min.js"></script>
+    <script src="../../js/ScrollTrigger.min.js"></script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/splitting.min.js"></script>
 
     <section class="contact-next-project">
       <!-- Newsletter -->
@@ -372,13 +716,19 @@
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
               <a
-                href="/aviso_privasidad.html"
+                href="../../aviso_privasidad.html"
                 target="_blank"
                 rel="noopener"
                 data-i18n="newsletter_policy_link"
               ></a>
             </label>
           </div>
+
+          <button
+            type="submit"
+            class="newsletter-btn"
+            data-i18n="newsletter_btn"
+          ></button>
 
           <div id="nm-message"></div>
 
@@ -419,7 +769,7 @@
         <h3 data-i18n="next_project_title">Next Projects</h3>
         <article class="project-card">
           <img
-            src="/projects/ViviendaModular/images/electromovilidad.png"
+            src="../ViviendaModular/images/electromovilidad.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
@@ -429,7 +779,7 @@
         </article>
         <article class="project-card">
           <img
-            src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
+            src="../ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
@@ -472,7 +822,7 @@
               source: window.location.pathname,
             };
 
-            fetch("/mail.php", {
+            fetch("../../mail.php", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),

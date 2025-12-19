@@ -144,7 +144,7 @@ body {
   left: 0;
   width: 100px; /* Ancho fijo */
   height: 100vh; /* Toda la pantalla */
-  background-color: rgba(26, 26, 26, 0.02);
+  background-color: #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,7 +284,7 @@ svg {
   align-items: top;
 }
 
-body.menu-open .secundary-brand {
+body.menu-open .secondary-brand {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;

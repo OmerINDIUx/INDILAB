@@ -28,7 +28,9 @@ window.applyTranslations = applyTranslations;
 function translatePage(lang = "en") {
   console.log(`🌐 Cargando /json/${lang}.json ...`);
 
-  fetch(`/json/${lang}.json`)
+  // Use a global root path variable if defined, otherwise default to absolute/root
+  const basePath = window.rootPath || "";
+  fetch(`${basePath}json/${lang}.json`)
     .then((res) => {
       if (!res.ok) throw new Error(`No se encontró /json/${lang}.json`);
       return res.json();
