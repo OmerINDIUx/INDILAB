@@ -1,14 +1,22 @@
 /* ===========================
    FUENTE PERSONALIZADA
+
+   power_grotesk-regular-webfont.woff2
 =========================== */
 @font-face {
-  font-family: "PowerGrotesk";
-  src: url("/../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
-    url("/../fonts/power_grotesk-medium-webfont.woff") format("woff");
+  font-family: "PowerGrotesk bold";
+  src: url("/fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
+    url("/fonts/power_grotesk-medium-webfont.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
-
+@font-face {
+  font-family: "PowerGrotesk";
+  src: url("/fonts/power_grotesk-regular-webfont.woff2") format("woff2"),
+    url("/fonts/power_grotesk-regular-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
 /* ===========================
    SECCIONES GENERALES
 =========================== */
@@ -233,8 +241,153 @@ section {
 
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #1a1a1a !important;
   margin-bottom: 0.2rem;
+}
+
+/* ===========================
+   TEXT PROVOCATION
+=========================== */
+.text-provocation {
+  padding: 4rem 10%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.text-provocation div {
+  max-width: 900px;
+}
+
+.text-provocation h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: #eeeeee;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.text-provocation P {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: #eeeeee;
+}
+@media (max-width: 768px) {
+  .text-provocation h2 {
+    font-size: 2rem;
+  }
+}
+
+/* ===========================
+   INTERACTIVE NOTE
+=========================== */
+.interactive-note-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.note-trigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e2462b;
+  color: #e2462b;
+  font-family: "PowerGrotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.note-trigger:hover .info-icon {
+  background: #e2462b;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.note-popup {
+  position: absolute;
+  bottom: 60px; /* Position above the icon */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 90vw;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: #252525;
+  border-left: 4px solid #e2462b;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+/* Arrow indicator */
+.note-popup::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #252525 transparent transparent transparent;
+}
+
+.interactive-note-container:hover .note-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.note-popup h3 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e2462b;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.note-popup p {
+  font-family: "Figtree", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #eee;
+  margin: 0;
+  text-align: left; /* Ensure text inside popup is readable */
+}
+
+@media (max-width: 768px) {
+  .note-popup {
+    bottom: 50px;
+    padding: 1.5rem;
+    width: 85vw;
+  }
 }
 
 /* ===========================
