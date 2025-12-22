@@ -37,6 +37,7 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1; /* Ensure all sections sit above the fixed video (z-0) */
 }
 
 #phrase-section {
@@ -57,16 +58,12 @@ section {
 }
 
 .blog-scroll-strip {
-  width: 100%;
-  position: relative;
-}
-
-#run.blog-scroll-strip {
   position: relative;
   z-index: 3;
   min-height: 100vh;
-  padding: .1vh 0;
+  padding: 0.1vh 0;
   background-color: transparent;
+  width: 100%;
 }
 
 .blog-scroll-strip__inner {
@@ -97,8 +94,6 @@ section {
   transform: scale(1.03);
   transition: transform 0.5s ease;
 }
-
-
 
 /* ===========================
    RUIDO EN BLOQUES CLAROS
@@ -185,6 +180,9 @@ section {
   position: relative;
   width: 100%;
   height: auto;
+  padding: 0;
+  margin: 0;
+  display: block;
 }
 
 /* Ocupa toda la pantalla, GSAP la fija y la pega a la izquierda */
@@ -200,6 +198,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: flex-end; /* 👈 pegamos el canvas a la DERECHA */
+  pointer-events: none; /* Ensure clicks pass through to buttons/links */
 }
 
 /* Canvas dentro, pegado a la derecha */
@@ -358,15 +357,24 @@ section {
    BLOG COLLAGE
 =========================== */
 
-
 /* ===========================
    TÍTULOS PRINCIPALES
 =========================== */
+
+/* Title Section Positioning */
+.title-section {
+  justify-content: center;
+  padding-top: 0;
+  margin-top: -100vh;
+  position: relative;
+  z-index: 50; /* High z-index to sit above video */
+}
+
 .Title {
   width: 50vw;
   min-width: 300px;
   max-width: 600px;
-  margin: 4vh auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
   text-align: center;
   font-family: "Figtree", sans-serif;
@@ -412,7 +420,7 @@ section {
   width: 80px;
   background: transparent;
   pointer-events: none;
-  z-index: 0 !important;
+  z-index: 20000 !important; /* Ensure logo is always on top (above sidebar z-10000) */
 }
 
 .secundary-brand img {
@@ -442,17 +450,6 @@ section {
 .top-bar {
   display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* ===========================
    CONTACTO + SIGUIENTE PROYECTO
@@ -487,7 +484,7 @@ section.contact-next-project {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 1.6rem;
-  margin: 0 0 .75rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .newsletter-block > p {
@@ -505,8 +502,6 @@ section.contact-next-project {
   color: #eee;
   margin: 0 0 1.2rem 0;
 }
-
-
 
 /* FORMULARIO */
 #newsletter-form {
@@ -533,18 +528,13 @@ section.contact-next-project {
   color: #1a1a1a;
   font: inherit;
   outline: none;
-  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease, transform 0.12s ease;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background-color 0.16s ease, transform 0.12s ease;
 }
 
 #newsletter-form input::placeholder {
   color: #999;
 }
-
-
-
-
-
-
 
 #newsletter-form input[type="email"]:focus,
 #newsletter-form input[type="text"]:focus {
@@ -595,7 +585,8 @@ section.contact-next-project {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+  transition: transform 0.14s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease;
 }
 
 .newsletter-btn:hover {
@@ -629,8 +620,7 @@ section.contact-next-project {
   border-radius: 999px;
 
   border: 2px solid transparent; /* necesario para borde degradado */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
 
   color: #eee;
@@ -641,23 +631,17 @@ section.contact-next-project {
   font-size: 1rem;
   cursor: pointer;
 
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease,
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
 /* HOVER → igual que .close-menu:hover */
 .social a:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
 
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
 
   background-size: 400% 400%;
@@ -665,7 +649,6 @@ section.contact-next-project {
 
   color: #eee; /* ícono siempre claro */
 }
-
 
 /* Tarjeta "siguiente proyecto" */
 .project-card {
@@ -699,7 +682,7 @@ section.contact-next-project {
 
 /* Si ya tienes .btn global, esto es solo ajuste fino */
 .project-card__link {
-    text-decoration: none;
+  text-decoration: none;
 
   margin-top: 0.7rem;
   display: inline-block;
@@ -712,30 +695,23 @@ section.contact-next-project {
 
   border-radius: 999px;
   border: 2px solid transparent; /* necesario para el degradado */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
 
   color: #eee;
   cursor: pointer;
 
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
     color 0.3s ease;
 }
 
 /* Hover con el mismo lenguaje visual que .close-menu */
 .project-card__link:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
 
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
@@ -748,25 +724,19 @@ section.contact-next-project {
   box-shadow: none;
 }
 
-
-
-
 #newsletter-form input[type="email"]:focus,
 #newsletter-form input[type="text"]:focus {
   border: 1px solid transparent; /* necesario para ver el borde degradado */
-  background:
-    linear-gradient(#f7f7f7, #f7f7f7) padding-box, /* relleno claro del input */
-    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  background: linear-gradient(#f7f7f7, #f7f7f7) padding-box,
+    /* relleno claro del input */
+      linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
   transform: translateY(-1px);
   outline: none;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
 }
-
 
 .policy {
   display: flex;
@@ -790,9 +760,7 @@ section.contact-next-project {
 .policy input[type="checkbox"]:focus-visible {
   outline: none;
   border-color: transparent;
-  box-shadow:
-    0 0 6px 1px #18b2e880,
-    0 0 12px 2px #ffc04380;
+  box-shadow: 0 0 6px 1px #18b2e880, 0 0 12px 2px #ffc04380;
 }
 
 .policy a {
@@ -806,9 +774,7 @@ section.contact-next-project {
 .policy a:hover {
   color: #a51c5b;
   text-decoration-style: wavy;
-  text-shadow:
-    0 0 6px #18b2e880,
-    0 0 10px #ffc04380;
+  text-shadow: 0 0 6px #18b2e880, 0 0 10px #ffc04380;
 }
 
 .newsletter-btn {
@@ -817,8 +783,7 @@ section.contact-next-project {
   padding: 0.65rem 1.6rem;
   border-radius: 0 8px 0 8px;
   border: 2px solid transparent; /* igual que .close-menu */
-  background:
-    linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
     linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
   color: #eee;
   font-family: "PowerGrotesk", sans-serif;
@@ -829,22 +794,16 @@ section.contact-next-project {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
     color 0.3s ease;
 }
 
 /* Hover: mismo lenguaje visual que .close-menu:hover */
 .newsletter-btn:hover {
   transform: translateY(-1px);
-  box-shadow:
-    0 0 8px 1px #18b2e880,
-    0 0 16px 3px #ffc04380,
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
     0 0 24px 4px #f677a780;
-  background:
-    linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
     linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
   background-size: 400% 400%;
   animation: borderGradient 4s ease infinite;
@@ -855,9 +814,6 @@ section.contact-next-project {
   transform: translateY(0);
   box-shadow: none;
 }
-
-
-
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -886,26 +842,6 @@ section.contact-next-project {
     flex-wrap: wrap;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ===========================
    RESPONSIVE
@@ -959,5 +895,251 @@ section.contact-next-project {
     width: 100vw;
     height: 80px;
     background: #1a1a1a;
+  }
+}
+
+/* ===========================
+   HORIZONTAL SCROLL SECTION
+=========================== */
+.horizontal-scroll-section {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 20vh; /* Ensure separation from previous pinned content */
+  padding: 0 !important; /* Reset generic section padding to prevent layout shifts */
+  overflow: hidden;
+  position: relative;
+  z-index: 20; /* Ensure it is above previous sections */
+  background-color: #1a1a1a; /* Dark background to contrast with white text */
+  display: flex;
+  flex-direction: row; /* FORCE row direction to override generic section column */
+  align-items: center;
+  justify-content: flex-start; /* Fix start position now that it is row */
+  will-change: transform;
+}
+
+.carousel-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 80vh; /* Occupy most of the viewport height */
+  align-items: center;
+  padding-left: 10vw; /* Initial padding */
+  padding-right: 10vw; /* End padding for balance */
+  gap: 5vw; /* Space between items */
+  will-change: transform;
+}
+
+/* RESPONSIVE VERTICAL STACK REMOVED - KEEPING HORIZONTAL SCROLL */
+
+.carousel-item {
+  flex: 0 0 auto; /* Don't shrink or grow unexpectedly */
+  flex-shrink: 0; /* Reinforce */
+  width: 40vw; /* Adjust width as needed */
+  max-width: 600px;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  /* border: 2px solid red;  Debug border */
+}
+
+/* Specific styling for the first text item */
+.carousel-item.text-item {
+  color: #eeeeee;
+  width: 30vw;
+  min-width: 300px;
+  margin-right: 5vw; /* Extra spacing if gap fails */
+  background-color: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.white {
+  color: #eeeeee !important;
+}
+
+.carousel-item.text-item h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: #eeeeee; /* Force white color */
+}
+
+.carousel-item.text-item p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #eeeeee;
+}
+
+/* Styling for card items (image + text) */
+.carousel-item.card-item {
+  background: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: #eeeeee;
+  text-align: left;
+
+  /* GRID LAYOUT: Image Left | Content Right */
+  /* GRID LAYOUT: Image Left | Content Right */
+  display: grid;
+  grid-template-columns: 35% 1fr; /* 35% image, rest text */
+  grid-template-rows: auto auto; /* Title, then Paragraph */
+  grid-template-areas:
+    "image title"
+    "image text";
+  gap: 0 2rem; /* Gap between columns */
+
+  width: 90vw; /* Occupy 90% of screen width */
+  max-width: 1600px; /* Increase max-width to allow large format */
+  align-items: center; /* Align content to center vertically if desired, or start */
+}
+
+.carousel-item.card-item img.carrucel-imagen {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3; /* Vertical portrait format */
+  max-height: 80vh; /* Constrain height */
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 0; /* No margin needed in grid */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item.card-item h2 {
+  grid-area: title;
+  font-family: "PowerGrotesk", sans-serif; /* Match title font */
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.carousel-item.card-item p {
+  grid-area: text;
+  color: #eeeeee;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%; /* Ensure text doesn't hit the very edge */
+}
+
+/* RESPONSIVE: Stack vertically on smaller screens */
+@media (max-width: 900px) {
+  .carousel-item.card-item {
+    display: flex;
+    flex-direction: column;
+    width: 85vw; /* Fuller width on mobile */
+    max-width: 500px;
+    gap: 1.5rem;
+  }
+
+  .carousel-item.card-item img.carrucel-imagen {
+    height: 300px; /* Fixed height again for mobile consistency */
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-item.card-item h2 {
+    font-size: 1.5rem;
+  }
+}
+/* ===========================
+   LENIS SMOOTH SCROLL
+   =========================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ===========================
+   GLOSARIO GRID
+=========================== */
+.Glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 68px 20px; /* Reduced row gap to 60px */
+  padding: 4rem 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  height: auto; /* Override default section height */
+  min-height: auto;
+  background-color: transparent; /* Assuming bg handled by body/container */
+  align-items: stretch; /* Force items to stretch to row height */
+}
+
+/* Make sure the section container allows the grid to flow naturally */
+section.Glossary-grid {
+  height: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  align-items: stretch; /* Override generic section align-items: center */
+}
+
+.glossary-item {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  border-radius: 2rem 0 2rem 0;
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: box-shadow 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure flex container fills the grid cell */
+}
+
+.glossary-item:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.glossary-item h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: "PowerGrotesk", sans-serif;
+  letter-spacing: 0.03em;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glossary-item p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ddd;
+  font-family: "Figtree", sans-serif;
+  margin-bottom: 0;
+}
+
+@media (min-width: 1200px) {
+  .Glossary-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .Glossary-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  .glossary-item h3 {
+    font-size: 1.1rem;
   }
 }

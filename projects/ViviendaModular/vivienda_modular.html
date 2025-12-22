@@ -6,35 +6,35 @@
     <link
       id="menu-css"
       rel="stylesheet"
-      href="/css/components/menu-header.css"
+      href="../../css/components/menu-header.css"
     />
 
     <meta charset="UTF-8" />
-    <title>Vivienda Modular</title>
+    <title>Vivienda Progresiva</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- External CSS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style_viviendamodular.css" />
+    <link rel="stylesheet" href="css/link-styles.css" />
+
+    <!-- JS Scripts (Local) -->
+    <script src="../../js/gsap.min.js"></script>
+    <script src="../../js/ScrollTrigger.min.js"></script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/splitting.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <script type="module" src="../../js/demo4/traduction.js"></script>
 
     <script>
       document.documentElement.className = "js";
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
-    <link rel="stylesheet" href="css/style_viviendamodular.css" />
-
-    <script src="/js/gsap.min.js"></script>
-    <script src="/js/ScrollTrigger.min.js"></script>
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
-    <script type="module" src="/js/demo4/traduction.js"></script>
     <meta
       name="google-site-verification"
       content="aAM5tigcEfaCe8zQagC7uLQgQrQ1Pcs2EfJi_JwAAsM"
@@ -42,7 +42,7 @@
   </head>
 
   <body>
-    <!-- <section class="video-scroll-wrapper"></section> -->
+    <section class="video-scroll-wrapper"></section>
     <div>
       <div class="video-fullscreen">
         <canvas id="image-sequence"></canvas>
@@ -50,80 +50,65 @@
     </div>
 
     <!-- Cards -->
-    <section>
+    <section class="title-section">
       <div class="Title">
         <h2>Nota Conceptual | vivienda</h2>
-        <h1>Vivienda Modular</h1>
-        <h3>Diciembre 2024</h3>
+        <h1>Vivienda progresiva:</h1>
+        <h2>Construir ciudad desde la urbanización orgánica</h2>
       </div>
     </section>
 
     <section>
       <div class="card">
-        <h2>
-          "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-          consectetur, adipisci velitance"
-        </h2>
+        <p>
+          En México, la vivienda autoproducida es una realidad para la gran
+          mayoría de las personas. Millones de hogares se han construido paso a
+          paso, con esfuerzo propio y sin acompañamiento técnico. La vivienda
+          progresiva propone algo distinto: reconocer esa realidad, diseñarla
+          desde el inicio y convertir el crecimiento incremental en una
+          estrategia urbana segura, eficiente y digna para enfrentar el rezago
+          habitacional sin expandir la desigualdad territorial.
+        </p>
       </div>
     </section>
 
-    <section class="TextLarge">
-      <div>
-        <h2 class="white">Subtitulo</h2>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
-        </p>
-      </div>
-    </section>
     <!-- SECTION DEL TEXTO, ESTÁTICO -->
     <section id="phrase-section">
       <div class="blog-scroll-strip__phrase">
-        <h2>La vivienda modular no se construye, se ensambla.</h2>
-        <p>
-          Una misma lógica, múltiples configuraciones: pieza por pieza, la
-          ciudad puede adaptarse al clima, al tiempo y a las personas.
-        </p>
+        <h2>
+          ¿Y si garantizar el derecho a la vivienda implicara garantizar también
+          el derecho a transformarla y ampliarla con seguridad y dignidad?
+        </h2>
       </div>
     </section>
-
     <!-- SECTION DE LAS IMÁGENES -->
-    <section id="run" class="blog-scroll-strip">
+    <section id="run1" class="blog-scroll-strip">
       <div class="blog-scroll-strip__inner">
         <div class="blog-scroll-strip__rail">
           <figure class="blog-scroll-card">
             <img
-              src="images/pexels-david-olaniyi-1926688-10504890.jpg"
+              src="images/cool paviment.png"
               alt="Montaje de vivienda modular"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              src="images/beautiful-architecture-building-exterior-of-singap-2024-09-21-22-26-04-utc.JPG"
               alt="Vivienda modular con paneles solares"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              src="images/beautiful-vertical-shot-of-the-famous-gardens-by-t-2025-02-03-13-59-05-utc.jpg"
+              alt="Conjunto de vivienda modular"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="images/Whates squere.png"
               alt="Conjunto de vivienda modular"
             />
           </figure>
@@ -132,145 +117,697 @@
     </section>
 
     <!-- SECTION DE LAS IMÁGENES -->
-    <section id="run" class="blog-scroll-strip">
+    <section id="run2" class="blog-scroll-strip">
       <div class="blog-scroll-strip__inner">
         <div class="blog-scroll-strip__rail">
           <figure class="blog-scroll-card">
             <img
-              src="images/pexels-david-olaniyi-1926688-10504890.jpg"
+              src="images/cool paviment.png"
               alt="Montaje de vivienda modular"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              src="images/beautiful-architecture-building-exterior-of-singap-2024-09-21-22-26-04-utc.JPG"
               alt="Vivienda modular con paneles solares"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              src="images/beautiful-vertical-shot-of-the-famous-gardens-by-t-2025-02-03-13-59-05-utc.jpg"
+              alt="Conjunto de vivienda modular"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="images/Whates squere.png"
               alt="Conjunto de vivienda modular"
             />
           </figure>
         </div>
       </div>
     </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
       gsap.registerPlugin(ScrollTrigger);
 
       const phraseSection = document.querySelector("#phrase-section");
-      const runSection = document.querySelector("#run");
-      const rail = document.querySelector("#run .blog-scroll-strip__rail");
-      const cards = gsap.utils.toArray("#run .blog-scroll-card");
 
-      if (phraseSection && runSection && rail && cards.length) {
+      function initScrollStrip(sectionId) {
+        const runSection = document.querySelector(sectionId);
+        if (!runSection) return;
+
+        const rail = runSection.querySelector(".blog-scroll-strip__rail");
+        const cards = gsap.utils.toArray(".blog-scroll-card", rail);
+
+        if (!rail || !cards.length) return;
+
         function distributeRandomPositions() {
           const railRect = rail.getBoundingClientRect();
-          const railWidth = railRect.width;
-          const railHeight = railRect.height;
+          // We use fixed width calc or get it from element if fully rendered
+          const railWidth = railRect.width || rail.offsetWidth;
+          const railHeight = railRect.height || rail.offsetHeight;
           const cardWidth = 360;
 
           cards.forEach((card) => {
             const x = gsap.utils.random(0, Math.max(railWidth - cardWidth, 0));
             const y = gsap.utils.random(0, railHeight * 0.7);
-
-            // usamos x/y en vez de left/top para que GSAP controle todo
             gsap.set(card, { x, y });
           });
 
           ScrollTrigger.refresh();
         }
 
-        window.addEventListener("load", () => {
-          // 1) Primero colocamos aleatoriamente las tarjetas
-          distributeRandomPositions();
-
-          // 2) Animación de cada tarjeta al hacer scroll por #run
-          cards.forEach((card) => {
-            const fromY = gsap.utils.random(10, 40);
-            const travel = gsap.utils.random(60, 140);
-            const toY = fromY - travel;
-
-            gsap.fromTo(
-              card,
-              { yPercent: fromY },
-              {
-                yPercent: toY,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: runSection, // 👈 ahora el tramo correcto es #run
-                  start: "top bottom", // cuando #run entra por abajo
-                  end: "bottom top", // hasta que #run sale por arriba
-                  scrub: true,
-                  // markers: true,          // actívalo si quieres debugear
-                },
-              }
-            );
-          });
-
-          // 3) Fijamos el texto mientras dura la sección #run
-          if (window.innerWidth > 860) {
-            ScrollTrigger.create({
-              trigger: runSection, // tramo definido por #run
-              start: "top bottom", // cuando #run entra por abajo
-              end: "bottom top", // hasta que #run sale por arriba
-              pin: phraseSection, // fijamos TODO el section del texto
-              pinSpacing: false,
-              // markers: true,
-            });
-          }
-        });
-
-        // Recalcular posiciones al redimensionar
+        // 1) Position randomly
+        distributeRandomPositions();
         window.addEventListener("resize", distributeRandomPositions);
+
+        // 2) Animate each card
+        cards.forEach((card) => {
+          const fromY = gsap.utils.random(10, 40);
+          const travel = gsap.utils.random(60, 140);
+          const toY = fromY - travel;
+
+          gsap.fromTo(
+            card,
+            { yPercent: fromY },
+            {
+              yPercent: toY,
+              ease: "none",
+              scrollTrigger: {
+                trigger: runSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+        });
       }
+
+      window.addEventListener("load", () => {
+        // Initialize both strips
+        initScrollStrip("#run1");
+        initScrollStrip("#run2");
+
+        // 3) Pin text (Logic preserved for run1 specifically or general?)
+        // Original logic pinned phraseSection when #run was triggered.
+        // Assuming we want it pinned during the first visual run section usually.
+        // Let's attach it to run1 for now as it was logically the first one matched by querySelector("#run")
+
+        const pinTrigger = document.querySelector("#run1");
+        if (window.innerWidth > 860 && pinTrigger && phraseSection) {
+          ScrollTrigger.create({
+            trigger: pinTrigger,
+            start: "top bottom",
+            end: "bottom top",
+            pin: phraseSection,
+            pinSpacing: false,
+            pinSpacing: false,
+          });
+        }
+      });
     </script>
 
     <section class="TextLarge">
       <div>
-        <h2 class="white">Contexto:</h2>
+        <h2 class="white">El contexto urbano de la vivienda autoproducida</h2>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          El acceso a vivienda digna se ha consolidado como uno de los grandes
+          retos urbanos a escala global. De acuerdo con organismos
+          internacionales y autoridades nacionales, millones de familias en el
+          mundo enfrentan déficits habitacionales asociados tanto a la falta de
+          nuevas viviendas como a la precariedad de las existentes.
+          <a
+            href="https://www.gob.mx/sedatu/prensa/8-5-millones-de-viviendas-en-rezago-habitacional-conavi"
+            >El déficit es de 8.5 millones de viviendas para el caso mexicano.
+          </a>
+          Este fenómeno no se distribuye de manera uniforme: tiende a
+          concentrarse en los sectores de menores ingresos y en áreas urbanas
+          que han crecido aceleradamente en las últimas décadas, donde la
+          expansión de la ciudad ha superado la capacidad institucional,
+          financiera y técnica para garantizar condiciones de habitabilidad
+          dignas.
+        </p>
+
+        <p>
+          <a
+            href="https://sniiv.sedatu.gob.mx/Autoproduccion/Estadisticas_generales"
+            >Más del 57 por ciento del parque habitacional nacional, equivalente
+            a aproximadamente 20.2 millones de viviendas, ha sido construido
+            mediante procesos de autoproducción.</a
+          >Este modelo ha permitido a millones de familias acceder a un hogar,
+          pero suele desarrollarse sin supervisión técnica, con tiempos de
+          consolidación de entre 15 y 20 años y con riesgos estructurales,
+          funcionales y urbanos acumulados. La vivienda se amplía conforme hay
+          recursos, pero sin un diseño, infraestructura y servicios que
+          anticipen el crecimiento.
         </p>
         <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
+          Al mismo tiempo, los modelos tradicionales de vivienda de interés
+          social y vivienda asequible han mostrado límites claros. Producción
+          masiva, localización periférica, escasa adaptabilidad y una
+          desconexión con las dinámicas reales de las familias han contribuido a
+          viviendas abandonadas, endeudamiento y expansión urbana poco
+          eficiente. En este contexto, pensar nuevas tipologías no es una
+          cuestión de diseño, sino de política urbana y justicia territorial.
+        </p>
+      </div>
+    </section>
+    <!-- 
+    <section class="TextLarge">
+      <div>
+        <h2>La urgencia climática urbana ya está aquí.</h2>
+        <p>
+          Las ciudades concentran la mayor parte de la actividad humana. Según
+          ONU-Hábitat, consumen 78 por ciento de la energía global y generan más
+          de 60 por ciento de las emisiones de gases de efecto invernadero, a
+          pesar de ocupar menos de 2 por ciento del territorio mundial. La
+          concentración de actividades y el dinamismo inherente a la vida urbana
+          crea entornos vulnerables ante olas de calor, lluvias intensas,
+          sequías, y contaminación atmosférica.
+        </p>
+        <p>
+          Si bien las soluciones basadas en la naturaleza, como ampliar áreas
+          verdes o plantar árboles, son indispensables, en un mundo
+          mayoritariamente urbano no solo tardan años en generar efectos
+          visibles, sino que resultan insuficientes para enfrentar la magnitud y
+          velocidad de los desafíos climáticos actuales. En un contexto donde el
+          clima avanza más rápido que la capacidad de respuesta humana se vuelve
+          imprescindible complementar estas estrategias con sistemas que sean
+          tan dinámicos como los cambios contemporáneos y que no dependan de
+          ciclos biológicos para ofrecer resultados.
         </p>
       </div>
     </section>
 
+    <section class="TextLarge">
+      <div>
+        <h2>Infraestructura que responde al entorno</h2>
+        <p>
+          La
+          <a
+            href="https://repositorio.cepal.org/server/api/core/bitstreams/1e61262e-7887-4cfd-8efc-cf4626e0056c/content"
+            target="_blank"
+            rel="noopener noreferrer"
+            >infraestructura bioresponsiva</a
+          >
+          es una evolución de la infraestructura verde. Mientras la
+          infraestructura gris resuelve servicios urbanos esenciales, drenaje,
+          pavimentos, edificios, y la infraestructura verde incorpora elementos
+          naturales para restaurar ecosistemas, la bioresponsiva va un paso más
+          allá: integra biología, materiales inteligentes y diseño adaptativo
+          para responder al entorno en tiempo real.
+        </p>
+        <p>
+          Su diferencia central está en el tiempo de reacción. La
+          <a
+            href="https://www.researchgate.net/publication/353659657_Que_es_la_infraestructura_verde_urbana_IVU"
+            target="_blank"
+            rel="noopener noreferrer"
+            >infraestructura verde</a
+          >
+          mejora el clima urbano hacia el futuro; la bioresponsiva actúa desde
+          el presente, absorbiendo agua, reflejando calor, filtrando aire o
+          regulando la temperatura del espacio público sin necesidad de
+          intervención humana constante.
+        </p>
+        <p>
+          Este enfoque combina ingeniería, diseño regenerativo y tecnología para
+          crear soluciones que se autogestionan. No sustituye a los árboles, la
+          vegetación, o a la naturaleza, sino que acelera sus beneficios
+          mediante sistemas híbridos capaces de complementar la resiliencia
+          natural de las ciudades con los beneficios de la creatividad humana
+        </p>
+      </div>
+    </section> -->
+
+    <section class="Glossary-grid">
+      <div class="glossary-item">
+        <h3>Vivienda social</h3>
+        <p>
+          Vivienda promovida, financiada o subsidiada total o parcialmente por
+          el Estado, dirigida a hogares de bajos ingresos. Su objetivo principal
+          es garantizar el acceso a una vivienda digna como derecho social, no
+          maximizar rentabilidad. Suele estar sujeta a reglas de asignación,
+          precios tope y criterios de elegibilidad.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda de interés social (VIS)</h3>
+        <p>
+          Subcategoría de la vivienda social, común en México y América Latina.
+          Se refiere a vivienda producida bajo esquemas normativos específicos
+          (costos máximos, superficies mínimas, estándares definidos) y
+          generalmente vinculada a créditos públicos o paraestatales.
+          Históricamente asociada a producción masiva y periférica.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda asequible</h3>
+        <p>
+          Vivienda cuyo costo total (renta o hipoteca más servicios básicos) no
+          supera un umbral razonable del ingreso del hogar, usualmente 30–35 %.
+          No implica necesariamente subsidio público ni está limitada a
+          población de muy bajos ingresos. Puede ser producida por el sector
+          privado, cooperativas o esquemas mixtos.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda accesible</h3>
+        <p>
+          Concepto centrado en la usabilidad del espacio, no en el precio. Se
+          refiere a viviendas diseñadas para ser utilizadas de manera segura y
+          autónoma por personas con discapacidad, adultos mayores o movilidad
+          reducida. Incluye criterios de diseño universal, adaptabilidad y
+          eliminación de barreras físicas.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda adecuada</h3>
+        <p>
+          Concepto utilizado por ONU-Hábitat y el derecho internacional. Integra
+          múltiples dimensiones: seguridad de la tenencia, acceso a servicios,
+          habitabilidad, ubicación adecuada, asequibilidad y adecuación
+          cultural. No describe un tipo de producto, sino un estándar mínimo de
+          calidad y dignidad.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda progresiva</h3>
+        <p>
+          Modelo de vivienda concebida para crecer y transformarse en el tiempo,
+          de acuerdo con las capacidades económicas y necesidades cambiantes del
+          hogar. Puede ser autoconstruida o asistida técnicamente. Reconoce la
+          vivienda como proceso incremental y no como objeto terminado.
+        </p>
+      </div>
+
+      <div class="glossary-item">
+        <h3>Vivienda en renta social</h3>
+        <p>
+          Vivienda destinada al arrendamiento con precios por debajo del
+          mercado, generalmente con apoyo público o regulatorio. Busca ampliar
+          opciones habitacionales más allá de la propiedad, especialmente para
+          jóvenes, trabajadores móviles o hogares que no pueden acceder a
+          crédito.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda cooperativa</h3>
+        <p>
+          Modelo en el que la propiedad y gestión de la vivienda es colectiva, a
+          través de cooperativas de habitantes. Prioriza el valor de uso sobre
+          el valor de cambio, fomenta comunidad y suele ofrecer mayor
+          estabilidad de largo plazo en costos de vivienda.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda incluyente</h3>
+        <p>
+          Vivienda integrada deliberadamente en zonas centrales o bien
+          conectadas, dirigida a una mezcla de niveles socioeconómicos. Suele
+          estar asociada a políticas de zonificación incluyente, cuotas de
+          vivienda asequible o incentivos urbanos para evitar segregación
+          espacial.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda sustentable</h3>
+        <p>
+          Vivienda diseñada para reducir impactos ambientales a lo largo de su
+          ciclo de vida. Incorpora eficiencia energética, manejo de agua,
+          materiales adecuados y, en algunos casos, estrategias bioclimáticas.
+          Puede coexistir con vivienda social o asequible, aunque no son
+          sinónimos.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda digna</h3>
+        <p>
+          Concepto normativo y ético, ampliamente usado en marcos
+          constitucionales. No define tipología ni régimen de propiedad, sino
+          una condición mínima de calidad espacial, seguridad, servicios y
+          localización que permita el desarrollo pleno de las personas.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda informal</h3>
+        <p>
+          Vivienda construida fuera de los marcos legales o normativos vigentes
+          (tenencia irregular del suelo, ausencia de permisos o servicios). No
+          equivale necesariamente a precariedad, pero sí a una relación frágil
+          con el Estado y el acceso a derechos urbanos.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda de mercado</h3>
+        <p>
+          Vivienda producida y asignada exclusivamente por dinámicas de oferta y
+          demanda, sin restricciones de precio ni criterios sociales. Sirve como
+          contrapunto conceptual frente a la vivienda social, asequible o
+          incluyente.
+        </p>
+      </div>
+      <div class="glossary-item">
+        <h3>Vivienda autoconstruida / autoproducida</h3>
+        <p>
+          Vivienda edificada directamente por los propios habitantes, con o sin
+          apoyo técnico o financiero. Es el modo dominante de producción
+          habitacional en muchas ciudades latinoamericanas. Puede generar
+          soluciones adaptadas al contexto familiar, pero también riesgos
+          estructurales si no hay acompañamiento.
+        </p>
+      </div>
+    </section>
+
+    <section id="horizontal-scroll" class="horizontal-scroll-section">
+      <div class="carousel-wrapper">
+        <div class="carousel-item card-item">
+          <img
+            src="images/beautiful-vertical-shot-of-the-famous-gardens-by-t-2025-02-03-13-59-05-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>
+            <a
+              href="https://www.nlb.gov.sg/main/article-detail?cmsuuid=cfc0035c-4734-4d26-8fe1-8f0c6a9e1e6c"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Singapur: agua, paisaje y control climático al mismo tiempo</a
+            >
+          </h2>
+          <p>
+            El programa Active, Beautiful, Clean Waters (ABC Waters) de
+            Singapur, lanzado en 2006 por la agencia nacional de agua (PUB,
+            Public Utilities Bureau), transforma drenajes y canales urbanos en
+            infraestructura biorresiliente multifuncional que combina objetivos
+            como el control de escurrimientos, mejora de calidad del agua,
+            restauración ecológica y la creación de espacioss público de alto
+            valor social. Su enfoque de gestión por cuenca integra soluciones
+            basadas en naturaleza como humedales, vegetación riparia y
+            renaturalización de cauces para reducir riesgos de inundación,
+            filtrar contaminantes y aumentar la biodiversidad urbana,
+            manteniendo su función hidráulica original. A nivel urbano, el
+            programa ha permitido reconvertir infraestructuras grises en
+            paisajes resilientes y accesibles, como el proyecto de Bishan-Ang Mo
+            Kio Park, donde un canal de concreto fue reemplazado por un río
+            sinuoso con control natural de caudales y hábitats restaurados. Para
+            2017 se habían completado 36 sitios, consolidando un modelo pionero
+            de infraestructura hídrica adaptable al clima, que incrementa la
+            capacidad de absorción, reduce vulnerabilidades y fortalece la
+            relación entre agua, espacio público y comunidad.
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/Whates squere.png"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>
+            <a
+              href="https://resilientcitiesnetwork.org/resilient-water-management/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Rotterdam: plazas que almacenan agua</a
+            >
+          </h2>
+          <p>
+            Algunas plazas en la ciudad neerlandesa de Rotterdam funcionan como
+            infraestructura con fin dual: espacios públicos en temporada seca y
+            cuencas de retención durante tormentas e inundaciones repentinas. La
+            plaza Benthemplein, inaugurada en 2013, almacena temporalmente hasta
+            1 700 m³ de agua recolectada mediante superficies permeables y tres
+            depósitos de distintas profundidades. Este espacio se desarrolló
+            como proyecto piloto dentro del Waterplan 2 de Rotterdam (2007),
+            concebido para escalar soluciones de plazas de agua en toda la
+            ciudad. El proyecto tuvo un costo aproximado de 50 millones de pesos
+            (USD 2.7 millones), de los cuales casi la mitad provinieron de una
+            subvención de la Comisión Europea, mientras que el financiamiento
+            local se gestó a través de la agencia gubernamental encargada de la
+            gestión del agua. Su diseño incluyó talleres con comunidades y
+            escuelas para definir usos, mantenimiento y convivencia con el agua.
+          </p>
+        </div>
+
+        <div class="carousel-item card-item">
+          <img
+            src="images/cool paviment.png"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>
+            <a
+              href="https://www.smartcitiesdive.com/news/los-anageles-cool-reflective-pavement-study-results-pacoima-extreme-heat/714420/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Los Ángeles: pavimentos fríos para combatir el calor extremo a
+              nivel peatonal</a
+            >
+          </h2>
+          <p>
+            El programa Cool LA aplica recubrimientos reflectantes en calles
+            para reducir la absorción de calor. Iniciado como piloto en 2017,
+            consolidó uno de sus despliegues más grandes en la colonia angelina
+            de Pacoima en julio de 2022, donde se aplicaron más de 65 mil m² de
+            pavimento reflectante dentro del proyecto GAF Cool Community, una
+            colaboración público-privada. Estudios realizados durante 12 meses
+            posteriores a la intervención mostraron reducciones de hasta 6 °C en
+            la temperatura superficial del pavimento y entre 1 y 2 °C en la
+            temperatura ambiente durante episodios de calor extremo. La
+            reflectancia del asfalto aumentó significativamente tras el
+            tratamiento, aunque se requiere mantenimiento periódico porque la
+            suciedad y el desgaste reducen su eficacia. El costo exacto del
+            piloto no ha sido publicado, pero se sabe que el recubrimiento
+            utilizado es sustancialmente más caro que uno convencional, con
+            precios reportados de $150 MXN por litro ($30 USD por galón). Las
+            soluciones a islas de calor urbano son más eficientes cuando se
+            combinan con arborización,sombra, y otras soluciones
+            complementarias.
+          </p>
+        </div>
+        <div class="carousel-item card-item">
+          <img
+            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>
+            <a
+              href="https://dbdh.org/district-heating-in-greater-copenhagen-2050/?utm_source=chatgpt.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Copenhague: infraestructura para la captura de calor residual</a
+            >
+          </h2>
+          <p>
+            Copenhague ha impulsado una de las redes de calefacción distrital
+            más avanzadas del mundo, liderada por la empresa pública HOFOR, que
+            hoy opera una red ~85 % neutra en carbono gracias a una mezcla de
+            captura de calor residual, geotermia, bombas de calor y biomasa
+            renovable. Más del 90 % de los edificios de la ciudad están
+            conectados y se espera que en 2025 más de 130 000 viviendas se
+            abastezcan casi por completo con energía renovable. La
+            infraestructura captura calor excedente de plantas de tratamiento,
+            incineración y edificios, y lo redistribuye de manera eficiente como
+            energía térmica. La expansión reciente incluye pilotos con bombas de
+            calor a escala urbana que ya suministran calor a miles de hogares y
+            una hoja de ruta para instalar 300 MW adicionales de bombas de calor
+            y 550 MW de calderas eléctricas rumbo a 2033. El marco regulatorio
+            danés, con cambios clave como la eliminación del tope al precio del
+            calor residual a partir de julio de 2025, ha facilitado nuevas
+            inversiones estimadas entre 3 y 5 mil millones de coronas danesas.
+            Estos avances son un pilar del plan CPH 2025, que busca reducir más
+            de 70 % de emisiones respecto a 2005.
+          </p>
+        </div>
+
+        <div class="carousel-item card-item">
+          <img
+            src="images/pexels-malaydi-30467145.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>
+            <a
+              href="https://www.pwc.com/gx/en/issues/business-model-reinvention/how-we-fuel-and-power/sustainable-energy-infrastructure/the-eco-oasis-blueprint-for-sustainable-cities.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Masdar City: principios de diseño</a
+            >
+          </h2>
+          <p>
+            Masdar City nació en 2006 como uno de los megaproyectos urbanos más
+            ambiciosos del mundo, concebido con la aspiración de construir desde
+            cero una ciudad sostenible en pleno desierto. Aunque este tipo de
+            desarrollos suele enfrentarse a críticas fundadas por su escala, sus
+            altos costos, sus largos plazos de maduración y el riesgo de
+            convertirse en enclaves poco integrados o difíciles de escalar,
+            Masdar City integró desde el inicio principios de planeación y
+            diseño que son grandes pilares de la infraestructura resiliente.
+            Incorporó un plan maestro compacto orientado al peatón, una red de
+            movilidad eléctrica de baja energía, estrategias pasivas de
+            enfriamiento ajustadas al clima desértico y un sistema urbano basado
+            en infraestructura distribuida que reduce vulnerabilidades. Su
+            trazado urbano aprovecha corredores de viento para disminuir
+            temperaturas hasta 5 °C en calles peatonales, emplea edificios con
+            40 % menos consumo de energía y agua, e integra generación solar
+            descentralizada que asegura continuidad operativa. Estos elementos,
+            combinados con regulaciones técnicas estrictas y una gobernanza
+            alineada al largo plazo, le otorgan una ventaja estructural al
+            operar como un distrito capaz de adaptarse, absorber choques y
+            mantener funcionalidad aun bajo condiciones climáticas extremas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="TextLarge">
+      <div>
+        <h2>Implicaciones para México y Latinoamérica</h2>
+        <p>
+          Las ciudades latinoamericanas enfrentan condiciones climáticas
+          diversas: calor extremo en el norte, lluvias torrenciales en el
+          sureste, mala calidad del aire en valles cerrados y vulnerabilidad a
+          inundaciones en zonas costeras. La infraestructura bioresponsiva se
+          adapta a cada uno de estos contextos, porque su lógica es modular y
+          basada en el comportamiento ambiental local.
+        </p>
+        <p>
+          En México, este enfoque tiene oportunidades claras: pavimentos
+          permeables y gestores hídricos en zonas con riesgo de inundación,
+          fachadas y recubrimientos que filtren aire en ciudades contaminadas,
+          techos verdes que reduzcan el calor urbano y materiales que capturen
+          CO₂ en áreas industriales.
+        </p>
+        <p>
+          Implementar infraestructura bioresponsiva requiere un esquema
+          regulatorio que permita e incentive la experimentación y una
+          colaboración multidisciplinaria entre ingeniería, arquitectura,
+          urbanismo y comunidades locales. Las ciudades son el espacio ideal
+          donde se prueben prototipos capaces de medir, ajustar y responder
+          según el clima urbano en tiempo real.
+        </p>
+        <p>
+          Para la región, esta infraestructura representa una vía hacia la
+          adaptación climática sin depender exclusivamente de grandes
+          inversiones o intervenciones masivas. Es un puente entre innovación,
+          resiliencia y justicia climática.
+        </p>
+      </div>
+    </section>
+
+    <section class="TextLarge">
+      <div>
+        <h2>Conclusión</h2>
+        <p>
+          La infraestructura bioresponsiva se presenta como una invitación a
+          repensar la falsa dicotomía entre el entorno construido y el medio
+          ambiente. Más que un conjunto de obras e infraestructura que cumple
+          fines deterministas, se promueve un enfoque que contempla los centros
+          urbanos como un sistema vivo que complementa a la infraestructura
+          verde y acelera la adaptación urbana a los nuevos retos climáticos.
+          Sus beneficios pueden ser inmediatos: enfriar calles, absorber agua,
+          mejorar el aire o reducir riesgos climáticos, sin reemplazar la
+          vegetación y los beneficios de largo plazo que conlleva un desarrollo
+          balanceado con la naturaleza.
+        </p>
+        <p>
+          Las ciudades que adopten este enfoque podrán anticipar cambios,
+          responder con flexibilidad y abrir paso a modelos de urbanismo
+          regenerativo capaces de cuidar a quienes habitan el espacio público.
+        </p>
+      </div>
+    </section>
+
+    <!-- Script for Horizontal Scroll -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Inicialización de Lenis para scroll suave
+        const initSmooth = () => {
+          if (typeof Lenis !== "undefined") {
+            const lenis = new Lenis({
+              lerp: 0.1,
+              smoothWheel: true,
+            });
+
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+              lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+            console.log(
+              "✅ Lenis inicializado en infraestructura-bioresponsiva"
+            );
+          } else {
+            console.error(
+              "❌ Lenis no está definido. Falló la carga del script."
+            );
+          }
+        };
+
+        // Registrar GSAP Plugins (Check if GSAP loaded)
+        if (typeof gsap !== "undefined") {
+          gsap.registerPlugin(ScrollTrigger);
+        } else {
+          console.error("❌ GSAP no está definido.");
+        }
+
+        // Iniciar Lenis
+        initSmooth();
+
+        const section = document.querySelector(".horizontal-scroll-section");
+        const wrapper = document.querySelector(".carousel-wrapper");
+
+        if (section && wrapper) {
+          function getScrollAmount() {
+            let wrapperWidth = wrapper.scrollWidth;
+            // Return negative value for left translation
+            // Using window.innerWidth ensures we scroll just enough to see the end
+            return -(wrapperWidth - window.innerWidth);
+          }
+
+          const tween = gsap.fromTo(
+            wrapper,
+            { x: 0 },
+            {
+              x: getScrollAmount,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: () => `+=${Math.abs(getScrollAmount())}`,
+                pin: true,
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+
+          // Refresh on window load to ensure all images/layout are settled
+          window.addEventListener("load", () => {
+            ScrollTrigger.refresh();
+            console.log("Carousel: ScrollTrigger refreshed on load");
+          });
+        }
+      });
+    </script>
+
     <script src="js/vivienda_modular.js"></script>
-    <script src="/js/gsap.min.js"></script>
-    <script src="/js/ScrollTrigger.min.js"></script>
-    <script src="/js/lenis.min.js"></script>
-    <script src="/js/splitting.min.js"></script>
+    <!-- Removed duplicate imported scripts -->
 
     <div class="top-bar"></div>
 
     <div class="menu-placeholder" id="menu-placeholder"></div>
 
     <script>
-      fetch("/menu.html")
+      fetch("../../menu.html")
         .then((response) => {
           if (!response.ok) {
             throw new Error(
@@ -290,7 +827,7 @@
 
           // Cargar el script después de que el menú esté en el DOM
           const script = document.createElement("script");
-          script.src = "/js/demo4/menu.js";
+          script.src = "../../js/demo4/menu.js";
           script.onload = () => console.log("menu.js cargado correctamente ✅");
           script.onerror = () =>
             console.error("Error al cargar /js/demo4/menu.js ❌");
@@ -311,7 +848,7 @@
     </a>
     <script>
       const container = document.querySelector(".secundary-brand");
-      fetch("/svg/indi-lab_Vertical_Animate.svg")
+      fetch("../../svg/indi-lab_Vertical_Animate.svg")
         .then((response) => response.text())
         .then((svgText) => {
           container.innerHTML = svgText;
@@ -348,7 +885,7 @@
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
               <a
-                href="/aviso_privasidad.html"
+                href="../../aviso_privasidad.html"
                 target="_blank"
                 rel="noopener"
                 data-i18n="newsletter_policy_link"
@@ -395,7 +932,7 @@
         <h3 data-i18n="next_project_title">Next Projects</h3>
         <article class="project-card">
           <img
-            src="/projects/ViviendaModular/images/electromovilidad.png"
+            src="images/electromovilidad.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
@@ -405,7 +942,7 @@
         </article>
         <article class="project-card">
           <img
-            src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
+            src="images/Generated Image September 09, 2025 - 2_24PM.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">

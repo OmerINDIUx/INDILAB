@@ -5,12 +5,12 @@ const context = canvas.getContext("2d");
 
 // 🎞 Configuración de frames
 const frameStart = 100;
-const frameEnd = 487;
+const frameEnd = 310;
 const frameCount = frameEnd - frameStart + 1;
 const currentFrame = (index) =>
-  `../../projects/ViviendaModular/images/vivienda_modular_sequence/contruccion_vivienda_modular${
+  `../../projects/Infraestructura-bioresponsiva/images/conhill/conhill-${
     frameStart + index
-  }.jpg`;
+  }.png`;
 
 const images = [];
 const imageSeq = { frame: 0 };
