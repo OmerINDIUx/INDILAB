@@ -1,0 +1,1377 @@
+/* ===========================
+   GLOBAL BLOG STYLES
+   Projects: Infraestructura, Islas de Calor, Vivienda Modular
+   Based on: style_islas-calor.css (Optimized)
+=========================== */
+
+/* ===========================
+   FONTS
+=========================== */
+@font-face {
+  font-family: "PowerGrotesk";
+  src: url("../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
+    url("../fonts/power_grotesk-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PowerGrotesk bold";
+  src: url("../fonts/power_grotesk-medium-webfont.woff2") format("woff2"),
+    url("../fonts/power_grotesk-medium-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ===========================
+   RESET & BASE
+=========================== */
+/* ===========================
+   RESET & BASE
+=========================== */
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Figtree", sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* THEME: LIGHT (Islas de Calor) */
+html.light-theme {
+  background-color: #eeeeee;
+}
+
+html.light-theme body {
+  background-color: transparent;
+  color: #1a1a1a; /* Base text color for light theme */
+  padding-left: 0; /* Islas doesn't define body padding in CSS, likely handled by containers or default */
+}
+/* Recorrecting assumption: .gif-container is 100px left.
+   If Islas had NO body padding, we set 0. */
+
+/* THEME: DARK (Vivienda & Infraestructura) */
+html.dark-theme {
+  background-color: #1a1a1a;
+}
+
+html.dark-theme body {
+  background-color: transparent;
+  color: #eeeeee;
+  padding-left: 50px; /* Explicitly from source files */
+}
+
+/* Body Base */
+body {
+  margin: 0;
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Z-INDEX LAYERING STRATEGY
+   --------------------------
+   -10: Background GIFs (.gif-container)
+   0:   Base background elements (noise, secondary brand)
+   10:  Content containers (sections, .card, .TextLarge)
+   20:  Interactive overlays (map fullscreen button)
+   100: Top Navigation / Menu
+   20000: Secondary Brand (Logo)
+=========================== */
+
+.gif-container {
+  position: fixed;
+  top: 0;
+  left: 100px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.gif-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#gif1 {
+  opacity: 1;
+}
+
+section {
+  min-height: 105vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* GLASSMORPHISM CARD STYLE */
+.card {
+  color: #1a1a1a;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 800px;
+  text-align: center;
+
+  /* Glassmorphism */
+  background: rgba(238, 238, 238, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+
+  margin: 0 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.card h1,
+.card h2,
+.card h3 {
+  margin: 0.5rem 0 1rem;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+}
+
+.card p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* ===========================
+   MAPS (ISLAS DE CALOR)
+=========================== */
+.insersion_mapas {
+  background-color: transparent;
+  background: #eeeeee;
+  padding: 60px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.insersion_mapas h2 {
+  text-align: left;
+  font-size: 2.5rem;
+  font-family: "PowerGrotesk", sans-serif;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.insersion_mapas p {
+  text-align: left;
+  font-size: 1.15rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.sub {
+  color: #1a1a1a;
+}
+
+.archivo-erick-islas {
+  width: 100%;
+  max-width: 90%;
+  margin: auto;
+}
+
+.mapas-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.mapa-col {
+  flex: 1 1 60%;
+}
+
+.texto-col {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+#islasdecalor-erick-placeholder {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-container-wrapper {
+  position: relative;
+  width: 100%;
+  height: min(80vh, 700px);
+  min-height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: #e0e0e0;
+}
+
+.map-fullscreen-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: rgba(26, 26, 26, 0.9);
+  color: #eeeeee;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.map-fullscreen-btn:hover {
+  background-color: rgb(226, 70, 43);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 8px 20px rgba(226, 70, 43, 0.4);
+}
+
+.map-fullscreen-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===========================
+   NOISE OVERLAY
+=========================== */
+.insersion_mapas::before,
+body::before {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background-image: url("../img/noise.png");
+  background-repeat: repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 0;
+}
+
+*[style*="background: #eee"],
+*[style*="background: #eeeeee"],
+*[style*="background-color: #eee"],
+*[style*="background-color: #eeeeee"],
+#image-sequence,
+.insersion_mapas,
+.card,
+.TextLarge,
+.image-section {
+  position: relative;
+  overflow: hidden;
+}
+
+*[style*="background: #eee"]::before,
+*[style*="background: #eeeeee"]::before,
+*[style*="background-color: #eee"]::before,
+*[style*="background-color: #eeeeee"]::before,
+#image-sequence::before,
+.insersion_mapas .card::before,
+.TextLarge::before,
+.image-section::before {
+  z-index: 0;
+  content: "";
+  position: absolute;
+  inset: -100%;
+  height: 300%;
+  background: url("../img/noise.png") repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+}
+
+#image-sequence > *,
+.card > *,
+.TextLarge > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  20% {
+    transform: translate(-15%, 5%);
+  }
+  30% {
+    transform: translate(7%, -25%);
+  }
+  40% {
+    transform: translate(-5%, 25%);
+  }
+  50% {
+    transform: translate(-15%, 10%);
+  }
+  60% {
+    transform: translate(15%, 0%);
+  }
+  70% {
+    transform: translate(0%, 15%);
+  }
+  80% {
+    transform: translate(3%, 35%);
+  }
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}
+
+/* ===========================
+   VIDEO & CANVAS
+=========================== */
+.video-scroll-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.video-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align right for infrastructure layout support */
+  pointer-events: none;
+  background: #1a1a1a;
+}
+
+.video-fullscreen video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#image-sequence {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: #eeeeee; /* Default light, overridden to dark in some contexts */
+}
+
+/* ===========================
+   TEXT LARGE
+=========================== */
+.TextLarge {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  background-color: #eeeeee;
+  padding-top: 0;
+}
+
+.TextLarge div {
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: justify;
+  color: #1a1a1a;
+  line-height: 1.8;
+  max-width: 70%;
+}
+
+.TextLarge h2 {
+  text-align: left;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
+}
+
+.TextLarge.white h2,
+.TextLarge .white {
+  color: #eeeeee !important;
+}
+
+.TextLarge span {
+  display: block;
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid #1a1a1a;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 0.05) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* ===========================
+   TITLES
+=========================== */
+.title-section {
+  justify-content: center;
+  padding-top: 0;
+  margin-top: -100vh; /* Pull up over video */
+  position: relative;
+  z-index: 50;
+}
+
+.Title {
+  width: 50vw;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 4vh auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  color: #eee;
+  background: transparent;
+}
+
+.Title h1 {
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 3rem;
+  text-shadow: 0 0 24px #000000b7;
+  margin: 0.5rem 0 1rem;
+}
+
+.Title h2,
+.Title h3 {
+  font-family: "Figtree", sans-serif;
+  color: #eee;
+  text-shadow: 0 0 16px #000000c7;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.Title h2 {
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.Title h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+/* ===========================
+   SECONDARY BRAND
+=========================== */
+.secundary-brand,
+.secondary-brand {
+  all: unset;
+  z-index: 20000 !important;
+  position: fixed;
+  top: 0;
+  left: 10px;
+  background: transparent;
+  pointer-events: none;
+  width: 80px;
+  max-width: 80px;
+}
+
+.secundary-brand img,
+.secondary-brand img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: auto;
+}
+
+.INDI path,
+.LAB path {
+  fill: #eee;
+}
+.colorkey path {
+  fill: rgb(226, 70, 43);
+}
+
+/* Hide logo when menu open */
+.menu-fullscreen.show ~ a .secondary-brand,
+.menu-fullscreen.show ~ a .secundary-brand {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.top-bar {
+  display: none;
+}
+
+/* ===========================
+   HORIZONTAL SCROLL SECTION
+=========================== */
+.horizontal-scroll-section {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  will-change: transform;
+  background-color: #1a1a1a;
+}
+
+.carousel-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 80vh;
+  align-items: center;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  gap: 5vw;
+  will-change: transform;
+  background-color: #1a1a1a;
+}
+
+/* Carousel Items Styles (from Infraestructura/Vivienda) */
+.carousel-item {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 40vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.carousel-item.text-item {
+  color: #eeeeee;
+  width: 30vw;
+  min-width: 300px;
+  margin-right: 5vw;
+  background-color: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.carousel-item.text-item h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: #eeeeee;
+}
+
+.carousel-item.text-item p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #eeeeee;
+}
+
+.carousel-item.card-item {
+  background: #252525;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: #eeeeee;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "image title"
+    "image text";
+  gap: 0 2rem;
+  width: 90vw;
+  max-width: 1600px;
+  align-items: center;
+}
+
+.carousel-item.card-item img.carrucel-imagen {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3;
+  max-height: 80vh;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item.card-item h2 {
+  grid-area: title;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.carousel-item.card-item p {
+  grid-area: text;
+  color: #eeeeee;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+/* ===========================
+   SCROLL STRIP (PORTED)
+=========================== */
+#phrase-section {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+}
+
+.blog-scroll-strip__phrase {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.blog-scroll-strip {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  padding: 0.1vh 0;
+  background-color: transparent;
+  width: 100%;
+}
+
+.blog-scroll-strip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-scroll-strip__rail {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.blog-scroll-card {
+  position: absolute;
+  max-width: 360px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  will-change: transform;
+}
+
+.blog-scroll-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1.03);
+  transition: transform 0.5s ease;
+}
+
+/* ===========================
+   COMPONENTS FROM VIVIENDA/INFRA
+=========================== */
+
+/* Text Provocation */
+.text-provocation {
+  padding: 4rem 10%;
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.text-provocation div {
+  max-width: 900px;
+}
+
+.text-provocation h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: #eeeeee;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.text-provocation p {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: #eeeeee;
+}
+
+/* Interactive Note */
+.interactive-note-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.note-trigger {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e2462b;
+  color: #e2462b;
+  font-family: "PowerGrotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.note-trigger:hover .info-icon {
+  background: #e2462b;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.note-popup {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 90vw;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: #252525;
+  border-left: 4px solid #e2462b;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+.note-popup::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #252525 transparent transparent transparent;
+}
+
+.interactive-note-container:hover .note-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.note-popup h3 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e2462b;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.note-popup p {
+  font-family: "Figtree", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #eee;
+  margin: 0;
+  text-align: left;
+}
+
+.Glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; /* Reduced from 68px 20px for tighter layout */
+  padding: 4rem 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  height: auto; /* Override default section height */
+  min-height: auto;
+  background-color: #1a1a1a;
+  align-items: start; /* Changed from stretch to start to avoid stretching empty space if content differs */
+}
+
+.glossary-title {
+  grid-column: 1 / -1;
+  width: 100%;
+  text-align: center;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2.5rem;
+  color: #fff; /* or #eee matching other white text */
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+/* Make sure the section container allows the grid to flow naturally */
+section.Glossary-grid {
+  height: auto;
+  padding-top: 3rem; /* Reduced from 5rem */
+  padding-bottom: 3rem; /* Reduced from 5rem */
+  align-items: start; /* Override generic section align-items: center */
+}
+
+.glossary-item {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.8rem 1.2rem; /* Further reduced padding */
+  border-radius: 0.8rem; /* Adjusted border radius */
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: box-shadow 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  cursor: pointer; /* Clickable cursor for the whole box */
+}
+
+.glossary-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.08); /* Slightly lighter on hover */
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.glossary-item h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.1rem; /* Slightly smaller font if needed for compactness */
+  font-weight: 700;
+  color: #fff;
+  font-family: "PowerGrotesk", sans-serif;
+  letter-spacing: 0.03em;
+  padding-bottom: 0; /* Removed padding bottom */
+  border-bottom: none;
+  position: relative;
+  transition: color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically align text and icon */
+  line-height: 1.2;
+}
+
+.glossary-item h3::after {
+  content: "+";
+  font-size: 1.4rem;
+  font-weight: 400;
+  transition: transform 0.3s ease;
+  line-height: 1; /* Fix vertical alignment issues */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px; /* Fixed height for icon container */
+  width: 24px;
+}
+
+.glossary-item.active h3::after {
+  transform: rotate(45deg);
+}
+
+.glossary-item.active h3 {
+  margin-bottom: 12px;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glossary-item p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ddd;
+  font-family: "Figtree", sans-serif;
+  margin-bottom: 0;
+
+  /* Accordion styles */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
+}
+
+.glossary-item.active p {
+  max-height: 500px; /* Arbitrary large height */
+  opacity: 1;
+}
+
+/* ===========================
+   CONTACTO + SIGUIENTE PROYECTO
+=========================== */
+section.contact-next-project {
+  height: auto;
+  padding: 6rem 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 3rem;
+  background-color: #1a1a1a;
+}
+
+.contact-next-project > * {
+  flex: 1 1 0;
+  max-width: 600px;
+}
+
+.newsletter-block,
+.next-project-block {
+  color: #eee;
+  padding: 2.2rem 2.4rem;
+}
+
+.newsletter-block h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.6rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.newsletter-block > p {
+  margin: 0 0 1.6rem 0;
+  font-size: 0.95rem;
+  color: #eee;
+  max-width: 26rem;
+}
+
+.next-project-block h3 {
+  font-family: "Figtree", sans-serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+  margin: 0 0 1.2rem 0;
+}
+
+/* FORMULARIO */
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#newsletter-form label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #eee;
+}
+
+#newsletter-form input[type="email"],
+#newsletter-form input[type="text"] {
+  margin-top: 0.35rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  color: #1a1a1a;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background-color 0.16s ease, transform 0.12s ease;
+}
+
+#newsletter-form input::placeholder {
+  color: #999;
+}
+
+#newsletter-form input[type="email"]:focus,
+#newsletter-form input[type="text"]:focus {
+  border-color: rgb(226, 70, 43);
+  box-shadow: 0 0 0 1px rgba(226, 70, 43, 0.35);
+  background-color: #fff;
+  transform: translateY(-1px);
+}
+
+.policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #eee;
+}
+
+.policy input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: rgb(226, 70, 43);
+}
+
+.policy a {
+  color: rgb(226, 70, 43);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.policy a:hover {
+  text-decoration-style: wavy;
+}
+
+.newsletter-btn {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #1a1a1a;
+  background-color: #1a1a1a;
+  color: #eee;
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgb(226, 70, 43);
+  color: #1a1a1a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.newsletter-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+#nm-message {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.social {
+  margin-top: 1.6rem;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.social a {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.social a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+  color: #eee;
+}
+
+.project-card {
+  display: flex;
+  gap: 1.4rem;
+  align-items: flex-start;
+  padding-top: 10%;
+}
+
+.project-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 0 1.2rem 0 1.2rem;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.project-card__body h4 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.project-card__body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #eee;
+  max-width: 18rem;
+}
+
+.project-card__link {
+  text-decoration: none;
+  margin-top: 0.7rem;
+  display: inline-block;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.8rem;
+  font-family: "PowerGrotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease,
+    color 0.3s ease;
+}
+
+.project-card__link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px 1px #18b2e880, 0 0 16px 3px #ffc04380,
+    0 0 24px 4px #f677a780;
+  background: linear-gradient(#1e1e1e, #1e1e1e) padding-box,
+    linear-gradient(270deg, #18b2e8, #ffc043, #a51c5b, #f677a7) border-box;
+  background-size: 400% 400%;
+  animation: borderGradient 4s ease infinite;
+  color: #eee;
+}
+
+.project-card__link:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===========================
+   ADJUSTMENTS FOR RESPONSIVE
+=========================== */
+@media (max-width: 1024px) {
+  .mapas-layout {
+    flex-direction: column-reverse; /* Or column, kept original behavior check */
+    flex-direction: column;
+    gap: 30px;
+  }
+  .mapa-col,
+  .texto-col {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+  .map-container-wrapper {
+    height: 60vh;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  section.contact-next-project {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 8% 4rem;
+  }
+  .contact-next-project > * {
+    max-width: 100%;
+  }
+
+  /* Carousel Stack logic if needed, copied from Infraestructura style */
+  .carousel-item.card-item {
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    max-width: 500px;
+    gap: 1.5rem;
+  }
+  .carousel-item.card-item img.carrucel-imagen {
+    height: 300px;
+    margin-bottom: 0.5rem;
+  }
+  .carousel-item.card-item h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+    width: 85%;
+    max-width: 700px;
+  }
+  .map-container-wrapper {
+    height: 50vh;
+  }
+  .insersion_mapas h2 {
+    font-size: 2rem;
+  }
+
+  html,
+  body {
+    padding-left: 0;
+  }
+  .gif-container,
+  .video-fullscreen,
+  #image-sequence {
+    left: 0;
+    width: 100%;
+  }
+
+  .TextLarge {
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+  }
+  .Title {
+    width: 90%;
+    font-size: 1.2rem;
+  }
+  .Title h1 {
+    font-size: 2.2rem;
+  }
+
+  .text-provocation h2 {
+    font-size: 2rem;
+  }
+
+  .note-popup {
+    bottom: 50px;
+    padding: 1.5rem;
+    width: 85vw;
+  }
+
+  /* Glossary */
+  .Glossary-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  .glossary-item h3 {
+    font-size: 1.1rem;
+  }
+
+  .top-bar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    background: #1a1a1a;
+  }
+}
+
+/* ... previous styles ... */
+
+@media (min-width: 1200px) {
+  .Glossary-grid {
+    grid-template-columns: repeat(2, 1fr); /* Changed from 3 to 2 columns */
+    padding: 0 15%; /* Add side padding to center the 2 cols nicely if space is too wide */
+  }
+}
+
+/* Common Image Section Styles */
+/* ... existing styles ... */
+@media (max-width: 600px) {
+  .project-card {
+    flex-direction: column;
+  }
+  .project-card img {
+    width: 100%;
+    height: auto;
+  }
+  .social {
+    flex-wrap: wrap;
+  }
+}
+
+/* Common Image Section Styles */
+.image-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+  padding: 2rem;
+}
+
+.card-image {
+  display: flex;
+  align-items: top;
+  justify-content: top;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+}
+.img-wrapper,
+.text-wrapper {
+  flex: 1;
+}
+.card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 0 2rem 0 2rem;
+  object-fit: cover;
+}
+
+.image-section1 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-color: #eee;
+  color: #1a1a1a;
+}
+.card-img1 {
+  max-width: 85%;
+  min-width: 75%;
+  border-radius: 0 2rem 0 2rem;
+  margin-bottom: 1rem;
+}
