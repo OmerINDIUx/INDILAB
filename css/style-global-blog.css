@@ -415,7 +415,7 @@ body::before {
   color: #eeeeee !important;
 }
 
-.TextLarge span {
+.span-resaltado {
   display: block;
   margin: 2.5rem 0;
   padding-left: 1.5rem;
@@ -731,64 +731,48 @@ body::before {
   color: #eeeeee;
 }
 
-/* Interactive Note */
-.interactive-note-container {
+/* Inline Definition Span */
+.span-definicion {
+  display: inline-block;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.note-trigger {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-.info-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #e2462b;
-  color: #e2462b;
-  font-family: "PowerGrotesk", sans-serif;
-  font-weight: 700;
-  font-size: 1.2rem;
-  background: transparent;
+  font-weight: 500; /* Medium weight */
+  border-bottom: 2px dotted #007bff; /* Blue dotted underline */
+  color: inherit;
   transition: all 0.3s ease;
 }
 
-.note-trigger:hover .info-icon {
-  background: #e2462b;
+.span-definicion:hover {
   color: #fff;
-  transform: scale(1.1);
+  border-bottom-style: solid;
 }
 
 .note-popup {
   position: absolute;
-  bottom: 60px;
+  bottom: 120%; /* Above the text */
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   width: 90vw;
-  max-width: 600px;
-  padding: 2rem;
+  max-width: 500px;
+  padding: 1.5rem;
   background-color: #252525;
-  border-left: 4px solid #e2462b;
+  border-left: 4px solid #e2462b; /* Keep accent color for border */
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 100;
+  cursor: auto; /* Reset cursor inside popup */
+  text-align: left;
+}
+
+.span-definicion.active .note-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 .note-popup::after {
@@ -809,7 +793,8 @@ body::before {
   pointer-events: auto;
 }
 
-.note-popup h3 {
+.popup-title {
+  display: block;
   font-family: "PowerGrotesk", sans-serif;
   font-size: 1rem;
   text-transform: uppercase;
@@ -820,7 +805,8 @@ body::before {
   font-weight: 700;
 }
 
-.note-popup p {
+.popup-text {
+  display: block;
   font-family: "Figtree", sans-serif;
   font-size: 0.95rem;
   line-height: 1.6;
