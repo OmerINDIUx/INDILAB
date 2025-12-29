@@ -412,7 +412,7 @@ body::before {
 
 .TextLarge.white h2,
 .TextLarge .white {
-  color: #eeeeee !important;
+  color: #1a1a1a !important;
 }
 
 .span-resaltado {
@@ -445,7 +445,13 @@ body::before {
   position: relative;
   z-index: 50;
 }
-
+.title-section-video {
+  justify-content: center;
+  padding-top: 0;
+  margin-top: -200vh; /* Pull up over video */
+  position: relative;
+  z-index: 50;
+}
 .Title {
   width: 50vw;
   min-width: 300px;
@@ -736,14 +742,14 @@ body::before {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  font-weight: 500; /* Medium weight */
-  border-bottom: 2px dotted #007bff; /* Blue dotted underline */
+  font-weight: 700; /* Medium weight */
+  border-bottom: 2px dotted #18b2e8; /* Blue dotted underline */
   color: inherit;
   transition: all 0.3s ease;
 }
 
 .span-definicion:hover {
-  color: #fff;
+  color: #18b2e8;
   border-bottom-style: solid;
 }
 
@@ -755,8 +761,8 @@ body::before {
   width: 90vw;
   max-width: 500px;
   padding: 1.5rem;
-  background-color: #252525;
-  border-left: 4px solid #e2462b; /* Keep accent color for border */
+  background-color: #1a1a1a;
+  border-left: 4px solid #18b2e8; /* Keep accent color for border */
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -799,7 +805,7 @@ body::before {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #e2462b;
+  color: #18b2e8;
   margin-top: 0;
   margin-bottom: 0.8rem;
   font-weight: 700;
@@ -835,7 +841,7 @@ body::before {
   text-align: center;
   font-family: "PowerGrotesk", sans-serif;
   font-size: 2.5rem;
-  color: #fff; /* or #eee matching other white text */
+  color: #eee; /* or #eee matching other white text */
   margin-bottom: 2rem;
   text-transform: uppercase;
 }
@@ -873,7 +879,7 @@ section.Glossary-grid {
   margin-bottom: 0;
   font-size: 1.1rem; /* Slightly smaller font if needed for compactness */
   font-weight: 700;
-  color: #fff;
+  color: #eee;
   font-family: "PowerGrotesk", sans-serif;
   letter-spacing: 0.03em;
   padding-bottom: 0; /* Removed padding bottom */
@@ -926,6 +932,89 @@ section.Glossary-grid {
 .glossary-item.active p {
   max-height: 500px; /* Arbitrary large height */
   opacity: 1;
+}
+/* ===========================
+   TEXT PROVOCATION SECTION
+=========================== */
+/* ===========================
+   TEXT PROVOCATION SECTION
+=========================== */
+.text-provocation {
+  padding: 8rem 5%;
+  background-color: #1a1a1a;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  gap: 4rem;
+  align-items: center;
+  justify-items: start;
+  text-align: left; /* Left align for side-by-side */
+}
+
+/* Image Styles */
+.text-provocation img {
+  width: 100%;
+  height: auto;
+  /* Removed max-height to show full vertical image */
+  object-fit: contain; /* Ensure full image is visible */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Text Container */
+.provoc-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.text-provocation p:first-of-type {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 1.2rem; /* Reduced from 0.9rem */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #eee;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+}
+
+.text-provocation h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3.8rem); /* Reduced from 2.5/4/4.5 */
+  line-height: 1.1;
+  color: #eee;
+  margin: 0 0 2rem 0;
+  max-width: 100%;
+  font-weight: 400;
+  text-align: left;
+}
+
+.text-provocation p:last-of-type {
+  font-family: "Figtree", sans-serif;
+  font-size: 1.5rem; /* Reduced from 1.1rem */
+  line-height: 1.5;
+  color: #eee;
+  max-width: 100%; /* Allow full width of text col */
+  margin: 0;
+}
+
+/* Responsive Stacking */
+@media (max-width: 900px) {
+  .text-provocation {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .provoc-text {
+    align-items: center;
+  }
+
+  .text-provocation h2,
+  .text-provocation p:last-of-type {
+    text-align: center;
+    max-width: 100%;
+  }
 }
 
 /* ===========================
@@ -1360,4 +1449,62 @@ section.contact-next-project {
   min-width: 75%;
   border-radius: 0 2rem 0 2rem;
   margin-bottom: 1rem;
+}
+
+/* ===========================
+   STATEMENT SECTION (PORTED)
+=========================== */
+.statement {
+  background-color: #1a1a1a;
+  color: #eeeeee;
+  text-align: center;
+  padding: 4rem 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+.content-text {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+  position: relative;
+}
+
+.content-text h2 {
+  font-family: "Figtree", sans-serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 1.3;
+}
+
+.corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+}
+
+.corner-bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+
+.corner-top-right {
+  top: -20px;
+  right: -20px;
+}
+
+@media (max-width: 500px) {
+  .statement h2 {
+    font-size: 1.4rem !important;
+    max-width: 90%;
+  }
+  .corner {
+    width: 25px;
+    height: 25px;
+  }
 }

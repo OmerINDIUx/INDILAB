@@ -51,9 +51,9 @@
     </div>
 
     <!-- Cards -->
-    <section class="title-section">
+    <section class="title-section-video">
       <div class="Title">
-        <h2>Nota Conceptual | vivienda</h2>
+        <h3>Señales Urbanas | Vivienda Modular</h3>
         <h1>Vivienda Modular:</h1>
         <h2>Construir ciudad desde la urbanización orgánica</h2>
       </div>
@@ -151,87 +151,6 @@
         </div>
       </div>
     </section>
-
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      const phraseSection = document.querySelector("#phrase-section");
-
-      function initScrollStrip(sectionId) {
-        const runSection = document.querySelector(sectionId);
-        if (!runSection) return;
-
-        const rail = runSection.querySelector(".blog-scroll-strip__rail");
-        const cards = gsap.utils.toArray(".blog-scroll-card", rail);
-
-        if (!rail || !cards.length) return;
-
-        function distributeRandomPositions() {
-          const railRect = rail.getBoundingClientRect();
-          // We use fixed width calc or get it from element if fully rendered
-          const railWidth = railRect.width || rail.offsetWidth;
-          const railHeight = railRect.height || rail.offsetHeight;
-          const cardWidth = 360;
-
-          cards.forEach((card) => {
-            const x = gsap.utils.random(0, Math.max(railWidth - cardWidth, 0));
-            const y = gsap.utils.random(0, railHeight * 0.7);
-            gsap.set(card, { x, y });
-          });
-
-          ScrollTrigger.refresh();
-        }
-
-        // 1) Position randomly
-        distributeRandomPositions();
-        window.addEventListener("resize", distributeRandomPositions);
-
-        // 2) Animate each card
-        cards.forEach((card) => {
-          const fromY = gsap.utils.random(10, 40);
-          const travel = gsap.utils.random(60, 140);
-          const toY = fromY - travel;
-
-          gsap.fromTo(
-            card,
-            { yPercent: fromY },
-            {
-              yPercent: toY,
-              ease: "none",
-              scrollTrigger: {
-                trigger: runSection,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            }
-          );
-        });
-      }
-
-      window.addEventListener("load", () => {
-        // Initialize both strips
-        initScrollStrip("#run1");
-        initScrollStrip("#run2");
-
-        // 3) Pin text (Logic preserved for run1 specifically or general?)
-        // Original logic pinned phraseSection when #run was triggered.
-        // Assuming we want it pinned during the first visual run section usually.
-        // Let's attach it to run1 for now as it was logically the first one matched by querySelector("#run")
-
-        const pinTrigger = document.querySelector("#run1");
-        if (window.innerWidth > 860 && pinTrigger && phraseSection) {
-          ScrollTrigger.create({
-            trigger: pinTrigger,
-            start: "top bottom",
-            end: "bottom top",
-            pin: phraseSection,
-            pinSpacing: false,
-            pinSpacing: false,
-          });
-        }
-      });
-    </script>
 
     <section class="TextLarge">
       <div>
@@ -610,14 +529,231 @@
       </div>
     </section>
 
-    <section class="text-provocation">
-      <div>
-        <h2>
-          ¿Y si el crecimiento incremental de la vivienda dejara de ser un
-          problema que corregir y se convirtiera en una herramienta de
-          participación urbana?
-        </h2>
+    <section class="statement">
+      <div id="content-row">
+        <div class="content-text">
+          <h2>
+            ¿Y si el crecimiento incremental de la vivienda dejara de ser un
+            problema que corregir y se convirtiera en una herramienta de
+            participación urbana?
+          </h2>
+          <div
+            class="corner corner-bottom-left"
+            data-svg="/svg/cornner_bottom_left.svg"
+          ></div>
+          <div
+            class="corner corner-top-right"
+            data-svg="/svg/cornner_top_right.svg"
+          ></div>
+        </div>
       </div>
+
+      <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initialize SVGs
+        function loadSVGs() {
+          document.querySelectorAll("[data-svg]").forEach((el) => {
+            const svgPath = el.getAttribute("data-svg");
+            fetch(svgPath)
+              .then((res) => res.text())
+              .then((svgContent) => {
+                el.innerHTML = svgContent;
+              })
+              .catch((err) => console.error("Error loading SVG:", err));
+          });
+        }
+        loadSVGs();
+
+        // Corner Animation
+        function initCornerAnimation() {
+          const bottomLeft = document.querySelector(".corner-bottom-left");
+          const topRight = document.querySelector(".corner-top-right");
+          const content = document.querySelector(".content-text");
+
+          if (!bottomLeft || !topRight || !content) return;
+
+          let tl;
+
+          function getPositions() {
+            const w = content.offsetWidth;
+            const h = content.offsetHeight;
+            const cornerSize = 50;
+
+            // Calculate Start Positions (Center relative to Final CSS Position)
+            // Final Position: x:0, y:0 (which corresponds to CSS bottom:-20, left:-20)
+
+            // To animate FROM center TO corners:
+            // Center X = w/2. Corner X (visual) = -20.
+            // Start X offset = CenterX - CornerX = (w/2) - (-20) - (cornerSize/2)
+            const startX_BL = w / 2 + 20 - cornerSize / 2;
+            const startY_BL = -(h / 2) - 20 + cornerSize / 2;
+
+            const startX_TR = -(w / 2) - 20 + cornerSize / 2;
+            const startY_TR = h / 2 + 20 - cornerSize / 2;
+
+            return {
+              bottomLeft: { startX: startX_BL, startY: startY_BL },
+              topRight: { startX: startX_TR, startY: startY_TR },
+            };
+          }
+
+          function animateCorners() {
+            const pos = getPositions();
+
+            // Set Initial State (Center)
+            gsap.set(bottomLeft, {
+              x: pos.bottomLeft.startX,
+              y: pos.bottomLeft.startY,
+              opacity: 0,
+            });
+
+            gsap.set(topRight, {
+              x: pos.topRight.startX,
+              y: pos.topRight.startY,
+              opacity: 0,
+            });
+
+            const timeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: ".statement",
+                start: "top center",
+                end: "bottom bottom",
+                scrub: true,
+              },
+            });
+
+            // Animate to Final State (CSS Position: 0,0)
+            timeline
+              .to(bottomLeft, {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                ease: "power3.out",
+              })
+              .to(
+                topRight,
+                {
+                  x: 0,
+                  y: 0,
+                  opacity: 1,
+                  ease: "power3.out",
+                },
+                "<"
+              );
+
+            return timeline;
+          }
+
+          // Fade-in text
+          gsap.fromTo(
+            ".content-text",
+            { opacity: 0.01 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: ".statement",
+                start: "top center",
+                end: "bottom bottom",
+                scrub: true,
+              },
+            }
+          );
+
+          setTimeout(() => {
+            tl = animateCorners();
+          }, 500);
+
+          window.addEventListener("resize", () => {
+            if (tl) {
+              tl.kill();
+              tl = animateCorners();
+            }
+          });
+        }
+        // Call animation after a slight delay to ensure layout is ready or on load
+        window.addEventListener("load", initCornerAnimation);
+
+        const phraseSection = document.querySelector("#phrase-section");
+
+        function initScrollStrip(sectionId) {
+          const runSection = document.querySelector(sectionId);
+          if (!runSection) return;
+
+          const rail = runSection.querySelector(".blog-scroll-strip__rail");
+          const cards = gsap.utils.toArray(".blog-scroll-card", rail);
+
+          if (!rail || !cards.length) return;
+
+          function distributeRandomPositions() {
+            const railRect = rail.getBoundingClientRect();
+            // We use fixed width calc or get it from element if fully rendered
+            const railWidth = railRect.width || rail.offsetWidth;
+            const railHeight = railRect.height || rail.offsetHeight;
+            const cardWidth = 360;
+
+            cards.forEach((card) => {
+              const x = gsap.utils.random(
+                0,
+                Math.max(railWidth - cardWidth, 0)
+              );
+              const y = gsap.utils.random(0, railHeight * 0.7);
+              gsap.set(card, { x, y });
+            });
+
+            ScrollTrigger.refresh();
+          }
+
+          // 1) Position randomly
+          distributeRandomPositions();
+          window.addEventListener("resize", distributeRandomPositions);
+
+          // 2) Animate each card
+          cards.forEach((card) => {
+            const fromY = gsap.utils.random(10, 40);
+            const travel = gsap.utils.random(60, 140);
+            const toY = fromY - travel;
+
+            gsap.fromTo(
+              card,
+              { yPercent: fromY },
+              {
+                yPercent: toY,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: runSection,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          });
+        }
+
+        window.addEventListener("load", () => {
+          // Initialize both strips
+          initScrollStrip("#run1");
+          initScrollStrip("#run2");
+
+          // 3) Pin text (Logic preserved for run1 specifically or general?)
+          // Original logic pinned phraseSection when #run was triggered.
+          // Assuming we want it pinned during the first visual run section usually.
+          // Let's attach it to run1 for now as it was logically the first one matched by querySelector("#run")
+
+          const pinTrigger = document.querySelector("#run1");
+          if (window.innerWidth > 860 && pinTrigger && phraseSection) {
+            ScrollTrigger.create({
+              trigger: pinTrigger,
+              start: "top bottom",
+              end: "bottom top",
+              pin: phraseSection,
+              pinSpacing: false,
+              pinSpacing: false,
+            });
+          }
+        });
+      </script>
     </section>
 
     <section class="TextLarge">
@@ -708,7 +844,7 @@
         <h2 class="white">Una visión de futuro para la vivienda</h2>
 
         <p>
-          a vivienda progresiva no es una solución única, sencilla ni inmediata
+          La vivienda progresiva no es una solución única, sencilla ni inmediata
           al déficit habitacional. Requiere supervisión técnica, financiamiento
           flexible y ajustes normativos que reconozcan el crecimiento y
           evolución por etapas. Pero su potencial es claro. Permite duplicar el
@@ -718,20 +854,27 @@
         </p>
       </div>
     </section>
+
     <section class="text-provocation">
-      <p>
-        Desde una perspectiva de innovación urbana, este modelo plantea una
-        pregunta más amplia:
-      </p>
-      <h2>
-        ¿cómo podemos diseñar sistemas urbanos que evolucionen con las
-        necesidades de las personas?
-      </h2>
-      <p>
-        En INDI Lab entendemos la vivienda como infraestructura viva, capaz de
-        adaptarse, aprender y crecer. Diseñar para el cambio no es renunciar a
-        la planeación, sino llevarla al siguiente nivel.
-      </p>
+      <img
+        src="images/view-from-the-kitchen-of-modern-and-bright-dining-2025-01-08-06-39-30-utc.jpg"
+        alt="cocina moderna"
+      />
+      <div class="provoc-text">
+        <p>
+          Desde una perspectiva de innovación urbana, este modelo plantea una
+          pregunta más amplia:
+        </p>
+        <h2>
+          ¿cómo podemos diseñar sistemas urbanos que evolucionen con las
+          necesidades de las personas?
+        </h2>
+        <p>
+          En INDI Lab entendemos la vivienda como infraestructura viva, capaz de
+          adaptarse, aprender y crecer. Diseñar para el cambio no es renunciar a
+          la planeación, sino llevarla al siguiente nivel.
+        </p>
+      </div>
     </section>
 
     <!-- <section id="horizontal-scroll" class="horizontal-scroll-section">
