@@ -258,7 +258,7 @@ svg {
   height: 100%;
   width: 80%;
   padding-top: 4rem;
-  align-items: top;
+  align-items: start;
   z-index: 1040; /* mismo nivel que items */
 }
 .menu-links {
@@ -269,18 +269,6 @@ svg {
 
 .menu-blog {
   grid-column: 2;
-}
-
-.menu-blog {
-  display: grid;
-  gap: 1rem;
-  margin-top: -35rem;
-  height: auto;
-  z-index: 1040;
-}
-
-.menu-columns {
-  align-items: top;
 }
 
 body.menu-open .secondary-brand {
