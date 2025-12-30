@@ -69,7 +69,6 @@ body {
   background: var(--color-bg-light);
   transform-style: preserve-3d;
   backface-visibility: hidden;
-  pointer-events: auto;
   transform-origin: left center;
   transform: rotateY(-90deg);
   z-index: 3010; /* por encima del wrapper */

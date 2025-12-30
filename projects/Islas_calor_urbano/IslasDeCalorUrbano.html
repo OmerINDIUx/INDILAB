@@ -20,8 +20,8 @@
 
     <!-- GSAP loaded at the end of body -->
 
-    <link rel="stylesheet" href="/css/style-global-blog.css" />
-    <link rel="stylesheet" href="/css/link-styles.css" />
+    <link rel="stylesheet" href="../../css/style-global-blog.css" />
+    <link rel="stylesheet" href="../../css/link-styles.css" />
 
     <script>
       window.rootPath = "../../";
@@ -319,6 +319,10 @@
                 );
               }
               placeholder.innerHTML = html;
+
+              if (typeof ScrollTrigger !== "undefined") {
+                ScrollTrigger.refresh();
+              }
 
               if (!window.L) {
                 const leafletScript = document.createElement("script");
@@ -820,7 +824,7 @@
       });
     </script>
 
-    <section class="contact-next-project">
+    <footer class="contact-next-project">
       <!-- Newsletter -->
       <div class="newsletter-block">
         <h2 data-i18n="newsletter_title"></h2>
@@ -985,7 +989,7 @@
           });
         })();
       </script>
-    </section>
+    </footer>
     <script>
       gsap.registerPlugin(ScrollTrigger);
       // Sticky Header

@@ -137,6 +137,24 @@ section {
   z-index: 10;
 }
 
+@media (max-width: 1024px) {
+  .card {
+    max-width: 70%;
+    margin: auto;
+    margin-left: 150px;
+    padding: 2rem;
+  }
+  .TextLarge h2,
+  .TextLarge p {
+    max-width: 80%;
+    margin: auto;
+  }
+  .TextLarge span {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+
 .card h1,
 .card h2,
 .card h3 {
@@ -157,7 +175,6 @@ section {
 .insersion_mapas {
   background-color: transparent;
   background: #eeeeee;
-  padding: 60px 0;
   position: relative;
   z-index: 10;
 }
@@ -402,6 +419,12 @@ body::before {
   max-width: 70%;
 }
 
+@media (max-width: 1024px) {
+  .TextLarge div {
+    max-width: 90%;
+  }
+}
+
 .TextLarge h2 {
   text-align: left;
   font-size: 2.2rem;
@@ -486,6 +509,16 @@ body::before {
 .Title h3 {
   font-size: 1.2rem;
   letter-spacing: 0.1em;
+}
+
+@media (max-width: 1024px) {
+  .Title {
+    width: 90vw;
+    max-width: none;
+  }
+  .Title h1 {
+    font-size: 2.2rem;
+  }
 }
 
 .general-tittle {
@@ -586,7 +619,9 @@ body::before {
   background-color: #1a1a1a;
 }
 
-/* Carousel Items Styles (from Infraestructura/Vivienda) */
+/* ===========================
+   CAROUSEL ITEMS (Restored from Infraestructura)
+=========================== */
 .carousel-item {
   flex: 0 0 auto;
   flex-shrink: 0;
@@ -697,6 +732,13 @@ body::before {
   padding: 0.1vh 0;
   background-color: transparent;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .blog-scroll-card {
+    /* Scale down cards on mobile to prevent overlapping pinned text */
+    max-width: 260px;
+  }
 }
 
 .blog-scroll-strip__inner {
@@ -1480,6 +1522,165 @@ section.contact-next-project {
 }
 
 /* ===========================
+   CONTACT & NEWSLETTER (PORTED)
+=========================== */
+.contact-next-project {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 4rem 10%;
+  background-color: #1a1a1a;
+  color: #eeeeee;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.newsletter-block,
+.next-project-block {
+  flex: 1 1 400px;
+  margin-bottom: 2rem;
+}
+
+.newsletter-block {
+  padding-right: 2rem;
+}
+
+/* Responsiveness for Footer */
+@media (max-width: 1024px) {
+  .contact-next-project {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+
+  .newsletter-block,
+  .next-project-block {
+    width: 100%;
+    max-width: 500px; /* Constrain width */
+    margin: 0 auto 3rem auto;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsletter-block h2 {
+    text-align: center;
+    width: 100%;
+  }
+
+  #newsletter-form {
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .social {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+}
+
+.newsletter-block h2 {
+  font-family: "PowerGrotesk", sans-serif;
+  font-size: 2rem;
+  margin-top: 0;
+  color: #eeeeee;
+}
+
+#newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
+
+#newsletter-form input[type="email"],
+#newsletter-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #252525;
+  color: #fff;
+  font-family: inherit;
+}
+
+.policy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.social {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.social a {
+  color: #eeeeee;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.social a:hover {
+  color: #18b2e8;
+}
+
+/* Responsiveness for Footer */
+@media (max-width: 1024px) {
+  .contact-next-project {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 5%;
+  }
+
+  .newsletter-block {
+    padding-right: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #newsletter-form {
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #newsletter-form input[type="email"],
+  #newsletter-form input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem; /* Better touch target */
+    padding: 12px;
+  }
+
+  .social {
+    justify-content: center;
+    font-size: 1.5rem; /* Larger icons */
+    margin-bottom: 2rem;
+  }
+
+  .next-project-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ===========================
    STATEMENT SECTION (PORTED)
 =========================== */
 .statement {
@@ -1596,4 +1797,3 @@ section.contact-next-project {
     grid-template-columns: 1fr;
   }
 }
-
