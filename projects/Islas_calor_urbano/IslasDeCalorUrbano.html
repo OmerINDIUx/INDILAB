@@ -812,7 +812,7 @@
 
         // Pinning logic
         const pinTrigger = document.querySelector("#run1");
-        if (window.innerWidth > 860 && pinTrigger && phraseSection) {
+        if (window.innerWidth >= 768 && pinTrigger && phraseSection) {
           ScrollTrigger.create({
             trigger: pinTrigger,
             start: "top bottom",

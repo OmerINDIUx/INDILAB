@@ -547,6 +547,11 @@ body::before {
     padding: 0.8rem 1rem;
     font-size: 0.9rem; /* Smaller font on mobile */
   }
+
+  .card {
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }
 
 /* ===========================

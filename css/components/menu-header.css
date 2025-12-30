@@ -534,12 +534,14 @@ body.menu-open .secondary-brand {
     gap: 0.5rem;
     justify-content: flex-end;
     z-index: 12000; /* por encima de sidebar12 */
+    pointer-events: auto;
   }
 
   .sidebar12 {
     width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
     z-index: 10000;
+    pointer-events: none;
   }
 
   .lang-btn {
