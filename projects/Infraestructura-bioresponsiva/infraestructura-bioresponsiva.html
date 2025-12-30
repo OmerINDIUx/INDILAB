@@ -876,5 +876,30 @@
         });
       </script>
     </section>
+    <!-- Scroll Progress Bar Script -->
+    <script>
+      (function () {
+        // Create bar container
+        const container = document.createElement("div");
+        container.className = "scroll-progress-container";
+
+        const bar = document.createElement("div");
+        bar.className = "scroll-progress-bar";
+
+        container.appendChild(bar);
+        document.body.appendChild(container);
+
+        // Update width
+        window.addEventListener("scroll", () => {
+          const scrollTop =
+            window.scrollY || document.documentElement.scrollTop;
+          const scrollHeight =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          const scrolled = (scrollTop / scrollHeight) * 100;
+          bar.style.width = scrolled + "%";
+        });
+      })();
+    </script>
   </body>
 </html>
