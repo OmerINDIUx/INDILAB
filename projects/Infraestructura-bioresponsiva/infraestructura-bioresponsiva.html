@@ -165,18 +165,19 @@
         if (!runSection) return;
 
         const rail = runSection.querySelector(".blog-scroll-strip__rail");
+        // Scope to rail to ensure we only get cards in this section
         const cards = gsap.utils.toArray(".blog-scroll-card", rail);
 
         if (!rail || !cards.length) return;
 
         function distributeRandomPositions() {
           const railRect = rail.getBoundingClientRect();
-          // We use fixed width calc or get it from element if fully rendered
           const railWidth = railRect.width || rail.offsetWidth;
           const railHeight = railRect.height || rail.offsetHeight;
-          const cardWidth = 360;
 
           cards.forEach((card) => {
+            // Get actual card width, fallback to 360 if not rendered yet
+            const cardWidth = card.offsetWidth || 360;
             const x = gsap.utils.random(0, Math.max(railWidth - cardWidth, 0));
             const y = gsap.utils.random(0, railHeight * 0.7);
             gsap.set(card, { x, y });
@@ -187,7 +188,10 @@
 
         // 1) Position randomly
         distributeRandomPositions();
-        window.addEventListener("resize", distributeRandomPositions);
+        window.addEventListener("resize", () => {
+          // Debounce or just call it
+          distributeRandomPositions();
+        });
 
         // 2) Animate each card
         cards.forEach((card) => {
@@ -217,22 +221,32 @@
         initScrollStrip("#run1");
         initScrollStrip("#run2");
 
-        // 3) Pin text (Logic preserved for run1 specifically or general?)
-        // Original logic pinned phraseSection when #run was triggered.
-        // Assuming we want it pinned during the first visual run section usually.
-        // Let's attach it to run1 for now as it was logically the first one matched by querySelector("#run")
-
+        // 3) Pin text
         const pinTrigger = document.querySelector("#run1");
-        if (window.innerWidth > 860 && pinTrigger && phraseSection) {
+        const endTrigger = document.querySelector("#run2");
+
+        // Ensure elements exist. Lowered breakpoint to 320px for mobile support
+        if (
+          window.innerWidth > 320 &&
+          pinTrigger &&
+          phraseSection &&
+          endTrigger
+        ) {
           ScrollTrigger.create({
             trigger: pinTrigger,
             start: "top bottom",
+            endTrigger: endTrigger,
             end: "bottom top",
             pin: phraseSection,
             pinSpacing: false,
-            pinSpacing: false,
           });
+
+          // Force z-index to be higher than images (12)
+          gsap.set(phraseSection, { zIndex: 15, position: "relative" });
         }
+
+        // Final refresh to ensure all positions are correct
+        ScrollTrigger.refresh();
       });
     </script>
 
