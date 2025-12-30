@@ -1418,6 +1418,7 @@ section.contact-next-project {
     border-radius: 1.5rem;
     width: 85%;
     max-width: 700px;
+    margin: 0 auto; /* Reset left margin from desktop/tablet styles */
   }
   .map-container-wrapper {
     height: 50vh;
@@ -1480,6 +1481,10 @@ section.contact-next-project {
 
   .statement h2 {
     font-size: 2rem;
+  }
+
+  .carousel-item.text-item {
+    width: 80vw;
   }
 }
 
@@ -1762,6 +1767,7 @@ section.contact-next-project {
 }
 
 @media (max-width: 500px) {
+  /* Statement Section */
   .statement h2 {
     font-size: 1.4rem !important;
     max-width: 90%;
@@ -1771,11 +1777,62 @@ section.contact-next-project {
     height: 25px;
   }
 
-  /* Optimize carousel for very small screens */
+  /* Smaller floating images on scroll strip */
+  .blog-scroll-card {
+    max-width: 140px; /* Reduced to ~half of tablet size */
+    border-radius: 10px;
+  }
+
+  /* Carousel Optimization */
   .carousel-item.card-item {
-    grid-template-columns: 130px 1fr;
+    grid-template-columns: 100px 1fr; /* Smaller image col for very small screens */
     gap: 0 1rem;
     padding: 1rem;
+    width: 150vw; /* Keep width wide for scroll */
+    max-width: 150vw;
+  }
+  .carousel-item.card-item h2 {
+    font-size: 1.2rem; /* Smaller title */
+    margin-bottom: 0.5rem;
+    padding-top: 1rem;
+  }
+  .carousel-item.card-item p {
+    font-size: 0.95rem; /* Smaller body text */
+    padding-bottom: 1rem;
+  }
+
+  /* Typography Scaling */
+  .Title h1 {
+    font-size: 1.8rem;
+  }
+  .insersion_mapas h2,
+  .TextLarge h2,
+  .glossary-title {
+    font-size: 1.8rem;
+  }
+  .TextLarge div {
+    max-width: 95%; /* Use more width */
+  }
+
+  /* Spacing & Components */
+  .card {
+    padding: 1.5rem 1rem;
+    max-width: 90%;
+  }
+
+  .map-container-wrapper {
+    height: 40vh; /* Shorter map on mobile */
+    min-height: 300px;
+  }
+
+  .newsletter-block,
+  .next-project-block {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .contact-next-project {
+    padding: 2rem 1rem;
   }
 }
 
@@ -1822,7 +1879,6 @@ section.contact-next-project {
   font-size: 1.5rem;
   margin-top: 0;
   margin-bottom: 1rem;
-  color: #18b2e8; /* Accent color */
 }
 
 .glossary-item p {
