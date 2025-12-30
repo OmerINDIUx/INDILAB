@@ -52,7 +52,9 @@
     <!-- Cards -->
     <section class="title-section-video">
       <div class="Title">
-        <h3>Señales Urbanas | Infraestructura Biorresponsiva</h3>
+        <h3 class="general-tittle">
+          Señales Urbanas | Infraestructura Biorresponsiva
+        </h3>
         <h1>La Ciudad como Organismo:</h1>
         <h2>
           Infraestructura biorresponsiva y un nuevo paradigma para el entorno
@@ -848,6 +850,16 @@
               });
           });
         })();
+      </script>
+      <script>
+        gsap.registerPlugin(ScrollTrigger);
+        // Sticky Header
+        ScrollTrigger.create({
+          trigger: ".general-tittle",
+          start: "top top",
+          end: 99999,
+          toggleClass: "is-sticky",
+        });
       </script>
     </section>
   </body>

@@ -53,7 +53,7 @@
     <!-- Cards -->
     <section class="title-section-video">
       <div class="Title">
-        <h3>Señales Urbanas | Vivienda Modular</h3>
+        <h3 class="general-tittle">Señales Urbanas | Vivienda Modular</h3>
         <h1>Vivienda Modular:</h1>
         <h2>Construir ciudad desde la urbanización orgánica</h2>
       </div>
@@ -1409,5 +1409,15 @@
         })();
       </script>
     </section>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      // Sticky Header
+      ScrollTrigger.create({
+        trigger: ".general-tittle",
+        start: "top top",
+        end: 99999,
+        toggleClass: "is-sticky",
+      });
+    </script>
   </body>
 </html>

@@ -88,7 +88,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  z-index: -10;
+  z-index: 0; /* Was -10, moved to 0 to be safe */
   pointer-events: none;
 }
 
@@ -271,7 +271,7 @@ body::before {
   opacity: 0.3;
   pointer-events: none;
   animation: grain 8s steps(10) infinite;
-  z-index: 0;
+  z-index: 1; /* Was 0, moved to 1 to cover properties at 0 */
 }
 
 *[style*="background: #eee"],
@@ -483,13 +483,29 @@ body::before {
   font-weight: 600;
 }
 
-.Title h2 {
-  font-size: 1.2rem;
-  letter-spacing: 0.05em;
-}
 .Title h3 {
   font-size: 1.2rem;
   letter-spacing: 0.1em;
+}
+
+.general-tittle {
+  transition: all 0.4s ease;
+  padding: 1rem 0;
+  width: 100%;
+  margin: 0;
+}
+
+.general-tittle.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #1a1a1a;
+  z-index: 9000;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  max-width: 100vw; /* Override normal title constraints */
 }
 
 /* ===========================
