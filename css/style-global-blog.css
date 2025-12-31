@@ -534,12 +534,13 @@ body::before {
   left: 0;
   width: 100%;
   background-color: #1a1a1a;
-  z-index: 9000;
+  z-index: 20005; /* 👈 Increased to be above everything (sidebar is 10000) */
   padding: 1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   margin: 0;
   max-width: 100%;
   box-sizing: border-box; /* Ensure padding doesn't overflow */
+  color: #eeeeee; /* Ensure text is visible */
 }
 
 @media (max-width: 768px) {
@@ -597,6 +598,50 @@ body::before {
 }
 .top-bar {
   display: none;
+}
+
+/* ===========================
+   STICKY HEADER CLONE
+   (Resolves stacking context issues)
+=========================== */
+.sticky-header-clone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1a1a1a;
+  z-index: 9000; /* 👈 Adjusted: Above content (10-50) but BELOW sidebar (10000) and logo (20000) */
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: #eeeeee;
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+
+  /* Hidden state */
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sticky-header-clone.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .sticky-header-clone {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    top: 80px; /* Below top-bar on mobile if needed, or 0 if top-bar covers it */
+  }
 }
 
 /* ===========================

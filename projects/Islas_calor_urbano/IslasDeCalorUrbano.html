@@ -34,6 +34,11 @@
   </head>
 
   <body class="light-theme">
+    <!-- Sticky Header Clone (Hidden by default) -->
+    <h3 id="sticky-header-clone" class="sticky-header-clone">
+      Señales Urbanas | Islas de Calor Urbano
+    </h3>
+
     <div class="gif-container" id="fullscreen1">
       <img src="images/calor_CDMX-01.png" alt="Innovación Urbana 1" id="gif1" />
       <img src="images/calor_CDMX-02.png" alt="Innovación Urbana 2" id="gif2" />
@@ -690,7 +695,11 @@
 
     <div class="top-bar"></div>
 
-    <div class="menu-placeholder" id="menu-placeholder"></div>
+    <div
+      class="menu-placeholder"
+      id="menu-placeholder"
+      style="pointer-events: none"
+    ></div>
 
     <script>
       fetch("../../menu.html")
@@ -992,13 +1001,25 @@
     </section>
     <script>
       gsap.registerPlugin(ScrollTrigger);
-      // Sticky Header
-      ScrollTrigger.create({
-        trigger: ".general-tittle",
-        start: "top top",
-        end: 99999,
-        toggleClass: "is-sticky",
-      });
+      // Sticky Header Clone Logic
+      const stickyClone = document.getElementById("sticky-header-clone");
+
+      if (stickyClone) {
+        ScrollTrigger.create({
+          trigger: ".general-tittle",
+          start: "top top",
+          end: 99999,
+          onToggle: (self) => {
+            if (self.isActive) {
+              stickyClone.classList.add("visible");
+            } else {
+              stickyClone.classList.remove("visible");
+            }
+          },
+        });
+      } else {
+        console.warn("Sticky Clone header not found!");
+      }
     </script>
     <!-- Scroll Progress Bar Script -->
     <script>

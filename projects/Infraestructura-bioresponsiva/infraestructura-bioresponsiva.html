@@ -45,6 +45,11 @@
   </head>
 
   <body class="dark-theme">
+    <!-- Sticky Header Clone (Hidden by default) -->
+    <h3 id="sticky-header-clone" class="sticky-header-clone">
+      Señales Urbanas | Infraestructura Biorresponsiva
+    </h3>
+
     <section class="video-scroll-wrapper"></section>
     <div>
       <div class="video-fullscreen">
@@ -160,6 +165,26 @@
 
     <script>
       gsap.registerPlugin(ScrollTrigger);
+
+      // Sticky Header Clone Logic
+      const stickyClone = document.getElementById("sticky-header-clone");
+
+      if (stickyClone) {
+        ScrollTrigger.create({
+          trigger: ".general-tittle",
+          start: "top 20px", // Adjust start slightly to match visual preference if needed or keep "top top"
+          end: 99999,
+          onToggle: (self) => {
+            if (self.isActive) {
+              stickyClone.classList.add("visible");
+            } else {
+              stickyClone.classList.remove("visible");
+            }
+          },
+        });
+      } else {
+        console.warn("Sticky Clone header not found!");
+      }
 
       const phraseSection = document.querySelector("#phrase-section");
 

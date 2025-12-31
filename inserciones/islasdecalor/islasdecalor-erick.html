@@ -8,13 +8,9 @@
     <title>Islas de Calor en CDMX 2020-2024</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
+      /* Removed global html, body styles to prevent scroll locking in main page */
       #map {
-        height: 100vh;
+        height: 100%; /* Changed from 100vh to fit container */
         width: 100%;
       }
       /* Forzar que el control de capas siempre esté visible */

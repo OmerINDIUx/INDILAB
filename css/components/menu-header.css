@@ -149,6 +149,7 @@ body {
   align-items: center;
   padding-top: 20px;
   z-index: 10000;
+  pointer-events: none !important; /* 👈 Robust Fix: Permitir scroll/click a través de la barra obligatoriamente */
 }
 .sidebar-buttons {
   position: absolute;
@@ -159,6 +160,7 @@ body {
   gap: 2rem;
   padding-bottom: 3rem;
   z-index: 1050; /* botones por encima de todo */
+  pointer-events: auto; /* 👈 Reactivar clicks en los botones */
 }
 
 .lang-btn,
