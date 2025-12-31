@@ -29,6 +29,9 @@
     <script src="../../js/lenis.min.js"></script>
     <script src="../../js/splitting.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+    <script>
+      window.rootPath = "../../";
+    </script>
     <script type="module" src="../../js/demo4/traduction.js"></script>
     <script src="../../js/glossary.js"></script>
 
@@ -1295,13 +1298,19 @@
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
               <a
-                href="../../aviso_privasidad.html"
+                href="/aviso_privasidad.html"
                 target="_blank"
                 rel="noopener"
                 data-i18n="newsletter_policy_link"
               ></a>
             </label>
           </div>
+
+          <button
+            type="submit"
+            class="newsletter-btn"
+            data-i18n="newsletter_btn"
+          ></button>
 
           <div id="nm-message"></div>
 
@@ -1342,17 +1351,17 @@
         <h3 data-i18n="next_project_title">Next Projects</h3>
         <article class="project-card">
           <img
-            src="images/electromovilidad.png"
+            src="/projects/ViviendaModular/images/electromovilidad.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
-            <h4 data-i18n="Electromobility"></h4>
+            <h4 data-i18n="Urban Heat Islands"></h4>
             <p data-i18n="project_card_link"></p>
           </div>
         </article>
         <article class="project-card">
           <img
-            src="images/Generated Image September 09, 2025 - 2_24PM.png"
+            src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">

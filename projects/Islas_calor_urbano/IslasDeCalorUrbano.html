@@ -824,7 +824,7 @@
       });
     </script>
 
-    <footer class="contact-next-project">
+    <section class="contact-next-project">
       <!-- Newsletter -->
       <div class="newsletter-block">
         <h2 data-i18n="newsletter_title"></h2>
@@ -853,7 +853,7 @@
             <label for="nm-policy">
               <span data-i18n="newsletter_policy_accept"></span>
               <a
-                href="../../aviso_privasidad.html"
+                href="/aviso_privasidad.html"
                 target="_blank"
                 rel="noopener"
                 data-i18n="newsletter_policy_link"
@@ -906,17 +906,17 @@
         <h3 data-i18n="next_project_title">Next Projects</h3>
         <article class="project-card">
           <img
-            src="../ViviendaModular/images/electromovilidad.png"
+            src="/projects/ViviendaModular/images/electromovilidad.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
-            <h4 data-i18n="Electromobility"></h4>
+            <h4 data-i18n="Urban Heat Islands"></h4>
             <p data-i18n="project_card_link"></p>
           </div>
         </article>
         <article class="project-card">
           <img
-            src="../ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
+            src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
             alt="Miniatura proyecto siguiente"
           />
           <div class="project-card__body">
@@ -959,7 +959,7 @@
               source: window.location.pathname,
             };
 
-            fetch("../../mail.php", {
+            fetch("/mail.php", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
@@ -989,7 +989,7 @@
           });
         })();
       </script>
-    </footer>
+    </section>
     <script>
       gsap.registerPlugin(ScrollTrigger);
       // Sticky Header
