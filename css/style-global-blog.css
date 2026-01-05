@@ -767,6 +767,13 @@ body::before {
   align-items: center;
   justify-content: center;
   background-color: #eeeeee;
+  padding-left: 100px;
+}
+
+@media (max-width: 768px) {
+  #phrase-section {
+    padding-left: 0;
+  }
 }
 
 .blog-scroll-strip__phrase {
@@ -1880,13 +1887,16 @@ section.contact-next-project {
   }
 
   /* Typography Scaling */
+  .carousel-item.text-item h2 {
+    font-size: 1.3rem; /* User requested reduction */
+  }
   .Title h1 {
     font-size: 1.8rem;
   }
   .insersion_mapas h2,
   .TextLarge h2,
   .glossary-title {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
   }
   .TextLarge div {
     max-width: 95%; /* Use more width */
