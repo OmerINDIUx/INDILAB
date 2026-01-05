@@ -79,6 +79,28 @@
   "experimental +": "Experimental + Data Driven Approach",
   "data driven": "Data driven, small scale interventions, impact assessment",
 
+  "our_approach_intro": "INDI Lab structures its work across four complementary product lines. Each one responds to a different moment in the innovation cycle:",
+  "our_approach_spam": "sensing, structuring, testing, and translating.",
+  "our_approach_text": "Together, they reflect how we move from ideas to evidence, and from pilots to scalable urban solutions. ",
+
+  "Señales_Urbanas_title": "Urban Signals",
+  "Señales_Urbanas_text": "What is changing in cities, and why does it matter now?",
+  "Señales_Urbanas_text1": "Urban Signals are INDI Lab’s applied research and thought leadership outputs. They explore emerging trends, comparative analysis, critical questions, and early signals shaping the future of cities and infrastructure. ",
+  "Señales_Urbanas_text2": "These pieces combine data, case analysis, and grounded observation to frame complex urban challenges and surface new hypotheses worth testing. Urban Signals are not speculative opinion pieces; they are informed interpretations rooted in real-world constraints and opportunities.",
+
+  "Sistemas_Urbanos_title": "Urban Systems",
+  "Sistemas_Urbanos_text": "How can urban complexity be measured, visualized, and compared?",
+  "Sistemas_Urbanos_text1": "Urban Systems are INDI Lab’s data-driven platforms, analytical tools and digital solutions. They transform raw data into structured intelligence that supports urban decision-making. ",
+  "Sistemas_Urbanos_text2": "These products include GIS platforms, indices, dashboards, and analytical models that can be reused, updated, and scaled. Urban Systems are designed to be durable assets, not one-off studies. ",
+
+  "Experimentos_urbano_title": "Urban Experiments",
+  "Experimentos_urbano_text": "What happens when theidea meets urban complexity?",
+  "Experimentos_urbano_text1": "Urban Experiments document INDI Lab’s pilots, prototypes, and real-world tests. They capture how ideas perform when exposed to real urban conditions, technical constraints, and institutional realities. ",
+  "Experimentos_urbano_text2": "Each Urban Experiment is a structured learning process. The goal is not only to test solutions, but to generate evidence that can inform replication, adaptation, or scaling. ",
+
+  "Urban_Playbooks_title": "Urban Playbooks",
+  "Urban_Playbooks_text": "How can this insight be applied, adopted, or scaled?",
+  "Urban_Playbooks_text1": "Urban Playbooks translate insight into action. They synthesize research, data, and experimentation into clear guidance for decision-makers. These outputs are designed for public officials, infrastructure developers, and institutional partners who need actionable recommendations, not just raw analysis.",
   "urban spaces": "Urban Spaces",
   "public spaces": "Public Spaces + urban life",
 

@@ -66,7 +66,11 @@
 
   "who mwe are intro": "INDI Lab es el",
   "who mwe are spam": "laboratorio de innovación urbana y plataforma de emprendimiento de Grupo INDI,",
-  "who we are text": "un incubador y motor de I+D que moviliza recursos compartidos —datos, infraestructura, capital, talento y conocimiento institucional— para acelerar la ejecución y escalar soluciones urbanas transformadoras.",
+  "who we are text": "En conjunto, reflejan cómo pasamos de ideas a evidencia, y de pilotos a soluciones urbanas escalables.",
+
+  "our_approach_intro": "INDI Lab estructura su trabajo en cuatro productos complementarios. Cada uno responde a un momento distinto del ciclo de innovación:",
+  "our_approach_spam": "detectar, estructurar, probar y escalar. ",
+  "our_approach_text": "En conjunto, reflejan cómo pasamos de ideas a evidencia, y de pilotos a soluciones urbanas escalables. ",
 
   "We design prototype": "Diseñamos, prototipamos y pilotamos soluciones que abordan los desafíos urbanos más urgentes, situadas en la convergencia entre ingeniería, tecnología y vida urbana.",
 
@@ -129,17 +133,24 @@
   "Applied research, data analysis, and strategic studies": "Investigación aplicada, análisis de datos y estudios estratégicos",
   "Applied research, data analysis, and strategic studies text": "que no solo respaldan la implementación, sino que también aportan al discurso urbano global y a la formulación de políticas públicas.",
 
-  "infra_title": "Ejecución con Respaldo en Infraestructura",
-  "infra_text": "Integrado dentro de Grupo INDI, INDI Lab aprovecha la capacidad constructiva a escala nacional para reducir el riesgo en I+D y acelerar la implementación a través de proyectos reales.",
+  "Señales_Urbanas_title": "Señales Urbanas",
+  "Señales_Urbanas_text": "¿Qué está cambiando en las ciudades y por qué importa?",
+  "Señales_Urbanas_text1": "Señales Urbanas reúne los productos de investigación aplicada y pensamiento estratégico de INDI Lab. Explora tendencias emergentes, análisis comparativos, preguntas críticas y señales tempranas que están dando forma al futuro de las ciudades y la infraestructura.",
+  "Señales_Urbanas_text2": "Estas piezas combinan datos, análisis comparativo de casos y observación directa para enmarcar desafíos urbanos complejos y plantear nuevas hipótesis que vale la pena poner a prueba. No son opiniones especulativas, sino interpretaciones informadas, ancladas en restricciones y oportunidades del mundo real.",
 
-  "pipeline_title": "Prototipar–Implementar–Escalar",
-  "pipeline_text": "Convertimos conceptos en pilotos, y pilotos en soluciones replicables — con un fuerte enfoque en la expansión basada en datos.",
+  "Sistemas_Urbanos_title": "Sistemas Urbanos",
+  "Sistemas_Urbanos_text": "¿Cómo puede medirse, visualizarse y compararse la complejidad urbana? ",
+  "Sistemas_Urbanos_text1": "Sistemas Urbanos agrupa las plataformas, herramientas analíticas y soluciones digitales desarrolladas por INDI Lab. Transforman datos en bruto en inteligencia estructurada que apoya la toma de decisiones urbanas. ",
+  "Sistemas_Urbanos_text2": "Incluyen plataformas GIS, índices, tableros y modelos analíticos diseñados para ser reutilizables, actualizables y escalables. Sistemas Urbanos no son estudios aislados, sino marcos de análisis reutilizables y escalables. ",
 
-  "ecosystem_title": "Aprovechamiento del Ecosistema",
-  "ecosystem_text": "Alianzas estratégicas con universidades, organizaciones sin fines de lucro, startups de tecnología cívica y gobiernos.",
+  "Experimentos_urbano_title": "Experimentos Urbanos",
+  "Experimentos_urbano_text": "¿Qué ocurre cuando una idea se enfrenta a la complejidad urbana? ",
+  "Experimentos_urbano_text1": "Experimentos Urbanos documenta los pilotos, prototipos y pruebas en condiciones reales desarrollados por INDI Lab. Capturan cómo se comportan las ideas cuando se exponen a contextos urbanos reales, restricciones técnicas y realidades institucionales. ",
+  "Experimentos_urbano_text2": "Cada experimento es un proceso de aprendizaje estructurado. El objetivo no es solo probar soluciones, sino generar evidencia que permita su replicación, adaptación o escalamiento. ",
 
-  "data_title": "Datos e Inteligencia Colectiva",
-  "data_text": "Nuestros proyectos son tanto impulsados por datos como guiados por la inteligencia colectiva — combinando análisis cuantitativo con estrategias de participación comunitaria para garantizar que cada intervención sea sensible al contexto, socialmente fundamentada y responda a las necesidades de las personas y los lugares.",
+  "Urban_Playbooks_title": "Urban Playbooks",
+  "Urban_Playbooks_text": "¿Cómo puede aplicarse, adoptarse o escalarse este conocimiento? ",
+  "Urban_Playbooks_text1": "Urban Playbooks son hojas de ruta que traducen conocimiento en acción. Sintetiza investigación, datos y experimentación en guías claras para la toma de decisiones. Estos productos están diseñados para funcionarios públicos, desarrolladores de infraestructura y socios institucionales que necesitan recomendaciones accionables, no únicamente análisis técnico. ",
 
   "Co-creating the future": "Cocreando el futuro de las ciudades con datos, diseño y tecnología.",
 
