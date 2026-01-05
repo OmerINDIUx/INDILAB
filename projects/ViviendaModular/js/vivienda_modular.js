@@ -4,13 +4,11 @@ const canvas = document.getElementById("image-sequence");
 const context = canvas.getContext("2d");
 
 // 🎞 Configuración de frames
-const frameStart = 100;
-const frameEnd = 487;
+const frameStart = 1000;
+const frameEnd = 1181;
 const frameCount = frameEnd - frameStart + 1;
 const currentFrame = (index) =>
-  `images/vivienda_modular_sequence/contruccion_vivienda_modular${
-    frameStart + index
-  }.jpg`;
+  `images/vivienda_modular/viviendaModular${frameStart + index}.jpg`;
 
 const images = [];
 const imageSeq = { frame: 0 };

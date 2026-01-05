@@ -4,13 +4,13 @@ const canvas = document.getElementById("image-sequence");
 const context = canvas.getContext("2d");
 
 // 🎞 Configuración de frames
-const frameStart = 100;
-const frameEnd = 310;
+const frameStart = 1000;
+const frameEnd = 1140;
 const frameCount = frameEnd - frameStart + 1;
 const currentFrame = (index) =>
-  `../../projects/Infraestructura-bioresponsiva/images/conhill/conhill-${
+  `../../projects/Infraestructura-bioresponsiva/images/lowconhil/esto${
     frameStart + index
-  }.png`;
+  }.jpg`;
 
 const images = [];
 const imageSeq = { frame: 0 };
