@@ -1629,12 +1629,12 @@ section.contact-next-project {
 /* SCROLL PROGRESS BAR */
 .scroll-progress-container {
   position: fixed;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   width: 100%;
   height: 6px;
   background: transparent;
-  z-index: 9999;
+  z-index: 999999;
   pointer-events: none;
 }
 
