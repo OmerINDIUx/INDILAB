@@ -856,7 +856,7 @@ body::before {
 
 /* Inline Definition Span */
 .span-definicion {
-  display: inline-block;
+  display: inline;
   position: relative;
   cursor: pointer;
   font-weight: 700; /* Medium weight */
@@ -1500,15 +1500,29 @@ section.contact-next-project {
   }
 
   .note-popup {
-    bottom: 50px;
-    padding: 1.5rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%) !important;
     width: 85vw;
+    max-width: 400px;
+    z-index: 20005;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Override desktop transform animations for mobile centering */
+  .span-definicion.active .note-popup,
+  .span-definicion:hover .note-popup {
+    transform: translate(-50%, -50%) !important;
   }
 
   /* Glossary */
   .Glossary-grid {
     grid-template-columns: 1fr;
-    padding: 2rem 1.5rem;
+    padding: 1rem 1rem;
+    gap: 10px;
   }
   .glossary-item h3 {
     font-size: 1.1rem;
@@ -1898,6 +1912,10 @@ section.contact-next-project {
   .contact-next-project {
     padding: 2rem 1rem;
   }
+
+  .span-resaltado {
+    font-size: 1rem;
+  }
 }
 
 /* ===========================
@@ -1925,7 +1943,7 @@ section.contact-next-project {
 
 .glossary-item {
   background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
+  padding: 0.8rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
