@@ -156,102 +156,56 @@
         <script>
           gsap.registerPlugin(ScrollTrigger);
 
-          ScrollTrigger.matchMedia({
-            // 🖥️ Desktop: Pinned Carousel Animation
-            "(min-width: 769px)": function () {
-              const phrases = gsap.utils.toArray(".list .phrase");
-              
-              // Initial setup: all invisible except first one potentially (handled by timeline)
-              gsap.set(phrases, { opacity: 0, scale: 0.95, filter: "blur(10px)", y: 20 });
-              
-              // Master timeline linked to scroll
-              const tl = gsap.timeline({
-                scrollTrigger: {
-                  trigger: ".list",
-                  start: "top top",
-                  end: "+=" + phrases.length * 100 + "%", // Extend scroll distance for reading time
-                  scrub: 1, // Smooth interaction
-                  pin: true,
-                  anticipatePin: 1,
-                },
-              });
-
-              phrases.forEach((phrase, i) => {
-                // Determine timing
-                // We want: Fade In -> Stay -> Fade Out
-                // Overlap: Next one fades in while previous fades out? Or sequential?
-                // Let's do a cross-fade style: 
-                // 1. Enter
-                // 2. Hold
-                // 3. Exit (unless last one)
-
-                const durationIn = 1;
-                const durationHold = 2; // Increased for long text reading
-                const durationOut = 1;
-                
-                // Entrance
-                tl.to(phrase, { 
-                  opacity: 1, 
-                  scale: 1, 
-                  filter: "blur(0px)", 
-                  y: 0, 
-                  duration: durationIn, 
-                  ease: "power2.out" 
-                });
-
-                // Hold
-                tl.to(phrase, { 
-                  opacity: 1, 
-                  duration: durationHold 
-                });
-
-                // Exit (skip for the very last item if you want it to stay a bit, or fade it out to end section)
-                if(i < phrases.length) {
-                   tl.to(phrase, { 
-                    opacity: 0, 
-                    scale: 1.05, 
-                    filter: "blur(10px)", 
-                    y: -20, 
-                    duration: durationOut, 
-                    ease: "power2.in" 
-                   });
-                }
-              });
-
-              return () => {
-                // Cleanup when screen resizes out of this match
-                tl.kill();
-                gsap.set(phrases, { clearProps: "all" });
-              };
+          // � Unified Animation (Pinned Carousel for ALL devices)
+          const phrases = gsap.utils.toArray(".list .phrase");
+          
+          // Initial setup: all invisible except first one potentially
+          gsap.set(phrases, { opacity: 0, scale: 0.95, filter: "blur(10px)", y: 20 });
+          
+          // Master timeline linked to scroll
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: ".list",
+              start: "top top",
+              end: "+=" + phrases.length * 100 + "%", // Extend scroll distance
+              scrub: 1, // Smooth interaction
+              pin: true,
+              anticipatePin: 1,
             },
+          });
 
-            // 📱 Mobile: Simple Fade-In on Scroll
-            "(max-width: 768px)": function () {
-              const phrases = gsap.utils.toArray(".list .phrase");
-              
-              // Reset any specific styles from desktop if needed (handled by matchMedia cleanup usually, but good to be safe)
-              gsap.set(phrases, { opacity: 0, y: 50 });
+          phrases.forEach((phrase, i) => {
+            // Determine timing: Fade In -> Stay -> Fade Out
+            const durationIn = 1;
+            const durationHold = 2; 
+            const durationOut = 1;
+            
+            // Entrance
+            tl.to(phrase, { 
+              opacity: 1, 
+              scale: 1, 
+              filter: "blur(0px)", 
+              y: 0, 
+              duration: durationIn, 
+              ease: "power2.out" 
+            });
 
-              phrases.forEach((phrase) => {
-                gsap.to(phrase, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.8,
-                  ease: "power2.out",
-                  scrollTrigger: {
-                    trigger: phrase,
-                    start: "top 85%", // Trigger when near bottom of viewport
-                    end: "top 50%",
-                    toggleActions: "play none none reverse",
-                  }
+            // Hold
+            tl.to(phrase, { 
+              opacity: 1, 
+              duration: durationHold 
+            });
+
+            // Exit (unless last one)
+            if(i < phrases.length) {
+                tl.to(phrase, { 
+                opacity: 0, 
+                scale: 1.05, 
+                filter: "blur(10px)", 
+                y: -20, 
+                duration: durationOut, 
+                ease: "power2.in" 
                 });
-              });
-              
-               return () => {
-                // Cleanup
-                ScrollTrigger.getAll().forEach(t => t.kill());
-                gsap.set(phrases, { clearProps: "all" });
-              };
             }
           });
 
