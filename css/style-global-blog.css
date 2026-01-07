@@ -1538,6 +1538,34 @@ section.contact-next-project {
     margin: 0 auto; /* Reset margin from 1024px media query */
     width: 100%;
   }
+
+  /* Mobile Pagination for Glossary */
+  .glossary-item.hidden-mobile {
+    display: none !important;
+  }
+
+  .glossary-view-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #eee;
+    font-family: "PowerGrotesk", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+  }
+
+  .glossary-view-more-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
   .glossary-item h3 {
     font-size: 1.1rem;
   }
@@ -2005,5 +2033,47 @@ section.contact-next-project {
   .Glossary-grid,
   .card {
     margin-left: 40px !important;
+  }
+}
+
+/* ===========================
+   GLOSSARY PAGINATION (MOBILE)
+=========================== */
+@media (max-width: 768px) {
+  .glossary-item.hidden-mobile {
+    display: none !important;
+  }
+
+  .glossary-view-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    margin-left: auto;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #eee;
+    font-family: "PowerGrotesk", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+  }
+
+  .glossary-view-more-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (min-width: 769px) {
+  .glossary-view-more-btn {
+    display: none !important;
+  }
+  .glossary-item.hidden-mobile {
+    display: flex !important;
   }
 }
