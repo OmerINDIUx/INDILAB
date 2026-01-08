@@ -12,20 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
     window.applyTranslations();
   }
 
+  // Determine root path
+  const root = window.rootPath || "";
+
   // Load Cookie Consent
   const cookieScript = document.createElement("script");
-  cookieScript.src = "/js/cookie-consent.js";
+  cookieScript.src = `${root}js/cookie-consent.js`;
   document.body.appendChild(cookieScript);
 });
 
 /**
- * Loads the menu from /menu.html and injects it into #menu-placeholder.
+ * Loads the menu from menu.html and injects it into #menu-placeholder.
  */
 function loadMenu() {
   const placeholder = document.getElementById("menu-placeholder");
   if (!placeholder) return;
 
-  fetch("/menu.html")
+  const root = window.rootPath || "";
+
+  fetch(`${root}menu.html`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -35,14 +40,22 @@ function loadMenu() {
       return response.text();
     })
     .then((data) => {
+      // Fix paths in loaded menu HTML (simple replacement for links)
+      // Note: This is a simple fix. For more complex apps, use a proper base or absolute paths.
+      // However, since we are moving to relative, we might need to adjust links inside menu.html dynamically?
+      // For now, let's just load it. The links in menu.html are likely absolute "/index.html".
+      // If we change them to relative, we need to adjust them based on where we are.
+      // But let's first fix the LOADING of the menu itself.
       placeholder.innerHTML = data;
 
-      // Load menu.js after menu HTML is injected
+      // When loading menu.html content, if it contains links like href="/index.html",
+      // and we are capable of relative paths, we might want to replace them?
+      // Actually, if we stick to removing "/" from global.js, it fixes the "loading" part.
+
       const script = document.createElement("script");
-      script.src = "/js/demo4/menu.js";
+      script.src = `${root}js/demo4/menu.js`;
       script.onload = () => console.log("menu.js loaded successfully ✅");
-      script.onerror = () =>
-        console.error("Error loading /js/demo4/menu.js ❌");
+      script.onerror = () => console.error("Error loading js/demo4/menu.js ❌");
       document.body.appendChild(script);
 
       // Re-apply translations if needed

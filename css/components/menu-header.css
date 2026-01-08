@@ -148,7 +148,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 10000;
+  z-index: 100;
   pointer-events: none !important; /* 👈 Robust Fix: Permitir scroll/click a través de la barra obligatoriamente */
 }
 .sidebar-buttons {
@@ -583,7 +583,7 @@ body.menu-open .secondary-brand {
     width: 100%;
     height: 80px;
     background: var(--color-bg-dark);
-    z-index: 300;
+    z-index: 30000000;
   }
 }
 

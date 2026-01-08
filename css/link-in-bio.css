@@ -40,10 +40,8 @@ body::before {
 .profile-img {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 2px solid var(--color-bg-light, #eee);
   padding: 4px;
   background-color: transparent;
 }
