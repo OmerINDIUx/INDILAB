@@ -598,7 +598,9 @@ body::before {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-/* top-bar display handled by media queries */
+.top-bar {
+  display: none;
+}
 
 /* ===========================
    STICKY HEADER CLONE
@@ -1486,13 +1488,20 @@ section.contact-next-project {
 
   html,
   body {
-    padding-left: 0;
+    padding-left: 0 !important;
+    overflow-x: hidden;
   }
   .gif-container,
   .video-fullscreen,
-  #image-sequence {
+  #image-sequence,
+  .horizontal-scroll-section {
     left: 0;
     width: 100%;
+  }
+  .carousel-wrapper {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    box-sizing: border-box;
   }
 
   .TextLarge {

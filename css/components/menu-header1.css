@@ -1,6 +1,3 @@
-@import url("../base/variables.css");
-@import url("../base/animations.css");
-
 /* HEADER GLOBAL */
 /* ==============================
    HEADER Y WRAPPERS
@@ -66,9 +63,10 @@ body {
 #fullscreen-menu {
   width: 100%;
   height: 100%;
-  background: var(--color-bg-light);
+  background: #eee;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  pointer-events: auto;
   transform-origin: left center;
   transform: rotateY(-90deg);
   z-index: 3010; /* por encima del wrapper */
@@ -80,7 +78,7 @@ body {
 .menu__item {
   font-weight: 400;
   font-size: 1.5rem;
-  color: var(--color-bg-dark);
+  color: #1a1a1a;
   text-decoration: none;
   position: relative;
   display: block;
@@ -143,13 +141,12 @@ body {
   left: 0;
   width: 100px; /* Ancho fijo */
   height: 100vh; /* Toda la pantalla */
-  background-color: #1a1a1a;
+  background-color: #1a1a1a02;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 100;
-  pointer-events: none !important; /* 👈 Robust Fix: Permitir scroll/click a través de la barra obligatoriamente */
+  z-index: 315;
 }
 .sidebar-buttons {
   position: absolute;
@@ -160,7 +157,6 @@ body {
   gap: 2rem;
   padding-bottom: 3rem;
   z-index: 1050; /* botones por encima de todo */
-  pointer-events: auto; /* 👈 Reactivar clicks en los botones */
 }
 
 .lang-btn,
@@ -170,16 +166,9 @@ body {
   height: 44px;
   border: 2px solid transparent;
   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
-  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
-      padding-box,
-    linear-gradient(
-        135deg,
-        var(--color-bg-dark),
-        var(--color-bg-dark),
-        var(--color-bg-dark)
-      )
-      border-box;
-  color: var(--color-bg-light);
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
   cursor: pointer;
   box-sizing: border-box;
   padding: 0;
@@ -207,7 +196,17 @@ body {
   animation: borderGradient 4s ease infinite;
 }
 
-/* Animation borderGradient (Imported from animations.css) */
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 .hamburger {
   flex-direction: column;
@@ -217,18 +216,18 @@ body {
 .hamburger span {
   height: 3px;
   width: 40%;
-  background-color: var(--color-bg-light);
+  background-color: #eee;
   display: block;
   border-radius: 2px;
   transition: background-color 0.3s ease;
 }
 
 .secundary-brand2 .INDI path {
-  fill: var(--color-bg-dark);
+  fill: #1a1a1a;
 }
 
 .secundary-brand2 .LAB path {
-  fill: var(--color-bg-dark);
+  fill: #1a1a1a;
 }
 
 .secundary-brand2 .colorkey path {
@@ -260,7 +259,7 @@ svg {
   height: 100%;
   width: 80%;
   padding-top: 4rem;
-  align-items: start;
+  align-items: top;
   z-index: 1040; /* mismo nivel que items */
 }
 .menu-links {
@@ -273,7 +272,19 @@ svg {
   grid-column: 2;
 }
 
-body.menu-open .secondary-brand {
+.menu-blog {
+  display: grid;
+  gap: 1rem;
+  margin-top: -35rem;
+  height: auto;
+  z-index: 1040;
+}
+
+.menu-columns {
+  align-items: top;
+}
+
+body.menu-open .secundary-brand {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -292,16 +303,9 @@ body.menu-open .secondary-brand {
   z-index: 1100;
   transition: all 0.3s ease;
   border-radius: 0 8px 0 8px; /* 🔑 esquinas personalizadas */
-  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
-      padding-box,
-    linear-gradient(
-        135deg,
-        var(--color-bg-dark),
-        var(--color-bg-dark),
-        var(--color-bg-dark)
-      )
-      border-box;
-  color: var(--color-bg-light);
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
 }
 
 .close-menu::before,
@@ -312,7 +316,7 @@ body.menu-open .secondary-brand {
   left: 50%;
   width: 55%;
   height: 3px;
-  background: var(--color-bg-light);
+  background: #eee;
   border-radius: 2px;
   transform-origin: center;
 }
@@ -332,16 +336,9 @@ body.menu-open .secondary-brand {
   height: 44px;
   border: 2px solid transparent; /* necesario para ver el borde degradado */
   border-radius: 0 8px 0 8px;
-  background: linear-gradient(var(--color-bg-dark), var(--color-bg-dark))
-      padding-box,
-    linear-gradient(
-        135deg,
-        var(--color-bg-dark),
-        var(--color-bg-dark),
-        var(--color-bg-dark)
-      )
-      border-box;
-  color: var(--color-bg-light);
+  background: linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+    linear-gradient(135deg, #1a1a1a, #1a1a1a, #1a1a1a) border-box;
+  color: #eee;
   cursor: pointer;
   z-index: 1100;
   transition: all 0.3s ease;
@@ -359,7 +356,7 @@ body.menu-open .secondary-brand {
   left: 50%;
   width: 50%;
   height: 3px;
-  background: var(--color-bg-light); /* 👈 color fijo */
+  background: #eee; /* 👈 color fijo */
   border-radius: 2px;
   transform-origin: center;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -413,7 +410,7 @@ body.menu-open .secondary-brand {
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
-  color: var(--color-bg-dark);
+  color: #1a1a1a;
   position: relative;
   margin-top: 0rem;
 }
@@ -447,14 +444,14 @@ body.menu-open .secondary-brand {
   height: auto;
   border: 2px solid transparent;
   border-radius: 0 16px 0 16px;
-  box-shadow: 0 6px 20px var(--color-bg-dark) 10;
+  box-shadow: 0 6px 20px #1a1a1a10;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .blog-item a:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px var(--color-bg-dark) 12;
+  box-shadow: 0 12px 30px #1a1a1a12;
   animation: borderGradient 8s ease infinite;
   /* background:
     linear-gradient(#f7f7f7, #f1f1f1) padding-box,
@@ -486,13 +483,13 @@ body.menu-open .secondary-brand {
 .blog-title {
   font-weight: 700;
   font-size: 1rem;
-  color: var(--color-bg-dark);
+  color: #1a1a1a;
   text-decoration: none; /* 👈 sin subrayado */
 }
 
 .blog-date {
   font-size: 0.85rem;
-  color: var(--color-bg-dark) 90;
+  color: #1a1a1a90;
   opacity: 0.9;
   text-decoration: none; /* 👈 por si acaso */
 }
@@ -524,14 +521,12 @@ body.menu-open .secondary-brand {
     gap: 0.5rem;
     justify-content: flex-end;
     z-index: 12000; /* por encima de sidebar12 */
-    pointer-events: auto;
   }
 
   .sidebar12 {
     width: 0; /* "desactiva" la barra lateral en móvil */
     background: transparent;
-    z-index: 10000;
-    pointer-events: none;
+    z-index: 322;
   }
 
   .lang-btn {
@@ -580,10 +575,10 @@ body.menu-open .secondary-brand {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 80px;
-    background: var(--color-bg-dark);
-    z-index: 3000;
+    background: #1a1a1a;
+    z-index: 300;
   }
 }
 
@@ -599,10 +594,5 @@ body.menu-open .secondary-brand {
 
   .menu__item {
     font-size: 1.2rem;
-  }
-
-  .close-menu {
-    top: 1.5rem;
-    right: 1.5rem;
   }
 }
