@@ -553,8 +553,29 @@ body::before {
   }
 
   .card {
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
+    transform: none; /* Reset tablet transform */
+  }
+
+  .Title {
+    transform: none; /* Reset tablet transform */
+    width: 90vw;
+  }
+
+  .title-section-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0;
+    height: 100vh;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
   }
 }
 
