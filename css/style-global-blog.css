@@ -457,7 +457,12 @@ body::before {
   padding-bottom: 1rem;
   border-radius: 0 8px 8px 0;
 }
-
+.span-blanco {
+  color: #eeeeee !important;
+  color: #eeeeee;
+  border-left: 4px solid #eee;
+  font-size: 1rem;
+}
 /* ===========================
    TITLES
 =========================== */
@@ -2106,4 +2111,13 @@ section.contact-next-project {
   .glossary-item.hidden-mobile {
     display: flex !important;
   }
+}
+
+/* ===========================
+   UTILITIES
+=========================== */
+.font-power {
+  font-family: "PowerGrotesk bold", sans-serif;
+  text-transform: uppercase;
+  font-weight: 800;
 }

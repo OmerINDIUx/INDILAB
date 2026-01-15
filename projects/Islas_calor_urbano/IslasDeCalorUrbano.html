@@ -15,7 +15,7 @@
     />
 
     <meta charset="UTF-8" />
-    <title>Reto de Innovación Urbana</title>
+    <title>Islas de Calor Urbano</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- GSAP loaded at the end of body -->
@@ -57,7 +57,7 @@
     </section>
 
     <section>
-      <div class="card" id="cambio_gif">
+      <div class="card cambio_gif_trigger">
         <h2>
           "Ciudades que enfrían: rediseñar el clima urbano para mitigar las
           Islas de Calor Urbano"
@@ -65,7 +65,7 @@
       </div>
     </section>
     <section>
-      <div class="card" id="cambio_gif">
+      <div class="card cambio_gif_trigger">
         <p>
           Las islas de calor urbano intensifican las temperaturas en las
           ciudades y afectan la salud y calidad de vida de sus habitantes. Este
@@ -81,8 +81,9 @@
     <section id="phrase-section">
       <div class="blog-scroll-strip__phrase">
         <h2>
-          ¿Qué pasaría si nuestras ciudades pudieran adaptarse en tiempo real a
-          distintas condiciones climáticas y choques externos?
+          Al ser el calentamiento global un fenómeno sistémico, ¿qué pasaría si
+          las ciudades pudieran operar como organismos reguladores, capaces de
+          absorber, modular y redistribuir la temperatura de forma inteligente
         </h2>
       </div>
     </section>
@@ -92,21 +93,24 @@
         <div class="blog-scroll-strip__rail">
           <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/pexels-david-olaniyi-1926688-10504890.jpg"
+              src="images/biorresponsable_osaka.jpg"
               alt="Montaje de vivienda modular"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              src="images/melburge.jpg"
               alt="Vivienda modular con paneles solares"
             />
           </figure>
 
           <figure class="blog-scroll-card">
+            <img src="images/new-york.jpg" alt="Conjunto de vivienda modular" />
+          </figure>
+          <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              src="images/superville_barcelona.jpg"
               alt="Conjunto de vivienda modular"
             />
           </figure>
@@ -120,21 +124,24 @@
         <div class="blog-scroll-strip__rail">
           <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/pexels-david-olaniyi-1926688-10504890.jpg"
+              src="images/biorresponsable_osaka.jpg"
               alt="Montaje de vivienda modular"
             />
           </figure>
 
           <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/new-modern-house-cottage-with-solar-photovoltaic-p-2025-01-16-22-43-52-utc.jpg"
+              src="images/melburge.jpg"
               alt="Vivienda modular con paneles solares"
             />
           </figure>
 
           <figure class="blog-scroll-card">
+            <img src="images/new-york.jpg" alt="Conjunto de vivienda modular" />
+          </figure>
+          <figure class="blog-scroll-card">
             <img
-              src="../Infraestructura-bioresponsiva/images/residential-area-with-buildings-2025-02-10-08-30-44-utc.jpg"
+              src="images/superville_barcelona.jpg"
               alt="Conjunto de vivienda modular"
             />
           </figure>
@@ -151,6 +158,8 @@
           aledañas, según la
           <a
             href="https://espanol.epa.gov/la-energia-y-el-medioambiente/las-islas-de-calor"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Environmental Protection Agency.
           </a>
@@ -162,36 +171,43 @@
         <p>
           Los impactos son profundos. La Organización Mundial de la Salud estima
           que el calor extremo será uno de los mayores riesgos ambientales para
-          la salud urbana en este siglo.
+          la salud urbana en este siglo. En 2023, un estudio liderado por el
           <a
             href="https://efe.com/medio-ambiente/2024-08-12/calor-muertes-europa-2023/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            En 2023, un estudio liderado por el Instituto de Salud Global de
-            Barcelona registró cerca de 48,000 muertes por calor en Europa.</a
+            Instituto de Salud Global de Barcelona </a
+          >registró cerca de 48,000 muertes por calor en Europa.En Estados
+          Unidos, los
+          <a
+            href="https://www.cdc.gov/mmwr/volumes/69/wr/mm6924a1.htm"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-          <a href="https://www.cdc.gov/mmwr/volumes/69/wr/mm6924a1.htm"
-            >En Estados Unidos, los Centros para el Control y la Prevención de
-            Enfermedades reportan un promedio de 702 muertes anuales
-            relacionadas con el calor entre 2004 y 2018.</a
-          >
+            Centros para el Control y la Prevención de Enfermedades </a
+          >reportan un promedio de 702 muertes anuales relacionadas con el calor
+          entre 2004 y 2018. En Asia, un
           <a
             href="https://www.sciencedirect.com/science/article/abs/pii/S0048969715000753"
-            >En Asia, un metaanálisis que cubre 88 ciudades encontró diferencias
-            de hasta 11 °C dentro de un mismo centro urbano, con un promedio de
-            4.1 °C de diferencia entre las zonas más templadas y las ICU
-            identificadas en estas ciudades.</a
-          >
+            target="_blank"
+            rel="noopener noreferrer"
+            >metaanálisis </a
+          >que cubre 88 ciudades encontró diferencias de hasta 11 °C dentro de
+          un mismo centro urbano, con un promedio de 4.1 °C de diferencia entre
+          las zonas más templadas y las ICU identificadas en estas ciudades.
         </p>
         <p>
           En América Latina, la urbanización acelerada y la informalidad
           intensifican los riesgos. El INEGI estima que más del 80 por ciento de
           la población mexicana vive en ciudades, muchas con baja cobertura
           vegetal, alta exposición solar y superficies de asfalto oscuro. En un
-          análisis de <strong> INDI Lab </strong> con datos satelitales de la
-          NASA, se identificaron puntos críticos de calor superficial en
-          corredores como Iztapalapa y el oriente de la Zona Metropolitana del
-          Valle de México, donde las temperaturas pueden superar los 50 °C en
-          superficie terrestre durante los meses más cálidos.
+          análisis de <strong class="font-power"> INDI Lab </strong> con datos
+          satelitales de la NASA, se identificaron puntos críticos de calor
+          superficial en corredores como Iztapalapa y el oriente de la Zona
+          Metropolitana del Valle de México, donde las temperaturas pueden
+          superar los 50 °C en superficie terrestre durante los meses más
+          cálidos.
         </p>
         <p>
           El resto de la CDMX, y ciudades como Monterrey, Guadalajara y Mérida
@@ -392,7 +408,7 @@
         </div>
         <div class="carousel-item card-item">
           <img
-            src="images/aerial-view-of-empty-stadium-surrounded-by-green-t-2025-02-09-22-15-52-utc.jpg"
+            src="images/biorresponsable_osaka.jpg"
             alt="Descripción de la imagen"
             class="carrucel-imagen"
           />
@@ -415,7 +431,7 @@
         </div>
         <div class="carousel-item card-item">
           <img
-            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            src="images/cool paviment.png"
             alt="Descripción de la imagen"
             class="carrucel-imagen"
           />
@@ -437,15 +453,27 @@
             hasta en 5.6 °C la temperatura superficial del suelo en calles del
             programa piloto “Cool Streets LA” impulsado por la Oficina de
             Servicios Viales de la ciudad.
+
+            <span class="span-resaltado span-blanco"
+              >El albedo es la capacidad de una superficie para reflejar la
+              radiación solar en lugar de absorberla. Se mide como un valor
+              adimensional entre 0 y 1 mediante sensores fotométricos o
+              satelitales que registran la fracción de radiación reflejada;
+              superficies claras como nieve o techos blancos pueden tener
+              valores de 0.8–0.9, mientras que pavimentos oscuros y asfalto
+              típico están entre 0.04–0.12, lo que determina cuánto calor se
+              retiene en el entorno construido.</span
+            >
           </p>
         </div>
+
         <div class="carousel-item card-item">
           <img
-            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            src="images/superville_barcelona.jpg"
             alt="Descripción de la imagen"
             class="carrucel-imagen"
           />
-          <h2>Diseño táctico Hiper-local</h2>
+          <h2>Diseño táctico Hiperlocal</h2>
           <p>
             El diseño táctico a nivel de barrio se presenta como una alternativa
             local para mejorar los microclimas urbanos. Distintas ciudades del
@@ -454,46 +482,275 @@
             térmica a nivel peatonal, con beneficios adicionales como menor
             exposición a contaminantes y ruido urbano. Barcelona, por ejemplo,
             ha promovido la creación de supermanzanas como parte del programa
-            “Superilles”, que reorganiza bloques de manzanas para reducir hasta
-            90 por ciento el tráfico vehicular de paso, mejorar la calidad del
-            aire y habilitar más espacio peatonal con vegetación, mobiliario y
-            zonas de sombra permanentes y temporales. En el barrio de Sant
-            Antoni, por ejemplo, se registraron reducciones significativas de
-            ruido y NO₂, como producto de las nuevas áreas verdes que a su vez
-            generan microclimas más frescos. En Tokio, las estrategias de
-            enfriamiento urbano incluyen programas de sombra con lonas térmicas,
-            estructuras ligeras y el uso de pavimentos fríos y recubrimientos de
-            barrera térmica impulsados por el gobierno metropolitano. Estas
+            <a
+              href="https://ajuntament.barcelona.cat/superilles/es"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              “Superilles”</a
+            >, que reorganiza bloques de manzanas para reducir hasta 90 por
+            ciento el tráfico vehicular de paso, mejorar la calidad del aire y
+            habilitar más espacio peatonal con vegetación, mobiliario y zonas de
+            sombra permanentes y temporales. En el barrio de Sant Antoni, por
+            ejemplo, se registraron reducciones significativas de ruido y NO₂,
+            como producto de las nuevas áreas verdes que a su vez generan
+            microclimas más frescos. En Tokio, las estrategias de enfriamiento
+            urbano incluyen programas de sombra con lonas térmicas, estructuras
+            ligeras y el uso de pavimentos fríos y recubrimientos de barrera
+            térmica impulsados por el gobierno metropolitano. Estas
             intervenciones buscan disminuir la temperatura superficial del suelo
             y crear microclimas más confortables, especialmente en calles,
-            plazas y zonas vulnerables al calor. .
+            plazas y zonas vulnerables al calor.
           </p>
         </div>
+
         <div class="carousel-item card-item">
           <img
-            src="images/montreal-quebec-canada-2025-10-06-23-23-54-utc.jpg"
+            src="images/new-york.jpg"
             alt="Descripción de la imagen"
             class="carrucel-imagen"
           />
-          <h2>Gestores Hídricos</h2>
+          <h2>Tecnología y ciencia urbana aplicada 1/2</h2>
           <p>
-            La ciudad danesa de Copenhague lanzó el programa “Cloudburst
-            Management Plan” después de una temporada de lluvias extremas en el
-            año 2011, cuando llegaron a caer cerca de 200 mm en pocas horas y
-            los daños superaron los 900 millones de dólares. El plan combina
-            infraestructura gris con soluciones azul-verde para captar, desviar
-            y almacenar agua pluvial en el espacio público. Este programa
-            incluye más de 300 intervenciones distribuidas por toda la ciudad:
-            calles diseñadas para conducir agua hacia parques inundables,
-            superficies permeables, canales abiertos, plazas que se convierten
-            en reservorios temporales y sistemas subterráneos complementarios.
-            Espacios públicos como el parque Enghaveparken pueden almacenar más
-            de 22 000 m³ de agua, equivalente a 10 albercas olímpicas, durante
-            tormentas extremas. El programa no solo reduce riesgo de
-            inundaciones entre 30 y 50 %, sino que también genera beneficios
-            colaterales: más áreas verdes, enfriamiento urbano, biodiversidad y
-            espacios públicos de mayor calidad.
+            En Nueva York, programas como
+            <a
+              href="https://urbanheat.nyc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Heat Watch</a
+            >
+            emplean sensores móviles de alta resolución instalados en vehículos
+            y bicicletas para medir la temperatura, humedad y ubicación, con
+            registros cada segundo. Estos sensores permiten generar mapas
+            térmicos a escala de calle, con datos que representan una
+            experiencia urbana individual. Esta metodología ha permitido
+            identificar diferencias de hasta 10 °C entre vecindarios durante
+            olas de calor. El análisis de estos datos ha permitido correlacionar
+            zonas históricamente desinvertidas con mayores temperaturas y
+            riesgos de salud. Los datos se integran con modelos satelitales y
+            socioeconómicos para priorizar intervenciones en comunidades
+            vulnerables, como tácticas de expansión de sombra, vegetación y
+            superficies permeables, y han servido para promover políticas y
+            acciones locales de justicia climática.
           </p>
+        </div>
+
+        <div class="carousel-item card-item">
+          <img
+            src="images/melburge.jpg"
+            alt="Descripción de la imagen"
+            class="carrucel-imagen"
+          />
+          <h2>Tecnología y ciencia urbana aplicada 2/2</h2>
+          <p>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.melbourne.vic.gov.au/urban-forest-strategy"
+              >Melbourne</a
+            >
+            impulsa una Estrategia de Bosque Urbano que combina monitoreo aéreo
+            de alta resolución y sensores en árboles para evaluar su salud,
+            estrés hídrico y capacidad de enfriamiento. Sus plataformas
+            digitales integran datos de cobertura vegetal, temperatura y
+            vulnerabilidad social, permitiendo identificar barrios críticos y
+            medir el impacto de intervenciones en tiempo real. La ciudad busca
+            duplicar la cobertura de dosel arbóreo para 2040, reducir
+            temperaturas superficiales en zonas prioritarias y optimizar
+            recursos mediante riego inteligente y mantenimiento predictivo,
+            demostrando cómo la tecnología y ciencia de datos pueden amplificar
+            el impacto climático y social de la vegetación urbana.
+            <br /><br />Estos casos ilustran cómo la combinación de políticas,
+            diseño, tecnología y naturaleza puede transformar el calor en
+            oportunidades de regeneración urbana.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement">
+      <div id="content-row">
+        <div class="content-text">
+          <h2>
+            ¿Y si las estaciones de transporte se convirtieran en la
+            infraestructura social más poderosa de nuestras ciudades?
+          </h2>
+          <!-- Inline SVGs to avoid fetch/CORS issues on local file system -->
+          <div class="corner corner-bottom-left">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 1920 1920"
+              style="enable-background: new 0 0 1920 1920"
+              xml:space="preserve"
+            >
+              <g fill="#eee" id="corner_booton_left" class="corner_booton_left">
+                <path
+                  d="M1,1919L1,1l448.2,0l0,1400.1c0,63-29.9,131.5-73.3,175.4l2.7,2.7c43.5-43.8,111.4-74,173.8-74H1919V1919L1,1919z"
+                />
+              </g>
+            </svg>
+          </div>
+          <div class="corner corner-top-right">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 1920 1920"
+              style="enable-background: new 0 0 1920 1920"
+              xml:space="preserve"
+            >
+              <g fill="#eee" id="corner_top_right" class="corner_top_right">
+                <path
+                  d="M1920,0l0,1918l-448.2,0l0-1400.1c0-63,29.9-131.5,73.3-175.4l-2.7-2.7c-43.5,43.8-111.4,74-173.8,74L2,413.7L2,0L1920,0z"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Corner Animation
+        function initCornerAnimation() {
+          const bottomLeft = document.querySelector(".corner-bottom-left");
+          const topRight = document.querySelector(".corner-top-right");
+          const content = document.querySelector(".content-text");
+
+          if (!bottomLeft || !topRight || !content) return;
+
+          function getPositions() {
+            const w = content.offsetWidth;
+            const h = content.offsetHeight;
+            // Get size from offsetWidth (CSS handles this: 50px or 25px)
+            const cornerSize = bottomLeft.offsetWidth || 50;
+
+            // Calculate Start Positions (Center relative to Final CSS Position)
+            // Final Position: x:0, y:0 (which corresponds to CSS bottom:-20, left:-20)
+
+            // To animate FROM center TO corners:
+            // Center X = w/2. Corner X (visual) = -20.
+            // Start X offset = CenterX - CornerX = (w/2) - (-20) - (cornerSize/2)
+            const startX_BL = w / 2 + 20 - cornerSize / 2;
+            const startY_BL = -(h / 2) - 20 + cornerSize / 2;
+
+            const startX_TR = -(w / 2) - 20 + cornerSize / 2;
+            const startY_TR = h / 2 + 20 - cornerSize / 2;
+
+            return {
+              bottomLeft: { startX: startX_BL, startY: startY_BL },
+              topRight: { startX: startX_TR, startY: startY_TR },
+            };
+          }
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: ".statement",
+              start: "top center",
+              end: "bottom bottom",
+              scrub: true,
+              invalidateOnRefresh: true, // Critical for responsive recalculations
+            },
+          });
+
+          // Use function-based values for responsive recalculation
+          tl.fromTo(
+            bottomLeft,
+            {
+              x: () => getPositions().bottomLeft.startX,
+              y: () => getPositions().bottomLeft.startY,
+              opacity: 0,
+            },
+            {
+              x: 0,
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+            }
+          ).fromTo(
+            topRight,
+            {
+              x: () => getPositions().topRight.startX,
+              y: () => getPositions().topRight.startY,
+              opacity: 0,
+            },
+            {
+              x: 0,
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+            },
+            "<"
+          );
+
+          // Fade-in text
+          gsap.fromTo(
+            ".content-text",
+            { opacity: 0.01 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: ".statement",
+                start: "top center",
+                end: "bottom bottom",
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Call animation on load
+        window.addEventListener("load", initCornerAnimation);
+      </script>
+    </section>
+
+    <!-- NEW SECTIONS -->
+    <section id="phrase-section">
+      <div class="blog-scroll-strip__phrase">
+        <h2>
+          Al ser el calentamiento global un fenómeno sistémico, ¿qué pasaría si
+          las ciudades pudieran operar como organismos reguladores, capaces de
+          absorber, modular y redistribuir la temperatura de forma inteligente
+        </h2>
+      </div>
+    </section>
+
+    <!-- SECTION DE LAS IMÁGENES -->
+    <section id="run1" class="blog-scroll-strip">
+      <div class="blog-scroll-strip__inner">
+        <div class="blog-scroll-strip__rail">
+          <figure class="blog-scroll-card">
+            <img
+              src="images/biorresponsable_osaka.jpg"
+              alt="Montaje de vivienda modular"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img
+              src="images/melburge.jpg"
+              alt="Vivienda modular con paneles solares"
+            />
+          </figure>
+
+          <figure class="blog-scroll-card">
+            <img src="images/new-york.jpg" alt="Conjunto de vivienda modular" />
+          </figure>
+          <figure class="blog-scroll-card">
+            <img
+              src="images/superville_barcelona.jpg"
+              alt="Conjunto de vivienda modular"
+            />
+          </figure>
         </div>
       </div>
     </section>
@@ -538,8 +795,14 @@
           La infraestructura verde puede escalarse con especies endémicas y
           sistemas hídricos como zanjas de infiltración o jardines de lluvia.
           Las ciudades deben considerar financiamiento climático para
-          implementar estas soluciones. Fondos como el Green Climate Fund o los
-          Bonos Verdes ofrecen oportunidades de inversión y financiamiento
+          implementar estas soluciones. Fondos como el
+          <a
+            href="https://www.greenclimate.fund/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Green Climate Fund</a
+          >
+          o los Bonos Verdes ofrecen oportunidades de inversión y financiamiento
           alternativo al presupuesto público.
         </p>
 
@@ -572,7 +835,17 @@
         </p>
       </div>
     </section>
-
+    <section class="text-provocation">
+      <img
+        src="images/the-corridor-for-walking-inside-the-modern-buildin-2026-01-07-00-08-17-utc.jpg"
+        alt="cocina moderna"
+      />
+      <div class="provoc-text">
+        <h2>
+          ¿Qué pasaría si nuestras ciudades fueran capaces de enfriar el futuro?
+        </h2>
+      </div>
+    </section>
     <!-- Script for Horizontal Scroll -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -656,8 +929,8 @@
         gsap.set("#gif1", { opacity: 1 });
         gsap.set("#gif2, #gif3, #gif4, #gif5, #gif6", { opacity: 0 });
 
-        // Selecciona todas las secciones con id "cambio_gif"
-        const cambioSections = document.querySelectorAll("#cambio_gif");
+        // Selecciona todas las secciones con la clase "cambio_gif_trigger"
+        const cambioSections = document.querySelectorAll(".cambio_gif_trigger");
 
         if (cambioSections.length === 0) {
           console.warn("⚠️ No se encontraron secciones con id #cambio_gif");
@@ -971,6 +1244,9 @@
         });
       })();
     </script>
+    <script src="../../js/gsap.min.js"></script>
+    <script src="../../js/ScrollTrigger.min.js"></script>
+    <script src="../../js/scroll-strip.js"></script>
     <script src="/js/cookie-consent.js"></script>
   </body>
 </html>
