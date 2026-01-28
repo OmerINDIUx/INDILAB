@@ -180,8 +180,23 @@
         @foreach($project->content['blocks'] as $block)
             @php $data = $block['data'] ?? []; @endphp
 
-            {{-- 1. HERO --}}
+            {{-- 1. HERO (Refactored: Fixed BG + Scrolling Title) --}}
             @if($block['type'] === 'hero')
+            <!-- Fixed Background Layer (Behind everything) -->
+            <div class="fixed-hero-bg" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 0;
+                background-image: url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); 
+                background-size: cover; 
+                background-position: center;
+                pointer-events: none;">
+            </div>
+
+            <!-- Title Section (Scrolls over Fixed BG) -->
             <section class="title-section-video" style="
                 height: 100vh; 
                 margin-top: 0 !important; 
@@ -189,11 +204,9 @@
                 display: flex; 
                 align-items: center; 
                 justify-content: center; 
-                background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); 
-                background-size: cover; 
-                background-position: center; 
+                background: transparent; /* No background here */
                 position: relative;
-                z-index: 10;">
+                z-index: 10; /* Above fixed bg */">
                 <div class="Title">
                     @if(!empty($data['h3']))
                         <h3 class="general-tittle">{{ $data['h3'] }}</h3>
@@ -217,7 +230,7 @@
 
             {{-- 3. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
             @if($block['type'] === 'phrase')
-            <section id="phrase-section">
+            <section class="blog-scroll-strip-phrase-section">
                 <div class="blog-scroll-strip__phrase">
                     <h2>{{ $data['text'] ?? '' }}</h2>
                 </div>
@@ -250,8 +263,17 @@
                     $imgs2 = $doSplit ? array_slice($images, ceil($count/2)) : [];
                 @endphp
 
+                {{-- PHRASE SECTION (Pinned) --}}
+                @if($doSplit && $phrase)
+                <section class="blog-scroll-strip-phrase-section">
+                    <div class="blog-scroll-strip__phrase">
+                        <h2>{{ $phrase }}</h2>
+                    </div>
+                </section>
+                @endif
+
                 {{-- RUN 1 --}}
-                <section id="run1" class="blog-scroll-strip">
+                <section class="blog-scroll-strip">
                     <div class="blog-scroll-strip__inner">
                         <div class="blog-scroll-strip__rail">
                             @foreach($imgs1 as $img)
@@ -265,18 +287,9 @@
                     </div>
                 </section>
 
-                {{-- PHRASE SECTION (Pinned) --}}
-                @if($doSplit && $phrase)
-                <section id="phrase-section">
-                    <div class="blog-scroll-strip__phrase">
-                        <h2>{{ $phrase }}</h2>
-                    </div>
-                </section>
-                @endif
-
                 {{-- RUN 2 --}}
                 @if($doSplit && count($imgs2) > 0)
-                <section id="run2" class="blog-scroll-strip">
+                <section class="blog-scroll-strip">
                     <div class="blog-scroll-strip__inner">
                         <div class="blog-scroll-strip__rail">
                             @foreach($imgs2 as $img)
