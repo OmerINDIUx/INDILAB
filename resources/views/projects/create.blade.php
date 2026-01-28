@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="/css/components/menu-header.css" />
 
 <!-- Shared CMS Styles -->
-<!-- Shared CMS Styles -->
 <link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
    <!--  Fix Preview Context overrides 
     /* .preview-viewport styles moved to Shadow DOM injection -->
 </style>
@@ -140,15 +140,21 @@
                 <input type="hidden" name="content[blocks][0][type]" value="hero">
                 <div class="form-group">
                     <label class="form-label">Categoría h3</label>
-                    <input type="text" name="content[blocks][0][data][h3]" class="form-control" placeholder="Ej: MÉXICO" oninput="updateBlockPreview('0', 'h3', this.value)">
+                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('hero-h3', 'a')"><i class="fas fa-link"></i></button></div>
+                    <div id="hero-h3-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('0', 'h3', this.innerHTML)">{{ old('content.blocks.0.data.h3', $heroBlock['data']['h3'] ?? '') }}</div>
+                    <input type="hidden" name="content[blocks][0][data][h3]" id="hero-h3" value="{{ old('content.blocks.0.data.h3', $heroBlock['data']['h3'] ?? '') }}">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Título h1 (PowerGrotesk)</label>
-                    <input type="text" name="content[blocks][0][data][h1]" class="form-control" placeholder="Ej: INFRAESTRUCTURA" oninput="updateBlockPreview('0', 'h1', this.value)">
+                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('hero-h1', 'a')"><i class="fas fa-link"></i></button></div>
+                    <div id="hero-h1-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('0', 'h1', this.innerHTML)">{{ old('content.blocks.0.data.h1', $heroBlock['data']['h1'] ?? '') }}</div>
+                    <input type="hidden" name="content[blocks][0][data][h1]" id="hero-h1" value="{{ old('content.blocks.0.data.h1', $heroBlock['data']['h1'] ?? '') }}">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Tagline h2</label>
-                    <input type="text" name="content[blocks][0][data][h2]" class="form-control" placeholder="Ej: BIORESPONSIVA" oninput="updateBlockPreview('0', 'h2', this.value)">
+                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('hero-h2', 'a')"><i class="fas fa-link"></i></button></div>
+                    <div id="hero-h2-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('0', 'h2', this.innerHTML)">{{ old('content.blocks.0.data.h2', $heroBlock['data']['h2'] ?? '') }}</div>
+                    <input type="hidden" name="content[blocks][0][data][h2]" id="hero-h2" value="{{ old('content.blocks.0.data.h2', $heroBlock['data']['h2'] ?? '') }}">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Imagen de Fondo Hero</label>
@@ -179,21 +185,47 @@
                             <div class="block-body">
                                 @if($type === 'intro_glass')
                                     <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                    <textarea id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" rows="4" class="form-control rt-textarea" oninput="updateBlockPreview('{{ $idx }}', 'text', this.value)">{{ $data['data']['text'] ?? '' }}</textarea>
+                                    <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
+                                    <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['data']['text'] ?? '' }}">
                                 @elseif($type === 'phrase')
-                                    <textarea name="content[blocks][{{ $idx }}][data][text]" rows="3" class="form-control" oninput="updateBlockPreview('{{ $idx }}', 'text', this.value)">{{ $data['data']['text'] ?? '' }}</textarea>
+                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                    <div id="textarea-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
+                                    <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['data']['text'] ?? '' }}">
                                 @elseif($type === 'text_large')
-                                    <div class="form-group"><label class="form-label">Subtítulo</label><input type="text" name="content[blocks][{{ $idx }}][data][h2]" class="form-control" value="{{ $data['data']['h2'] ?? '' }}" oninput="updateBlockPreview('{{ $idx }}', 'h2', this.value)"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">Subtítulo</label>
+                                        <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                        <div id="h2-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'h2', this.innerHTML)"></div>
+                                        <input type="hidden" id="h2-{{ $idx }}" name="content[blocks][{{ $idx }}][data][h2]" value="{{ $data['data']['h2'] ?? '' }}">
+                                    </div>
                                     <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                    <textarea id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][content]" rows="6" class="form-control rt-textarea" oninput="updateBlockPreview('{{ $idx }}', 'content', this.value)">{{ $data['data']['content'] ?? '' }}</textarea>
+                                    <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'content', this.innerHTML)"></div>
+                                    <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][content]" value="{{ $data['data']['content'] ?? '' }}">
                                 @elseif($type === 'gallery_rail')
+                                    <div class="form-group">
+                                        <label class="form-label">Frase Destacada (Scroll Strip)</label>
+                                        <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                        <div id="textarea-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateGalleryPreview('{{ $idx }}'); document.getElementById('textarea-{{ $idx }}').value = this.innerHTML;"></div>
+                                        <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][phrase]" value="{{ $data['data']['phrase'] ?? '' }}">
+                                    </div>
                                     <input type="file" name="content[blocks][{{ $idx }}][data][images][]" multiple class="form-control" onchange="previewGallery('{{ $idx }}', this)">
                                 @elseif($type === 'carousel_adv')
                                     <div class="slides-container" id="slides-{{ $idx }}">
                                         @if(isset($data['data']['slides'])) @foreach($data['data']['slides'] as $sIdx => $slide)
                                             <div class="slide-item" style="border:1px solid #eee; padding:15px; border-radius:8px; margin-bottom:15px;">
-                                                <input type="text" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][title]" class="form-control" value="{{ $slide['title'] ?? '' }}" oninput="updateCarouselPreview('{{ $idx }}')">
-                                                <textarea name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][description]" class="form-control" oninput="updateCarouselPreview('{{ $idx }}')">{{ $slide['description'] ?? '' }}</textarea>
+                                                <div class="form-group">
+                                                    <label class="form-label">Título</label>
+                                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('slide-title-{{ $idx }}-{{ $sIdx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                                    <div id="slide-title-{{ $idx }}-{{ $sIdx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateCarouselPreview('{{ $idx }}'); document.getElementById('slide-title-{{ $idx }}-{{ $sIdx }}').value = this.innerHTML;"></div>
+                                                    <input type="hidden" id="slide-title-{{ $idx }}-{{ $sIdx }}" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][title]" value="{{ $slide['title'] ?? '' }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label">Descripción</label>
+                                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                                    <div id="slide-desc-{{ $idx }}-{{ $sIdx }}-editor" class="rich-editor" contenteditable="true" oninput="updateCarouselPreview('{{ $idx }}'); document.getElementById('slide-desc-{{ $idx }}-{{ $sIdx }}').value = this.innerHTML;"></div>
+                                                    <input type="hidden" id="slide-desc-{{ $idx }}-{{ $sIdx }}" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][description]" value="{{ $slide['description'] ?? '' }}">
+                                                </div>
+                                                {{-- Media selection part remains the same --}}
                                                 <div class="media-selector-wrapper" style="margin-top:10px;">
                                                     <div class="media-preview-box" id="preview-{{ $idx }}-{{ $sIdx }}" 
                                                          style="background-image: url('{{ isset($slide['image']) ? asset('storage/'.$slide['image']) : '' }}'); height: 100px; background-size: cover; background-position: center; border-radius: 6px; margin-bottom: 5px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
@@ -236,8 +268,8 @@
         <template id="initial-preview-html">
             <div id="preview-blocks-list">
                 <div class="preview-item" id="prev-block-0" data-type="hero">
-                    <div class="Title" id="hero-preview-bg" style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); background-size: cover; background-position: center; padding: 40px 20px; border-radius: 12px; margin-bottom: 20px;">
-                        <span class="h3" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">{{ $heroBlock['data']['h3'] ?? old('content.blocks.0.data.h3', 'Categoría') }}</span>
+                    <div class="Title" id="hero-preview-bg" style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); background-size: cover; background-position: center; border-radius: 12px; margin-bottom: 20px; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
+                        <span class="h3 blog-category-badge {{ old('badge_color', 'cat-grad-1') }}" style="margin-bottom: 20px;">{{ $heroBlock['data']['h3'] ?? old('content.blocks.0.data.h3', 'Categoría') }}</span>
                         <h1>{{ $heroBlock['data']['h1'] ?? old('content.blocks.0.data.h1', 'TÍTULO') }}</h1>
                         <h2>{{ $heroBlock['data']['h2'] ?? old('content.blocks.0.data.h2', 'TAGLINE') }}</h2>
                     </div>
@@ -269,25 +301,48 @@
 <template id="tpl-intro_glass">
     <div class="block-item" data-type="intro_glass"><input type="hidden" name="content[blocks][INDEX][type]" value="intro_glass">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> INTRO GLASS</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
-        <div class="block-body"><div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div><textarea id="textarea-INDEX" name="content[blocks][INDEX][data][text]" rows="4" class="form-control rt-textarea" oninput="updateBlockPreview('INDEX', 'text', this.value)"></textarea></div>
+        <div class="block-body">
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
+            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
+        </div>
     </div>
 </template>
 <template id="tpl-phrase">
     <div class="block-item" data-type="phrase"><input type="hidden" name="content[blocks][INDEX][type]" value="phrase">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> GRAN FRASE</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
-        <div class="block-body"><textarea name="content[blocks][INDEX][data][text]" rows="3" class="form-control" oninput="updateBlockPreview('INDEX', 'text', this.value)"></textarea></div>
+        <div class="block-body">
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div id="textarea-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
+            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
+        </div>
     </div>
 </template>
 <template id="tpl-text_large">
     <div class="block-item" data-type="text_large"><input type="hidden" name="content[blocks][INDEX][type]" value="text_large">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> TEXTO LARGO</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
-        <div class="block-body"><div class="form-group"><label class="form-label">Subtítulo</label><input type="text" name="content[blocks][INDEX][data][h2]" class="form-control" oninput="updateBlockPreview('INDEX', 'h2', this.value)"></div><div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div><textarea id="textarea-INDEX" name="content[blocks][INDEX][data][content]" rows="6" class="form-control rt-textarea" oninput="updateBlockPreview('INDEX', 'content', this.value)"></textarea></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">Subtítulo</label>
+                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+                <div id="h2-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'h2', this.innerHTML)"></div>
+                <input type="hidden" id="h2-INDEX" name="content[blocks][INDEX][data][h2]">
+            </div>
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'content', this.innerHTML)"></div>
+            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][content]">
+        </div>
     </div>
 </template>
     <div class="block-item" data-type="gallery_rail"><input type="hidden" name="content[blocks][INDEX][type]" value="gallery_rail">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> SCROLL STRIP (PARALLAX)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
         <div class="block-body">
-            <div class="form-group"><label class="form-label">Frase Destacada (Scroll Strip)</label><textarea name="content[blocks][INDEX][data][phrase]" class="form-control" rows="2" placeholder="Ej: ¿Qué pasaría si...?" oninput="updateGalleryPreview('INDEX')"></textarea></div>
+            <div class="form-group">
+                <label class="form-label">Frase Destacada (Scroll Strip)</label>
+                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+                <div id="textarea-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateGalleryPreview('INDEX'); document.getElementById('textarea-INDEX').value = this.innerHTML;"></div>
+                <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][phrase]">
+            </div>
             <div class="gallery-items-container" id="gallery-items-INDEX" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap:10px;"></div>
             <button type="button" class="form-control" style="margin-top:10px;" onclick="addGalleryItem('INDEX')">+ Añadir Imagen</button>
         </div>
@@ -310,8 +365,24 @@
 <template id="tpl-slide-item">
     <div class="slide-item" style="border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 15px; position:relative;">
         <button type="button" class="block-btn remove" style="position:absolute; top:5px; right:5px; background:#f44336; color:white; border:none; width:20px; height:20px; border-radius:50%; cursor:pointer;" onclick="removeCarouselSlide(this, 'BLOCK_INDEX')">x</button>
-        <input type="text" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][title]" class="form-control" placeholder="Título" oninput="updateCarouselPreview('BLOCK_INDEX')">
-        <textarea name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][description]" class="form-control" placeholder="Descripción" oninput="updateCarouselPreview('BLOCK_INDEX')"></textarea>
+        
+        <div class="form-group">
+            <label class="form-label">Título</label>
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('slide-title-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div id="slide-title-BLOCK_INDEX-SLIDE_INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateCarouselPreview('BLOCK_INDEX'); document.getElementById('slide-title-BLOCK_INDEX-SLIDE_INDEX').value = this.innerHTML;"></div>
+            <input type="hidden" id="slide-title-BLOCK_INDEX-SLIDE_INDEX" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][title]">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <div class="rt-toolbar">
+                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button>
+            </div>
+            <div id="slide-desc-BLOCK_INDEX-SLIDE_INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateCarouselPreview('BLOCK_INDEX'); document.getElementById('slide-desc-BLOCK_INDEX-SLIDE_INDEX').value = this.innerHTML;"></div>
+            <input type="hidden" id="slide-desc-BLOCK_INDEX-SLIDE_INDEX" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][description]">
+        </div>
+
         <div class="media-selector-wrapper" style="margin-top:10px;">
             <div class="media-preview-box" id="preview-BLOCK_INDEX-SLIDE_INDEX" 
                  style="height: 100px; background-size: cover; background-position: center; border-radius: 6px; margin-bottom: 5px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
@@ -346,11 +417,18 @@
             linkLinks.setAttribute('href', '{{ asset('css/link-styles.css') }}');
             shadow.appendChild(linkLinks);
 
+            const linkBlog = document.createElement('link');
+            linkBlog.setAttribute('rel', 'stylesheet');
+            linkBlog.setAttribute('href', '{{ asset('css/blog.css') }}');
+            shadow.appendChild(linkBlog);
+
 
             // Internal Overrides (Force Mobile View @500px)
             const style = document.createElement('style');
             style.textContent = `
-                :host { display: block; overflow-y: auto; height: 100%; background: #1a1a1a; color: #eee; }
+                :host { display: block; overflow-y: auto; height: 100%; background: #111; color: #eee; }
+                
+                .preview-viewport { background: #111; min-height: 100%; }
                 
                 /* FONT FACES for Shadow DOM */
                 @font-face { font-family: "PowerGrotesk"; src: url("{{ asset('fonts/power_grotesk-medium-webfont.woff2') }}") format("woff2"); font-weight: 500; }
@@ -376,8 +454,10 @@
                 .TextLarge h2 { font-size: 1.3rem !important; } 
                 .TextLarge div { max-width: 95% !important; }
                 
-                .Title { width: 90% !important; font-size: 1.2rem !important; margin: 0 auto 20px auto !important; padding: 20px 0 !important; }
-                .Title h1 { font-size: 2.2rem !important; } 
+                .Title { width: 90% !important; margin: 0 auto 20px auto !important; padding: 40px 0 !important; text-align: center !important; }
+                .Title h1 { font-size: 2.2rem !important; margin: 10px 0 !important; line-height: 1.1 !important; } 
+                .Title h2 { font-size: 1.2rem !important; margin: 0 !important; font-weight: 400 !important; }
+                .Title .blog-category-badge { font-size: 1rem !important; padding: 4px 15px !important; }
                 
                 .span-resaltado { font-size: 1rem !important; margin: 20px 0 !important; }
                 
@@ -484,18 +564,27 @@
         if(cardHost && !cardHost.shadowRoot) {
             const cardShadow = cardHost.attachShadow({mode: 'open'});
              // External CSS
-            const link = document.createElement('link');
-            link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
-            cardShadow.appendChild(link);
+            const linkGlobal = document.createElement('link');
+            linkGlobal.setAttribute('rel', 'stylesheet');
+            linkGlobal.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
+            cardShadow.appendChild(linkGlobal);
+
+            const linkBlog = document.createElement('link');
+            linkBlog.setAttribute('rel', 'stylesheet');
+            linkBlog.setAttribute('href', '{{ asset('css/blog.css') }}');
+            cardShadow.appendChild(linkBlog);
             
             // Internal Overrides
             const style = document.createElement('style');
             style.textContent = `
-                :host { display: block; }
-                a { text-decoration: none; }
-                .blog-item1 { margin: 0; width: 100%; border:none; }
-                .blog-thumb { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+                :host { display: block; --main-font: "PowerGrotesk", sans-serif; --bold-font: "PowerGrotesk bold", sans-serif; }
+                a { text-decoration: none; color: inherit; }
+                .blog-item1 { margin: 0; width: 100%; border:none; background: transparent; }
+                .blog-thumb { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; }
+                .blog-info1 { padding: 15px 0; color: #eee; }
+                .blog-title1 { color: #eee !important; margin: 10px 0; font-family: var(--bold-font); }
+                .blog-category-badge { color: #fff !important; }
+                .blog-date1 { color: #888 !important; font-size: 0.8rem; }
             `;
             cardShadow.appendChild(style);
 
@@ -516,20 +605,40 @@
             const el = window.cardShadow.getElementById('card-category-preview');
             el.innerText = val;
             el.style.display = val ? 'inline-block' : 'none';
-            // Sync logic
-            const heroH3Input = document.querySelector('input[name="content[blocks][0][data][h3]"]');
-            if(heroH3Input) { heroH3Input.value = val; updateBlockPreview('0', 'h3', val); }
+            
+            // Sync logic to Hero H3
+            const heroH3Input = document.getElementById('hero-h3');
+            const heroH3Editor = document.getElementById('hero-h3-editor');
+            if(heroH3Input && heroH3Editor) { 
+                heroH3Input.value = val; 
+                heroH3Editor.innerHTML = val;
+                // Lock if category is selected
+                if (val) {
+                    heroH3Editor.contentEditable = "false";
+                    heroH3Editor.style.opacity = "0.7";
+                    heroH3Editor.style.cursor = "not-allowed";
+                } else {
+                    heroH3Editor.contentEditable = "true";
+                    heroH3Editor.style.opacity = "1";
+                    heroH3Editor.style.cursor = "text";
+                }
+                updateBlockPreview('0', 'h3', val); 
+            }
         }
         if(field === 'badge_color') {
             const el = window.cardShadow.getElementById('card-category-preview');
             if(el) el.className = 'blog-category-badge ' + val;
             
-             // SYNC TO HERO H3 COLOR
+             // SYNC TO HERO H3 COLOR in Preview
             if(window.previewShadow) {
                 const heroP = window.previewShadow.getElementById('prev-block-0');
                 if(heroP) {
                     const h3 = heroP.querySelector('.h3');
-                    if(h3) h3.className = 'h3 blog-category-badge ' + val;
+                    if(h3) {
+                        // Remove old cat-grad classes
+                        h3.classList.remove('cat-grad-1', 'cat-grad-2', 'cat-grad-3', 'cat-grad-4');
+                        h3.classList.add(val);
+                    }
                 }
             }
         }
@@ -578,6 +687,18 @@
             list.appendChild(newItem);
         }
 
+        // Initialize Rich Editors for this block
+        if(type === 'intro_glass') {
+            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+        } else if(type === 'phrase') {
+            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+        } else if(type === 'gallery_rail') {
+            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+        } else if(type === 'text_large') {
+            initRichEditor(`h2-${blockIndex}-editor`, `h2-${blockIndex}`);
+            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+        }
+
         blockIndex++;
         checkIntroGlassConstraint();
         initSortable();
@@ -606,15 +727,78 @@
         const container = document.getElementById('slides-' + blockIdx);
         const count = container.querySelectorAll('.slide-item').length;
         container.insertAdjacentHTML('beforeend', document.getElementById('tpl-slide-item').innerHTML.replace(/BLOCK_INDEX/g, blockIdx).replace(/SLIDE_INDEX/g, count));
+        
+        initRichEditor(`slide-title-${blockIdx}-${count}-editor`, `slide-title-${blockIdx}-${count}`);
+        initRichEditor(`slide-desc-${blockIdx}-${count}-editor`, `slide-desc-${blockIdx}-${count}`);
+
         updateCarouselPreview(blockIdx);
     }
 
     function formatText(id, tag) {
-        const textarea = document.getElementById(id); const start = textarea.selectionStart; const end = textarea.selectionEnd; const text = textarea.value.substring(start, end);
-        let replacement = "";
-        if(tag === 'b') replacement = `<b>${text}</b>`;
-        if(tag === 'a') { const url = prompt("Enter URL:", "https://"); replacement = `<a href="${url}" target="_blank">${text || 'Link'}</a>`; }
-        textarea.setRangeText(replacement, start, end, 'select'); textarea.dispatchEvent(new Event('input'));
+        const editor = document.getElementById(id + '-editor');
+        if (!editor) return;
+        
+        editor.focus();
+        if (tag === 'b') {
+            document.execCommand('bold', false, null);
+        } else if (tag === 'a') {
+            let currentUrl = "https://";
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const container = selection.getRangeAt(0).commonAncestorContainer;
+                const link = container.nodeName === 'A' ? container : container.parentNode;
+                if (link && link.nodeName === 'A') {
+                    currentUrl = link.getAttribute('href');
+                }
+            }
+
+            const url = prompt("Enter URL (clear to remove):", currentUrl);
+            if (url !== null) {
+                if (url === "") {
+                    document.execCommand('unlink', false, null);
+                } else {
+                    document.execCommand('createLink', false, url);
+                    // Selection might have changed, re-fetch to set target
+                    const newSelection = window.getSelection();
+                    if (newSelection.rangeCount > 0) {
+                        const newContainer = newSelection.getRangeAt(0).commonAncestorContainer;
+                        const newLink = newContainer.nodeName === 'A' ? newContainer : newContainer.parentNode;
+                        if (newLink && newLink.nodeName === 'A') {
+                            newLink.target = "_blank";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // NEW: Handle Rich Editor Content Sync
+    function initRichEditor(id, syncId) {
+        const editor = document.getElementById(id);
+        const textarea = document.getElementById(syncId);
+        if (!editor || !textarea) return;
+
+        // Load initial content
+        editor.innerHTML = textarea.value;
+
+        editor.addEventListener('input', () => {
+            textarea.value = editor.innerHTML;
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+
+        // Prevent bold in specific fields if needed
+        editor.addEventListener('keydown', (e) => {
+            if (editor.classList.contains('no-bold') && (e.ctrlKey || e.metaKey) && e.key === 'b') {
+                e.preventDefault();
+            }
+        });
+
+        // Clean paste
+        editor.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+        });
     }
 
     function updatePreview(scope, field, val) { if(scope === 'global' && field === 'title') updateBlockPreview('0', 'h1', val); }
@@ -656,18 +840,21 @@
         let html = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;">';
         const baseUrl = window.rootPath || '/';
         slides.forEach((s, sIdx) => {
-            const title = s.querySelector('input[type="text"]').value || "Slide";
-            const desc = s.querySelector('textarea').value || "";
+            const titleInput = s.querySelector(`input[id^="slide-title-"]`);
+            const descInput = s.querySelector(`input[id^="slide-desc-"]`);
+            const title = titleInput ? titleInput.value : "Slide";
+            const desc = descInput ? descInput.value : "";
+            
             const hiddenInput = s.querySelector('input[type="hidden"][name*="image"]');
-                const imgSrc = (hiddenInput && hiddenInput.value) ? `${baseUrl}storage/${hiddenInput.value}` : '';
-                
-                const noImgClass = imgSrc ? '' : 'no-image';
-                const imgTag = imgSrc ? `<img src="${imgSrc}" class="carrucel-imagen">` : '';
+            const imgSrc = (hiddenInput && hiddenInput.value) ? `${baseUrl}storage/${hiddenInput.value}` : '';
+            
+            const noImgClass = imgSrc ? '' : 'no-image';
+            const imgTag = imgSrc ? `<img src="${imgSrc}" class="carrucel-imagen">` : '';
 
-                html += `<div class="carousel-item card-item ${noImgClass}" id="p-slide-${idx}-${sIdx}">${imgTag}<div><h2>${title}</h2><p>${desc}</p></div></div>`;
-            });
-            pBlock.innerHTML = html + '</div>';
-        }
+            html += `<div class="carousel-item card-item ${noImgClass}" id="p-slide-${idx}-${sIdx}">${imgTag}<div><h2>${title}</h2><p>${desc}</p></div></div>`;
+        });
+        pBlock.innerHTML = html + '</div>';
+    }
 
         function removeCarouselSlide(btn, blockIdx) {
             if(confirm('Eliminar slide?')) {
@@ -706,7 +893,7 @@
         // For simplicity, we just dump them all in a rail for now.
         // Or we could try to emulate the split.
         
-        const phrase = document.querySelector(`textarea[name="content[blocks][${idx}][data][phrase]"]`)?.value || '';
+        const phrase = document.getElementById(`textarea-${idx}`)?.value || '';
         const items = document.getElementById('gallery-items-' + idx).querySelectorAll('.gallery-item');
         const root = window.rootPath || '/';
         
@@ -799,6 +986,34 @@
             btn.style.filter = 'none';
         }
     }
-    document.addEventListener('DOMContentLoaded', () => { initSortable(); checkIntroGlassConstraint(); });
+    function initializeAllRichEditors() {
+        // Init Hero Editors
+        initRichEditor('hero-h3-editor', 'hero-h3');
+        initRichEditor('hero-h1-editor', 'hero-h1');
+        initRichEditor('hero-h2-editor', 'hero-h2');
+
+        // Init Block Editors
+        document.querySelectorAll('.rich-editor').forEach(editor => {
+            if (editor.id.startsWith('hero-')) return; // Already done
+            const syncId = editor.id.replace('-editor', '');
+            initRichEditor(editor.id, syncId);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { 
+        initSortable(); 
+        checkIntroGlassConstraint(); 
+        initializeAllRichEditors();
+
+        // Initial state sync for Category
+        const catSelect = document.querySelector('select[name="category"]');
+        if (catSelect) {
+            updateCardPreview('category', catSelect.value);
+        }
+        const badgeColor = document.querySelector('input[name="badge_color"]:checked');
+        if (badgeColor) {
+            updateCardPreview('badge_color', badgeColor.value);
+        }
+    });
 </script>
 @endsection
