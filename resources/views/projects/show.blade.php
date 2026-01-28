@@ -71,11 +71,71 @@
             background: {{ ($project->theme ?? 'dark') == 'light' ? 'rgba(0,0,0,0.05)' : '#252525' }};
         }
 
-        .TextLarge div { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            text-align: justify; 
+        /* TextLarge & Related Styles - EXACT COPY from style-global-blog.css */
+        .TextLarge {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            background-color: #eeeeee;
+            padding-top: 0;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 3rem;
         }
+        
+        .TextLarge div { 
+            max-width: 80%; 
+            margin: 0 auto; 
+            text-align: justify !important; 
+            color: #1a1a1a;
+            line-height: 1.8;
+            max-width: 70%;
+        }
+
+        .TextLarge h2 {
+            text-align: left;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.2rem;
+            max-width: 70%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .span-resaltado {
+            display: block;
+            margin: 2.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 4px solid #1a1a1a;
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.4;
+            background: linear-gradient(
+                90deg,
+                rgba(26, 26, 26, 0.05) 0%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .span-blanco {
+            color: #eeeeee !important;
+            border-left: 4px solid #eee;
+            font-size: 1rem;
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .TextLarge div { max-width: 90%; }
+            .TextLarge h2 { max-width: 90%; }
+        }
+
 
         .blog-scroll-strip__rail { min-height: 100vh; overflow: visible; }
 
@@ -164,16 +224,14 @@
             </section>
             @endif
 
-            {{-- 4. TEXT LARGE (Aligned with card structure if needed, or custom) --}}
+            {{-- 4. TEXT LARGE (Refactored to match reference structure) --}}
             @if($block['type'] === 'text_large')
-            <section>
-                <div class="card">
+            <section class="TextLarge">
+                <div>
                     @if(!empty($data['h2']))
                         <h2>{{ $data['h2'] }}</h2>
                     @endif
-                    <div class="text-content">
-                        {!! $data['content'] ?? '' !!}
-                    </div>
+                    {!! $data['content'] ?? '' !!}
                 </div>
             </section>
             @endif
