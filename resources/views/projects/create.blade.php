@@ -1014,6 +1014,103 @@
         if (badgeColor) {
             updateCardPreview('badge_color', badgeColor.value);
         }
+
+        // SAVE BUTTON (AJAX)
+        const btnSave = document.getElementById('btn-save-draft');
+        const form = document.getElementById('projectForm');
+
+        btnSave.addEventListener('click', async (e) => {
+            e.preventDefault();
+            document.getElementById('form-action').value = 'save';
+            
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.getAttribute('action'), {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    console.error('Server error:', errText);
+                    try {
+                        const errJson = JSON.parse(errText);
+                        alert('Error del servidor: ' + (errJson.message || 'Error de validación'));
+                    } catch(e) {
+                        alert('Error del servidor (Status ' + response.status + '). Revisa la consola o los logs.');
+                    }
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    showToast('Cambios guardados como borrador.');
+                    if (result.redirect) {
+                        // If it's a new project, redirect to edit page to continue
+                        window.location.href = result.redirect;
+                    }
+                } else {
+                    alert('Error al guardar: ' + (result.message || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ocurrió un error al conectar con el servidor.');
+            } finally {
+                btnSave.disabled = false;
+                btnSave.innerHTML = 'Guardar Cambios';
+            }
+        });
+
+        // PUBLISH BUTTON (Standard Redirect)
+        const btnPublish = document.getElementById('btn-publish-project');
+        btnPublish.addEventListener('click', () => {
+            document.getElementById('form-action').value = 'publish';
+            form.submit();
+        });
     });
+
+    function showToast(message) {
+        let toast = document.createElement('div');
+        toast.className = 'cms-toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        
+        // Style toast
+        Object.assign(toast.style, {
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            background: '#1a1a1a',
+            color: '#fff',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            zIndex: '10000',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+            borderLeft: '4px solid #0f0',
+            transition: 'all 0.3s ease',
+            opacity: '0',
+            transform: 'translateY(20px)'
+        });
+
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        }, 10);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
 </script>
 @endsection

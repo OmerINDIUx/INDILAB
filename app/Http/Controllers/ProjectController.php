@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('created_at', 'desc')->get();
+        $projects = Project::with('lastEditor')->orderBy('created_at', 'desc')->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -71,8 +71,19 @@ class ProjectController extends Controller
             'badge_color' => $validated['badge_color'] ?? 'cat-grad-1',
             'published_at' => $validated['published_at'] ?? null,
             'coming_soon' => $request->boolean('coming_soon'),
-            'content' => $contentData,
         ]);
+
+        if ($request->action === 'save') {
+            $project->draft_content = $contentData;
+            $project->content = ['blocks' => []]; // Empty live content
+            $project->draft_last_editor_id = auth()->id();
+            $project->draft_updated_at = now();
+        } else {
+            $project->content = $contentData;
+            $project->draft_content = null;
+            $project->draft_last_editor_id = null;
+            $project->draft_updated_at = null;
+        }
         
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('projects', 'public');
@@ -80,6 +91,14 @@ class ProjectController extends Controller
         }
 
         $project->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true, 
+                'project' => $project,
+                'redirect' => route('work.edit', $project)
+            ]);
+        }
 
         return redirect()->route('work.index')->with('success', 'Project created successfully.');
     }
@@ -95,8 +114,11 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(Request $request, Project $project)
     {
+        if ($request->get('use_draft') && $project->draft_content) {
+            $project->content = $project->draft_content;
+        }
         return view('projects.edit', compact('project'));
     }
 
@@ -146,16 +168,30 @@ class ProjectController extends Controller
         $project->badge_color = $validated['badge_color'] ?? 'cat-grad-1';
         $project->published_at = $validated['published_at'] ?? null;
         $project->coming_soon = $request->boolean('coming_soon');
-        $project->content = $contentData;
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('projects', 'public');
             $project->image_path = $path;
         }
 
+        if ($request->action === 'save') {
+            $project->draft_content = $contentData;
+            $project->draft_last_editor_id = auth()->id();
+            $project->draft_updated_at = now();
+        } else {
+            $project->content = $contentData;
+            $project->draft_content = null; // Clear draft on publish
+            $project->draft_last_editor_id = null;
+            $project->draft_updated_at = null;
+        }
+
         $project->save();
 
-        return redirect()->route('work.show', $project)->with('success', 'Project updated successfully.');
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Cambios guardados como borrador.']);
+        }
+
+        return redirect()->route('work.show', $project)->with('success', 'Project updated and published successfully.');
     }
 
     private function processBlockFiles($request, $blocks)

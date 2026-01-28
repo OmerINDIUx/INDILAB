@@ -27,12 +27,17 @@ class Project extends Model
         'category',
         'meta_keywords',
         'badge_color',
+        'draft_content',
+        'draft_last_editor_id',
+        'draft_updated_at',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'coming_soon' => 'boolean',
         'content' => 'array',
+        'draft_content' => 'array',
+        'draft_updated_at' => 'datetime',
     ];
 
     protected static function boot()
@@ -50,6 +55,11 @@ class Project extends Model
                 $project->slug = Str::slug($project->title);
             }
         });
+    }
+
+    public function lastEditor()
+    {
+        return $this->belongsTo(User::class, 'draft_last_editor_id');
     }
 
     public function images()

@@ -341,8 +341,8 @@
         </template>
         
         <div class="publish-area" style="display:flex; gap:10px; flex-direction:column;">
-            <button type="button" class="btn-publish" style="background:#ccc; color:#333;" onclick="document.getElementById('form-action').value='save'; document.getElementById('projectForm').submit()">Guardar Cambios</button>
-            <button type="button" class="btn-publish" onclick="document.getElementById('form-action').value='publish'; document.getElementById('projectForm').submit()">Actualizar Proyecto</button>
+            <button type="button" class="btn-publish" style="background:#ccc; color:#333;" id="btn-save-draft">Guardar Cambios</button>
+            <button type="button" class="btn-publish" id="btn-publish-project">Actualizar Proyecto</button>
         </div>
     </aside>
 </div>
@@ -506,6 +506,8 @@
                 .Title h2 { font-size: 1.2rem !important; margin: 0 !important; font-weight: 400 !important; }
                 .Title .blog-category-badge { font-size: 1rem !important; padding: 4px 15px !important; }
                 
+                #draft-alert { display: none; } /* Removed old alert bar */
+                
                 .span-resaltado { font-size: 1rem !important; margin: 20px 0 !important; }
                 
                 /* CAROUSEL FIX: Image Left, Text Right */
@@ -642,7 +644,82 @@
         if (badgeColor) {
             updateCardPreview('badge_color', badgeColor.value);
         }
+
+        // AJAX SAVE
+        const btnSave = document.getElementById('btn-save-draft');
+        const form = document.getElementById('projectForm');
+
+        btnSave.addEventListener('click', async (e) => {
+            e.preventDefault();
+            document.getElementById('form-action').value = 'save';
+            
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.getAttribute('action'), {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }
+                });
+
+                if (!response.ok) {
+                    const errText = await response.text();
+                    console.error('Server error:', errText);
+                    try {
+                        const errJson = JSON.parse(errText);
+                        alert('Error del servidor: ' + (errJson.message || 'Error de validación'));
+                    } catch(e) {
+                        alert('Error del servidor (Status ' + response.status + '). Revisa la consola o los logs.');
+                    }
+                    return;
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    showToast('Cambios guardados como borrador.');
+                    // Show draft alert if it was hidden
+                    const alert = document.getElementById('draft-alert');
+                    if (alert) alert.style.display = 'flex';
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Ocurrió un error al guardar.');
+            } finally {
+                btnSave.disabled = false;
+                btnSave.innerHTML = 'Guardar Cambios';
+            }
+        });
+
+        // PUBLISH
+        const btnPublish = document.getElementById('btn-publish-project');
+        btnPublish.addEventListener('click', () => {
+            document.getElementById('form-action').value = 'publish';
+            form.submit();
+        });
     });
+
+    function showToast(message) {
+        let toast = document.createElement('div');
+        toast.className = 'cms-toast';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        Object.assign(toast.style, {
+            position: 'fixed', bottom: '30px', right: '30px', background: '#1a1a1a', color: '#fff',
+            padding: '12px 24px', borderRadius: '8px', zIndex: '10000', borderLeft: '4px solid #0f0',
+            opacity: '0', transform: 'translateY(20px)', transition: 'all 0.3s ease'
+        });
+        setTimeout(() => { toast.style.opacity = '1'; toast.style.transform = 'translateY(0)'; }, 10);
+        setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(20px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+    }
 
     function initializeAllRichEditors() {
         // Init Hero Editors

@@ -9,6 +9,7 @@
     <meta name="description" content="@yield('meta_description', 'INDI Lab Project')" />
     <meta name="keywords" content="@yield('meta_keywords', 'indi, lab')" />
     <meta name="author" content="Codrops" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 

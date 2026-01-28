@@ -158,10 +158,80 @@
 
 @auth
 <div style="position: fixed; bottom: 30px; left: 30px; z-index: 99999;">
-    <a href="{{ route('work.edit', $project) }}" style="background: rgb(226, 70, 43); color: #fff; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+    <button type="button" 
+        onclick="handleEditClick(this)"
+        data-has-draft="{{ $project->draft_content ? 'true' : 'false' }}"
+        data-draft-date="{{ $project->draft_updated_at ? $project->draft_updated_at->format('d/m/Y H:i') : '' }}"
+        data-draft-user="{{ $project->lastEditor ? $project->lastEditor->name : 'Sistema' }}"
+        data-edit-url="{{ route('work.edit', $project) }}"
+        style="background: rgb(226, 70, 43); color: #fff; border: none; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 10px 20px rgba(0,0,0,0.2); cursor: pointer;">
         <i class="fas fa-edit"></i> Edit Project
-    </a>
+    </button>
 </div>
+
+{{-- Recovery Modal --}}
+<div id="recovery-modal" class="cms-modal-overlay" style="display: none;">
+    <div class="cms-modal">
+        <i class="fas fa-file-signature" style="font-size: 3rem; color: #1a1a1a; margin-bottom: 20px; display: block;"></i>
+        <h3>Recuperar Borrador</h3>
+        <p>Hemos detectado cambios guardados que aún no se han publicado. ¿Cómo te gustaría continuar?</p>
+        
+        <div class="draft-meta">
+            <div><i class="far fa-calendar-alt"></i> <strong>Fecha:</strong> <span id="modal-draft-date"></span></div>
+            <div><i class="far fa-user"></i> <strong>Usuario:</strong> <span id="modal-draft-user"></span></div>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-modal btn-secondary" onclick="openLive()">Usar Versión Publicada</button>
+            <button type="button" class="btn-modal btn-primary" onclick="openDraft()">Cargar Borrador</button>
+        </div>
+        <button type="button" onclick="closeRecoveryModal()" style="margin-top: 20px; background: none; border: none; color: #888; text-decoration: underline; cursor: pointer;">Cancelar</button>
+    </div>
+</div>
+
+<style>
+    .cms-modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 20000;
+    }
+    .cms-modal {
+        background: #fff; color: #1a1a1a !important; padding: 40px; border-radius: 16px;
+        max-width: 500px; width: 90%; text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .cms-modal h3 { font-size: 1.8rem; margin-bottom: 15px; font-weight: 800; color: #1a1a1a; }
+    .cms-modal p { color: #666; margin-bottom: 30px; line-height: 1.6; }
+    .cms-modal .draft-meta {
+        background: #f8f8f8; padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #eee; text-align: left; color: #1a1a1a;
+    }
+    .cms-modal .modal-actions { display: flex; gap: 15px; justify-content: center; }
+    .cms-modal .modal-actions button {
+        padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer;
+        transition: all 0.2s; border: none; font-size: 1rem; flex: 1;
+    }
+    .cms-modal .btn-primary { background: #1a1a1a; color: #fff; }
+    .cms-modal .btn-secondary { background: #eee; color: #333; }
+</style>
+
+<script>
+    let currentEditUrl = '';
+    function handleEditClick(btn) {
+        const hasDraft = btn.getAttribute('data-has-draft') === 'true';
+        currentEditUrl = btn.getAttribute('data-edit-url');
+        if (hasDraft) {
+            document.getElementById('modal-draft-date').innerText = btn.getAttribute('data-draft-date');
+            document.getElementById('modal-draft-user').innerText = btn.getAttribute('data-draft-user');
+            document.getElementById('recovery-modal').style.display = 'flex';
+        } else {
+            window.location.href = currentEditUrl;
+        }
+    }
+    function openDraft() { window.location.href = currentEditUrl + (currentEditUrl.includes('?') ? '&' : '?') + 'use_draft=1'; }
+    function openLive() { window.location.href = currentEditUrl; }
+    function closeRecoveryModal() { document.getElementById('recovery-modal').style.display = 'none'; }
+</script>
 @endauth
 
 <h3 id="sticky-header-clone" class="sticky-header-clone">
