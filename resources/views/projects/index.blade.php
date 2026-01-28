@@ -8,6 +8,11 @@
 @endpush
 
 @section('content')
+    @if (session('success'))
+        <div style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin: 20px auto; max-width: 1200px; text-align: center;">
+            {{ session('success') }}
+        </div>
+    @endif
     <!-- Hero -->
     <section class="hero-carousel-section">
       <div class="carousel-background">
@@ -54,7 +59,12 @@
         @forelse($projects as $project)
             <article class="blog-item1" data-tags="Infraestructura"> 
               <!-- Note: Tags are static for now. We can add a 'category' field to Project model later. -->
-              <a href="{{ route('work.show', $project) }}">
+              @if($project->coming_soon)
+                <div style="cursor: default; display: block; height: 100%;">
+              @else
+                <a href="{{ route('work.show', $project) }}">
+              @endif
+
                 @if($project->image_path)
                     <img
                       src="{{ asset('storage/' . $project->image_path) }}"
@@ -70,12 +80,20 @@
                     />
                 @endif
                 <div class="blog-info1">
+                  @if($project->category)
+                    <span class="blog-category-badge {{ $project->badge_color ?? 'cat-grad-1' }}">{{ $project->category }}</span>
+                  @endif
                   <h3 class="blog-title1">{{ $project->title }}</h3>
                   <p class="blog-date1">
-                      {{ $project->published_at ? $project->published_at->format('F Y') : 'Draft' }}
+                      {{ $project->coming_soon ? 'PRÓXIMAMENTE' : ($project->published_at ? $project->published_at->format('F Y') : 'Draft') }}
                   </p>
                 </div>
-              </a>
+
+              @if($project->coming_soon)
+                </div>
+              @else
+                </a>
+              @endif
             </article>
         @empty
             <p style="color: white; padding: 20px;">No projects found. <a href="{{ route('work.create') }}" style="text-decoration: underline;">Create one?</a></p>

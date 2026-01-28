@@ -1,167 +1,323 @@
 @extends('layouts.app')
 
 @section('title', $project->meta_title ?? $project->title . ' | INDI Lab')
+@section('meta_description', $project->meta_description ?? $project->short_description ?? 'INDI Lab Project')
 
-@section('body-class', 'dark-theme')
+@section('html-class', ($project->theme ?? 'dark') == 'light' ? 'light-theme' : 'dark-theme')
 
 @push('css')
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style-global-blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/link-styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
+    <style>
+        :root {
+            --cms-theme-bg: {{ ($project->theme ?? 'dark') == 'light' ? '#eeeeee' : '#1a1a1a' }};
+            --cms-theme-text: {{ ($project->theme ?? 'dark') == 'light' ? '#1a1a1a' : '#eeeeee' }};
+        }
+        
+        /* Layout Fixes & Forced Visibility */
+        body {
+            padding-left: 100px !important;
+            background-color: var(--cms-theme-bg) !important;
+            color: var(--cms-theme-text) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        main {
+            position: relative;
+            z-index: 10;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+
+        /* Ensure texts are visible even if translation fails */
+        [data-i18n]:empty::before {
+            content: attr(data-i18n);
+            opacity: 0.5;
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 768px) {
+            body { padding-left: 0 !important; }
+        }
+
+        .sticky-header-clone { 
+            background-color: var(--cms-theme-bg); 
+            color: var(--cms-theme-text); 
+            z-index: 9000;
+        }
+        
+        .Title { 
+            padding: 0 5vw; 
+            max-width: 1200px; 
+            margin: 4vh auto; 
+            text-align: center;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .carousel-item.card-item {
+            display: grid !important;
+            grid-template-columns: 35% 1fr;
+            grid-template-areas: "image title" "image text";
+            gap: 2rem;
+            width: 85vw;
+            max-width: 1400px;
+            background: {{ ($project->theme ?? 'dark') == 'light' ? 'rgba(0,0,0,0.05)' : '#252525' }};
+        }
+
+        .TextLarge div { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            text-align: justify; 
+        }
+
+        .blog-scroll-strip__rail { min-height: 100vh; overflow: visible; }
+
+        @media (max-width: 768px) {
+            .carousel-item.card-item {
+                grid-template-columns: 1fr;
+                grid-template-areas: "image" "title" "text";
+                width: 90vw;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
 
+<script>
+    document.documentElement.classList.remove('light-theme', 'dark-theme');
+    document.documentElement.classList.add('{{ ($project->theme ?? "dark") }}-theme');
+</script>
+
 @auth
-<!-- Admin Controls -->
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <a href="{{ route('work.edit', $project) }}" style="background: white; color: black; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-right: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">Edit</a>
-    <form action="{{ route('work.destroy', $project) }}" method="POST" style="display: inline-block;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" style="background: #dc3545; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" onclick="return confirm('Are you sure?')">Delete</button>
-    </form>
+<div style="position: fixed; bottom: 30px; left: 30px; z-index: 99999;">
+    <a href="{{ route('work.edit', $project) }}" style="background: rgb(226, 70, 43); color: #fff; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+        <i class="fas fa-edit"></i> Edit Project
+    </a>
 </div>
 @endauth
 
-<!-- 1. Hero Section -->
-<section class="title-section-video" style="padding-top: 150px; min-height: 60vh; display: flex; align-items: flex-end; padding-bottom: 50px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('{{ $project->image_path ? asset('storage/' . $project->image_path) : '' }}'); background-size: cover; background-position: center;">
-    <div class="Title" style="padding: 0 5vw;">
-        @if($project->subtitle)
-            <h3 class="general-tittle" style="opacity: 0.9;">{{ $project->subtitle }}</h3>
-        @endif
-        <h1 style="font-size: 4rem; line-height: 1.1;">{{ $project->title }}</h1>
-    </div>
-</section>
+<h3 id="sticky-header-clone" class="sticky-header-clone">
+    @if(isset($project->content['blocks']))
+        @foreach($project->content['blocks'] as $block)
+            @if($block['type'] === 'hero')
+                {{ $block['data']['h3'] ?? $project->title }}
+            @endif
+        @endforeach
+    @endif
+</h3>
 
-    <!-- DYNAMIC BLOCK RENDERER -->
+<main>
     @if(isset($project->content['blocks']) && is_array($project->content['blocks']))
-        
+        @php $runCounter = 1; @endphp
         @foreach($project->content['blocks'] as $block)
             @php $data = $block['data'] ?? []; @endphp
 
-            {{-- 1. HERO BLOCK --}}
+            {{-- 1. HERO --}}
             @if($block['type'] === 'hero')
-            <section class="title-section-video" style="padding-top: 150px; min-height: 60vh; display: flex; align-items: flex-end; padding-bottom: 50px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); background-size: cover; background-position: center;">
-                <div class="Title" style="padding: 0 5vw;">
-                    @if(!empty($data['subtitle']))
-                        <h3 class="general-tittle" style="opacity: 0.9;">{{ $data['subtitle'] }}</h3>
+            <section class="title-section-video" style="
+                height: 100vh; 
+                margin-top: 0 !important; 
+                padding-top: 0; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); 
+                background-size: cover; 
+                background-position: center; 
+                position: relative;
+                z-index: 10;">
+                <div class="Title">
+                    @if(!empty($data['h3']))
+                        <h3 class="general-tittle">{{ $data['h3'] }}</h3>
                     @endif
-                    <h1 style="font-size: 4rem; line-height: 1.1;">{{ $data['title'] ?? '' }}</h1>
+                    <h1>{{ $data['h1'] ?? $project->title }}</h1>
+                    @if(!empty($data['h2']))
+                        <h2>{{ $data['h2'] }}</h2>
+                    @endif
                 </div>
             </section>
             @endif
 
-            {{-- 2. INTRO TEXT BLOCK --}}
-            @if($block['type'] === 'intro')
-            <section class="TextLarge" style="padding-top: 80px; padding-bottom: 80px; background: #000;">
-                <div style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
-                    <p style="font-size: 1.5rem; line-height: 1.6; color: #ddd;">
-                        {!! nl2br(e($data['text'] ?? '')) !!}
-                    </p>
+            {{-- 2. INTRO GLASS --}}
+            @if($block['type'] === 'intro_glass')
+            <section>
+                <div class="card">
+                    <p>{!! $data['text'] ?? '' !!}</p>
                 </div>
             </section>
             @endif
 
-            {{-- 3. QUOTE BLOCK --}}
-            @if($block['type'] === 'quote')
-            <section id="phrase-section" style="padding: 100px 0; background: #111;">
-              <div class="blog-scroll-strip__phrase" style="text-align: center; max-width: 1200px; margin: 0 auto;">
-                <h2 style="font-size: 3rem; font-weight: 300; letter-spacing: -1px; color: #fff;">
-                    "{{ $data['text'] ?? '' }}"
-                </h2>
-              </div>
+            {{-- 3. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
+            @if($block['type'] === 'phrase')
+            <section id="phrase-section">
+                <div class="blog-scroll-strip__phrase">
+                    <h2>{{ $data['text'] ?? '' }}</h2>
+                </div>
             </section>
             @endif
 
-            {{-- 4. RICH TEXT SECTION --}}
-            @if($block['type'] === 'text')
-             <section class="TextLarge" style="padding: 80px 0; background: #000;">
-              <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
-                @if(!empty($data['title']))
-                    <h2 style="font-size: 2rem; margin-bottom: 30px; letter-spacing: -0.5px;">{{ $data['title'] }}</h2>
+            {{-- 4. TEXT LARGE (Aligned with card structure if needed, or custom) --}}
+            @if($block['type'] === 'text_large')
+            <section>
+                <div class="card">
+                    @if(!empty($data['h2']))
+                        <h2>{{ $data['h2'] }}</h2>
+                    @endif
+                    <div class="text-content">
+                        {!! $data['content'] ?? '' !!}
+                    </div>
+                </div>
+            </section>
+            @endif
+
+            {{-- 5. SCROLL STRIP (blog-scroll-strip) - Split Logic per reference --}}
+            @if($block['type'] === 'gallery_rail' && !empty($data['images']))
+                @php
+                    $images = $data['images'];
+                    $count = count($images);
+                    $phrase = $data['phrase'] ?? null;
+                    // Reference requires 4-8 images + phrase for full effect.
+                    // If phrase exists and we have enough images, we split them into run1 and run2 to wrap the phrase.
+                    $doSplit = !empty($phrase) && $count >= 4;
+                    
+                    $imgs1 = $doSplit ? array_slice($images, 0, ceil($count/2)) : $images;
+                    $imgs2 = $doSplit ? array_slice($images, ceil($count/2)) : [];
+                @endphp
+
+                {{-- RUN 1 --}}
+                <section id="run1" class="blog-scroll-strip">
+                    <div class="blog-scroll-strip__inner">
+                        <div class="blog-scroll-strip__rail">
+                            @foreach($imgs1 as $img)
+                                @if(is_string($img))
+                                <figure class="blog-scroll-card">
+                                    <img src="{{ asset('storage/' . $img) }}" />
+                                </figure>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+
+                {{-- PHRASE SECTION (Pinned) --}}
+                @if($doSplit && $phrase)
+                <section id="phrase-section">
+                    <div class="blog-scroll-strip__phrase">
+                        <h2>{{ $phrase }}</h2>
+                    </div>
+                </section>
                 @endif
-                <div style="font-size: 1.2rem; line-height: 1.8; color: #ccc;">
-                    {!! nl2br(e($data['content'] ?? '')) !!}
-                </div>
-              </div>
-            </section>
+
+                {{-- RUN 2 --}}
+                @if($doSplit && count($imgs2) > 0)
+                <section id="run2" class="blog-scroll-strip">
+                    <div class="blog-scroll-strip__inner">
+                        <div class="blog-scroll-strip__rail">
+                            @foreach($imgs2 as $img)
+                                @if(is_string($img))
+                                <figure class="blog-scroll-card">
+                                    <img src="{{ asset('storage/' . $img) }}" />
+                                </figure>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+                @endif
             @endif
 
-            {{-- 5. GALLERY STRIP --}}
-            @if($block['type'] === 'gallery' && !empty($data['images']))
-            <section class="blog-scroll-strip" style="overflow: hidden; padding: 50px 0;">
-              <div class="blog-scroll-strip__inner">
-                <div class="blog-scroll-strip__rail" style="display: flex; gap: 20px;">
-                  @foreach($data['images'] as $img)
-                  <figure class="blog-scroll-card" style="min-width: 400px; height: 300px; flex-shrink: 0; margin: 0;">
-                    <img src="{{ asset('storage/' . $img) }}" style="width: 100%; height: 100%; object-fit: cover;" />
-                  </figure>
-                  @endforeach
+            {{-- 6. CAROUSEL ADV (Custom Horizontal Section) --}}
+            @if($block['type'] === 'carousel_adv' && !empty($data['slides']))
+            <section class="horizontal-scroll-section">
+                <div class="carousel-wrapper">
+                    @foreach($data['slides'] as $slide)
+                    <div class="carousel-item card-item">
+                        @if(!empty($slide['image']))
+                            <img src="{{ asset('storage/' . $slide['image']) }}" class="carrucel-imagen" />
+                        @endif
+                        <h2 style="grid-area: title;">
+                            @if(!empty($slide['link']))
+                                <a href="{{ $slide['link'] }}" target="_blank">{{ $slide['title'] ?? '' }}</a>
+                            @else
+                                {{ $slide['title'] ?? '' }}
+                            @endif
+                        </h2>
+                        <p style="grid-area: text;">{{ $slide['description'] ?? '' }}</p>
+                    </div>
+                    @endforeach
                 </div>
-              </div>
             </section>
             @endif
-
-            {{-- 6. CAROUSEL --}}
-            @if($block['type'] === 'carousel' && !empty($data['slides']))
-            <section class="horizontal-scroll-section" style="padding: 100px 0; background: #111;">
-              <div class="carousel-wrapper" style="display: flex; gap: 40px; overflow-x: auto; padding: 0 5vw; padding-bottom: 20px;">
-                @foreach($data['slides'] as $slide)
-                <div class="carousel-item card-item" style="min-width: 350px; flex-shrink: 0;">
-                  @if(!empty($slide['image']))
-                    <img src="{{ asset('storage/' . $slide['image']) }}" class="carrucel-imagen" style="width: 100%; height: 250px; object-fit: cover; margin-bottom: 20px;" />
-                  @endif
-                  <h2 style="font-size: 1.5rem; margin-bottom: 10px;">
-                    @if(!empty($slide['link']))
-                        <a href="{{ $slide['link'] }}" target="_blank" style="color:white; text-decoration:underline;">{{ $slide['title'] ?? '' }}</a>
-                    @else
-                        {{ $slide['title'] ?? '' }}
-                    @endif
-                  </h2>
-                  <p style="color: #aaa;">{{ $slide['description'] ?? '' }}</p>
-                </div>
-                @endforeach
-              </div>
-            </section>
-            @endif
-
         @endforeach
-
-    @elseif(is_array($project->content))
-        {{-- Fallback for the previous Tabbed structure (if mixed use exists during transition) --}}
-        {{-- ... (Previous rendering logic could go here, but let's assume Migration is absolute for new projects) --}}
-        
-        {{-- Actually, let's keep the old logic as fallback or just migrate fully. 
-             If 'blocks' key is missing, maybe it's the old structure? 
-             Let's support legacy raw HTML as final fallback. 
-        --}}
-        <div class="project-content">
-             {{-- Attempt to render old fields if they exist and no blocks --}}
-             @if(!empty($project->content['intro_text']))
-                <section class="TextLarge"><p>{{ $project->content['intro_text'] }}</p></section>
-             @endif
-             {{-- ... --}}
-        </div>
-
     @else
-        {{-- LEGACY RAW HTML --}}
-        <div class="project-content">
-            {!! $project->content !!}
+        <div style="padding: 100px; text-align: center;">
+            <h2>Este proyecto aún no tiene contenido.</h2>
+            <p>Usa el editor para añadir bloques.</p>
         </div>
     @endif
+</main>
+
+@include('partials.newsletter')
 
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/gsap.min.js') }}"></script>
-    <script src="{{ asset('js/ScrollTrigger.min.js') }}"></script>
+    <script type="module" src="{{ asset('js/demo4/traduction.js') }}"></script>
     <script src="{{ asset('js/scroll-strip.js') }}"></script>
-    <script src="{{ asset('js/horizontal-scroll.js') }}"></script>
-    
     <script>
-       if (typeof gsap !== "undefined") {
-          gsap.registerPlugin(ScrollTrigger);
-          // Re-init custom scripts if necessary
-       }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined') {
+                console.error("GSAP not loaded");
+                return;
+            }
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            const header = document.getElementById('sticky-header-clone');
+            if (header) {
+                // Force visibility debug
+                console.log("Sticky Header Found");
+                
+                ScrollTrigger.create({
+                    start: "top top", // Trigger immediately at top for testing or slight scroll
+                    end: "max",
+                    onUpdate: (self) => {
+                        // Show if scrolled more than 50px OR scrolling UP
+                        if (self.scroll() > 50 && self.direction === 1) header.classList.add('visible');
+                        else if (self.direction === -1) header.classList.add('visible'); // Show on scroll up
+                        else if (self.scroll() < 50) header.classList.remove('visible'); // Hide at very top
+                    }
+                });
+            }
+
+            document.querySelectorAll('.horizontal-scroll-section').forEach(section => {
+                const wrapper = section.querySelector('.carousel-wrapper');
+                if (!wrapper) return;
+                
+                const scrollAmount = wrapper.scrollWidth - window.innerWidth;
+                
+                gsap.to(wrapper, {
+                    x: -scrollAmount - 100,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section, pin: true, scrub: 1, invalidateOnRefresh: true,
+                        end: () => "+=" + (scrollAmount + 500)
+                    }
+                });
+            });
+
+            // Replicated animations for cards and text
+            gsap.utils.toArray('.card, .blog-scroll-strip__phrase, .text-content').forEach(el => {
+                gsap.from(el, { y: 80, opacity: 0, duration: 1.5, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 95%" } });
+            });
+        });
     </script>
 @endpush

@@ -14,16 +14,24 @@ class Project extends Model
         'title',
         'slug',
         'subtitle',
+        'sticky_title',
         'short_description',
+        'tags',
+        'theme',
         'content',
         'image_path',
         'meta_title',
         'meta_description',
         'published_at',
+        'coming_soon',
+        'category',
+        'meta_keywords',
+        'badge_color',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'coming_soon' => 'boolean',
         'content' => 'array',
     ];
 

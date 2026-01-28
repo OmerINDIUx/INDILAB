@@ -1,190 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Add New Project | INDI Lab')
+@section('title', 'Create Project | INDI Lab')
 
-@section('body-class', 'dark-theme')
+@section('body-class', 'light-theme')
 
 @section('content')
-<!-- External Libs for Builder -->
+<!-- External Libs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/components/menu-header.css" />
 
-<style>
-    .cms-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding-top: 50px;
-        color: white;
-    }
-    .form-group {
-        margin-bottom: 25px;
-    }
-    .form-label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #ddd;
-    }
-    .form-control {
-        width: 100%;
-        padding: 12px;
-        background: #222;
-        border: 1px solid #444;
-        color: white;
-        border-radius: 4px;
-        font-family: inherit;
-    }
-    .form-control:focus {
-        border-color: #777;
-        outline: none;
-    }
-    
-    /* Block Builder UI Refinements */
-    .blocks-container {
-        margin-top: 40px;
-        border-top: 2px solid #444;
-        padding-top: 20px;
-    }
-    .block-item {
-        background: #2a2a2a;
-        border: 1px solid #444;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        overflow: hidden;
-        transition: transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    .block-item:hover {
-        border-color: #666;
-    }
-    .block-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #333;
-        padding: 12px 20px;
-        cursor: move; /* Drag handle */
-        border-bottom: 1px solid #444;
-    }
-    .block-header:hover {
-        background: #3a3a3a;
-    }
-    .block-title {
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.85em;
-        color: #aaa;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .block-actions {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    .block-btn {
-        background: transparent;
-        border: none;
-        color: #888;
-        cursor: pointer;
-        font-size: 1.1em;
-        transition: color 0.2s;
-    }
-    .block-btn:hover {
-        color: #fff;
-    }
-    .block-btn.remove {
-        color: #dc3545;
-    }
-    .block-body {
-        padding: 20px;
-        display: block;
-    }
-    .block-body.collapsed {
-        display: none;
-    }
-
-    /* Add Block Grid UI */
-    .add-block-area {
-        background: #1e1e1e;
-        padding: 20px;
-        border-radius: 8px;
-        border: 2px dashed #444;
-        text-align: center;
-        margin-top: 30px;
-    }
-    .add-block-title {
-        color: #fff;
-        margin-bottom: 20px;
-        font-size: 1.1em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .block-selection-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-    }
-    .add-block-card {
-        background: #2a2a2a;
-        padding: 15px;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s;
-        border: 1px solid #333;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    .add-block-card:hover {
-        background: #333;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-    .add-block-card i {
-        font-size: 2em;
-        color: #555;
-    }
-    .add-block-card span {
-        font-size: 0.9em;
-        color: #ccc;
-        font-weight: bold;
-    }
-    .submit-btn {
-        background: white;
-        color: black;
-        padding: 15px 40px;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 1.1em;
-        margin-top: 30px;
-        width: 100%;
-        border-radius: 5px;
-        transition: transform 0.2s;
-    }
-    .submit-btn:hover {
-        transform: scale(1.01);
-    }
-    .drag-handle-icon {
-        color: #555;
-        margin-right: 10px;
-    }
+<!-- Shared CMS Styles -->
+<!-- Shared CMS Styles -->
+<link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}" />
+    /* Fix Preview Context overrides */
+    /* .preview-viewport styles moved to Shadow DOM injection */
 </style>
 
-<section class="title-section-video" style="padding-top: 120px;">
-    <div class="Title">
-        <h1>New Project</h1>
-    </div>
-</section>
+<div class="cms-container">
+    <div class="editor-main">
+        <h1 style="font-weight: 900; font-size: 2.5rem; margin-bottom: 10px; letter-spacing: -0.02em;">Crear Nuevo Proyecto</h1>
+        <p style="color: #888; margin-bottom: 40px;">Editor profesional (PowerGrotesk + Production Classes).</p>
 
-<section class="TextLarge" style="position: relative; z-index: 10; background-color: #1a1a1a; min-height: 100vh;">
-    <div class="cms-container">
-        
         @if ($errors->any())
-            <div style="background-color: #5c1e23; color: #ffcccc; padding: 15px; border-radius: 5px; margin-bottom: 30px;">
+            <div style="background-color: #fceaea; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 30px;">
                 <ul style="margin: 0; padding-left: 20px;">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -193,293 +33,766 @@
             </div>
         @endif
 
+        @php $heroBlock = ['data' => []]; @endphp
+
         <form action="{{ route('work.store') }}" method="POST" enctype="multipart/form-data" id="projectForm">
             @csrf
             
-            <!-- Global Project Details -->
-            <div class="block-item" style="border: 1px solid #555;">
-                <div class="block-header" style="background: #222; cursor: default;">
-                     <span class="block-title"><i class="fas fa-globe"></i> GLOBAL SETTINGS</span>
-                </div>
-                <div class="block-body">
-                    <div class="form-group">
-                        <label class="form-label" for="title">Project Title</label>
-                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="subtitle">Subtitle</label>
-                        <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ old('subtitle') }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="short_description">Short Summary (SEO)</label>
-                        <textarea name="short_description" id="short_description" rows="2" class="form-control">{{ old('short_description') }}</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="image">Main Cover Image</label>
-                        <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                    </div>
-                </div>
-            </div>
-
-            <!-- BLOCKS BUILDER AREA -->
             <div class="blocks-container">
-                <h3 style="color: #fff; margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
-                    <i class="fas fa-layer-group"></i> Content Blocks
-                </h3>
-                
-                <div id="blocks-wrapper">
-                    <!-- Dynamic Blocks will serve here -->
-                </div>
+                <div class="section-header">Configuración Global & Card Preview</div>
+                <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
+                    
+                    <!-- Left Column: Inputs -->
+                    <div class="global-inputs">
+                        <div class="form-group">
+                            <label class="form-label">Título del Proyecto (Global)</label>
+                            <input type="text" name="title" class="form-control" placeholder="Ej: Infraestructura Bioresponsiva" required value="{{ old('title') }}" oninput="updateCardPreview('title', this.value)">
+                        </div>
 
-                <!-- NEW ADD BLOCK GRID -->
-                <div class="add-block-area">
-                    <h4 class="add-block-title">Add Content Block</h4>
-                    <div class="block-selection-grid">
-                        <div class="add-block-card" onclick="addBlock('hero')">
-                            <i class="fas fa-image"></i>
-                            <span>Hero Header</span>
+                        <div class="form-group">
+                            <label class="form-label">Categoría</label>
+                            <select name="category" class="form-control" onchange="updateCardPreview('category', this.value)">
+                                <option value="">Seleccionar Categoría...</option>
+                                <option value="Señales Urbanas" {{ old('category') == 'Señales Urbanas' ? 'selected' : '' }}>Señales Urbanas</option>
+                                <option value="Sistemas Urbanos" {{ old('category') == 'Sistemas Urbanos' ? 'selected' : '' }}>Sistemas Urbanos</option>
+                                <option value="Experimentos Urbanos" {{ old('category') == 'Experimentos Urbanos' ? 'selected' : '' }}>Experimentos Urbanos</option>
+                                <option value="Urban Playbooks" {{ old('category') == 'Urban Playbooks' ? 'selected' : '' }}>Urban Playbooks</option>
+                            </select>
                         </div>
-                        <div class="add-block-card" onclick="addBlock('intro')">
-                            <i class="fas fa-align-left"></i>
-                            <span>Intro Text</span>
+
+                        <div class="form-group">
+                            <label class="form-label">Color del Badge</label>
+                            <div style="display: flex; gap: 15px; background: #eee; padding: 10px; border-radius: 8px;">
+                                @foreach(['cat-grad-1', 'cat-grad-2', 'cat-grad-3', 'cat-grad-4'] as $gClass)
+                                    <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                                        <input type="radio" name="badge_color" value="{{ $gClass }}" {{ old('badge_color', 'cat-grad-1') == $gClass ? 'checked' : '' }} onchange="updateCardPreview('badge_color', this.value)">
+                                        <span class="{{ $gClass }}" style="display:inline-block; width:24px; height:24px; border-radius:50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #ccc;"></span>
+                                    </label>
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="add-block-card" onclick="addBlock('quote')">
-                            <i class="fas fa-quote-right"></i>
-                            <span>Quote</span>
+
+                        <div class="form-group">
+                            <label class="form-label">Palabras Clave SEO (Meta Keywords)</label>
+                            <input type="text" name="meta_keywords" class="form-control" placeholder="Ej: urbanismo, señales, interactivo" value="{{ old('meta_keywords') }}">
                         </div>
-                        <div class="add-block-card" onclick="addBlock('text')">
-                            <i class="fas fa-paragraph"></i>
-                            <span>Rich Text</span>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">Título Menú (Sticky)</label>
+                                <input type="text" name="sticky_title" class="form-control" placeholder="Aparece al hacer scroll" value="{{ old('sticky_title') }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fecha</label>
+                                <input type="date" name="published_at" id="input-date" class="form-control" value="{{ old('published_at') }}" onchange="updateCardPreview('date', this.value)">
+                                <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" name="coming_soon" id="check-coming-soon" value="1" onchange="updateCardPreview('coming_soon', this.checked)">
+                                    <label for="check-coming-soon" style="font-size: 0.9rem; margin:0; cursor: pointer;">Publicar como "Próximamente"</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="add-block-card" onclick="addBlock('gallery')">
-                            <i class="fas fa-images"></i>
-                            <span>Image Strip</span>
+
+                        <!-- Card Image Selector -->
+                        <div class="form-group">
+                            <label class="form-label">Imagen de Portada (Card)</label>
+                            <div class="media-selector-wrapper">
+                                <div class="media-preview-box" id="preview-cover" 
+                                     style="height: 100px; background-size: cover; background-position: center; border-radius: 6px; margin-bottom: 5px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
+                                     onclick="openMediaModal('input-cover', 'preview-cover')">
+                                    <span style="font-size:0.8rem; color:#999;">Select Cover Image</span>
+                                </div>
+                                <input type="hidden" name="image_path" id="input-cover" value="" onchange="updateCardPreview('image', this.value)">
+                                <input type="file" name="image" class="form-control" style="display:none">
+                                <button type="button" class="form-control" onclick="openMediaModal('input-cover', 'preview-cover')"><i class="fas fa-image"></i> Select from Library</button>
+                            </div>
                         </div>
-                        <div class="add-block-card" onclick="addBlock('carousel')">
-                            <i class="fas fa-film"></i>
-                            <span>Carousel</span>
+                    </div>
+
+                    <!-- Right Column: Card Preview -->
+                    <div class="card-preview-container" style="background: #1a1a1a; padding: 20px; border-radius: 12px;">
+                        <span style="color: #666; font-size: 0.7rem; display: block; margin-bottom: 10px; font-family: monospace;">PREVIEW: INDEX CARD</span>
+                        
+                        <div id="card-preview-host"></div>
+                        
+                        <template id="tpl-card-initial">
+                            <article class="blog-item1" style="max-width: 100%; margin: 0;">
+                                <a href="#" onclick="return false;" style="cursor: default;">
+                                    <img src="{{ old('image_path') ? asset('storage/'.old('image_path')) : asset('img/1x/Mesa de trabajo 2.png') }}" class="blog-thumb" id="card-img-preview">
+                                    <div class="blog-info1">
+                                        <span class="blog-category-badge {{ old('badge_color', 'cat-grad-1') }}" id="card-category-preview" style="display:{{ old('category') ? 'inline-block' : 'none' }};">{{ old('category') }}</span>
+                                        <h3 class="blog-title1" id="card-title-preview">{{ old('title', 'Título del Proyecto') }}</h3>
+                                        <p class="blog-date1" id="card-date-preview">Draft</p>
+                                    </div>
+                                </a>
+                            </article>
+                        </template>
+                    </div>
+                </div>
+                
+                <!-- Hidden Theme Input (Defaulting to Dark now as requested implies removing visual toggle) -->
+                {{-- Theme is handled by block styles usually, but keeping hidden input just in case controller needs it --}}
+                <input type="hidden" name="theme" value="dark">
+            </div>
+
+            <!-- MANDATORY HERO (Block 0) -->
+            <div class="blocks-container" style="border-left: 5px solid rgb(226, 70, 43);">
+                <div class="section-header" style="color: rgb(226, 70, 43);">Hero Section (Fijo)</div>
+                <input type="hidden" name="content[blocks][0][type]" value="hero">
+                <div class="form-group">
+                    <label class="form-label">Categoría h3</label>
+                    <input type="text" name="content[blocks][0][data][h3]" class="form-control" placeholder="Ej: MÉXICO" oninput="updateBlockPreview('0', 'h3', this.value)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Título h1 (PowerGrotesk)</label>
+                    <input type="text" name="content[blocks][0][data][h1]" class="form-control" placeholder="Ej: INFRAESTRUCTURA" oninput="updateBlockPreview('0', 'h1', this.value)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tagline h2</label>
+                    <input type="text" name="content[blocks][0][data][h2]" class="form-control" placeholder="Ej: BIORESPONSIVA" oninput="updateBlockPreview('0', 'h2', this.value)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Imagen de Fondo Hero</label>
+                    <div class="media-selector-wrapper">
+                        <div class="media-preview-box" id="preview-hero" 
+                             style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); height: 200px; background-size: cover; background-position: center; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
+                             onclick="openMediaModal('input-hero', 'preview-hero')">
+                            @if(!isset($heroBlock['data']['image'])) <span style="color:#999; font-weight:600;">Click to Open Media Library</span> @endif
                         </div>
+                        <input type="hidden" name="content[blocks][0][data][image]" id="input-hero" value="{{ $heroBlock['data']['image'] ?? '' }}" onchange="updateHeroBg(this.value)">
+                        <input type="file" name="content[blocks][0][data][image_file]" class="form-control" style="display:none">
+                        <button type="button" class="form-control" onclick="openMediaModal('input-hero', 'preview-hero')"><i class="fas fa-image"></i> Select from Library</button>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">Create Project</button>
+            <div id="blocks-wrapper">
+                @if(old('content.blocks'))
+                    @foreach(old('content.blocks') as $idx => $data)
+                        @if($idx == 0) @continue @endif
+                        @php $type = $data['type']; @endphp
+                        <div class="block-item" data-type="{{ $type }}">
+                            <input type="hidden" name="content[blocks][{{ $idx }}][type]" value="{{ $type }}">
+                            <div class="block-header" onclick="toggleBlock(this)">
+                                <span class="block-title"><i class="fas fa-bars"></i> {{ strtoupper(str_replace('_', ' ', $type)) }}</span>
+                                <div class="block-actions"><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+                            </div>
+                            <div class="block-body">
+                                @if($type === 'intro_glass')
+                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                    <textarea id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" rows="4" class="form-control rt-textarea" oninput="updateBlockPreview('{{ $idx }}', 'text', this.value)">{{ $data['data']['text'] ?? '' }}</textarea>
+                                @elseif($type === 'phrase')
+                                    <textarea name="content[blocks][{{ $idx }}][data][text]" rows="3" class="form-control" oninput="updateBlockPreview('{{ $idx }}', 'text', this.value)">{{ $data['data']['text'] ?? '' }}</textarea>
+                                @elseif($type === 'text_large')
+                                    <div class="form-group"><label class="form-label">Subtítulo</label><input type="text" name="content[blocks][{{ $idx }}][data][h2]" class="form-control" value="{{ $data['data']['h2'] ?? '' }}" oninput="updateBlockPreview('{{ $idx }}', 'h2', this.value)"></div>
+                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                    <textarea id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][content]" rows="6" class="form-control rt-textarea" oninput="updateBlockPreview('{{ $idx }}', 'content', this.value)">{{ $data['data']['content'] ?? '' }}</textarea>
+                                @elseif($type === 'gallery_rail')
+                                    <input type="file" name="content[blocks][{{ $idx }}][data][images][]" multiple class="form-control" onchange="previewGallery('{{ $idx }}', this)">
+                                @elseif($type === 'carousel_adv')
+                                    <div class="slides-container" id="slides-{{ $idx }}">
+                                        @if(isset($data['data']['slides'])) @foreach($data['data']['slides'] as $sIdx => $slide)
+                                            <div class="slide-item" style="border:1px solid #eee; padding:15px; border-radius:8px; margin-bottom:15px;">
+                                                <input type="text" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][title]" class="form-control" value="{{ $slide['title'] ?? '' }}" oninput="updateCarouselPreview('{{ $idx }}')">
+                                                <textarea name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][description]" class="form-control" oninput="updateCarouselPreview('{{ $idx }}')">{{ $slide['description'] ?? '' }}</textarea>
+                                                <div class="media-selector-wrapper" style="margin-top:10px;">
+                                                    <div class="media-preview-box" id="preview-{{ $idx }}-{{ $sIdx }}" 
+                                                         style="background-image: url('{{ isset($slide['image']) ? asset('storage/'.$slide['image']) : '' }}'); height: 100px; background-size: cover; background-position: center; border-radius: 6px; margin-bottom: 5px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
+                                                         onclick="openMediaModal('input-{{ $idx }}-{{ $sIdx }}', 'preview-{{ $idx }}-{{ $sIdx }}')">
+                                                        @if(!isset($slide['image'])) <span style="font-size:0.7rem; color:#999;">Select Image</span> @endif
+                                                    </div>
+                                                    <input type="hidden" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][image]" id="input-{{ $idx }}-{{ $sIdx }}" value="{{ $slide['image'] ?? '' }}" onchange="updateCarouselPreview('{{ $idx }}')">
+                                                    <input type="file" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][image_file]" class="form-control" style="display:none">
+                                                    <button type="button" class="form-control" style="padding:5px; font-size:0.8rem;" onclick="openMediaModal('input-{{ $idx }}-{{ $sIdx }}', 'preview-{{ $idx }}-{{ $sIdx }}')">Change Image</button>
+                                                </div>
+                                            </div>
+                                        @endforeach @endif
+                                    </div>
+                                    <button type="button" class="form-control" onclick="addCarouselSlide('{{ $idx }}')">+ Slide</button>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+
+            <div class="blocks-container" style="background: #f8f8f8; border: 2px dashed #ddd;">
+                <div class="section-header">Añadir Bloque de Producción</div>
+                <div class="add-block-grid">
+                    <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
+                    <div class="add-btn-card" onclick="addBlock('phrase')"><i class="fas fa-quote-left"></i><span>Gran Frase</span></div>
+                    <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
+                    <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
+                    <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
+                </div>
+            </div>
+            <input type="hidden" name="action" id="form-action" value="publish">
         </form>
     </div>
-</section>
 
-<!-- Block Templates (Hidden) -->
-<template id="tpl-hero">
-    <div class="block-item" data-type="hero">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="hero">
-        <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-image"></i> &nbsp; HERO SECTION</span>
-            <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
+    <aside class="preview-sidebar">
+        <div class="preview-header"><span>HIGH-FIDELITY PREVIEW</span><div style="width: 8px; height: 8px; background: #0f0; border-radius: 50%;"></div></div>
+        <div class="preview-viewport" id="preview-viewport"></div> <!-- Content injected via Shadow DOM -->
+        
+        <template id="initial-preview-html">
+            <div id="preview-blocks-list">
+                <div class="preview-item" id="prev-block-0" data-type="hero">
+                    <div class="Title" id="hero-preview-bg" style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); background-size: cover; background-position: center; padding: 40px 20px; border-radius: 12px; margin-bottom: 20px;">
+                        <span class="h3" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">{{ $heroBlock['data']['h3'] ?? old('content.blocks.0.data.h3', 'Categoría') }}</span>
+                        <h1>{{ $heroBlock['data']['h1'] ?? old('content.blocks.0.data.h1', 'TÍTULO') }}</h1>
+                        <h2>{{ $heroBlock['data']['h2'] ?? old('content.blocks.0.data.h2', 'TAGLINE') }}</h2>
+                    </div>
+                </div>
+                @if(old('content.blocks'))
+                    @foreach(old('content.blocks') as $idx => $block)
+                        @if($idx == 0) @continue @endif
+                        <div class="preview-item" id="prev-block-{{ $idx }}" data-type="{{ $block['type'] }}">
+                            @if($block['type'] === 'intro_glass') <div class="card" style="padding: 2rem;">{!! $block['data']['text'] ?? '' !!}</div>
+                            @elseif($block['type'] === 'phrase') <div class="span-resaltado" style="margin: 20px 0;">{{ $block['data']['text'] ?? '' }}</div>
+                            @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
+                            @elseif($block['type'] === 'gallery_rail') <div class="horizontal-scroll-section" style="overflow-x: auto; white-space: nowrap; padding: 10px;">@if(isset($block['data']['images'])) @foreach($block['data']['images'] as $img) <img src="{{ asset('storage/'.$img) }}" style="height: 120px; border-radius: 8px; margin-right: 10px; display: inline-block;"> @endforeach @endif</div>
+                            @elseif($block['type'] === 'carousel_adv') <div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;">@if(isset($block['data']['slides'])) @foreach($block['data']['slides'] as $slide) <div class="carousel-item card-item"><img src="{{ isset($slide['image']) ? asset('storage/'.$slide['image']) : '' }}" class="carrucel-imagen"><h2>{{ $slide['title'] ?? '' }}</h2><p>{{ $slide['description'] ?? '' }}</p></div> @endforeach @endif</div>
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
             </div>
+        </template>
+
+        <div class="publish-area" style="display:flex; gap:10px; flex-direction:column;">
+            <button type="button" class="btn-publish" style="background:#ccc; color:#333;" onclick="document.getElementById('form-action').value='save'; document.getElementById('projectForm').submit()">Guardar (Borrador)</button>
+            <button type="button" class="btn-publish" onclick="document.getElementById('form-action').value='publish'; document.getElementById('projectForm').submit()">Publicar Proyecto</button>
         </div>
+    </aside>
+</div>
+
+<!-- TEMPLATES -->
+<template id="tpl-intro_glass">
+    <div class="block-item" data-type="intro_glass"><input type="hidden" name="content[blocks][INDEX][type]" value="intro_glass">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> INTRO GLASS</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body"><div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div><textarea id="textarea-INDEX" name="content[blocks][INDEX][data][text]" rows="4" class="form-control rt-textarea" oninput="updateBlockPreview('INDEX', 'text', this.value)"></textarea></div>
+    </div>
+</template>
+<template id="tpl-phrase">
+    <div class="block-item" data-type="phrase"><input type="hidden" name="content[blocks][INDEX][type]" value="phrase">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> GRAN FRASE</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body"><textarea name="content[blocks][INDEX][data][text]" rows="3" class="form-control" oninput="updateBlockPreview('INDEX', 'text', this.value)"></textarea></div>
+    </div>
+</template>
+<template id="tpl-text_large">
+    <div class="block-item" data-type="text_large"><input type="hidden" name="content[blocks][INDEX][type]" value="text_large">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> TEXTO LARGO</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body"><div class="form-group"><label class="form-label">Subtítulo</label><input type="text" name="content[blocks][INDEX][data][h2]" class="form-control" oninput="updateBlockPreview('INDEX', 'h2', this.value)"></div><div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div><textarea id="textarea-INDEX" name="content[blocks][INDEX][data][content]" rows="6" class="form-control rt-textarea" oninput="updateBlockPreview('INDEX', 'content', this.value)"></textarea></div>
+    </div>
+</template>
+    <div class="block-item" data-type="gallery_rail"><input type="hidden" name="content[blocks][INDEX][type]" value="gallery_rail">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> SCROLL STRIP (PARALLAX)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
         <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Title</label>
-                <input type="text" name="content[blocks][INDEX][data][title]" class="form-control" placeholder="Large Title">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Subtitle</label>
-                <input type="text" name="content[blocks][INDEX][data][subtitle]" class="form-control">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Background Image</label>
-                <input type="file" name="content[blocks][INDEX][data][image]" class="form-control" accept="image/*">
-            </div>
+            <div class="form-group"><label class="form-label">Frase Destacada (Scroll Strip)</label><textarea name="content[blocks][INDEX][data][phrase]" class="form-control" rows="2" placeholder="Ej: ¿Qué pasaría si...?" oninput="updateGalleryPreview('INDEX')"></textarea></div>
+            <div class="gallery-items-container" id="gallery-items-INDEX" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap:10px;"></div>
+            <button type="button" class="form-control" style="margin-top:10px;" onclick="addGalleryItem('INDEX')">+ Añadir Imagen</button>
         </div>
     </div>
 </template>
-
-<template id="tpl-intro">
-    <div class="block-item" data-type="intro">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="intro">
-        <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-align-left"></i> &nbsp; INTRO TEXT</span>
-            <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Intro Paragraph</label>
-                <textarea name="content[blocks][INDEX][data][text]" rows="4" class="form-control" placeholder="Start typing the main introduction..."></textarea>
-            </div>
-        </div>
+<template id="tpl-gallery-item">
+    <div class="gallery-item" style="position:relative; width:100%; aspect-ratio:1; border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#eee;">
+        <button type="button" class="btn-remove-gam" style="position:absolute; top:2px; right:2px; background:red; color:white; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; z-index:10;" onclick="removeGalleryItem(this, 'BLOCK_INDEX')">x</button>
+        <div class="media-preview-box" id="preview-BLOCK_INDEX-ITEM_INDEX" style="width:100%; height:100%; background-size:cover; background-position:center; cursor:pointer;" onclick="openMediaModal('input-BLOCK_INDEX-ITEM_INDEX', 'preview-BLOCK_INDEX-ITEM_INDEX')"></div>
+        <input type="hidden" name="content[blocks][BLOCK_INDEX][data][gallery_items][ITEM_INDEX][image]" id="input-BLOCK_INDEX-ITEM_INDEX" onchange="updateGalleryPreview('BLOCK_INDEX')">
+        <input type="file" name="content[blocks][BLOCK_INDEX][data][gallery_items][ITEM_INDEX][image_file]" style="display:none">
     </div>
 </template>
-
-<template id="tpl-quote">
-    <div class="block-item" data-type="quote">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="quote">
-         <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-quote-right"></i> &nbsp; HIGHLIGHT QUOTE</span>
-             <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Quote Text</label>
-                <textarea name="content[blocks][INDEX][data][text]" rows="3" class="form-control" placeholder="Enter the key question or quote..."></textarea>
-            </div>
-        </div>
+<template id="tpl-carousel_adv">
+    <div class="block-item" data-type="carousel_adv"><input type="hidden" name="content[blocks][INDEX][type]" value="carousel_adv">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> CAROUSEL GRID (35/65)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body"><div class="slides-container" id="slides-INDEX"></div><button type="button" class="form-control" onclick="addCarouselSlide('INDEX')">+ Añadir Slide</button></div>
     </div>
 </template>
-
-<template id="tpl-text">
-    <div class="block-item" data-type="text">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="text">
-        <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-paragraph"></i> &nbsp; TEXT SECTION</span>
-             <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
+<template id="tpl-slide-item">
+    <div class="slide-item" style="border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 15px; position:relative;">
+        <button type="button" class="block-btn remove" style="position:absolute; top:5px; right:5px; background:#f44336; color:white; border:none; width:20px; height:20px; border-radius:50%; cursor:pointer;" onclick="removeCarouselSlide(this, 'BLOCK_INDEX')">x</button>
+        <input type="text" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][title]" class="form-control" placeholder="Título" oninput="updateCarouselPreview('BLOCK_INDEX')">
+        <textarea name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][description]" class="form-control" placeholder="Descripción" oninput="updateCarouselPreview('BLOCK_INDEX')"></textarea>
+        <div class="media-selector-wrapper" style="margin-top:10px;">
+            <div class="media-preview-box" id="preview-BLOCK_INDEX-SLIDE_INDEX" 
+                 style="height: 100px; background-size: cover; background-position: center; border-radius: 6px; margin-bottom: 5px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
+                 onclick="openMediaModal('input-BLOCK_INDEX-SLIDE_INDEX', 'preview-BLOCK_INDEX-SLIDE_INDEX')">
+                <span style="font-size:0.7rem; color:#999;">Select Image</span>
             </div>
-        </div>
-        <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Section Title</label>
-                <input type="text" name="content[blocks][INDEX][data][title]" class="form-control" placeholder="Optional Title">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Content</label>
-                <textarea name="content[blocks][INDEX][data][content]" rows="8" class="form-control" placeholder="Detailed content..."></textarea>
-            </div>
-        </div>
-    </div>
-</template>
-
-<template id="tpl-gallery">
-    <div class="block-item" data-type="gallery">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="gallery">
-        <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-images"></i> &nbsp; IMAGE GRID</span>
-             <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Upload Images</label>
-                <input type="file" name="content[blocks][INDEX][data][images][]" multiple class="form-control" accept="image/*">
-                <p style="color:#888; font-size: 0.9em; margin-top:5px;">Select multiple files to create a horizontal scroll strip.</p>
-            </div>
-        </div>
-    </div>
-</template>
-
-<template id="tpl-carousel">
-    <div class="block-item" data-type="carousel">
-        <input type="hidden" name="content[blocks][INDEX][type]" value="carousel">
-        <div class="block-header" onclick="toggleBlock(this)">
-            <span class="block-title"><i class="fas fa-bars drag-handle-icon"></i> <i class="fas fa-film"></i> &nbsp; CAROUSEL</span>
-             <div class="block-actions">
-                <button type="button" class="block-btn" title="Collapse"><i class="fas fa-chevron-up"></i></button>
-                <button type="button" class="block-btn remove" onclick="removeBlock(this, event)" title="Remove"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-        <div class="block-body">
-            <div class="carousel-slides-container" style="padding-left: 20px; border-left: 2px solid #555;">
-                 <!-- Slides added via JS -->
-                 <button type="button" class="add-btn" style="background:#444; color:white; padding: 8px 15px; border:none; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="addCarouselSlide(this, 'INDEX')">+ Add Slide</button>
-            </div>
+            <input type="hidden" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][image]" id="input-BLOCK_INDEX-SLIDE_INDEX" value="" onchange="updateCarouselPreview('BLOCK_INDEX')">
+            <input type="file" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][image_file]" class="form-control" style="display:none">
+            <button type="button" class="form-control" style="padding:5px; font-size:0.8rem;" onclick="openMediaModal('input-BLOCK_INDEX-SLIDE_INDEX', 'preview-BLOCK_INDEX-SLIDE_INDEX')">Select from Library</button>
         </div>
     </div>
 </template>
 
 <script>
-    let blockIndex = 0;
+    window.rootPath = "{{ asset('/') }}";
+    let blockIndex = {{ count(old('content.blocks', [])) > 0 ? max(array_keys(old('content.blocks'))) + 1 : 1 }};
 
-    // Initialize Sortable
-    document.addEventListener('DOMContentLoaded', function() {
-        const el = document.getElementById('blocks-wrapper');
-        const sortable = Sortable.create(el, {
-            handle: '.block-header', // Drag handle
-            animation: 150,
-            ghostClass: 'sortable-ghost',
-        });
+    // Shadow DOM Integration
+    document.addEventListener('DOMContentLoaded', () => {
+        const host = document.getElementById('preview-viewport');
+        if(!host.shadowRoot) {
+            const shadow = host.attachShadow({mode: 'open'});
+            
+            // External CSS
+            const link = document.createElement('link');
+            link.setAttribute('rel', 'stylesheet');
+            link.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
+            shadow.appendChild(link);
+
+            // Internal Overrides (Force Mobile View @500px)
+            const style = document.createElement('style');
+            style.textContent = `
+                :host { display: block; overflow-y: auto; height: 100%; background: #1a1a1a; color: #eee; }
+                
+                /* FONT FACES for Shadow DOM */
+                @font-face { font-family: "PowerGrotesk"; src: url("{{ asset('fonts/power_grotesk-medium-webfont.woff2') }}") format("woff2"); font-weight: 500; }
+                @font-face { font-family: "PowerGrotesk bold"; src: url("{{ asset('fonts/power_grotesk-medium-webfont.woff2') }}") format("woff2"); font-weight: 700; }
+                
+                /* FORCE MOBILE STYLES (Exact copy from style-global-blog.css @media max-width: 768px & 500px) */
+                html, body { padding-left: 0 !important; overflow-x: hidden; background: transparent; }
+                
+                h1, h2, h3, .Title h1, .Title h2, .Title h3, .card h1, .card h2, .card h3 {
+                    font-family: "PowerGrotesk", sans-serif !important;
+                }
+
+                .card { 
+                    padding: 2rem 1.5rem !important;
+                    border-radius: 1.5rem !important;
+                    width: 85% !important;
+                    max-width: 700px !important;
+                    margin: 0 auto 20px auto !important;
+                    transform: none !important;
+                }
+                
+                .TextLarge { padding: 2rem 1rem !important; font-size: 0.9rem !important; }
+                .TextLarge h2 { font-size: 1.3rem !important; } 
+                .TextLarge div { max-width: 95% !important; }
+                
+                .Title { width: 90% !important; font-size: 1.2rem !important; margin: 0 auto 20px auto !important; padding: 20px 0 !important; }
+                .Title h1 { font-size: 2.2rem !important; } 
+                
+                .span-resaltado { font-size: 1rem !important; margin: 20px 0 !important; }
+                
+                /* CAROUSEL FIX: Image Left, Text Right */
+                .carousel-item.card-item { 
+                    display: grid !important; 
+                    grid-template-columns: 40% 1fr !important;
+                    gap: 15px !important;
+                    align-items: center !important;
+                    width: 100% !important; 
+                    max-width: 100% !important;
+                    margin-bottom: 20px !important;
+                    text-align: left !important;
+                }
+                .carousel-item.card-item img.carrucel-imagen { 
+                    width: 100% !important; 
+                    height: auto !important; 
+                    object-fit: cover !important;
+                    border-radius: 8px !important;
+                }
+                .carousel-item.card-item.no-image {
+                    grid-template-columns: 1fr !important;
+                }
+                .carousel-item.card-item.no-image {
+                    grid-template-columns: 1fr !important;
+                }
+                .carousel-item.card-item h2 { font-size: 1rem !important; margin: 0 0 5px 0 !important; }
+                .carousel-item.card-item p { font-size: 0.8rem !important; margin: 0 !important; }
+
+                /* Scroll Strip Mobile Simulation (Vertical Scatter Fidelity) */
+                .blog-scroll-strip__rail {
+                    display: flex !important;
+                    flex-wrap: wrap !important; /* Allow wrapping for scatter effect */
+                    justify-content: center !important;
+                    align-items: flex-start !important;
+                    gap: 15px !important;
+                    padding: 20px 10px !important;
+                    background: transparent !important;
+                    overflow: visible !important; /* Let it grow vertically */
+                }
+                .blog-scroll-card {
+                    width: 140px !important; 
+                    max-width: 45% !important; /* Ensure 2 columns on small preview */
+                    border-radius: 10px !important;
+                    flex-shrink: 0 !important;
+                    margin: 0 !important;
+                    position: relative !important;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+                    overflow: hidden !important;
+                    transition: transform 0.3s ease !important;
+                }
+                
+                /* Pseudo-Scatter Effect */
+                .blog-scroll-card:nth-child(odd) { transform: translateY(20px) !important; }
+                .blog-scroll-card:nth-child(even) { transform: translateY(-10px) !important; }
+                .blog-scroll-card:hover { z-index: 10 !important; transform: scale(1.05) !important; }
+                .blog-scroll-card img {
+                    width: 100% !important;
+                    height: auto !important;
+                    border-radius: 10px !important;
+                    display: block !important;
+                }
+                
+                /* Phrase Section Simulation */
+                .blog-scroll-strip__phrase-container {
+                    background-color: #eeeeee !important; 
+                    color: #1a1a1a !important; 
+                    padding: 40px 20px !important; /* More breathing room */
+                    text-align: center !important;
+                    margin: 30px 0 !important;
+                    border-radius: 8px !important;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+                }
+                .blog-scroll-strip__phrase {
+                    max-width: 100% !important;
+                }
+                .blog-scroll-strip__phrase h2 {
+                    font-family: 'PowerGrotesk', sans-serif !important;
+                    font-size: 1.2rem !important;
+                    color: #1a1a1a !important; /* Ensure dark text on light bg */
+                    margin: 0 !important;
+                }
+
+                .horizontal-scroll-section { position: relative !important; height: auto !important; background: transparent !important; padding: 0 !important; justify-content: flex-start !important; overflow-x: auto !important; }
+                
+                /* Specific Intro Glass Style (if different, but usually it's just .card) */
+                /* If user meant rounded corners like card-img, we might need a mockup class, but standard .card is 1.5rem radius */
+            `;
+            shadow.appendChild(style);
+
+            // Content
+            const tpl = document.getElementById('initial-preview-html');
+            const wrapper = document.createElement('div');
+            wrapper.className = "preview-wrapper";
+            wrapper.id = "preview-blocks-list";
+            wrapper.appendChild(tpl.content.cloneNode(true));
+            shadow.appendChild(wrapper);
+
+            window.previewShadow = shadow; // Expose for updates
+        }
+
+        // Card Preview Shadow DOM
+        const cardHost = document.getElementById('card-preview-host');
+        if(cardHost && !cardHost.shadowRoot) {
+            const cardShadow = cardHost.attachShadow({mode: 'open'});
+             // External CSS
+            const link = document.createElement('link');
+            link.setAttribute('rel', 'stylesheet');
+            link.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
+            cardShadow.appendChild(link);
+            
+            // Internal Overrides
+            const style = document.createElement('style');
+            style.textContent = `
+                :host { display: block; }
+                a { text-decoration: none; }
+                .blog-item1 { margin: 0; width: 100%; border:none; }
+                .blog-thumb { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; }
+            `;
+            cardShadow.appendChild(style);
+
+            const tpl = document.getElementById('tpl-card-initial');
+            cardShadow.appendChild(tpl.content.cloneNode(true));
+            window.cardShadow = cardShadow;
+        }
     });
 
+    function updateCardPreview(field, val) {
+        if(!window.cardShadow) return;
+        
+        if(field === 'title') {
+            window.cardShadow.getElementById('card-title-preview').innerText = val || 'Título del Proyecto';
+             updatePreview('global', 'title', val);
+        }
+        if(field === 'category') {
+            const el = window.cardShadow.getElementById('card-category-preview');
+            el.innerText = val;
+            el.style.display = val ? 'inline-block' : 'none';
+            // Sync logic
+            const heroH3Input = document.querySelector('input[name="content[blocks][0][data][h3]"]');
+            if(heroH3Input) { heroH3Input.value = val; updateBlockPreview('0', 'h3', val); }
+        }
+        if(field === 'badge_color') {
+            const el = window.cardShadow.getElementById('card-category-preview');
+            if(el) el.className = 'blog-category-badge ' + val;
+            
+             // SYNC TO HERO H3 COLOR
+            if(window.previewShadow) {
+                const heroP = window.previewShadow.getElementById('prev-block-0');
+                if(heroP) {
+                    const h3 = heroP.querySelector('.h3');
+                    if(h3) h3.className = 'h3 blog-category-badge ' + val;
+                }
+            }
+        }
+        if(field === 'date' || field === 'coming_soon') {
+            const isComingSoon = document.getElementById('check-coming-soon').checked;
+            const dateVal = document.getElementById('input-date').value;
+             const elDate = window.cardShadow.getElementById('card-date-preview');
+            if(isComingSoon) { elDate.innerText = 'PRÓXIMAMENTE'; return; }
+            if(!dateVal) { elDate.innerText = 'Draft'; return; }
+            const date = new Date(dateVal);
+            const options = { year: 'numeric', month: 'long' };
+            elDate.innerText = date.toLocaleDateString('en-US', options);
+        }
+        if(field === 'image') {
+            if(val) {
+                const baseUrl = window.rootPath || '/';
+                window.cardShadow.getElementById('card-img-preview').src = baseUrl + 'storage/' + val;
+            }
+        }
+    }
+
+    // Obsolete setTheme function removed as UI is gone.
+
     function addBlock(type) {
+        if(type === 'intro_glass' && isIntroGlassDisabled()) return;
+
         const wrapper = document.getElementById('blocks-wrapper');
         const template = document.getElementById('tpl-' + type);
+        wrapper.insertAdjacentHTML('beforeend', template.innerHTML.replace(/INDEX/g, blockIndex));
         
-        if(!template) return;
+        // Shadow DOM Preview
+        if(window.previewShadow) {
+            const list = window.previewShadow.getElementById('preview-blocks-list');
+            const newItem = document.createElement('div');
+            newItem.id = 'prev-block-' + blockIndex;
+            newItem.className = 'preview-item';
+            newItem.dataset.type = type;
+            // Initialize mock content structure matches Global CSS expectations
+            if(type === 'intro_glass') newItem.innerHTML = '<div class="card" style="padding: 2rem;"></div>';
+            else if(type === 'phrase') newItem.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>';
+            else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
+            // Gallery/Carousel initialized empty
+            else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
+            else if(type === 'carousel_adv') newItem.innerHTML = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;"></div>';
+            
+            list.appendChild(newItem);
+        }
 
-        // Clone template content
-        let clone = template.content.cloneNode(true);
-        let html = clone.firstElementChild.outerHTML; // Get HTML string to replace placeholders
-
-        // Replace INDEX with unique ID
-        html = html.replace(/INDEX/g, blockIndex);
-        
-        // Append to DOM
-        wrapper.insertAdjacentHTML('beforeend', html);
-        
-        // Scroll to new block
-        wrapper.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
         blockIndex++;
+        checkIntroGlassConstraint();
+        initSortable();
     }
 
-    function removeBlock(btn, event) {
-        event.stopPropagation(); // Prevent collapse toggle
-        if(confirm('Delete this block?')) {
-            btn.closest('.block-item').remove();
+    function removeBlock(btn, e) {
+        e.stopPropagation();
+        if(confirm('¿Eliminar bloque?')) {
+            const item = btn.closest('.block-item');
+            const idxRegex = item.querySelector('input[name*="[type]"]').name.match(/\[(\d+)\]/);
+            if(idxRegex) {
+                const idx = idxRegex[1];
+                item.remove();
+                if(window.previewShadow) {
+                    const p = window.previewShadow.getElementById('prev-block-' + idx);
+                    if(p) p.remove();
+                }
+            }
+            setTimeout(checkIntroGlassConstraint, 50);
         }
     }
 
-    function toggleBlock(header) {
-        const body = header.nextElementSibling;
-        const icon = header.querySelector('.block-actions .fa-chevron-up, .block-actions .fa-chevron-down');
+    function toggleBlock(header) { if(!event.target.closest('.block-btn')) header.nextElementSibling.classList.toggle('collapsed'); }
+
+    function addCarouselSlide(blockIdx) {
+        const container = document.getElementById('slides-' + blockIdx);
+        const count = container.querySelectorAll('.slide-item').length;
+        container.insertAdjacentHTML('beforeend', document.getElementById('tpl-slide-item').innerHTML.replace(/BLOCK_INDEX/g, blockIdx).replace(/SLIDE_INDEX/g, count));
+        updateCarouselPreview(blockIdx);
+    }
+
+    function formatText(id, tag) {
+        const textarea = document.getElementById(id); const start = textarea.selectionStart; const end = textarea.selectionEnd; const text = textarea.value.substring(start, end);
+        let replacement = "";
+        if(tag === 'b') replacement = `<b>${text}</b>`;
+        if(tag === 'a') { const url = prompt("Enter URL:", "https://"); replacement = `<a href="${url}" target="_blank">${text || 'Link'}</a>`; }
+        textarea.setRangeText(replacement, start, end, 'select'); textarea.dispatchEvent(new Event('input'));
+    }
+
+    function updatePreview(scope, field, val) { if(scope === 'global' && field === 'title') updateBlockPreview('0', 'h1', val); }
+
+    function updateBlockPreview(idx, field, val) {
+        if(!window.previewShadow) return; 
+        const p = window.previewShadow.getElementById('prev-block-' + idx);
+        if(!p) return;
+        const type = p.dataset.type;
+
+        if(type === 'hero') {
+            if(field === 'h3') p.querySelector('.h3').innerText = val;
+            if(field === 'h1') p.querySelector('h1').innerText = val;
+            if(field === 'h2') p.querySelector('h2').innerText = val;
+        }
+        else if(type === 'intro_glass') {
+            let el = p.querySelector('.card');
+            if(!el) { p.innerHTML = '<div class="card" style="padding: 2rem;"></div>'; el = p.querySelector('.card'); }
+            el.innerHTML = val;
+        }
+        else if(type === 'phrase') {
+            let el = p.querySelector('.span-resaltado');
+            if(!el) { p.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>'; el = p.querySelector('.span-resaltado'); }
+            el.innerText = val;
+        }
+        else if(type === 'text_large') {
+            let container = p.querySelector('.TextLarge');
+            if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }
+            if(field === 'h2') container.querySelector('h2').innerText = val;
+            if(field === 'content') container.querySelector('div').innerHTML = val;
+        }
+    }
+
+    function updateCarouselPreview(idx) {
+        if(!window.previewShadow) return;
+        const pBlock = window.previewShadow.getElementById('prev-block-' + idx);
+        if(!pBlock) return;
+        const slides = document.getElementById('slides-' + idx).querySelectorAll('.slide-item');
+        let html = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;">';
+        const baseUrl = window.rootPath || '/';
+        slides.forEach((s, sIdx) => {
+            const title = s.querySelector('input[type="text"]').value || "Slide";
+            const desc = s.querySelector('textarea').value || "";
+            const hiddenInput = s.querySelector('input[type="hidden"][name*="image"]');
+                const imgSrc = (hiddenInput && hiddenInput.value) ? `${baseUrl}storage/${hiddenInput.value}` : '';
+                
+                const noImgClass = imgSrc ? '' : 'no-image';
+                const imgTag = imgSrc ? `<img src="${imgSrc}" class="carrucel-imagen">` : '';
+
+                html += `<div class="carousel-item card-item ${noImgClass}" id="p-slide-${idx}-${sIdx}">${imgTag}<div><h2>${title}</h2><p>${desc}</p></div></div>`;
+            });
+            pBlock.innerHTML = html + '</div>';
+        }
+
+        function removeCarouselSlide(btn, blockIdx) {
+            if(confirm('Eliminar slide?')) {
+                btn.closest('.slide-item').remove();
+                updateCarouselPreview(blockIdx);
+            }
+        }
+
+
+
+    function updateHeroBg(val) {
+        if(!val || !window.previewShadow) return;
+        const baseUrl = window.rootPath || '/';
+        const url = `${baseUrl}storage/${val}`;
+        const el = window.previewShadow.getElementById('hero-preview-bg');
+        if(el) el.style.backgroundImage = `url(${url})`;
+    }
+
+    function addGalleryItem(blockIdx) {
+        const container = document.getElementById('gallery-items-' + blockIdx);
+        const count = container.querySelectorAll('.gallery-item').length;
+        container.insertAdjacentHTML('beforeend', document.getElementById('tpl-gallery-item').innerHTML.replace(/BLOCK_INDEX/g, blockIdx).replace(/ITEM_INDEX/g, count));
+        updateGalleryPreview(blockIdx);
+    }
+
+    function removeGalleryItem(btn, blockIdx) {
+        btn.closest('.gallery-item').remove();
+        updateGalleryPreview(blockIdx);
+    }
+
+    function updateGalleryPreview(idx) {
+        if(!window.previewShadow) return;
+        const p = window.previewShadow.getElementById('prev-block-' + idx);
         
-        if (body.classList.contains('collapsed')) {
-            body.classList.remove('collapsed');
-            if(icon) { icon.classList.remove('fa-chevron-down'); icon.classList.add('fa-chevron-up'); }
+        // Split logic visualization in preview?
+        // For simplicity, we just dump them all in a rail for now.
+        // Or we could try to emulate the split.
+        
+        const phrase = document.querySelector(`textarea[name="content[blocks][${idx}][data][phrase]"]`)?.value || '';
+        const items = document.getElementById('gallery-items-' + idx).querySelectorAll('.gallery-item');
+        const root = window.rootPath || '/';
+        
+        // Build array of images
+        let images = [];
+        items.forEach(item => {
+             const input = item.querySelector('input[type="hidden"]');
+             if(input && input.value) images.push(root + 'storage/' + input.value);
+        });
+
+        const count = images.length;
+        const doSplit = phrase && count >= 4;
+        const imgs1 = doSplit ? images.slice(0, Math.ceil(count/2)) : images;
+        const imgs2 = doSplit ? images.slice(Math.ceil(count/2)) : [];
+
+        let html = '';
+        
+        // Run 1
+        html += `<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail">`;
+        imgs1.forEach(src => html += `<figure class="blog-scroll-card"><img src="${src}"></figure>`);
+        html += `</div></div></div>`;
+
+        // Phrase
+        if(doSplit && phrase) {
+            html += `<div class="blog-scroll-strip__phrase-container"><div class="blog-scroll-strip__phrase"><h2>${phrase}</h2></div></div>`;
+        }
+
+        // Run 2
+        if(doSplit && imgs2.length > 0) {
+            html += `<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail">`;
+            imgs2.forEach(src => html += `<figure class="blog-scroll-card"><img src="${src}"></figure>`);
+            html += `</div></div></div>`;
+        }
+
+        p.innerHTML = html;
+    }
+
+    function initSortable() {
+        const el = document.getElementById('blocks-wrapper'); if(!el) return;
+        Sortable.create(el, {
+            handle: '.block-header', animation: 150,
+            onEnd: () => {
+                const list = window.previewShadow ? window.previewShadow.getElementById('preview-blocks-list') : null;
+                const hero = window.previewShadow ? window.previewShadow.getElementById('prev-block-0') : null;
+                if(!list || !hero) return;
+                
+                // Reorder Preview Elements based on Form Elements
+                const fragments = document.createDocumentFragment();
+                fragments.appendChild(hero); // Keep Hero top
+                
+                document.querySelectorAll('#blocks-wrapper .block-item').forEach(item => {
+                    const idxInput = item.querySelector('input[name*="[type]"]');
+                    if(idxInput) {
+                        const idxMatch = idxInput.name.match(/\[(\d+)\]/);
+                        if(idxMatch) {
+                            const idx = idxMatch[1];
+                            const p = window.previewShadow.getElementById('prev-block-' + idx);
+                            if(p) fragments.appendChild(p);
+                        }
+                    }
+                });
+                list.innerHTML = '';
+                list.appendChild(fragments);
+                checkIntroGlassConstraint();
+            }
+        });
+    }
+
+    function isIntroGlassDisabled() {
+        // Rule: Can only add Intro Glass if NO other block types exist (besides intro_glass itself).
+        // If there is ANY block that is NOT 'intro_glass', then it is disabled.
+        const blocks = document.querySelectorAll('#blocks-wrapper .block-item');
+        for(let i=0; i<blocks.length; i++) {
+            if(blocks[i].dataset.type !== 'intro_glass') return true;
+        }
+        return false;
+    }
+
+    function checkIntroGlassConstraint() {
+        const btn = document.getElementById('btn-add-intro_glass');
+        if(!btn) return;
+        
+        if(isIntroGlassDisabled()) {
+            btn.style.opacity = '0.3';
+            btn.style.pointerEvents = 'none';
+            btn.style.filter = 'grayscale(1)';
         } else {
-            body.classList.add('collapsed');
-            if(icon) { icon.classList.remove('fa-chevron-up'); icon.classList.add('fa-chevron-down'); }
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+            btn.style.filter = 'none';
         }
     }
-
-    // Special handler for Carousel Slides nested
-    function addCarouselSlide(btn, blockIdxParam) {
-        const container = btn.parentElement;
-        const existingSlides = container.querySelectorAll('.slide-item').length;
-        
-        const slideHtml = `
-            <div class="slide-item" style="background:#333; padding:15px; margin-bottom:15px; border-radius:4px; position:relative; border:1px solid #444;">
-                <button type="button" onclick="this.parentElement.remove()" style="position:absolute; top:10px; right:10px; background:none; border:none; color:#dc3545; cursor:pointer; font-size:1.2em;">&times;</button>
-                <div class="form-group" style="margin-bottom:10px;">
-                    <label style="display:block; color:#aaa; font-size:0.8em; margin-bottom:5px;">Image</label>
-                    <input type="file" name="content[blocks][${blockIdxParam}][data][slides][${existingSlides}][image]" class="form-control" style="padding:5px;" accept="image/*">
-                </div>
-                <div class="form-group" style="margin-bottom:10px;">
-                    <input type="text" name="content[blocks][${blockIdxParam}][data][slides][${existingSlides}][title]" class="form-control" placeholder="Slide Title" style="padding:8px; background:#222; color:white; border:1px solid #555;">
-                </div>
-                <div class="form-group" style="margin-bottom:10px;">
-                    <textarea name="content[blocks][${blockIdxParam}][data][slides][${existingSlides}][description]" class="form-control" rows="2" placeholder="Description" style="padding:8px; background:#222; color:white; border:1px solid #555;"></textarea>
-                </div>
-                 <div class="form-group" style="margin-bottom:0px;">
-                    <input type="text" name="content[blocks][${blockIdxParam}][data][slides][${existingSlides}][link]" class="form-control" placeholder="Link URL (Optional)" style="padding:8px; background:#222; color:white; border:1px solid #555;">
-                </div>
-            </div>
-        `;
-        
-        // Insert before the add button
-        btn.insertAdjacentHTML('beforebegin', slideHtml);
-    }
+    document.addEventListener('DOMContentLoaded', () => { initSortable(); checkIntroGlassConstraint(); });
 </script>
 @endsection

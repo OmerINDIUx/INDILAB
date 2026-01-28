@@ -1,0 +1,63 @@
+{
+    "blocks": [
+        {
+            "data": {
+                "h1": "Infraestructura biorresponsiva y un nuevo paradigma para el entorno construido",
+                "h2": "biorresponsiva",
+                "h3": "sdffgvbdf",
+                "image": "projects\/blocks\/TJ2WlcpLHHgFraiMyvZyIjsRr0YqZARg6WcovKQc.png"
+            },
+            "type": "hero"
+        },
+        {
+            "data": {
+                "text": "Las ciudades concentran la mayor parte de la actividad humana. Seg\u00fan ONU-H\u00e1bitat, consumen 78 por ciento de la energ\u00eda global y generan m\u00e1s de 60 por ciento de las emisiones de gases de efecto invernadero, a pesar de ocupar menos de 2 por ciento del territorio mundial. La concentraci\u00f3n de actividades y el dinamismo inherente a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica."
+            },
+            "type": "intro_glass"
+        },
+        {
+            "data": {
+                "text": "<b>a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica.  <\/b>"
+            },
+            "type": "intro_glass"
+        },
+        {
+            "data": {
+                "text": "Las ciudades concentran la mayor parte de la actividad humana. Seg\u00fan ONU-H\u00e1bitat, consumen 78 por ciento de la energ\u00eda global y generan m\u00e1s de 60 por ciento de las emisiones de gases de efecto invernadero, a pesar de ocupar menos de 2 por ciento del territorio mundial. La concentraci\u00f3n de actividades y el dinamismo inherente a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica."
+            },
+            "type": "phrase"
+        },
+        {
+            "data": {
+                "h2": "La urgencia clim\u00e1tica urbana ya est\u00e1 aqu\u00ed.",
+                "content": "Las ciudades concentran la mayor parte de la actividad humana. Seg\u00fan ONU-H\u00e1bitat, consumen 78 por ciento de la energ\u00eda global y generan m\u00e1s de 60 por ciento de las emisiones de gases de efecto invernadero, a pesar de ocupar menos de 2 por ciento del territorio mundial. La concentraci\u00f3n de actividades y el dinamismo inherente a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica."
+            },
+            "type": "text_large"
+        },
+        {
+            "data": {
+                "slides": [
+                    {
+                        "image": [],
+                        "title": "asdsaas",
+                        "description": "Las ciudades concentran la mayor parte de la actividad humana. Seg\u00fan ONU-H\u00e1bitat, consumen 78 por ciento de la energ\u00eda global y generan m\u00e1s de 60 por ciento de las emisiones de gases de efecto invernadero, a pesar de ocupar menos de 2 por ciento del territorio mundial. La concentraci\u00f3n de actividades y el dinamismo inherente a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica."
+                    },
+                    {
+                        "image": [],
+                        "title": "asdsaas",
+                        "description": "Las ciudades concentran la mayor parte de la actividad humana. Seg\u00fan ONU-H\u00e1bitat, consumen 78 por ciento de la energ\u00eda global y generan m\u00e1s de 60 por ciento de las emisiones de gases de efecto invernadero, a pesar de ocupar menos de 2 por ciento del territorio mundial. La concentraci\u00f3n de actividades y el dinamismo inherente a la vida urbana crea entornos vulnerables ante olas de calor, lluvias intensas, sequ\u00edas, y contaminaci\u00f3n atmosf\u00e9rica."
+                    }
+                ]
+            },
+            "type": "carousel_adv"
+        },
+        {
+            "data": {
+                "images": [
+                    []
+                ]
+            },
+            "type": "gallery_rail"
+        }
+    ]
+}

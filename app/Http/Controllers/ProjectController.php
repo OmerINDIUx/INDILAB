@@ -37,58 +37,41 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
+            'sticky_title' => 'nullable|string|max:255',
+            'tags' => 'nullable|string',
+            'theme' => 'required|in:dark,light',
             'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'category' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
+            'badge_color' => 'nullable|string',
             'published_at' => 'nullable|date',
+            'coming_soon' => 'nullable|boolean',
             'content' => 'nullable|array', 
         ]);
 
         $contentData = $validated['content'] ?? [];
         $blocks = $contentData['blocks'] ?? [];
 
-        // Recursive Block Processing for Files
         if (!empty($blocks)) {
-            foreach ($blocks as $key => &$block) {
-                $blockType = $block['type'] ?? 'unknown';
-                
-                // 1. Handle Hero Image
-                if ($blockType === 'hero' && $request->hasFile("content.blocks.$key.data.image")) {
-                    $path = $request->file("content.blocks.$key.data.image")->store('projects/blocks', 'public');
-                    $block['data']['image'] = $path;
-                }
-
-                // 2. Handle Gallery Images (Multiple)
-                if ($blockType === 'gallery' && $request->hasFile("content.blocks.$key.data.images")) {
-                    $imagePaths = [];
-                    foreach ($request->file("content.blocks.$key.data.images") as $img) {
-                        $imagePaths[] = $img->store('projects/blocks', 'public');
-                    }
-                    $block['data']['images'] = $imagePaths;
-                }
-
-                // 3. Handle Carousel Slides (Nested)
-                if ($blockType === 'carousel' && isset($block['data']['slides'])) {
-                    foreach ($block['data']['slides'] as $sKey => &$slide) {
-                        if ($request->hasFile("content.blocks.$key.data.slides.$sKey.image")) {
-                            $path = $request->file("content.blocks.$key.data.slides.$sKey.image")->store('projects/blocks', 'public');
-                            $slide['image'] = $path;
-                        }
-                    }
-                    unset($slide); // Break reference
-                }
-            }
-            unset($block); // Break reference
+            $blocks = $this->processBlockFiles($request, $blocks);
         }
 
-        // Re-assign processed blocks to content
-        $contentData['blocks'] = array_values($blocks); // Reset keys to be safe
+        $contentData['blocks'] = array_values($blocks);
 
         $project = new Project([
             'title' => $validated['title'],
-            'subtitle' => $validated['subtitle'],
+            'subtitle' => $validated['subtitle'] ?? null,
+            'sticky_title' => $validated['sticky_title'] ?? null,
+            'tags' => $validated['tags'] ?? null,
+            'theme' => $validated['theme'] ?? 'dark',
             'short_description' => $validated['short_description'] ?? null,
+            'category' => $validated['category'] ?? null,
+            'meta_keywords' => $validated['meta_keywords'] ?? null,
+            'badge_color' => $validated['badge_color'] ?? 'cat-grad-1',
             'published_at' => $validated['published_at'] ?? null,
-            'content' => $contentData, // Store the structured blocks
+            'coming_soon' => $request->boolean('coming_soon'),
+            'content' => $contentData,
         ]);
         
         if ($request->hasFile('image')) {
@@ -125,11 +108,45 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
-            'content' => 'required',
+            'sticky_title' => 'nullable|string|max:255',
+            'tags' => 'nullable|string',
+            'theme' => 'required|in:dark,light',
+            'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'category' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
+            'badge_color' => 'nullable|string',
+            'published_at' => 'nullable|date',
+            'coming_soon' => 'nullable|boolean',
+            'content' => 'nullable|array',
         ]);
 
-        $project->fill($validated);
+        $contentData = $validated['content'] ?? [];
+        $blocks = $contentData['blocks'] ?? [];
+
+        // Note: We rely on hidden inputs in the form for persistence. 
+        // If a file is uploaded, processBlockFiles overwrites the hidden input value.
+        // If no file, the hidden input (string path) is preserved.
+
+        if (!empty($blocks)) {
+            $blocks = $this->processBlockFiles($request, $blocks);
+        }
+
+        $contentData['blocks'] = array_values($blocks);
+        
+        // Update basic fields manually to avoid overwriting content
+        $project->title = $validated['title'];
+        $project->subtitle = $validated['subtitle'] ?? null;
+        $project->sticky_title = $validated['sticky_title'] ?? null;
+        $project->tags = $validated['tags'] ?? null;
+        $project->theme = $validated['theme'] ?? 'dark';
+        $project->short_description = $validated['short_description'] ?? null;
+        $project->category = $validated['category'] ?? null;
+        $project->meta_keywords = $validated['meta_keywords'] ?? null;
+        $project->badge_color = $validated['badge_color'] ?? 'cat-grad-1';
+        $project->published_at = $validated['published_at'] ?? null;
+        $project->coming_soon = $request->boolean('coming_soon');
+        $project->content = $contentData;
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('projects', 'public');
@@ -139,6 +156,94 @@ class ProjectController extends Controller
         $project->save();
 
         return redirect()->route('work.show', $project)->with('success', 'Project updated successfully.');
+    }
+
+    private function processBlockFiles($request, $blocks)
+    {
+        foreach ($blocks as $key => &$block) {
+            $blockType = $block['type'] ?? 'unknown';
+            
+            // 1. Single Image Blocks
+            // Look for 'image_file' upload. If found, upload and set 'image'. 
+            // Also create Media record.
+            if (in_array($blockType, ['hero', 'intro_glass'])) {
+                if ($request->hasFile("content.blocks.$key.data.image_file")) {
+                    $file = $request->file("content.blocks.$key.data.image_file");
+                    $path = $file->store('projects/blocks', 'public');
+                    $block['data']['image'] = $path;
+                    
+                    // Register in Media Library
+                    \App\Models\Media::create([
+                        'filename' => $file->getClientOriginalName(),
+                        'path' => $path,
+                        'mime_type' => $file->getMimeType(),
+                        'size' => $file->getSize(),
+                    ]);
+                }
+            }
+
+            // 2. Gallery Blocks
+            // Gallery handles multiple files. We assume input name="...[images_files][]"
+            // 2. Gallery Blocks (Refined for Slot/Order preservation)
+            if ($blockType === 'gallery_rail') {
+                $finalImages = [];
+                
+                // New Approach: 'gallery_items' loop (Order preserved)
+                if (isset($block['data']['gallery_items']) && is_array($block['data']['gallery_items'])) {
+                    foreach ($block['data']['gallery_items'] as $i => $item) {
+                        // Check for upload
+                        if ($request->hasFile("content.blocks.$key.data.gallery_items.$i.image_file")) {
+                            $file = $request->file("content.blocks.$key.data.gallery_items.$i.image_file");
+                            $path = $file->store('projects/blocks', 'public');
+                            $finalImages[] = $path;
+
+                            \App\Models\Media::create([
+                                'filename' => $file->getClientOriginalName(),
+                                'path' => $path,
+                                'mime_type' => $file->getMimeType(),
+                                'size' => $file->getSize(),
+                            ]);
+                        } elseif (!empty($item['image'])) {
+                            // Keep existing/selected
+                            $finalImages[] = $item['image'];
+                        }
+                    }
+                } 
+                // Fallback for Legacy/Bulk method (if still used)
+                elseif (isset($block['data']['images'])) {
+                     $finalImages = $block['data']['images']; // Keep existing
+                     // Handle bulk uploads if any (Old method)
+                     if ($request->hasFile("content.blocks.$key.data.images_files")) {
+                        foreach ($request->file("content.blocks.$key.data.images_files") as $img) {
+                             $path = $img->store('projects/blocks', 'public');
+                             $finalImages[] = $path;
+                        }
+                     }
+                }
+
+                $block['data']['images'] = $finalImages;
+                unset($block['data']['gallery_items']); // Clean up
+            }
+
+            // 3. Carousel Blocks
+            if ($blockType === 'carousel_adv' && isset($block['data']['slides'])) {
+                foreach ($block['data']['slides'] as $sKey => &$slide) {
+                    if ($request->hasFile("content.blocks.$key.data.slides.$sKey.image_file")) {
+                        $file = $request->file("content.blocks.$key.data.slides.$sKey.image_file");
+                        $path = $file->store('projects/blocks', 'public');
+                        $slide['image'] = $path;
+
+                        \App\Models\Media::create([
+                            'filename' => $file->getClientOriginalName(),
+                            'path' => $path,
+                            'mime_type' => $file->getMimeType(),
+                            'size' => $file->getSize(),
+                        ]);
+                    }
+                }
+            }
+        }
+        return $blocks;
     }
 
     /**

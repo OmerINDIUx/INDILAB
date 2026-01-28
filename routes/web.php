@@ -58,4 +58,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+    
+    // Media Library Routes
+    Route::get('/media', [App\Http\Controllers\MediaController::class, 'index'])->name('media.index');
+    Route::post('/media', [App\Http\Controllers\MediaController::class, 'store'])->name('media.store');
+    Route::delete('/media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])->name('media.destroy');
 });
