@@ -336,10 +336,16 @@
             const shadow = host.attachShadow({mode: 'open'});
             
             // External CSS
-            const link = document.createElement('link');
-            link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
-            shadow.appendChild(link);
+            const linkGlobal = document.createElement('link');
+            linkGlobal.setAttribute('rel', 'stylesheet');
+            linkGlobal.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
+            shadow.appendChild(linkGlobal);
+
+            const linkLinks = document.createElement('link');
+            linkLinks.setAttribute('rel', 'stylesheet');
+            linkLinks.setAttribute('href', '{{ asset('css/link-styles.css') }}');
+            shadow.appendChild(linkLinks);
+
 
             // Internal Overrides (Force Mobile View @500px)
             const style = document.createElement('style');

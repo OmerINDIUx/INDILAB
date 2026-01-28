@@ -387,10 +387,16 @@
         const host = document.getElementById('preview-viewport');
         if(host && !host.shadowRoot) {
             const shadow = host.attachShadow({mode: 'open'});
-            const link = document.createElement('link');
-            link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
-            shadow.appendChild(link);
+            const linkGlobal = document.createElement('link');
+            linkGlobal.setAttribute('rel', 'stylesheet');
+            linkGlobal.setAttribute('href', '{{ asset('css/style-global-blog.css') }}');
+            shadow.appendChild(linkGlobal);
+
+            const linkLinks = document.createElement('link');
+            linkLinks.setAttribute('rel', 'stylesheet');
+            linkLinks.setAttribute('href', '{{ asset('css/link-styles.css') }}');
+            shadow.appendChild(linkLinks);
+
             const style = document.createElement('style');
             style.textContent = `
                 :host { display: block; overflow-y: auto; height: 100%; background: #1a1a1a; color: #eee; }

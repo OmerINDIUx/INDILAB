@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style-global-blog.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/link-styles.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
+
     <style>
         :root {
             --cms-theme-bg: {{ ($project->theme ?? 'dark') == 'light' ? '#eeeeee' : '#1a1a1a' }};

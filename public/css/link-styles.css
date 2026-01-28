@@ -1,18 +1,31 @@
 /* Estilos para enlaces dentro de h2 y p */
 h2 a,
-p a {
-  color: inherit; /* Hereda el color del texto circundante */
-  text-decoration: underline; /* Añade subrayado para indicar que es un enlace */
-  text-decoration-thickness: 1px; /* Grosor del subrayado */
-  text-underline-offset: 4px; /* Distancia del subrayado */
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
-  display: inline !important; /* El !important es opcional si hay conflictos */
+h2 a:visited,
+p a,
+p a:visited,
+.TextLarge a,
+.TextLarge a:visited,
+.card a,
+.card a:visited,
+.blog-scroll-strip__phrase a,
+.blog-scroll-strip__phrase a:visited {
+    color: #18b2e8 !important; /* Project accent color (blue) */
+    text-decoration: underline !important; /* Ensure underline is forced */
+    text-decoration-thickness: 1px !important; /* Grosor del subrayado */
+    text-underline-offset: 4px !important; /* Distancia del subrayado */
+    transition:
+        color 0.3s ease,
+        text-decoration-color 0.3s ease !important;
+    display: inline !important;
 }
 
 h2 a:hover,
-p a:hover {
-  color: #007bff; /* Color azul estándar al pasar el mouse, ajustable según diseño */
-  text-decoration-color: #007bff;
+p a:hover,
+.TextLarge a:hover,
+.card a:hover,
+.blog-scroll-strip__phrase a:hover {
+    color: #007bff !important; /* Darker blue on hover */
+    text-decoration-color: #007bff !important;
 }
 
 /* Opcional: Icono para indicar enlace externo */
