@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/components/menu-header.css" />
+<link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
 
 <!-- Shared CMS Styles -->
 <link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}?v={{ time() }}" />

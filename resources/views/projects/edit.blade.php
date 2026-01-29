@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/components/menu-header.css" />
+<link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
 
 <!-- Shared CMS Styles -->
 <link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}?v={{ time() }}" />
@@ -899,13 +899,13 @@
 
         } else if(type === 'statement') {
             const temp = document.getElementById('tpl-statement');
-            html = temp.innerHTML.replace(/INDEX/g, count);
+            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
         } else if(type === 'text_provocation') {
             const temp = document.getElementById('tpl-text_provocation');
-            html = temp.innerHTML.replace(/INDEX/g, count);
+            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
         } else if(type === 'custom_html') {
             const temp = document.getElementById('tpl-custom_html');
-            html = temp.innerHTML.replace(/INDEX/g, count);
+            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
