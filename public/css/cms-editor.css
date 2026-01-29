@@ -485,10 +485,45 @@ body {
     align-items: center;
     justify-content: center;
 }
-.block-item[data-type="statement"] .block-preview h2 {
+
+/* Provocation Block Preview Styles (Mobile View - 500px) */
+.block-item[data-type="text_provocation"] .block-preview,
+.preview-item[data-type="text_provocation"] .text-provocation {
+    display: grid;
+    grid-template-columns: 1fr; /* Stacked for mobile */
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    background-color: #1a1a1a;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.block-item[data-type="text_provocation"] .block-preview img,
+.preview-item[data-type="text_provocation"] .text-provocation img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.block-item[data-type="text_provocation"] .block-preview .provoc-text,
+.preview-item[data-type="text_provocation"] .provoc-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.block-item[data-type="text_provocation"] .block-preview h2,
+.preview-item[data-type="text_provocation"] .text-provocation h2 {
     font-family: "PowerGrotesk", sans-serif;
-    font-size: 1.5rem;
-    color: #333;
+    font-size: 1.5rem; /* Scaled for 500px */
+    line-height: 1.1;
+    color: #eee;
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
 }
 
 .rich-editor .span-resaltado {

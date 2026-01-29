@@ -248,6 +248,8 @@
                 <div class="section-header">Añadir Bloque de Producción</div>
                 <div class="add-block-grid">
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
+                    <div class="add-btn-card" onclick="addBlock('statement')"><i class="fas fa-quote-right"></i><span>Statement</span></div>
+                    <div class="add-btn-card" onclick="addBlock('text_provocation')"><i class="fas fa-image"></i><span>Provocation</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -301,6 +303,37 @@
             <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
             <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
             <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
+        </div>
+    </div>
+</template>
+<template id="tpl-statement">
+    <div class="block-item" data-type="statement"><input type="hidden" name="content[blocks][INDEX][type]" value="statement">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-quote-right"></i> STATEMENT (ANIMATED)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">Texto del Statement</label>
+                <textarea class="form-control" name="content[blocks][INDEX][data][text]" rows="3" oninput="updateBlockPreview('INDEX', 'statement', this.value)"></textarea>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="tpl-text_provocation">
+    <div class="block-item" data-type="text_provocation"><input type="hidden" name="content[blocks][INDEX][type]" value="text_provocation">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-image"></i> PROVOCATION (IMG + TEXT)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">Texto de Provocación (H2)</label>
+                <textarea class="form-control" name="content[blocks][INDEX][data][text]" rows="2" oninput="updateBlockPreview('INDEX', 'text_provocation', this.value)"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Imagen de Fondo</label>
+                <div class="media-selector-wrapper">
+                    <div class="media-preview-box" id="preview-INDEX" style="height: 150px; background-color: #eee; display: flex; align-items: center; justify-content: center; cursor: pointer; background-size: cover; background-position: center;" onclick="openMediaModal('input-INDEX', 'preview-INDEX')">
+                        <span>Select Image</span>
+                    </div>
+                    <input type="hidden" name="content[blocks][INDEX][data][image]" id="input-INDEX" onchange="updateBlockPreview('INDEX', 'text_provocation_image', this.value)">
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -682,6 +715,8 @@
             if(type === 'intro_glass') newItem.innerHTML = '<div class="card" style="padding: 2rem;"></div>';
 
             else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
+            else if(type === 'statement') newItem.innerHTML = '<div class="statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;"></div>';
+            else if(type === 'text_provocation') newItem.innerHTML = '<div class="text-provocation" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; background: #1a1a1a;"><img src="" style="width: 100%; display: none;"><div class="provoc-text"><h2 style="color: #eee;"></h2></div></div>';
             // Gallery/Carousel initialized empty
             else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
             else if(type === 'carousel_adv') newItem.innerHTML = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;"></div>';
@@ -696,6 +731,10 @@
         } else if(type === 'statement') {
             const temp = document.getElementById('tpl-statement');
             html = temp.innerHTML.replace(/INDEX/g, count);
+        } else if(type === 'text_provocation') {
+            const temp = document.getElementById('tpl-text_provocation');
+            html = temp.innerHTML.replace(/INDEX/g, count);
+
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -873,6 +912,25 @@
             }
             el.innerText = val;
         }
+        else if(type === 'text_provocation') {
+             const container = p.querySelector('.text-provocation');
+             if(!container) { 
+                 p.innerHTML = '<div class="text-provocation" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; background: #1a1a1a;"><img src="" style="width: 100%; display: none;"><div class="provoc-text"><h2 style="color: #eee;"></h2></div></div>'; 
+             }
+             // Handle text update
+             if(field === 'text_provocation' || field === undefined) {
+                 const h2 = p.querySelector('.provoc-text h2');
+                 if(h2) h2.innerText = val;
+             }
+             // Handle image update
+             if(field === 'text_provocation_image') {
+                 const img = p.querySelector('.text-provocation img');
+                 if(img && val) {
+                     img.src = `${window.rootPath}storage/${val}`;
+                     img.style.display = 'block';
+                 }
+             }
+         }
         else if(type === 'text_large') {
             let container = p.querySelector('.TextLarge');
             if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }

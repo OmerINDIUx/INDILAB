@@ -305,18 +305,31 @@
                     <!-- Inline SVGs -->
                     <div class="corner corner-bottom-left">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1920" style="enable-background: new 0 0 1920 1920" xml:space="preserve">
-                            <g fill="#1a1a1a" class="corner_booton_left"><path d="M1,1919L1,1l448.2,0l0,1400.1c0,63-29.9,131.5-73.3,175.4l2.7,2.7c43.5-43.8,111.4-74,173.8-74H1919V1919L1,1919z"/></g>
+                            <g fill="#eee" class="corner_booton_left"><path d="M1,1919L1,1l448.2,0l0,1400.1c0,63-29.9,131.5-73.3,175.4l2.7,2.7c43.5-43.8,111.4-74,173.8-74H1919V1919L1,1919z"/></g>
                         </svg>
                     </div>
                     <div class="corner corner-top-right">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1920" style="enable-background: new 0 0 1920 1920" xml:space="preserve">
-                            <g fill="#1a1a1a" class="corner_top_right"><path d="M1920,0l0,1918l-448.2,0l0-1400.1c0-63,29.9-131.5,73.3-175.4l-2.7-2.7c-43.5,43.8-111.4,74-173.8,74L2,413.7L2,0L1920,0z"/></g>
+                            <g fill="#eee" class="corner_top_right"><path d="M1920,0l0,1918l-448.2,0l0-1400.1c0-63,29.9-131.5,73.3-175.4l-2.7-2.7c-43.5,43.8-111.4,74-173.8,74L2,413.7L2,0L1920,0z"/></g>
                         </svg>
                     </div>
                 </div>
             </section>
             @endif
-            {{-- 3. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
+
+            {{-- 4. PROVOCATION (Image + Text Grid Layout) --}}
+            @if($block['type'] === 'text_provocation')
+            <section class="text-provocation">
+                @if(!empty($data['image']))
+                <img src="{{ asset('storage/' . $data['image']) }}" alt="Provocation Image">
+                @endif
+                <div class="provoc-text">
+                    <h2>{{ $data['text'] ?? '' }}</h2>
+                </div>
+            </section>
+            @endif
+
+            {{-- 5. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
             @if($block['type'] === 'phrase')
             <section class="blog-scroll-strip-phrase-section">
                 <div class="blog-scroll-strip__phrase">

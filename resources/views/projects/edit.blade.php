@@ -219,6 +219,22 @@
                                     <label class="form-label">Texto del Statement</label>
                                     <textarea id="statement-{{ $idx }}" class="form-control" name="content[blocks][{{ $idx }}][data][text]" rows="3" oninput="updateBlockPreview('{{ $idx }}', 'statement', this.value)">{{ $data['text'] ?? '' }}</textarea>
                                 </div>
+                            @elseif($type === 'text_provocation')
+                                <div class="form-group">
+                                    <label class="form-label">Texto de Provocación (H2)</label>
+                                    <textarea id="prov-text-{{ $idx }}" class="form-control" name="content[blocks][{{ $idx }}][data][text]" rows="2" oninput="updateBlockPreview('{{ $idx }}', 'text_provocation', this.value)">{{ $data['text'] ?? '' }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Imagen de Fondo</label>
+                                    <div class="media-selector-wrapper">
+                                        <div class="media-preview-box" id="preview-{{ $idx }}" 
+                                             style="height: 150px; background-color: #eee; display: flex; align-items: center; justify-content: center; cursor: pointer; background-size: cover; background-position: center; @if(isset($data['image'])) background-image: url('{{ asset('storage/'.$data['image']) }}'); @endif" 
+                                             onclick="openMediaModal('input-{{ $idx }}', 'preview-{{ $idx }}')">
+                                            @if(!isset($data['image'])) <span>Select Image</span> @endif
+                                        </div>
+                                        <input type="hidden" name="content[blocks][{{ $idx }}][data][image]" id="input-{{ $idx }}" value="{{ $data['image'] ?? '' }}" onchange="updateBlockPreview('{{ $idx }}', 'text_provocation_image', this.value)">
+                                    </div>
+                                </div>
                             @elseif($type === 'gallery_rail')
                                 <div class="form-group">
                                     <label class="form-label">Frase Destacada (Scroll Strip)</label>
@@ -283,6 +299,7 @@
                 <div class="add-block-grid">
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
                     <div class="add-btn-card" onclick="addBlock('statement')"><i class="fas fa-quote-right"></i><span>Statement</span></div>
+                    <div class="add-btn-card" onclick="addBlock('text_provocation')"><i class="fas fa-image"></i><span>Provocation</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -309,6 +326,11 @@
                     <div class="preview-item" id="prev-block-{{ $idx }}" data-type="{{ $block['type'] }}">
                         @if($block['type'] === 'intro_glass') <div class="card" style="padding: 2rem;">{!! $block['data']['text'] ?? '' !!}</div>
                         @elseif($block['type'] === 'statement') <div class="Statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;">{{ $block['data']['text'] ?? '' }}</div>
+                        @elseif($block['type'] === 'text_provocation') 
+                            <div class="text-provocation" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; background: #1a1a1a;">
+                                @if(isset($block['data']['image'])) <img src="{{ asset('storage/'.$block['data']['image']) }}" style="width: 100%;"> @endif
+                                <div class="provoc-text"><h2 style="color: #eee;">{{ $block['data']['text'] ?? '' }}</h2></div>
+                            </div>
                         @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
                         @elseif($block['type'] === 'gallery_rail')
                             @php
@@ -396,6 +418,26 @@
             <div class="form-group">
                 <label class="form-label">Texto del Statement</label>
                 <textarea id="statement-INDEX" class="form-control" name="content[blocks][INDEX][data][text]" rows="3" oninput="updateBlockPreview('INDEX', 'statement', this.value)"></textarea>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="tpl-text_provocation">
+    <div class="block-item" data-type="text_provocation"><input type="hidden" name="content[blocks][INDEX][type]" value="text_provocation">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-image"></i> PROVOCATION (IMG + TEXT)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">Texto de Provocación (H2)</label>
+                <textarea id="prov-text-INDEX" class="form-control" name="content[blocks][INDEX][data][text]" rows="2" oninput="updateBlockPreview('INDEX', 'text_provocation', this.value)"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Imagen de Fondo</label>
+                <div class="media-selector-wrapper">
+                    <div class="media-preview-box" id="preview-INDEX" style="height: 150px; background-color: #eee; display: flex; align-items: center; justify-content: center; cursor: pointer; background-size: cover; background-position: center;" onclick="openMediaModal('input-INDEX', 'preview-INDEX')">
+                        <span>Select Image</span>
+                    </div>
+                    <input type="hidden" name="content[blocks][INDEX][data][image]" id="input-INDEX" onchange="updateBlockPreview('INDEX', 'text_provocation_image', this.value)">
+                </div>
             </div>
         </div>
     </div>
@@ -802,6 +844,9 @@
         } else if(type === 'statement') {
             const temp = document.getElementById('tpl-statement');
             html = temp.innerHTML.replace(/INDEX/g, count);
+        } else if(type === 'text_provocation') {
+            const temp = document.getElementById('tpl-text_provocation');
+            html = temp.innerHTML.replace(/INDEX/g, count);
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -997,6 +1042,19 @@
             let el = p.querySelector('.span-resaltado');
             if(!el) { p.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>'; el = p.querySelector('.span-resaltado'); }
             el.innerText = val;
+        }
+        else if(type === 'text_provocation') {
+             // Handle text update
+             if(field === undefined || field === 'text_provocation') {
+                 let el = p.querySelector('h2');
+                 if(!el) { p.innerHTML = '<div class="block-preview"><h2></h2></div>'; el = p.querySelector('h2'); }
+                 el.innerText = val;
+             }
+             // Handle image update
+             if(field === 'text_provocation_image') {
+                 let el = p.querySelector('.block-preview');
+                 if(el) el.style.backgroundImage = `url(${window.rootPath}storage/${val})`;
+             }
         }
         else if(type === 'statement') {
             let el = p.querySelector('.statement h2');
