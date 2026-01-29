@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="/css/components/menu-header.css" />
 
 <!-- Shared CMS Styles -->
-<link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}?v={{ time() }}" />
+<link rel="stylesheet" href="{{ asset('css/blog.css') }}?v={{ time() }}" />
     <!--  Fix Preview Context overrides 
     /* .preview-viewport styles moved to Shadow DOM injection -->
 </style>
@@ -199,10 +199,7 @@
                                 <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
                                 <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
                                 <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['text'] ?? '' }}">
-                            @elseif($type === 'phrase')
-                                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                <div id="textarea-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
-                                <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['text'] ?? '' }}">
+
                             @elseif($type === 'text_large')
                                 <div class="form-group">
                                     <label class="form-label">Subtítulo</label>
@@ -210,9 +207,18 @@
                                     <div id="h2-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'h2', this.innerHTML)"></div>
                                     <input type="hidden" id="h2-{{ $idx }}" name="content[blocks][{{ $idx }}][data][h2]" value="{{ $data['h2'] ?? '' }}">
                                 </div>
-                                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                <div class="rt-toolbar">
+                                    <button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button>
+                                    <button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button>
+                                    <button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'span', 'span-resaltado')"><b>H</b></button>
+                                </div>
                                 <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'content', this.innerHTML)"></div>
                                 <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][content]" value="{{ $data['content'] ?? '' }}">
+                            @elseif($type === 'statement')
+                                <div class="form-group">
+                                    <label class="form-label">Texto del Statement</label>
+                                    <textarea id="statement-{{ $idx }}" class="form-control" name="content[blocks][{{ $idx }}][data][text]" rows="3" oninput="updateBlockPreview('{{ $idx }}', 'statement', this.value)">{{ $data['text'] ?? '' }}</textarea>
+                                </div>
                             @elseif($type === 'gallery_rail')
                                 <div class="form-group">
                                     <label class="form-label">Frase Destacada (Scroll Strip)</label>
@@ -244,7 +250,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Descripción</label>
-                                                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                                <div class="rt-toolbar">
+                                                    <button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'b')"><b>B</b></button>
+                                                    <button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'a')"><i class="fas fa-link"></i></button>
+                                                    <button type="button" class="rt-btn" onclick="formatText('slide-desc-{{ $idx }}-{{ $sIdx }}', 'span', 'span-resaltado span-blanco')"><b>H</b></button>
+                                                </div>
                                                 <div id="slide-desc-{{ $idx }}-{{ $sIdx }}-editor" class="rich-editor" contenteditable="true" oninput="updateCarouselPreview('{{ $idx }}'); document.getElementById('slide-desc-{{ $idx }}-{{ $sIdx }}').value = this.innerHTML;"></div>
                                                 <input type="hidden" id="slide-desc-{{ $idx }}-{{ $sIdx }}" name="content[blocks][{{ $idx }}][data][slides][{{ $sIdx }}][description]" value="{{ $slide['description'] ?? '' }}">
                                             </div>
@@ -272,7 +282,7 @@
                 <div class="section-header">Añadir Bloque de Producción</div>
                 <div class="add-block-grid">
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
-                    <div class="add-btn-card" onclick="addBlock('phrase')"><i class="fas fa-quote-left"></i><span>Gran Frase</span></div>
+                    <div class="add-btn-card" onclick="addBlock('statement')"><i class="fas fa-quote-right"></i><span>Statement</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -298,7 +308,7 @@
                 @foreach($otherBlocks as $idx => $block)
                     <div class="preview-item" id="prev-block-{{ $idx }}" data-type="{{ $block['type'] }}">
                         @if($block['type'] === 'intro_glass') <div class="card" style="padding: 2rem;">{!! $block['data']['text'] ?? '' !!}</div>
-                        @elseif($block['type'] === 'phrase') <div class="span-resaltado" style="margin: 20px 0;">{{ $block['data']['text'] ?? '' }}</div>
+                        @elseif($block['type'] === 'statement') <div class="Statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;">{{ $block['data']['text'] ?? '' }}</div>
                         @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
                         @elseif($block['type'] === 'gallery_rail')
                             @php
@@ -348,22 +358,13 @@
 </div>
 
 <!-- TEMPLATES -->
+
 <template id="tpl-intro_glass">
     <div class="block-item" data-type="intro_glass"><input type="hidden" name="content[blocks][INDEX][type]" value="intro_glass">
-        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> INTRO GLASS</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-certificate"></i> INTRO GLASS</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
         <div class="block-body">
-            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
             <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
-            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
-        </div>
-    </div>
-</template>
-<template id="tpl-phrase">
-    <div class="block-item" data-type="phrase"><input type="hidden" name="content[blocks][INDEX][type]" value="phrase">
-        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> GRAN FRASE</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
-        <div class="block-body">
-            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
-            <div id="textarea-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
             <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
         </div>
     </div>
@@ -378,9 +379,24 @@
                 <div id="h2-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'h2', this.innerHTML)"></div>
                 <input type="hidden" id="h2-INDEX" name="content[blocks][INDEX][data][h2]">
             </div>
-            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div class="rt-toolbar">
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'span', 'span-resaltado')"><b>H</b></button>
+            </div>
             <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'content', this.innerHTML)"></div>
             <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][content]">
+        </div>
+    </div>
+</template>
+<template id="tpl-statement">
+    <div class="block-item" data-type="statement"><input type="hidden" name="content[blocks][INDEX][type]" value="statement">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-quote-right"></i> STATEMENT (ANIMATED)</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">Texto del Statement</label>
+                <textarea id="statement-INDEX" class="form-control" name="content[blocks][INDEX][data][text]" rows="3" oninput="updateBlockPreview('INDEX', 'statement', this.value)"></textarea>
+            </div>
         </div>
     </div>
 </template>
@@ -427,8 +443,9 @@
         <div class="form-group">
             <label class="form-label">Descripción</label>
             <div class="rt-toolbar">
-                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'b')"><b>B</b></button>
-                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'span', 'span-resaltado span-blanco')"><b>H</b></button>
             </div>
             <div id="slide-desc-BLOCK_INDEX-SLIDE_INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateCarouselPreview('BLOCK_INDEX'); document.getElementById('slide-desc-BLOCK_INDEX-SLIDE_INDEX').value = this.innerHTML;"></div>
             <input type="hidden" id="slide-desc-BLOCK_INDEX-SLIDE_INDEX" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][description]">
@@ -653,6 +670,15 @@
             e.preventDefault();
             document.getElementById('form-action').value = 'save';
             
+            // Sync rich editors to hidden inputs before form submission
+            document.querySelectorAll('.rich-editor').forEach(editor => {
+                const hiddenInputId = editor.id.replace('-editor', '');
+                const hiddenInput = document.getElementById(hiddenInputId);
+                if (hiddenInput) {
+                    hiddenInput.value = editor.innerHTML;
+                }
+            });
+
             btnSave.disabled = true;
             btnSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
 
@@ -761,7 +787,7 @@
             newItem.dataset.type = type;
             // Initialize mock content structure matches Global CSS expectations
             if(type === 'intro_glass') newItem.innerHTML = '<div class="card" style="padding: 2rem;"></div>';
-            else if(type === 'phrase') newItem.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>';
+
             else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
             else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
             else if(type === 'carousel_adv') newItem.innerHTML = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;"></div>';
@@ -772,8 +798,10 @@
         // Initialize Rich Editors for this block
         if(type === 'intro_glass') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
-        } else if(type === 'phrase') {
-            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+
+        } else if(type === 'statement') {
+            const temp = document.getElementById('tpl-statement');
+            html = temp.innerHTML.replace(/INDEX/g, count);
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -970,11 +998,89 @@
             if(!el) { p.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>'; el = p.querySelector('.span-resaltado'); }
             el.innerText = val;
         }
+        else if(type === 'statement') {
+            let el = p.querySelector('.statement h2');
+            if(!el) { 
+                p.innerHTML = '<div class="statement"><div class="content-text"><h2></h2></div></div>'; 
+                el = p.querySelector('h2'); 
+            }
+            el.innerText = val;
+        }
         else if(type === 'text_large') {
             let container = p.querySelector('.TextLarge');
             if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }
             if(field === 'h2') container.querySelector('h2').innerText = val;
             if(field === 'content') container.querySelector('div').innerHTML = val;
+        }
+    }
+
+    function formatText(id, tag, className = '') {
+        const editor = document.getElementById(id + '-editor');
+        if (!editor) return;
+        
+        editor.focus();
+        if (tag === 'b') {
+            document.execCommand('bold', false, null);
+        } else if (tag === 'span') {
+            const selection = window.getSelection();
+            if (!selection.rangeCount || selection.isCollapsed) return;
+            const range = selection.getRangeAt(0);
+            
+            // Check if we are already inside the target span
+            let container = range.commonAncestorContainer;
+            if (container.nodeType === 3) container = container.parentNode;
+            
+            // Find closest span with this class
+            let existingSpan = container.closest('span.' + className.split(' ').join('.'));
+            
+            if (existingSpan) {
+                // Unwrap
+                const parent = existingSpan.parentNode;
+                while (existingSpan.firstChild) {
+                    parent.insertBefore(existingSpan.firstChild, existingSpan);
+                }
+                parent.removeChild(existingSpan);
+            } else {
+                // Wrap
+                const span = document.createElement('span');
+                span.className = className;
+                try {
+                    range.surroundContents(span);
+                } catch (e) {
+                    // Fallback for complex selections (crossing boundaries)
+                    document.execCommand('insertHTML', false, `<span class="${className}">${selection.toString()}</span>`);
+                }
+            }
+            // Trigger input for sync
+            editor.dispatchEvent(new Event('input', { bubbles: true }));
+        } else if (tag === 'a') {
+            let currentUrl = "https://";
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const container = selection.getRangeAt(0).commonAncestorContainer;
+                const link = container.nodeName === 'A' ? container : container.parentNode;
+                if (link && link.nodeName === 'A') {
+                    currentUrl = link.getAttribute('href');
+                }
+            }
+
+            const url = prompt("Enter URL (clear to remove):", currentUrl);
+            if (url !== null) {
+                if (url === "") {
+                    document.execCommand('unlink', false, null);
+                } else {
+                    document.execCommand('createLink', false, url);
+                    // Selection might have changed, re-fetch to set target
+                    const newSelection = window.getSelection();
+                    if (newSelection.rangeCount > 0) {
+                        const newContainer = newSelection.getRangeAt(0).commonAncestorContainer;
+                        const newLink = newContainer.nodeName === 'A' ? newContainer : newContainer.parentNode;
+                        if (newLink && newLink.nodeName === 'A') {
+                            newLink.target = "_blank";
+                        }
+                    }
+                }
+            }
         }
     }
 

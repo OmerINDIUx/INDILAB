@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Stringable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (! Stringable::hasMacro('doesntStartWith')) {
+            Stringable::macro('doesntStartWith', function ($search) {
+                return ! $this->startsWith($search);
+            });
+        }
+
+        if (! Stringable::hasMacro('doesntEndWith')) {
+            Stringable::macro('doesntEndWith', function ($search) {
+                return ! $this->endsWith($search);
+            });
+        }
     }
 }

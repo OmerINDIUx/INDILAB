@@ -345,6 +345,18 @@ span {
     color: inherit; /* hereda el color de la sección */
 }
 
+/* Span Resaltado - Added for Rich Text Editor */
+.span-resaltado {
+    font-family: inherit;
+    font-size: 1.15rem;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+.span-resaltado.span-blanco {
+    color: #fff !important;
+    font-size: 0.9rem;
+}
+
 /* ===================
    TEXT CONTAINERS EN HERO
 =================== */
@@ -704,4 +716,65 @@ span {
     .hero-carousel-section h3 {
         max-width: 80%;
     }
+}
+
+/* ===========================
+   STATEMENT BLOCK
+=========================== */
+.statement {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    overflow: hidden;
+}
+
+.statement .content-text {
+    text-align: center;
+    max-width: 900px;
+    position: relative;
+    padding: 3rem;
+    z-index: 2;
+}
+
+.statement h2 {
+    font-family: "PowerGrotesk", sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+/* Corners */
+.corner {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.corner svg {
+    width: 100%;
+    height: 100%;
+    fill: #1a1a1a;
+}
+
+.corner-bottom-left {
+    bottom: -20px;
+    left: -20px;
+}
+
+.corner-top-right {
+    top: -20px;
+    right: -20px;
+}
+
+.dark-theme .statement h2 {
+    color: #eeeeee;
+}
+.dark-theme .corner svg g {
+    fill: #eeeeee;
 }

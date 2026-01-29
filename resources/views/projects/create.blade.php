@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="/css/components/menu-header.css" />
 
 <!-- Shared CMS Styles -->
-<link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/cms-editor.css') }}?v={{ time() }}" />
+<link rel="stylesheet" href="{{ asset('css/blog.css') }}?v={{ time() }}" />
    <!--  Fix Preview Context overrides 
     /* .preview-viewport styles moved to Shadow DOM injection -->
 </style>
@@ -187,10 +187,7 @@
                                     <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
                                     <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
                                     <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['data']['text'] ?? '' }}">
-                                @elseif($type === 'phrase')
-                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                    <div id="textarea-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'text', this.innerHTML)"></div>
-                                    <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['data']['text'] ?? '' }}">
+
                                 @elseif($type === 'text_large')
                                     <div class="form-group">
                                         <label class="form-label">Subtítulo</label>
@@ -251,7 +248,6 @@
                 <div class="section-header">Añadir Bloque de Producción</div>
                 <div class="add-block-grid">
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
-                    <div class="add-btn-card" onclick="addBlock('phrase')"><i class="fas fa-quote-left"></i><span>Gran Frase</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -279,7 +275,7 @@
                         @if($idx == 0) @continue @endif
                         <div class="preview-item" id="prev-block-{{ $idx }}" data-type="{{ $block['type'] }}">
                             @if($block['type'] === 'intro_glass') <div class="card" style="padding: 2rem;">{!! $block['data']['text'] ?? '' !!}</div>
-                            @elseif($block['type'] === 'phrase') <div class="span-resaltado" style="margin: 20px 0;">{{ $block['data']['text'] ?? '' }}</div>
+
                             @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
                             @elseif($block['type'] === 'gallery_rail') <div class="horizontal-scroll-section" style="overflow-x: auto; white-space: nowrap; padding: 10px;">@if(isset($block['data']['images'])) @foreach($block['data']['images'] as $img) <img src="{{ asset('storage/'.$img) }}" style="height: 120px; border-radius: 8px; margin-right: 10px; display: inline-block;"> @endforeach @endif</div>
                             @elseif($block['type'] === 'carousel_adv') <div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;">@if(isset($block['data']['slides'])) @foreach($block['data']['slides'] as $slide) <div class="carousel-item card-item"><img src="{{ isset($slide['image']) ? asset('storage/'.$slide['image']) : '' }}" class="carrucel-imagen"><h2>{{ $slide['title'] ?? '' }}</h2><p>{{ $slide['description'] ?? '' }}</p></div> @endforeach @endif</div>
@@ -308,16 +304,6 @@
         </div>
     </div>
 </template>
-<template id="tpl-phrase">
-    <div class="block-item" data-type="phrase"><input type="hidden" name="content[blocks][INDEX][type]" value="phrase">
-        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> GRAN FRASE</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
-        <div class="block-body">
-            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
-            <div id="textarea-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'text', this.innerHTML)"></div>
-            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][text]">
-        </div>
-    </div>
-</template>
 <template id="tpl-text_large">
     <div class="block-item" data-type="text_large"><input type="hidden" name="content[blocks][INDEX][type]" value="text_large">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> TEXTO LARGO</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
@@ -328,7 +314,11 @@
                 <div id="h2-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'h2', this.innerHTML)"></div>
                 <input type="hidden" id="h2-INDEX" name="content[blocks][INDEX][data][h2]">
             </div>
-            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div class="rt-toolbar">
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'span', 'span-resaltado')"><b>H</b></button>
+            </div>
             <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'content', this.innerHTML)"></div>
             <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][content]">
         </div>
@@ -376,8 +366,9 @@
         <div class="form-group">
             <label class="form-label">Descripción</label>
             <div class="rt-toolbar">
-                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'b')"><b>B</b></button>
-                <button type="button" class="rt-btn" onclick="formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('slide-desc-BLOCK_INDEX-SLIDE_INDEX', 'span', 'span-resaltado span-blanco')"><b>H</b></button>
             </div>
             <div id="slide-desc-BLOCK_INDEX-SLIDE_INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateCarouselPreview('BLOCK_INDEX'); document.getElementById('slide-desc-BLOCK_INDEX-SLIDE_INDEX').value = this.innerHTML;"></div>
             <input type="hidden" id="slide-desc-BLOCK_INDEX-SLIDE_INDEX" name="content[blocks][BLOCK_INDEX][data][slides][SLIDE_INDEX][description]">
@@ -459,7 +450,18 @@
                 .Title h2 { font-size: 1.2rem !important; margin: 0 !important; font-weight: 400 !important; }
                 .Title .blog-category-badge { font-size: 1rem !important; padding: 4px 15px !important; }
                 
-                .span-resaltado { font-size: 1rem !important; margin: 20px 0 !important; }
+                .span-resaltado { 
+                    font-family: inherit;
+                    font-size: 1.15rem; 
+                    color: #ff472b; 
+                    font-weight: 600; 
+                }
+
+                .carousel-item.card-item .span-resaltado.span-blanco {
+                    color: #fff !important;
+                    font-size: 0.9rem;
+                    margin: 15px 0;
+                }
                 
                 /* CAROUSEL FIX: Image Left, Text Right */
                 .carousel-item.card-item { 
@@ -678,7 +680,7 @@
             newItem.dataset.type = type;
             // Initialize mock content structure matches Global CSS expectations
             if(type === 'intro_glass') newItem.innerHTML = '<div class="card" style="padding: 2rem;"></div>';
-            else if(type === 'phrase') newItem.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>';
+
             else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
             // Gallery/Carousel initialized empty
             else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
@@ -690,8 +692,10 @@
         // Initialize Rich Editors for this block
         if(type === 'intro_glass') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
-        } else if(type === 'phrase') {
-            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+
+        } else if(type === 'statement') {
+            const temp = document.getElementById('tpl-statement');
+            html = temp.innerHTML.replace(/INDEX/g, count);
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -734,13 +738,50 @@
         updateCarouselPreview(blockIdx);
     }
 
-    function formatText(id, tag) {
+    function formatText(id, tag, className = '') {
         const editor = document.getElementById(id + '-editor');
         if (!editor) return;
         
         editor.focus();
         if (tag === 'b') {
             document.execCommand('bold', false, null);
+        } else if (tag === 'span') {
+            const selection = window.getSelection();
+            if (!selection.rangeCount || selection.isCollapsed) return;
+            const range = selection.getRangeAt(0);
+            
+            // Check if we are already inside the target span
+            let container = range.commonAncestorContainer;
+            if (container.nodeType === 3) container = container.parentNode;
+            
+            // Find closest span with this class
+            let existingSpan = container.closest('span.' + className.split(' ').join('.'));
+            
+            if (existingSpan) {
+                // Unwrap
+                const parent = existingSpan.parentNode;
+                while (existingSpan.firstChild) {
+                    parent.insertBefore(existingSpan.firstChild, existingSpan);
+                }
+                parent.removeChild(existingSpan);
+            } else {
+                // Wrap
+                // Check if selection contains other spans and strip them if they conflict? 
+                // For simplicity, just wrap. If user selects multiple times, we rely on unwrapping next time.
+                // Better approach: Clean range first?
+                // Let's stick to basic wrapping but ensure we don't nest identical spans if possible.
+                
+                const span = document.createElement('span');
+                span.className = className;
+                try {
+                    range.surroundContents(span);
+                } catch (e) {
+                    // Fallback for complex selections (crossing boundaries)
+                    document.execCommand('insertHTML', false, `<span class="${className}">${selection.toString()}</span>`);
+                }
+            }
+            // Trigger input for sync
+            editor.dispatchEvent(new Event('input', { bubbles: true }));
         } else if (tag === 'a') {
             let currentUrl = "https://";
             const selection = window.getSelection();
@@ -822,6 +863,14 @@
         else if(type === 'phrase') {
             let el = p.querySelector('.span-resaltado');
             if(!el) { p.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>'; el = p.querySelector('.span-resaltado'); }
+            el.innerText = val;
+        }
+        else if(type === 'statement') {
+            let el = p.querySelector('.statement h2');
+            if(!el) { 
+                p.innerHTML = '<div class="statement"><div class="content-text"><h2></h2></div></div>'; 
+                el = p.querySelector('h2'); 
+            }
             el.innerText = val;
         }
         else if(type === 'text_large') {

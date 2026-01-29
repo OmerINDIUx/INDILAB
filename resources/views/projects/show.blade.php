@@ -297,7 +297,25 @@
                 </div>
             </section>
             @endif
-
+            {{-- 3. STATEMENT (Animated Corners) --}}
+            @if($block['type'] === 'statement')
+            <section class="statement">
+                <div class="content-text">
+                    <h2>{{ $data['text'] ?? '' }}</h2>
+                    <!-- Inline SVGs -->
+                    <div class="corner corner-bottom-left">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1920" style="enable-background: new 0 0 1920 1920" xml:space="preserve">
+                            <g fill="#1a1a1a" class="corner_booton_left"><path d="M1,1919L1,1l448.2,0l0,1400.1c0,63-29.9,131.5-73.3,175.4l2.7,2.7c43.5-43.8,111.4-74,173.8-74H1919V1919L1,1919z"/></g>
+                        </svg>
+                    </div>
+                    <div class="corner corner-top-right">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1920" style="enable-background: new 0 0 1920 1920" xml:space="preserve">
+                            <g fill="#1a1a1a" class="corner_top_right"><path d="M1920,0l0,1918l-448.2,0l0-1400.1c0-63,29.9-131.5,73.3-175.4l-2.7-2.7c-43.5,43.8-111.4,74-173.8,74L2,413.7L2,0L1920,0z"/></g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+            @endif
             {{-- 3. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
             @if($block['type'] === 'phrase')
             <section class="blog-scroll-strip-phrase-section">
@@ -391,7 +409,7 @@
                                 {{ $slide['title'] ?? '' }}
                             @endif
                         </h2>
-                        <p style="grid-area: text;">{{ $slide['description'] ?? '' }}</p>
+                        <div style="grid-area: text; font-size: 0.95rem; margin: 0; line-height: 1.5;">{!! $slide['description'] ?? '' !!}</div>
                     </div>
                     @endforeach
                 </div>
@@ -454,6 +472,69 @@
                     }
                 });
             });
+
+            // CORNER ANIMATION (Statement Block)
+            function initCornerAnimation() {
+                const statement = document.querySelector(".statement");
+                const bottomLeft = document.querySelector(".corner-bottom-left");
+                const topRight = document.querySelector(".corner-top-right");
+                const content = document.querySelector(".statement .content-text");
+
+                if (!statement || !bottomLeft || !topRight || !content) return;
+
+                function getPositions() {
+                    const w = content.offsetWidth;
+                    const h = content.offsetHeight;
+                    const cornerSize = bottomLeft.offsetWidth || 50;
+                    
+                    // Start Positions (Expanded outwards)
+                    const startX_BL = (w / 2) + 100;
+                    const startY_BL = -(h / 2) - 100;
+
+                    const startX_TR = -(w / 2) - 100;
+                    const startY_TR = (h / 2) + 100;
+
+                    return {
+                        bottomLeft: { startX: startX_BL, startY: startY_BL },
+                        topRight: { startX: startX_TR, startY: startY_TR },
+                    };
+                }
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".statement",
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: 1,
+                        invalidateOnRefresh: true,
+                    },
+                });
+
+                tl.fromTo(bottomLeft, 
+                    { x: () => getPositions().bottomLeft.startX, y: () => getPositions().bottomLeft.startY, opacity: 0 },
+                    { x: 0, y: 0, opacity: 1, ease: "power2.out" }
+                ).fromTo(topRight, 
+                    { x: () => getPositions().topRight.startX, y: () => getPositions().topRight.startY, opacity: 0 },
+                    { x: 0, y: 0, opacity: 1, ease: "power2.out" }, "<"
+                );
+                
+                // Fade in text with cleaner easing
+                 gsap.fromTo(".statement .content-text", 
+                    { opacity: 0, y: 30 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 1.5, 
+                        ease: "power3.out",
+                        scrollTrigger: { 
+                            trigger: ".statement", 
+                            start: "top 75%",
+                            toggleActions: "play none none reverse" 
+                        } 
+                    }
+                );
+            }
+            initCornerAnimation();
 
             // Replicated animations for cards and text
             gsap.utils.toArray('.card, .blog-scroll-strip__phrase, .text-content').forEach(el => {
