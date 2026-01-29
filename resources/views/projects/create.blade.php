@@ -578,6 +578,41 @@
 
                 .horizontal-scroll-section { position: relative !important; height: auto !important; background: transparent !important; padding: 0 !important; justify-content: flex-start !important; overflow-x: auto !important; }
                 
+                /* Provocation Block - Mobile View (500px) */
+                .text-provocation {
+                    display: grid !important;
+                    grid-template-columns: 1fr !important;
+                    gap: 1.5rem !important;
+                    padding: 2rem 1rem !important;
+                    background-color: #1a1a1a !important;
+                    text-align: center !important;
+                    border-radius: 8px !important;
+                    margin: 20px auto !important;
+                    width: 90% !important;
+                }
+                .text-provocation img {
+                    width: 100% !important;
+                    height: auto !important;
+                    object-fit: contain !important;
+                    border-radius: 8px !important;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+                }
+                .text-provocation .provoc-text {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+                .text-provocation h2 {
+                    font-family: "PowerGrotesk", sans-serif !important;
+                    font-size: 1.5rem !important;
+                    line-height: 1.1 !important;
+                    color: #eee !important;
+                    margin: 0 !important;
+                    text-align: center !important;
+                    font-weight: 400 !important;
+                }
+                
                 /* Specific Intro Glass Style (if different, but usually it's just .card) */
                 /* If user meant rounded corners like card-img, we might need a mockup class, but standard .card is 1.5rem radius */
             `;

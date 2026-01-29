@@ -327,9 +327,9 @@
                         @if($block['type'] === 'intro_glass') <div class="card" style="padding: 2rem;">{!! $block['data']['text'] ?? '' !!}</div>
                         @elseif($block['type'] === 'statement') <div class="Statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;">{{ $block['data']['text'] ?? '' }}</div>
                         @elseif($block['type'] === 'text_provocation') 
-                            <div class="text-provocation" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; background: #1a1a1a;">
-                                @if(isset($block['data']['image'])) <img src="{{ asset('storage/'.$block['data']['image']) }}" style="width: 100%;"> @endif
-                                <div class="provoc-text"><h2 style="color: #eee;">{{ $block['data']['text'] ?? '' }}</h2></div>
+                            <div class="text-provocation" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1rem; background: #1a1a1a; text-align: center; border-radius: 8px; margin: 20px auto; width: 90%;">
+                                @if(isset($block['data']['image'])) <img src="{{ asset('storage/'.$block['data']['image']) }}" style="width: 100%; border-radius: 8px;"> @endif
+                                <div class="provoc-text"><h2 style="color: #eee; font-size: 1.5rem; text-align: center;">{{ $block['data']['text'] ?? '' }}</h2></div>
                             </div>
                         @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
                         @elseif($block['type'] === 'gallery_rail')
@@ -650,6 +650,41 @@
                 }
 
                 .horizontal-scroll-section { position: relative !important; height: auto !important; background: transparent !important; padding: 0 !important; justify-content: flex-start !important; overflow-x: auto !important; }
+                
+                /* Provocation Block - Mobile View (500px) */
+                .text-provocation {
+                    display: grid !important;
+                    grid-template-columns: 1fr !important;
+                    gap: 1.5rem !important;
+                    padding: 2rem 1rem !important;
+                    background-color: #1a1a1a !important;
+                    text-align: center !important;
+                    border-radius: 8px !important;
+                    margin: 20px auto !important;
+                    width: 90% !important;
+                }
+                .text-provocation img {
+                    width: 100% !important;
+                    height: auto !important;
+                    object-fit: contain !important;
+                    border-radius: 8px !important;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+                }
+                .text-provocation .provoc-text {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+                .text-provocation h2 {
+                    font-family: "PowerGrotesk", sans-serif !important;
+                    font-size: 1.5rem !important;
+                    line-height: 1.1 !important;
+                    color: #eee !important;
+                    margin: 0 !important;
+                    text-align: center !important;
+                    font-weight: 400 !important;
+                }
             `;
             shadow.appendChild(style);
             const tpl = document.getElementById('initial-preview-html');
@@ -1044,18 +1079,24 @@
             el.innerText = val;
         }
         else if(type === 'text_provocation') {
+             const container = p.querySelector('.text-provocation');
+             if(!container) { 
+                 p.innerHTML = '<div class="text-provocation" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1rem; background: #1a1a1a;"><img src="" style="width: 100%; display: none;"><div class="provoc-text"><h2 style="color: #eee;"></h2></div></div>'; 
+             }
              // Handle text update
-             if(field === undefined || field === 'text_provocation') {
-                 let el = p.querySelector('h2');
-                 if(!el) { p.innerHTML = '<div class="block-preview"><h2></h2></div>'; el = p.querySelector('h2'); }
-                 el.innerText = val;
+             if(field === 'text_provocation' || field === undefined) {
+                 const h2 = p.querySelector('.provoc-text h2');
+                 if(h2) h2.innerText = val;
              }
              // Handle image update
              if(field === 'text_provocation_image') {
-                 let el = p.querySelector('.block-preview');
-                 if(el) el.style.backgroundImage = `url(${window.rootPath}storage/${val})`;
+                 const img = p.querySelector('.text-provocation img');
+                 if(img && val) {
+                     img.src = `${window.rootPath}storage/${val}`;
+                     img.style.display = 'block';
+                 }
              }
-        }
+         }
         else if(type === 'statement') {
             let el = p.querySelector('.statement h2');
             if(!el) { 
