@@ -94,20 +94,22 @@
                     source: window.location.pathname,
                 };
 
-                // Temporary pointing to mail.php in public, eventually replace with route
-                fetch("{{ asset('mail.php') }}", {
+                // Pointing to Laravel newsletter route
+                fetch("{{ route('newsletter.subscribe') }}", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                            "Accept": "application/json"
                         },
                         body: JSON.stringify(payload),
                     })
                     .then((resp) => {
-                        if (!resp.ok) throw new Error("network");
-                        return resp.json().catch(() => ({}));
+                        if (!resp.ok) return resp.json().then(err => { throw new Error(err.message || "error") });
+                        return resp.json();
                     })
-                    .then(() => {
-                        show("Gracias por suscribirte. Revisa tu correo.", true);
+                    .then((data) => {
+                        show(data.message || "Gracias por suscribirte.", true);
                         form.reset();
                     })
                     .catch(() => {

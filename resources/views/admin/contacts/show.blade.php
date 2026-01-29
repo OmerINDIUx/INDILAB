@@ -127,6 +127,10 @@
                         <label>Form Type</label>
                         <span>{{ ucfirst($contact->form_type) }}</span>
                     </div>
+                    <div class="detail-item">
+                        <label>Source Page</label>
+                        <span>{{ $contact->metadata['source_page'] ?? 'Direct / Unknown' }}</span>
+                    </div>
                     @if($contact->phone)
                     <div class="detail-item">
                         <label>Phone</label>

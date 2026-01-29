@@ -158,6 +158,7 @@
                     <thead>
                         <tr>
                             <th>Sender</th>
+                            <th>Origin</th>
                             <th>Form Type</th>
                             <th>Message Preview</th>
                             <th>Date</th>
@@ -170,6 +171,11 @@
                             <td>
                                 <div style="font-weight: 600;">{{ $contact->name }}</div>
                                 <div style="font-size: 0.8rem; color: var(--dashboard-text-muted);">{{ $contact->email }}</div>
+                            </td>
+                            <td>
+                                <div style="font-size: 0.8rem; color: var(--dashboard-text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis;" title="{{ $contact->metadata['source_page'] ?? 'Unknown' }}">
+                                    {{ $contact->metadata['source_page'] ?? 'Unknown' }}
+                                </div>
                             </td>
                             <td>
                                 <span style="font-size: 0.75rem; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; text-transform: uppercase;">

@@ -56,6 +56,10 @@ Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])-
 // Analytics API (Public - needs to track all visitors)
 Route::post('/api/analytics/track', [App\Http\Controllers\Api\AnalyticsController::class, 'track'])->name('analytics.track');
 
+// Public Contact/Newsletter Routes
+Route::post('/api/newsletter/subscribe', [App\Http\Controllers\ContactController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('/api/contact/submit', [App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
+
 // Admin Routes (Protected)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
