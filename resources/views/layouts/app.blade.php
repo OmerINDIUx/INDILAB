@@ -47,6 +47,17 @@
 
     <script src="{{ asset('js/global.js') }}"></script>
     @include('components.media-manager')
+    
+    {{-- Analytics Tracking --}}
+    <script>
+        window.analyticsConfig = {
+            endpoint: '{{ route("analytics.track") }}',
+            sessionId: '{{ session()->getId() }}',
+            userId: {{ auth()->id() ?? 'null' }}
+        };
+    </script>
+    <script src="{{ asset('js/analytics-tracker.js') }}" defer></script>
+    
     @stack('scripts')
 </body>
 </html>

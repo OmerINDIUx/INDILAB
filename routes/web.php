@@ -53,11 +53,23 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'showLoginFor
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
+// Analytics API (Public - needs to track all visitors)
+Route::post('/api/analytics/track', [App\Http\Controllers\Api\AnalyticsController::class, 'track'])->name('analytics.track');
+
 // Admin Routes (Protected)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    
+    // Detailed Analytics
+    Route::get('/analytics', [App\Http\Controllers\Admin\AnalyticsController::class, 'index'])->name('analytics.index');
+    
+    // Contact Management
+    Route::get('/contacts', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/export', [App\Http\Controllers\Admin\ContactController::class, 'export'])->name('contacts.export');
+    Route::get('/contacts/{contact}', [App\Http\Controllers\Admin\ContactController::class, 'show'])->name('contacts.show');
+
+    // User Management
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['create', 'store', 'show', 'destroy']);
     
     // Media Library Routes
     Route::get('/media', [App\Http\Controllers\MediaController::class, 'index'])->name('media.index');

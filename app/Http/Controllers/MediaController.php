@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $media = Media::latest()->get();
-        return response()->json($media);
+        $media = Media::latest()->paginate(24);
+        
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($media);
+        }
+        
+        return view('admin.media.index', compact('media'));
     }
 
     public function store(Request $request)
