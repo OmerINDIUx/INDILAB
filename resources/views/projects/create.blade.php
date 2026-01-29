@@ -250,6 +250,7 @@
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
                     <div class="add-btn-card" onclick="addBlock('statement')"><i class="fas fa-quote-right"></i><span>Statement</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_provocation')"><i class="fas fa-image"></i><span>Provocation</span></div>
+                    <div class="add-btn-card" onclick="addBlock('custom_html')"><i class="fas fa-code"></i><span>Custom HTML</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -333,6 +334,18 @@
                     </div>
                     <input type="hidden" name="content[blocks][INDEX][data][image]" id="input-INDEX" onchange="updateBlockPreview('INDEX', 'text_provocation_image', this.value)">
                 </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="tpl-custom_html">
+    <div class="block-item" data-type="custom_html"><input type="hidden" name="content[blocks][INDEX][type]" value="custom_html">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-code"></i> CUSTOM HTML/SCRIPT</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">HTML/JavaScript Code</label>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">⚠️ Paste your HTML/JS code here. It will be rendered as-is in production.</p>
+                <textarea class="form-control" name="content[blocks][INDEX][data][html]" rows="12" style="font-family: 'Courier New', monospace; font-size: 0.9rem;" placeholder="<section>&#10;  <div id='my-embed'></div>&#10;  <script>&#10;    // Your code here&#10;  </script>&#10;</section>" oninput="updateBlockPreview('INDEX', 'custom_html', this.value)"></textarea>
             </div>
         </div>
     </div>
@@ -751,7 +764,8 @@
 
             else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
             else if(type === 'statement') newItem.innerHTML = '<div class="statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;"></div>';
-            else if(type === 'text_provocation') newItem.innerHTML = '<div class="text-provocation" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; background: #1a1a1a;"><img src="" style="width: 100%; display: none;"><div class="provoc-text"><h2 style="color: #eee;"></h2></div></div>';
+            else if(type === 'text_provocation') newItem.innerHTML = '<div class="text-provocation" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1rem; background: #1a1a1a;"><img src="" style="width: 100%; display: none;"><div class="provoc-text"><h2 style="color: #eee;"></h2></div></div>';
+            else if(type === 'custom_html') newItem.innerHTML = '<div class="custom-html-preview" style="padding: 20px; background: #f5f5f5; border: 2px dashed #999; text-align: center; color: #666; font-family: monospace;">Custom HTML Block (Preview Disabled)</div>';
             // Gallery/Carousel initialized empty
             else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
             else if(type === 'carousel_adv') newItem.innerHTML = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;"></div>';
@@ -964,8 +978,16 @@
                      img.src = `${window.rootPath}storage/${val}`;
                      img.style.display = 'block';
                  }
-             }
+              }
          }
+        else if(type === 'custom_html') {
+             // For security, we don't render custom HTML in preview
+             // Just show a placeholder
+             const container = p.querySelector('.custom-html-preview');
+             if(!container) {
+                 p.innerHTML = '<div class="custom-html-preview" style="padding: 20px; background: #f5f5f5; border: 2px dashed #999; text-align: center; color: #666; font-family: monospace;">Custom HTML Block<br><small>Preview disabled for security</small></div>';
+             }
+        }
         else if(type === 'text_large') {
             let container = p.querySelector('.TextLarge');
             if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }

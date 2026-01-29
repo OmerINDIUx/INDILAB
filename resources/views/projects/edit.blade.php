@@ -235,6 +235,12 @@
                                         <input type="hidden" name="content[blocks][{{ $idx }}][data][image]" id="input-{{ $idx }}" value="{{ $data['image'] ?? '' }}" onchange="updateBlockPreview('{{ $idx }}', 'text_provocation_image', this.value)">
                                     </div>
                                 </div>
+                            @elseif($type === 'custom_html')
+                                <div class="form-group">
+                                    <label class="form-label">HTML/JavaScript Code</label>
+                                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">⚠️ Paste your HTML/JS code here. It will be rendered as-is in production.</p>
+                                    <textarea class="form-control" name="content[blocks][{{ $idx }}][data][html]" rows="12" style="font-family: 'Courier New', monospace; font-size: 0.9rem;" placeholder="<section>&#10;  <div id='my-embed'></div>&#10;  <script>&#10;    // Your code here&#10;  </script>&#10;</section>" oninput="updateBlockPreview('{{ $idx }}', 'custom_html', this.value)">{{ $data['html'] ?? '' }}</textarea>
+                                </div>
                             @elseif($type === 'gallery_rail')
                                 <div class="form-group">
                                     <label class="form-label">Frase Destacada (Scroll Strip)</label>
@@ -300,6 +306,7 @@
                     <div class="add-btn-card" id="btn-add-intro_glass" onclick="addBlock('intro_glass')"><i class="fas fa-certificate"></i><span>Intro Glass</span></div>
                     <div class="add-btn-card" onclick="addBlock('statement')"><i class="fas fa-quote-right"></i><span>Statement</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_provocation')"><i class="fas fa-image"></i><span>Provocation</span></div>
+                    <div class="add-btn-card" onclick="addBlock('custom_html')"><i class="fas fa-code"></i><span>Custom HTML</span></div>
                     <div class="add-btn-card" onclick="addBlock('text_large')"><i class="fas fa-align-justify"></i><span>Texto Largo</span></div>
                     <div class="add-btn-card" onclick="addBlock('gallery_rail')"><i class="fas fa-layer-group"></i><span>Scroll Strip</span></div>
                     <div class="add-btn-card" onclick="addBlock('carousel_adv')"><i class="fas fa-columns"></i><span>Carousel Grid</span></div>
@@ -331,6 +338,8 @@
                                 @if(isset($block['data']['image'])) <img src="{{ asset('storage/'.$block['data']['image']) }}" style="width: 100%; border-radius: 8px;"> @endif
                                 <div class="provoc-text"><h2 style="color: #eee; font-size: 1.5rem; text-align: center;">{{ $block['data']['text'] ?? '' }}</h2></div>
                             </div>
+                        @elseif($block['type'] === 'custom_html')
+                            <div class="custom-html-preview" style="padding: 20px; background: #f5f5f5; border: 2px dashed #999; text-align: center; color: #666; font-family: monospace; margin: 20px auto; width: 90%;">Custom HTML Block<br><small>Preview disabled for security</small></div>
                         @elseif($block['type'] === 'text_large') <div class="TextLarge" style="padding: 20px;"><h2>{{ $block['data']['h2'] ?? '' }}</h2><div>{!! $block['data']['content'] ?? '' !!}</div></div>
                         @elseif($block['type'] === 'gallery_rail')
                             @php
@@ -438,6 +447,18 @@
                     </div>
                     <input type="hidden" name="content[blocks][INDEX][data][image]" id="input-INDEX" onchange="updateBlockPreview('INDEX', 'text_provocation_image', this.value)">
                 </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="tpl-custom_html">
+    <div class="block-item" data-type="custom_html"><input type="hidden" name="content[blocks][INDEX][type]" value="custom_html">
+        <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-code"></i> CUSTOM HTML/SCRIPT</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
+        <div class="block-body">
+            <div class="form-group">
+                <label class="form-label">HTML/JavaScript Code</label>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">⚠️ Paste your HTML/JS code here. It will be rendered as-is in production.</p>
+                <textarea class="form-control" name="content[blocks][INDEX][data][html]" rows="12" style="font-family: 'Courier New', monospace; font-size: 0.9rem;" placeholder="<section>&#10;  <div id='my-embed'></div>&#10;  <script>&#10;    // Your code here&#10;  </script>&#10;</section>" oninput="updateBlockPreview('INDEX', 'custom_html', this.value)"></textarea>
             </div>
         </div>
     </div>
@@ -882,6 +903,9 @@
         } else if(type === 'text_provocation') {
             const temp = document.getElementById('tpl-text_provocation');
             html = temp.innerHTML.replace(/INDEX/g, count);
+        } else if(type === 'custom_html') {
+            const temp = document.getElementById('tpl-custom_html');
+            html = temp.innerHTML.replace(/INDEX/g, count);
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -1095,8 +1119,14 @@
                      img.src = `${window.rootPath}storage/${val}`;
                      img.style.display = 'block';
                  }
-             }
+              }
          }
+        else if(type === 'custom_html') {
+             const container = p.querySelector('.custom-html-preview');
+             if(!container) {
+                 p.innerHTML = '<div class="custom-html-preview" style="padding: 20px; background: #f5f5f5; border: 2px dashed #999; text-align: center; color: #666; font-family: monospace;">Custom HTML Block<br><small>Preview disabled for security</small></div>';
+             }
+        }
         else if(type === 'statement') {
             let el = p.querySelector('.statement h2');
             if(!el) { 

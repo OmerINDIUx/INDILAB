@@ -329,6 +329,11 @@
             </section>
             @endif
 
+            {{-- 4.5. CUSTOM HTML (User-injected HTML/JS) --}}
+            @if($block['type'] === 'custom_html')
+            {!! $data['html'] ?? '' !!}
+            @endif
+
             {{-- 5. PHRASE (Aligned with .blog-scroll-strip__phrase) --}}
             @if($block['type'] === 'phrase')
             <section class="blog-scroll-strip-phrase-section">
