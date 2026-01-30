@@ -3,7 +3,6 @@
 @section('title', 'Our Approach | INDI Lab')
 
 @push('css')
-    <link id="menu-css" rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
     <link id="menu-css" rel="stylesheet" href="{{ asset('css/Our_Aproach.css') }}" />
 @endpush
 
@@ -41,14 +40,14 @@
     <section class="list">
       <div class="phrase">
         <span class="pdp" data-i18n="Señales_Urbanas_title"></span><br />
-        <strong><span data-i18n="Señales_Urbanas_text"></strong></span><br />
+        <strong><span data-i18n="Señales_Urbanas_text"></span></strong><br />
         <span data-i18n="Señales_Urbanas_text1"></span> <br />
         <br />
         <span data-i18n="Señales_Urbanas_text2"></span>
       </div>
       <div class="phrase">
         <span class="pdp" data-i18n="Sistemas_Urbanos_title"></span><br />
-        <strong><span data-i18n="Sistemas_Urbanos_text"></strong></span><br />
+        <strong><span data-i18n="Sistemas_Urbanos_text"></span></strong><br />
         <span data-i18n="Sistemas_Urbanos_text1"></span> <br />
         <br />
         <span data-i18n="Sistemas_Urbanos_text2"></span>
@@ -57,7 +56,7 @@
 
       <div class="phrase">
         <span class="pdp" data-i18n="Experimentos_urbano_title"></span><br />
-        <strong><span data-i18n="Experimentos_urbano_text"></strong></span><br />
+        <strong><span data-i18n="Experimentos_urbano_text"></span></strong><br />
         <span data-i18n="Experimentos_urbano_text1"></span> <br />
         <br />
         <span data-i18n="Experimentos_urbano_text2"></span>
@@ -65,7 +64,7 @@
 
       <div class="phrase">
         <span class="pdp" data-i18n="Urban_Playbooks_title"></span><br />
-        <strong><span data-i18n="Urban_Playbooks_text"></strong></span><br />
+        <strong><span data-i18n="Urban_Playbooks_text"></span></strong><br />
         <span data-i18n="Urban_Playbooks_text1"></span> <br />
       </div>
 
@@ -272,18 +271,7 @@
 
     @include('partials.newsletter')
 
-    <a href="{{ route('home') }}">
-      <div class="secundary-brand" data-svg="{{ asset('svg/indi-lab_Vertical_Animate.svg') }}"></div>
-    </a>
-    <script>
-        const container = document.querySelector(".secundary-brand");
-        fetch("{{ asset('svg/indi-lab_Vertical_Animate.svg') }}")
-        .then((response) => response.text())
-        .then((svgText) => {
-            container.innerHTML = svgText;
-        })
-        .catch((err) => console.error("Error cargando SVG:", err));
-    </script>
+
 @endsection
 
 @push('scripts')

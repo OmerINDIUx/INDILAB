@@ -15,6 +15,9 @@ body {
     color: #1a1a1a;
     background: #eee;
     position: relative;
+}
+
+body:not(.dashboard-page):not(.light-theme):not(.dark-theme) {
     width: calc(100% - 100px);
     margin-left: 100px;
 }

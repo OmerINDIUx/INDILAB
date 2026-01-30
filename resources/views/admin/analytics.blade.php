@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Analytics Details | INDI Lab Admin')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 <style>
     .analytics-grid {
         display: grid;
@@ -68,196 +67,144 @@
 </style>
 @endpush
 
-@section('body-class', 'dashboard-page')
+@section('admin_title', 'Detailed Analytics')
+@section('admin_subtitle', 'Deep dive into user behavior and site performance')
 
-@section('content')
-<div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="dashboard-sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <span style="font-weight: 800; letter-spacing: -1px; font-size: 1.5rem;">INDI Lab</span>
-            </div>
+@section('admin_actions')
+<div class="range-selector" style="display: flex; gap: 10px; background: #1a1a1a; padding: 5px; border-radius: 8px;">
+    <a href="?range=7" class="btn-range {{ $range == 7 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 7 ? '#fff' : '#888' }}; background: {{ $range == 7 ? '#333' : 'transparent' }}; font-size: 0.85rem;">7D</a>
+    <a href="?range=30" class="btn-range {{ $range == 30 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 30 ? '#fff' : '#888' }}; background: {{ $range == 30 ? '#333' : 'transparent' }}; font-size: 0.85rem;">30D</a>
+    <a href="?range=90" class="btn-range {{ $range == 90 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 90 ? '#fff' : '#888' }}; background: {{ $range == 90 ? '#333' : 'transparent' }}; font-size: 0.85rem;">90D</a>
+</div>
+@endsection
+
+@section('admin_content')
+<!-- Summary Cards -->
+<div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 25px;">
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(0,123,255,0.1); color: #007bff;"><i class="fas fa-eye"></i></div>
+        <div class="stat-info">
+            <h3>{{ number_format($stats['total_views']) }}</h3>
+            <p>Total Views</p>
         </div>
-        
-        <nav class="sidebar-nav">
-            <div class="nav-section">
-                <div class="nav-section-title">Main</div>
-                <a href="{{ route('admin.dashboard') }}" class="nav-item">
-                    <i class="fas fa-th-large"></i>
-                    <span>Overview</span>
-                </a>
-                <a href="{{ route('admin.analytics.index') }}" class="nav-item active">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
-                </a>
-            </div>
-            
-            <div class="nav-section">
-                <div class="nav-section-title">Content</div>
-                <a href="{{ route('work.index') }}" class="nav-item">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Projects</span>
-                </a>
-                <a href="{{ route('admin.contacts.index') }}" class="nav-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contacts</span>
-                </a>
-                <a href="{{ route('admin.media.index') }}" class="nav-item">
-                    <i class="fas fa-images"></i>
-                    <span>Media</span>
-                </a>
-            </div>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dashboard-main">
-        <header class="dashboard-header">
-            <div class="header-title">
-                <h1>Detailed Analytics</h1>
-                <p class="header-subtitle">Deep dive into user behavior and site performance</p>
-            </div>
-            
-            <div class="header-actions">
-                <div class="range-selector" style="display: flex; gap: 10px; background: #1a1a1a; padding: 5px; border-radius: 8px;">
-                    <a href="?range=7" class="btn-range {{ $range == 7 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 7 ? '#fff' : '#888' }}; background: {{ $range == 7 ? '#333' : 'transparent' }}; font-size: 0.85rem;">7D</a>
-                    <a href="?range=30" class="btn-range {{ $range == 30 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 30 ? '#fff' : '#888' }}; background: {{ $range == 30 ? '#333' : 'transparent' }}; font-size: 0.85rem;">30D</a>
-                    <a href="?range=90" class="btn-range {{ $range == 90 ? 'active' : '' }}" style="padding: 5px 15px; border-radius: 5px; text-decoration: none; color: {{ $range == 90 ? '#fff' : '#888' }}; background: {{ $range == 90 ? '#333' : 'transparent' }}; font-size: 0.85rem;">90D</a>
-                </div>
-            </div>
-        </header>
-
-        <div class="dashboard-content">
-            <!-- Summary Cards -->
-            <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 25px;">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(0,123,255,0.1); color: #007bff;"><i class="fas fa-eye"></i></div>
-                    <div class="stat-info">
-                        <h3>{{ number_format($stats['total_views']) }}</h3>
-                        <p>Total Views</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(40,167,69,0.1); color: #28a745;"><i class="fas fa-users"></i></div>
-                    <div class="stat-info">
-                        <h3>{{ number_format($stats['unique_visitors']) }}</h3>
-                        <p>Unique Visitors</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(255,193,7,0.1); color: #ffc107;"><i class="fas fa-clock"></i></div>
-                    <div class="stat-info">
-                        <h3>{{ gmdate('i:s', $stats['avg_time']) }}</h3>
-                        <p>Avg. Time</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: rgba(220,53,69,0.1); color: #dc3545;"><i class="fas fa-mouse-pointer"></i></div>
-                    <div class="stat-info">
-                        <h3>{{ round($stats['avg_scroll']) }}%</h3>
-                        <p>Avg. Scroll</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="analytics-grid">
-                <!-- Device Distribution -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <div class="chart-title">Device Distribution</div>
-                    </div>
-                    <div id="device-chart" style="height: 250px;"></div>
-                </div>
-
-                <!-- Browser Stats -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <div class="chart-title">Browser Usage</div>
-                    </div>
-                    <div id="browser-chart" style="height: 250px;"></div>
-                </div>
-            </div>
-
-            <!-- Top Pages Table -->
-            <div class="data-table-container" style="margin-bottom: 30px;">
-                <div style="padding: 20px; border-bottom: 1px solid var(--dashboard-border);">
-                    <h2 style="font-size: 1.1rem; font-weight: 600;">Top Visited Pages</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Page Path</th>
-                            <th>Views</th>
-                            <th>Avg. Time</th>
-                            <th>Avg. Scroll</th>
-                            <th>Retention</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($topPages as $page)
-                        <tr>
-                            <td>
-                                <div style="font-weight: 500;">{{ $page->page_title ?: 'Untitled Page' }}</div>
-                                <div style="font-size: 0.75rem; color: var(--dashboard-text-muted);">{{ $page->url }}</div>
-                            </td>
-                            <td>{{ number_format($page->views) }}</td>
-                            <td>{{ gmdate('i:s', $page->avg_time) }}</td>
-                            <td>{{ round($page->avg_scroll) }}%</td>
-                            <td>
-                                <div class="progress-bar-tiny">
-                                    <div class="progress-fill" style="width: {{ $page->avg_scroll }}%; background: {{ $page->avg_scroll > 70 ? 'var(--dashboard-success)' : ($page->avg_scroll > 40 ? 'var(--dashboard-primary)' : '#ffc107') }}"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Recent Visitor Log -->
-            <div class="data-table-container">
-                <div style="padding: 20px; border-bottom: 1px solid var(--dashboard-border);">
-                    <h2 style="font-size: 1.1rem; font-weight: 600;">Visitor Activity Log</h2>
-                </div>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Visitor Session</th>
-                            <th>Browsing Page</th>
-                            <th>Device / Browser</th>
-                            <th>Time Spent</th>
-                            <th>Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($visitorLogs as $log)
-                        <tr>
-                            <td style="font-family: monospace; font-size: 0.8rem;">
-                                {{ substr($log->session_id, 0, 12) }}...
-                            </td>
-                            <td>
-                                <div style="font-size: 0.9rem;">{{ $log->url }}</div>
-                            </td>
-                            <td>
-                                <span style="font-size: 0.75rem; color: var(--dashboard-text-muted);">
-                                    <i class="fas fa-{{ $log->device_type == 'mobile' ? 'mobile-alt' : ($log->device_type == 'tablet' ? 'tablet-alt' : 'desktop') }}"></i>
-                                    {{ $log->browser }}
-                                </span>
-                            </td>
-                            <td>
-                                {{ $log->time_on_page ? gmdate('i:s', $log->time_on_page) : '--' }}
-                            </td>
-                            <td>
-                                <div style="font-size: 0.8rem;">{{ $log->created_at->diffForHumans() }}</div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(40,167,69,0.1); color: #28a745;"><i class="fas fa-users"></i></div>
+        <div class="stat-info">
+            <h3>{{ number_format($stats['unique_visitors']) }}</h3>
+            <p>Unique Visitors</p>
         </div>
-    </main>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(255,193,7,0.1); color: #ffc107;"><i class="fas fa-clock"></i></div>
+        <div class="stat-info">
+            <h3>{{ gmdate('i:s', $stats['avg_time']) }}</h3>
+            <p>Avg. Time</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(220,53,69,0.1); color: #dc3545;"><i class="fas fa-mouse-pointer"></i></div>
+        <div class="stat-info">
+            <h3>{{ round($stats['avg_scroll']) }}%</h3>
+            <p>Avg. Scroll</p>
+        </div>
+    </div>
+</div>
+
+<div class="analytics-grid">
+    <!-- Device Distribution -->
+    <div class="chart-card">
+        <div class="chart-header">
+            <div class="chart-title">Device Distribution</div>
+        </div>
+        <div id="device-chart" style="height: 250px;"></div>
+    </div>
+
+    <!-- Browser Stats -->
+    <div class="chart-card">
+        <div class="chart-header">
+            <div class="chart-title">Browser Usage</div>
+        </div>
+        <div id="browser-chart" style="height: 250px;"></div>
+    </div>
+</div>
+
+<!-- Top Pages Table -->
+<div class="data-table-container" style="margin-bottom: 30px;">
+    <div style="padding: 20px; border-bottom: 1px solid var(--dashboard-border);">
+        <h2 style="font-size: 1.1rem; font-weight: 600;">Top Visited Pages</h2>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Page Path</th>
+                <th>Views</th>
+                <th>Avg. Time</th>
+                <th>Avg. Scroll</th>
+                <th>Retention</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($topPages as $page)
+            <tr>
+                <td>
+                    <div style="font-weight: 500;">{{ $page->page_title ?: 'Untitled Page' }}</div>
+                    <div style="font-size: 0.75rem; color: var(--dashboard-text-muted);">{{ $page->url }}</div>
+                </td>
+                <td>{{ number_format($page->views) }}</td>
+                <td>{{ gmdate('i:s', $page->avg_time) }}</td>
+                <td>{{ round($page->avg_scroll) }}%</td>
+                <td>
+                    <div class="progress-bar-tiny">
+                        <div class="progress-fill" style="width: {{ $page->avg_scroll }}%; background: {{ $page->avg_scroll > 70 ? 'var(--dashboard-success)' : ($page->avg_scroll > 40 ? 'var(--dashboard-primary)' : '#ffc107') }}"></div>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Recent Visitor Log -->
+<div class="data-table-container">
+    <div style="padding: 20px; border-bottom: 1px solid var(--dashboard-border);">
+        <h2 style="font-size: 1.1rem; font-weight: 600;">Visitor Activity Log</h2>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Visitor Session</th>
+                <th>Browsing Page</th>
+                <th>Device / Browser</th>
+                <th>Time Spent</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($visitorLogs as $log)
+            <tr>
+                <td style="font-family: monospace; font-size: 0.8rem;">
+                    {{ substr($log->session_id, 0, 12) }}...
+                </td>
+                <td>
+                    <div style="font-size: 0.9rem;">{{ $log->url }}</div>
+                </td>
+                <td>
+                    <span style="font-size: 0.75rem; color: var(--dashboard-text-muted);">
+                        <i class="fas fa-{{ $log->device_type == 'mobile' ? 'mobile-alt' : ($log->device_type == 'tablet' ? 'tablet-alt' : 'desktop') }}"></i>
+                        {{ $log->browser }}
+                    </span>
+                </td>
+                <td>
+                    {{ $log->time_on_page ? gmdate('i:s', $log->time_on_page) : '--' }}
+                </td>
+                <td>
+                    <div style="font-size: 0.8rem;">{{ $log->created_at->diffForHumans() }}</div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 @push('scripts')

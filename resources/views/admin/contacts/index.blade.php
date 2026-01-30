@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Contacts Inbox | INDI Lab Admin')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
 <style>
     .contact-filters {
         display: flex;
@@ -86,133 +85,81 @@
 </style>
 @endpush
 
-@section('body-class', 'dashboard-page')
+@section('admin_title', 'Conversations')
+@section('admin_subtitle', 'Manage and respond to all site inquiries')
 
-@section('content')
-<div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="dashboard-sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <span style="font-weight: 800; letter-spacing: -1px; font-size: 1.5rem;">INDI Lab</span>
-            </div>
-        </div>
-        
-        <nav class="sidebar-nav">
-            <div class="nav-section">
-                <div class="nav-section-title">Main</div>
-                <a href="{{ route('admin.dashboard') }}" class="nav-item">
-                    <i class="fas fa-th-large"></i>
-                    <span>Overview</span>
-                </a>
-                <a href="{{ route('admin.analytics.index') }}" class="nav-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
-                </a>
-            </div>
-            
-            <div class="nav-section">
-                <div class="nav-section-title">Content</div>
-                <a href="{{ route('work.index') }}" class="nav-item">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Projects</span>
-                </a>
-                <a href="{{ route('admin.contacts.index') }}" class="nav-item active">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contacts</span>
-                </a>
-                <a href="{{ route('admin.media.index') }}" class="nav-item">
-                    <i class="fas fa-images"></i>
-                    <span>Media</span>
-                </a>
-            </div>
-        </nav>
-    </aside>
+@section('admin_actions')
+<a href="{{ route('admin.contacts.export') }}" class="export-btn">
+    <i class="fas fa-file-excel"></i>
+    <span>Export Excel</span>
+</a>
+@endsection
 
-    <!-- Main Content -->
-    <main class="dashboard-main">
-        <header class="dashboard-header">
-            <div class="header-title">
-                <h1>Conversations</h1>
-                <p class="header-subtitle">Manage and respond to all site inquiries</p>
-            </div>
-            
-            <div class="header-actions">
-                <a href="{{ route('admin.contacts.export') }}" class="export-btn">
-                    <i class="fas fa-file-excel"></i>
-                    <span>Export to Excel</span>
-                </a>
-            </div>
-        </header>
+@section('admin_content')
+<div class="contact-filters">
+    <a href="{{ route('admin.contacts.index') }}" class="filter-btn {{ !$status ? 'active' : '' }}">All ({{ $counts['all'] }})</a>
+    <a href="?status=new" class="filter-btn {{ $status == 'new' ? 'active' : '' }}">New ({{ $counts['new'] }})</a>
+    <a href="?status=read" class="filter-btn {{ $status == 'read' ? 'active' : '' }}">Read ({{ $counts['read'] }})</a>
+    <a href="?status=replied" class="filter-btn {{ $status == 'replied' ? 'active' : '' }}">Replied ({{ $counts['replied'] }})</a>
+</div>
 
-        <div class="dashboard-content">
-            <div class="contact-filters">
-                <a href="{{ route('admin.contacts.index') }}" class="filter-btn {{ !$status ? 'active' : '' }}">All ({{ $counts['all'] }})</a>
-                <a href="?status=new" class="filter-btn {{ $status == 'new' ? 'active' : '' }}">New ({{ $counts['new'] }})</a>
-                <a href="?status=read" class="filter-btn {{ $status == 'read' ? 'active' : '' }}">Read ({{ $counts['read'] }})</a>
-                <a href="?status=replied" class="filter-btn {{ $status == 'replied' ? 'active' : '' }}">Replied ({{ $counts['replied'] }})</a>
-            </div>
-
-            <div class="contact-list-card">
-                <table class="contact-table">
-                    <thead>
-                        <tr>
-                            <th>Sender</th>
-                            <th>Origin</th>
-                            <th>Form Type</th>
-                            <th>Message Preview</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($contacts as $contact)
-                        <tr class="contact-row {{ $contact->status == 'new' ? 'unread' : '' }}" onclick="window.location='{{ route('admin.contacts.show', $contact) }}'">
-                            <td>
-                                <div style="font-weight: 600;">{{ $contact->name }}</div>
-                                <div style="font-size: 0.8rem; color: var(--dashboard-text-muted);">{{ $contact->email }}</div>
-                            </td>
-                            <td>
-                                <div style="font-size: 0.8rem; color: var(--dashboard-text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis;" title="{{ $contact->metadata['source_page'] ?? 'Unknown' }}">
-                                    {{ $contact->metadata['source_page'] ?? 'Unknown' }}
-                                </div>
-                            </td>
-                            <td>
-                                <span style="font-size: 0.75rem; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; text-transform: uppercase;">
-                                    {{ $contact->form_type }}
-                                </span>
-                            </td>
-                            <td>
-                                <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.9rem;">
-                                    {{ $contact->message }}
-                                </div>
-                            </td>
-                            <td>
-                                <div style="font-size: 0.85rem;">{{ $contact->created_at->format('M d, Y') }}</div>
-                                <div style="font-size: 0.75rem; color: var(--dashboard-text-muted);">{{ $contact->created_at->diffForHumans() }}</div>
-                            </td>
-                            <td>
-                                <span class="status-badge {{ $contact->status }}">
-                                    {{ ucfirst($contact->status) }}
-                                </span>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5" style="text-align: center; padding: 50px; color: var(--dashboard-text-muted);">
-                                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px; display: block; opacity: 0.2;"></i>
-                                <p>No messages found in this category.</p>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                
-                <div class="pagination-container">
-                    {{ $contacts->links() }}
-                </div>
-            </div>
-        </div>
-    </main>
+<div class="contact-list-card">
+    <table class="contact-table">
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Origin</th>
+                <th>Form Type</th>
+                <th>Message Preview</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($contacts as $contact)
+            <tr class="contact-row {{ $contact->status == 'new' ? 'unread' : '' }}" onclick="window.location='{{ route('admin.contacts.show', $contact) }}'">
+                <td>
+                    <div style="font-weight: 600;">{{ $contact->name }}</div>
+                    <div style="font-size: 0.8rem; color: var(--dashboard-text-muted);">{{ $contact->email }}</div>
+                </td>
+                <td>
+                    <div style="font-size: 0.8rem; color: var(--dashboard-text-muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis;" title="{{ $contact->metadata['source_page'] ?? 'Unknown' }}">
+                        {{ $contact->metadata['source_page'] ?? 'Unknown' }}
+                    </div>
+                </td>
+                <td>
+                    <span style="font-size: 0.75rem; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; text-transform: uppercase;">
+                        {{ $contact->form_type }}
+                    </span>
+                </td>
+                <td>
+                    <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.9rem;">
+                        {{ $contact->message }}
+                    </div>
+                </td>
+                <td>
+                    <div style="font-size: 0.85rem;">{{ $contact->created_at->format('M d, Y') }}</div>
+                    <div style="font-size: 0.75rem; color: var(--dashboard-text-muted);">{{ $contact->created_at->diffForHumans() }}</div>
+                </td>
+                <td>
+                    <span class="status-badge {{ $contact->status }}">
+                        {{ ucfirst($contact->status) }}
+                    </span>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 50px; color: var(--dashboard-text-muted);">
+                    <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px; display: block; opacity: 0.2;"></i>
+                    <p>No messages found in this category.</p>
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+    
+    <div class="pagination-container">
+        {{ $contacts->links() }}
+    </div>
 </div>
 @endsection

@@ -5,8 +5,24 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // loadMenu(); // Removed: Menu is now server-side rendered via Blade
-    loadSVGs();
+    if (
+        !document.querySelector(".dashboard-page") &&
+        !document.querySelector(".light-theme") &&
+        !document.querySelector(".dark-theme")
+    ) {
+        loadSVGs();
+    }
     initResizeHandler();
+
+    // Re-enable ScrollTrigger for non-admin/non-project pages
+    if (
+        typeof ScrollTrigger !== "undefined" &&
+        !document.querySelector(".dashboard-page") &&
+        !document.querySelector(".light-theme") &&
+        !document.querySelector(".dark-theme")
+    ) {
+        ScrollTrigger.refresh();
+    }
 
     if (window.applyTranslations) {
         window.applyTranslations();

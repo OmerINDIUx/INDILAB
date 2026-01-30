@@ -94,10 +94,7 @@
   // Color randomization moved to js/pages/who_we_are.js
   </script>
 
-  <!-- Logo -->
-  <a href="{{ route('home') }}">
-    <div class="secundary-brand" data-svg="{{ asset('svg/indi-lab_Vertical_Animate.svg') }}"></div>
-  </a>
+
 
   @include('partials.newsletter')
 @endsection

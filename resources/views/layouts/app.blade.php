@@ -29,6 +29,10 @@
     <script src="{{ asset('js/lenis.min.js') }}"></script>
     <script src="{{ asset('js/splitting.min.js') }}"></script>
 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/layout/secundary-brand.css') }}" />
+    
     <!-- Page Specific CSS -->
     @stack('css')
 
@@ -38,12 +42,23 @@
     </script>
 </head>
 <body class="@yield('body-class')">
+    @if(!request()->is('admin*') && !request()->is('projects*'))
     <div class="top-bar"></div>
+    @endif
+
+    @if(!request()->is('admin*') && !request()->is('projects*') && !request()->routeIs('home'))
+    <!-- Persistent Logo -->
+    <a href="{{ route('home') }}" class="secundary-brand-link">
+        <div class="secundary-brand" data-svg="{{ asset('svg/indi-lab_Vertical_Animate.svg') }}"></div>
+    </a>
+    @endif
 
     @yield('content')
 
+    @if(!request()->is('admin*') && !request()->is('projects*'))
     @include('partials.menu')
     <script src="{{ asset('js/demo4/menu.js') }}"></script>
+    @endif
 
     <script src="{{ asset('js/global.js') }}"></script>
     @include('components.media-manager')

@@ -73,7 +73,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/contacts/{contact}', [App\Http\Controllers\Admin\ContactController::class, 'show'])->name('contacts.show');
 
     // User Management
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['create', 'store', 'show', 'destroy']);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class)->except(['show']);
     
     // Media Library Routes
     Route::get('/media', [App\Http\Controllers\MediaController::class, 'index'])->name('media.index');

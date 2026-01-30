@@ -3,7 +3,6 @@
 @section('title', 'What We Do | INDI Lab')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}" />
 @endpush
 
@@ -174,19 +173,7 @@
       });
     </script>
 
-    <!-- Logo -->
-    <a href="{{ route('home') }}">
-      <div class="secundary-brand"></div>
-    </a>
-    <script>
-      const container = document.querySelector(".secundary-brand");
-      fetch("{{ asset('svg/indi-lab_Vertical_Animate.svg') }}")
-        .then((response) => response.text())
-        .then((svgText) => {
-          container.innerHTML = svgText;
-        })
-        .catch((err) => console.error("Error cargando SVG:", err));
-    </script>
+
 
     @include('partials.newsletter')
     <script src="{{ asset('js/carousel.js') }}"></script>

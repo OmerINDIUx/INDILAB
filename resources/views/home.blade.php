@@ -6,7 +6,6 @@
 
 @push('css')
     <link id="menu-css" rel="stylesheet" href="{{ asset('css/index.css') }}" />
-    <link id="menu-header-css" rel="stylesheet" href="{{ asset('css/components/menu-header1.css') }}" />
 @endpush
 
 @section('content')

@@ -20,7 +20,7 @@
         
         /* Layout Fixes & Forced Visibility */
         body {
-            padding-left: 100px !important;
+            padding: 0 !important;
             background-color: var(--cms-theme-bg) !important;
             color: var(--cms-theme-text) !important;
             opacity: 1 !important;
@@ -43,7 +43,7 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-left: 0 !important; }
+            body { padding: 0 !important; }
         }
 
         .sticky-header-clone { 
