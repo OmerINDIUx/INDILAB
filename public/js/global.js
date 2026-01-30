@@ -5,11 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // loadMenu(); // Removed: Menu is now server-side rendered via Blade
-    if (
-        !document.querySelector(".dashboard-page") &&
-        !document.querySelector(".light-theme") &&
-        !document.querySelector(".dark-theme")
-    ) {
+    if (!document.querySelector(".dashboard-page")) {
         loadSVGs();
     }
     initResizeHandler();
@@ -17,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Re-enable ScrollTrigger for non-admin/non-project pages
     if (
         typeof ScrollTrigger !== "undefined" &&
-        !document.querySelector(".dashboard-page") &&
-        !document.querySelector(".light-theme") &&
-        !document.querySelector(".dark-theme")
+        !document.querySelector(".dashboard-page")
     ) {
         ScrollTrigger.refresh();
     }

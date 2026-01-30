@@ -42,11 +42,11 @@
     </script>
 </head>
 <body class="@yield('body-class')">
-    @if(!request()->is('admin*') && !request()->is('projects*'))
+    @if(!request()->is('admin*'))
     <div class="top-bar"></div>
     @endif
 
-    @if(!request()->is('admin*') && !request()->is('projects*') && !request()->routeIs('home'))
+    @if(!request()->is('admin*') && !request()->routeIs('home'))
     <!-- Persistent Logo -->
     <a href="{{ route('home') }}" class="secundary-brand-link">
         <div class="secundary-brand" data-svg="{{ asset('svg/indi-lab_Vertical_Animate.svg') }}"></div>
@@ -55,7 +55,7 @@
 
     @yield('content')
 
-    @if(!request()->is('admin*') && !request()->is('projects*'))
+    @if(!request()->is('admin*'))
     @include('partials.menu')
     <script src="{{ asset('js/demo4/menu.js') }}"></script>
     @endif

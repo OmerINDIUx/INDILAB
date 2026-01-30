@@ -51,100 +51,28 @@
             color: var(--cms-theme-text); 
             z-index: 9000;
         }
-        
-        .Title { 
-            padding: 0 5vw; 
-            max-width: 1200px; 
-            margin: 4vh auto; 
-            text-align: center;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
 
-        .carousel-item.card-item {
-            display: grid !important;
-            grid-template-columns: 35% 1fr;
-            grid-template-areas: "image title" "image text";
-            gap: 2rem;
-            width: 85vw;
-            max-width: 1400px;
-            background: {{ ($project->theme ?? 'dark') == 'light' ? 'rgba(0,0,0,0.05)' : '#252525' }};
+        /* Progress Bar */
+        #read-progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 9501;
+            pointer-events: none;
         }
-
-        /* TextLarge & Related Styles - EXACT COPY from style-global-blog.css */
-        .TextLarge {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #1a1a1a;
-            background-color: #eeeeee;
-            padding-top: 0;
-            position: relative;
-            overflow: hidden;
-            padding-bottom: 3rem;
+        #read-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #18b2e8; /* Blue progress bar */
+            box-shadow: 0 0 10px rgba(24, 178, 232, 0.5);
         }
         
-        .TextLarge div { 
-            max-width: 80%; 
-            margin: 0 auto; 
-            text-align: justify !important; 
-            color: #1a1a1a;
-            line-height: 1.8;
-            max-width: 70%;
-        }
-
-        .TextLarge h2 {
-            text-align: left;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.2rem;
-            max-width: 70%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .span-resaltado {
-            display: block;
-            margin: 2.5rem 0;
-            padding-left: 1.5rem;
-            border-left: 4px solid #1a1a1a;
-            color: #1a1a1a;
-            font-size: 1.5rem;
-            font-weight: 500;
-            font-style: italic;
-            line-height: 1.4;
-            background: linear-gradient(
-                90deg,
-                rgba(26, 26, 26, 0.05) 0%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .span-blanco {
-            color: #eeeeee !important;
-            border-left: 4px solid #eee;
-            font-size: 1rem;
-            padding-left: 1rem;
-        }
-
-        @media (max-width: 1024px) {
-            .TextLarge div { max-width: 90%; }
-            .TextLarge h2 { max-width: 90%; }
-        }
-
-
         .blog-scroll-strip__rail { min-height: 100vh; overflow: visible; }
-
-        @media (max-width: 768px) {
-            .carousel-item.card-item {
-                grid-template-columns: 1fr;
-                grid-template-areas: "image" "title" "text";
-                width: 90vw;
-            }
+        
+        .carousel-item.card-item {
+            background: {{ ($project->theme ?? 'dark') == 'light' ? 'rgba(0,0,0,0.05)' : '#252525' }};
         }
     </style>
 @endpush
@@ -233,6 +161,11 @@
     function closeRecoveryModal() { document.getElementById('recovery-modal').style.display = 'none'; }
 </script>
 @endauth
+
+{{-- Progress Bar Container --}}
+<div id="read-progress-container">
+    <div id="read-progress-bar"></div>
+</div>
 
 <h3 id="sticky-header-clone" class="sticky-header-clone">
     @if(isset($project->content['blocks']))
@@ -460,18 +393,11 @@
 
             const header = document.getElementById('sticky-header-clone');
             if (header) {
-                // Force visibility debug
-                console.log("Sticky Header Found");
-                
                 ScrollTrigger.create({
-                    start: "top top", // Trigger immediately at top for testing or slight scroll
-                    end: "max",
-                    onUpdate: (self) => {
-                        // Show if scrolled more than 50px OR scrolling UP
-                        if (self.scroll() > 50 && self.direction === 1) header.classList.add('visible');
-                        else if (self.direction === -1) header.classList.add('visible'); // Show on scroll up
-                        else if (self.scroll() < 50) header.classList.remove('visible'); // Hide at very top
-                    }
+                    trigger: ".Title",
+                    start: "50% top", // Appears when 50% of Title is out
+                    onEnter: () => header.classList.add('visible'),
+                    onLeaveBack: () => header.classList.remove('visible'),
                 });
             }
 
@@ -553,6 +479,18 @@
                 );
             }
             initCornerAnimation();
+
+            // Progress Bar Animation
+            gsap.to("#read-progress-bar", {
+                width: "100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true
+                }
+            });
 
             // Replicated animations for cards and text
             gsap.utils.toArray('.card, .blog-scroll-strip__phrase, .text-content').forEach(el => {
