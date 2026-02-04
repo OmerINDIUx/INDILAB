@@ -42,23 +42,10 @@
     </div>
 
     <aside class="next-project-block">
-        <h3 data-i18n="next_project_title">Next Projects</h3>
-        <article class="project-card">
-            <img src="{{ asset('projects/ViviendaModular/images/electromovilidad.png') }}"
-                alt="Miniatura proyecto siguiente" />
-            <div class="project-card__body">
-                <h4 data-i18n="Electromobility"></h4>
-                <p data-i18n="project_card_link"></p>
-            </div>
-        </article>
-        <article class="project-card">
-            <img src="{{ asset('projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png') }}"
-                alt="Miniatura proyecto siguiente" />
-            <div class="project-card__body">
-                <h4 data-i18n="Urban Heat Islands"></h4>
-                <p data-i18n="project_card_link"></p>
-            </div>
-        </article>
+        <h3 data-i18n="next_project_title">Últimas publicaciones</h3>
+        @foreach($latestProjects->take(2) as $project)
+            <x-project-card :project="$project" :showCategory="false" />
+        @endforeach
     </aside>
 
     <script>

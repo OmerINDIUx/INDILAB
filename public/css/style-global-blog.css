@@ -60,7 +60,7 @@ html.dark-theme {
 html.dark-theme body {
     background-color: transparent;
     color: #eeeeee;
-    padding-left: 50px; /* Explicitly from source files */
+    padding-left: 0;
 }
 
 /* Body Base */
@@ -86,12 +86,18 @@ body {
 .gif-container {
     position: fixed;
     top: 0;
-    left: 100px;
+    left: 0; /* Default to 0 for full width themes */
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     z-index: 0; /* Was -10, moved to 0 to be safe */
     pointer-events: none;
+}
+
+html:not(.light-theme):not(.dark-theme)
+    body:not(.dashboard-page)
+    .gif-container {
+    left: 100px;
 }
 
 .gif-container img {
@@ -143,7 +149,6 @@ section {
     .card {
         max-width: 70%;
         margin: 0 auto;
-        transform: translateX(100px);
         padding: 2rem;
     }
     .TextLarge h2,
@@ -523,7 +528,6 @@ body::before {
         width: 70vw;
         max-width: none;
         margin: 0 auto;
-        transform: translateX(50px);
     }
     .Title h1 {
         font-size: 2.2rem;
@@ -555,19 +559,32 @@ body::before {
 @media (max-width: 768px) {
     .general-tittle.is-sticky {
         padding: 0.8rem 1rem;
-        font-size: 0.9rem; /* Smaller font on mobile */
-        top: 80px;
+        font-size: 0.9rem;
+        top: 80px !important;
+        z-index: 10001 !important;
     }
 
     .card {
-        max-width: 90%;
-        margin: 0 auto;
-        transform: none; /* Reset tablet transform */
+        padding: 2rem 1rem;
+        border-radius: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        transform: none !important;
+        box-sizing: border-box;
     }
 
     .Title {
-        transform: none; /* Reset tablet transform */
-        width: 90vw;
+        transform: none !important;
+        width: 100% !important;
+        margin: 0 auto;
+    }
+
+    main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
     }
 
     .title-section-video {
@@ -672,7 +689,8 @@ body::before {
     .sticky-header-clone {
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
-        top: 80px; /* Below top-bar on mobile if needed, or 0 if top-bar covers it */
+        top: 80px !important;
+        z-index: 10001 !important;
     }
 }
 
@@ -801,13 +819,26 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eeeeee;
+    background-color: var(--color-bg-light); /* Respetamos variables de tema */
+    padding-left: 0;
+}
+
+html:not(.light-theme):not(.dark-theme)
+    body:not(.dashboard-page)
+    .blog-scroll-strip-phrase-section {
     padding-left: 100px;
 }
 
 @media (max-width: 768px) {
     .blog-scroll-strip-phrase-section {
         padding-left: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .blog-scroll-strip__phrase {
+        max-width: 100% !important;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
     }
 }
 
@@ -823,7 +854,7 @@ body::before {
     z-index: 12;
     min-height: 100vh;
     padding: 0.1vh 0;
-    background-color: transparent;
+    background-color: transparent !important; /* DEBE ser transparente para ver el texto pinneado debajo */
     width: 100%;
 }
 
@@ -1468,9 +1499,15 @@ section.contact-next-project {
         min-height: 400px;
     }
     .Glossary-grid {
-        margin-left: 150px;
+        margin-left: 0;
         width: auto;
         padding-right: 2rem;
+    }
+
+    html:not(.light-theme):not(.dark-theme)
+        body:not(.dashboard-page)
+        .Glossary-grid {
+        margin-left: 150px;
     }
 }
 
@@ -1535,7 +1572,8 @@ section.contact-next-project {
         border-radius: 1.5rem;
         width: 85%;
         max-width: 700px;
-        margin: 0 auto; /* Reset left margin from desktop/tablet styles */
+        margin: 0 auto;
+        /* we remove transform override to let GSAP handle it */
     }
     .map-container-wrapper {
         height: 50vh;
@@ -1568,14 +1606,32 @@ section.contact-next-project {
     }
     .Title {
         width: 90%;
-        font-size: 1.2rem;
+        margin: 0 auto;
     }
     .Title h1 {
         font-size: 2.2rem;
     }
 
+    .text-provocation {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+        padding: 4rem 5%;
+    }
+
     .text-provocation h2 {
         font-size: 2rem;
+        padding: 0;
+        text-align: center;
+    }
+
+    .provoc-text {
+        align-items: center;
+    }
+
+    .text-provocation img {
+        width: 100% !important;
+        border-radius: 12px;
     }
 
     .note-popup {
@@ -1638,13 +1694,27 @@ section.contact-next-project {
     }
 
     .top-bar {
-        display: block;
+        display: block !important;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 80px;
-        background: #1a1a1a;
+        background: #1a1a1a !important;
+        z-index: 10001 !important;
+    }
+
+    .TextLarge div {
+        max-width: 100% !important;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .statement {
+        padding: 4rem 1.5rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .statement h2 {
@@ -2096,9 +2166,11 @@ section.contact-next-project {
 }
 
 /* Fix for Glossary and Card alignment between 768px and 1000px */
-@media (min-width: 768px) and (max-width: 1000px) {
-    .Glossary-grid,
-    .card {
+@media (min-width: 769px) and (max-width: 1000px) {
+    html:not(.light-theme):not(.dark-theme)
+        body:not(.dashboard-page)
+        .Glossary-grid,
+    html:not(.light-theme):not(.dark-theme) body:not(.dashboard-page) .card {
         margin-left: 40px !important;
     }
 }

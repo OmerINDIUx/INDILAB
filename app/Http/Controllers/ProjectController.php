@@ -17,7 +17,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('lastEditor')->orderBy('created_at', 'desc')->get();
+        $projects = Project::with('lastEditor')
+            ->orderBy('coming_soon', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -42,6 +45,7 @@ class ProjectController extends Controller
             'theme' => 'required|in:dark,light',
             'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'image_path' => 'nullable|string',
             'category' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
             'badge_color' => 'nullable|string',
@@ -88,6 +92,8 @@ class ProjectController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('projects', 'public');
             $project->image_path = $path;
+        } elseif ($request->filled('image_path')) {
+            $project->image_path = $request->image_path;
         }
 
         $project->save();
@@ -135,6 +141,7 @@ class ProjectController extends Controller
             'theme' => 'required|in:dark,light',
             'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
+            'image_path' => 'nullable|string',
             'category' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
             'badge_color' => 'nullable|string',
@@ -172,6 +179,8 @@ class ProjectController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('projects', 'public');
             $project->image_path = $path;
+        } elseif ($request->filled('image_path')) {
+            $project->image_path = $request->image_path;
         }
 
         if ($request->action === 'save') {

@@ -88,17 +88,29 @@
         const gallery = document.getElementById('media-gallery');
         gallery.innerHTML = '<div class="loading-spinner">Loading library...</div>';
         
-        // Use the global rootPath variable if available, otherwise fallback
-        const baseUrl = window.rootPath || '/';
-        
-        fetch("{{ route('admin.media.index') }}")
-            .then(res => res.json())
-            .then(data => renderGallery(data));
+        fetch("{{ route('admin.media.index') }}", {
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.json();
+        })
+        .then(data => renderGallery(data))
+        .catch(err => {
+            console.error('Fetch error:', err);
+            gallery.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: red; padding: 20px;">Error loading library.</div>';
+        });
     }
 
-    function renderGallery(items) {
+    function renderGallery(response) {
         const gallery = document.getElementById('media-gallery');
         gallery.innerHTML = '';
+        
+        // Handle both simple array and Laravel pagination object
+        const items = Array.isArray(response) ? response : (response.data || []);
         
         if(items.length === 0) {
             gallery.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #999; padding: 20px;">No images found. Upload one!</div>';
@@ -197,4 +209,8 @@
             dropzone.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:red"></i><p style="color:red">Error uploading file</p>';
         });
     }
+    // Expose utility for direct access
+    window.openMediaManager = function() {
+        openMediaModal(null, null);
+    };
 </script>

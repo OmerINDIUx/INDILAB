@@ -31,5 +31,12 @@ class AppServiceProvider extends ServiceProvider
                 return ! $this->endsWith($search);
             });
         }
+
+        \Illuminate\Support\Facades\View::composer(['partials.menu', 'partials.newsletter'], function ($view) {
+            $view->with('latestProjects', \App\Models\Project::orderBy('coming_soon', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get());
+        });
     }
 }

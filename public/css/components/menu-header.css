@@ -549,7 +549,7 @@ body.menu-open .secondary-brand {
     .sidebar12 {
         width: 0; /* "desactiva" la barra lateral en móvil */
         background: transparent;
-        z-index: 10000;
+        z-index: 20002 !important; /* Above top-bar (10001) and logo (20000) */
         pointer-events: none;
     }
 

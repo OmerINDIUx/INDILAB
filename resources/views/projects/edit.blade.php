@@ -859,7 +859,7 @@
         });
     }
 
-    let blockIndex = {{ count(old('content.blocks', [])) > 0 ? max(array_keys(old('content.blocks'))) + 1 : max(array_keys($blocks)) + 1 }};
+    let blockIndex = {{ (old('content.blocks') && count(old('content.blocks')) > 0) ? max(array_keys(old('content.blocks'))) + 1 : (isset($blocks) && count($blocks) > 0 ? max(array_keys($blocks)) + 1 : 1) }};
 
     function setTheme(t) {
         document.getElementById('project-theme').value = t;
@@ -1051,7 +1051,6 @@
                 if(heroP) {
                     const h3 = heroP.querySelector('.h3');
                     if(h3) {
-                        // Remove old cat-grad classes
                         h3.classList.remove('cat-grad-1', 'cat-grad-2', 'cat-grad-3', 'cat-grad-4');
                         h3.classList.add(val);
                     }
@@ -1074,7 +1073,9 @@
         if(field === 'image') {
             if(val) {
                 const baseUrl = window.rootPath || '/';
-                window.cardShadow.getElementById('card-img-preview').src = baseUrl + 'storage/' + val;
+                const fullPath = val.startsWith('http') ? val : (baseUrl + 'storage/' + (val.startsWith('/') ? val.substring(1) : val));
+                const imgEl = window.cardShadow.getElementById('card-img-preview');
+                if(imgEl) imgEl.src = fullPath;
             }
         }
     }
@@ -1372,6 +1373,31 @@
             btn.style.filter = 'none';
         }
     }
-    document.addEventListener('DOMContentLoaded', () => { initSortable(); checkIntroGlassConstraint(); });
+    document.addEventListener('DOMContentLoaded', () => { 
+        initSortable(); 
+        checkIntroGlassConstraint(); 
+        
+        // Local File Preview for Card Image
+        const fileInput = document.querySelector('input[name="image"]');
+        if (fileInput) {
+            fileInput.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(ex) {
+                        const preview = document.getElementById('preview-cover');
+                        if (preview) {
+                            preview.style.backgroundImage = `url('${ex.target.result}')`;
+                            preview.innerHTML = '';
+                        }
+                        if (window.cardShadow) {
+                            const cardImg = window.cardShadow.getElementById('card-img-preview');
+                            if (cardImg) cardImg.src = ex.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    });
 </script>
 @endsection

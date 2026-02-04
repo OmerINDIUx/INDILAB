@@ -10,12 +10,11 @@ class MediaController extends Controller
 {
     public function index(Request $request)
     {
-        $media = Media::latest()->paginate(24);
-        
         if ($request->wantsJson() || $request->ajax()) {
-            return response()->json($media);
+            return response()->json(Media::latest()->get());
         }
-        
+
+        $media = Media::latest()->paginate(24);
         return view('admin.media.index', compact('media'));
     }
 

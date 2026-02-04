@@ -17,141 +17,89 @@
     <section class="hero-carousel-section">
       <div class="carousel-background">
         <div class="overlay"></div>
-        <!-- Static carousel images for now, or dynamic if we add a 'featured' flag later -->
-        <img
-          src="{{ asset('img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg') }}"
-          class="carousel-img active"
-        />
-        <img
-          src="{{ asset('img/What we do/pexels-susan-flores-232226967-12294911.jpg') }}"
-          class="carousel-img"
-        />
-        <img
-          src="{{ asset('img/What we do/pexels-victor-armas-262050668-12930992.jpg') }}"
-          class="carousel-img"
-        />
+        <img src="{{ asset('img/What we do/pexels-gabo-orozco-lucio-233483298-28764098.jpg') }}" class="carousel-img active" />
+        <img src="{{ asset('img/What we do/pexels-susan-flores-232226967-12294911.jpg') }}" class="carousel-img" />
+        <img src="{{ asset('img/What we do/pexels-victor-armas-262050668-12930992.jpg') }}" class="carousel-img" />
       </div>
 
       <div class="carousel-content">
-        <h3 id="carousel-phrase" data-i18n="carrusel indi lab"></h3>
+        <div class="hero-text-wrapper">
+            <h1 class="main-title" data-i18n="menu projects">Nuestro Trabajo</h1>
+            <p class="hero-subtitle" data-i18n="carrusel indi lab"></p>
+        </div>
 
         <!-- Search Line -->
         <div class="search-line">
           <label for="carousel-search" data-i18n="INDI Lab #"></label>
           <div class="input-wrapper">
-            <input id="carousel-search" type="text" autocomplete="off" />
+            <input id="carousel-search" type="text" autocomplete="off" placeholder="Buscar..." />
             <span id="carousel-suggestion"></span>
           </div>
         </div>
         
-        <!-- Add Project Button (Only visible to Admin) -->
-        <div style="margin-top: 20px;">
-             <a href="{{ route('work.create') }}" style="color: white; text-decoration: underline; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 4px;">+ Java Add New Project</a>
+        @auth
+        <div style="margin-top: 30px;">
+             <a href="{{ route('work.create') }}" class="admin-add-btn">+ Agregar Nuevo Proyecto</a>
         </div>
+        @endauth
       </div>
     </section>
 
-    <!-- Blog -->
+    <!-- Projects Grid -->
     <section class="blog-section1" id="blog">
-      <h2 class="blog-heading1" data-i18n="Our work"></h2>
+      <div class="section-header">
+        <h2 class="blog-heading1" data-i18n="Our work">Nuestro Trabajo</h2>
+        <div class="section-underline"></div>
+      </div>
 
       <div class="blog-list1" id="blogList">
         @forelse($projects as $project)
-            <article class="blog-item1" data-tags="Infraestructura"> 
-              <!-- Note: Tags are static for now. We can add a 'category' field to Project model later. -->
-              @if($project->coming_soon)
-                <div style="cursor: default; display: block; height: 100%;">
-              @else
-                <a href="{{ route('work.show', $project) }}">
-              @endif
-
-                @if($project->image_path)
-                    <img
-                      src="{{ asset('storage/' . $project->image_path) }}"
-                      alt="{{ $project->title }}"
-                      class="blog-thumb"
-                    />
-                @else
-                    <!-- Fallback image or placeholder -->
-                     <img
-                      src="{{ asset('img/1x/Mesa de trabajo 2.png') }}"
-                      alt="{{ $project->title }}"
-                      class="blog-thumb"
-                    />
-                @endif
-                <div class="blog-info1">
-                  @if($project->category)
-                    <span class="blog-category-badge {{ $project->badge_color ?? 'cat-grad-1' }}">{{ $project->category }}</span>
-                  @endif
-                  <h3 class="blog-title1">{{ $project->title }}</h3>
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <p class="blog-date1">
-                        {{ $project->coming_soon ? 'PRÓXIMAMENTE' : ($project->published_at ? $project->published_at->format('F Y') : 'Draft') }}
-                    </p>
-                    @auth
-                      <button type="button" 
-                        class="btn-edit-trigger" 
-                        style="background: #e2462b; color: #fff; border: none; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; cursor: pointer; text-transform: uppercase;"
-                        data-id="{{ $project->slug }}"
-                        data-has-draft="{{ $project->draft_content ? 'true' : 'false' }}"
-                        data-draft-date="{{ $project->draft_updated_at ? $project->draft_updated_at->format('d/m/Y H:i') : '' }}"
-                        data-draft-user="{{ $project->lastEditor ? $project->lastEditor->name : 'Sistema' }}"
-                        data-edit-url="{{ route('work.edit', $project) }}"
-                        onclick="handleEditClick(this)">
-                        Editar
-                      </button>
-                    @endauth
-                  </div>
-                </div>
-
-              @if($project->coming_soon)
-                </div>
-              @else
-                </a>
-              @endif
-            </article>
+            <x-project-card :project="$project" :showEdit="true" />
         @empty
-            <p style="color: white; padding: 20px;">No projects found. <a href="{{ route('work.create') }}" style="text-decoration: underline;">Create one?</a></p>
+            <div class="empty-state">
+                <p>No se encontraron proyectos. <a href="{{ route('work.create') }}">¿Crear uno?</a></p>
+            </div>
         @endforelse
       </div>
 
-      <!-- Message if no results -->
-      <p id="noResults" style="display: none; color: #999; margin-top: 1em">
-        No results found
+      <p id="noResults" style="display: none; color: #999; margin-top: 2em; text-align: center;">
+        No se encontraron resultados
       </p>
     </section>
 
-    <!-- Scripts specific to this page layout -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll("[data-svg]").forEach((el) => {
-          const svgPath = el.getAttribute("data-svg");
-          fetch(svgPath)
-            .then((res) => res.text())
-            .then((svgContent) => {
-              el.innerHTML = svgContent;
-            })
-            .catch((err) => console.error("Error loading SVG:", err));
-        });
-      });
-    </script>
+    <style>
+        .hero-text-wrapper { text-align: center; margin-bottom: 20px; }
+        .main-title { font-size: 3.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 5px; color: #fff; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .hero-subtitle { font-size: 1.2rem; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+        .admin-add-btn { color: white; text-decoration: none; background: #e2462b; padding: 10px 20px; border-radius: 50px; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(226, 70, 43, 0.4); }
+        .admin-add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(226, 70, 43, 0.6); }
+        
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-underline { width: 60px; height: 4px; background: #e2462b; margin: 15px auto 0; border-radius: 2px; }
+        
+        .blog-item1 { position: relative; overflow: visible; }
+        .project-card-inner { display: block; height: 100%; text-decoration: none; color: inherit; background: #1a1a1a; border-radius: 16px; overflow: hidden; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(255,255,255,0.05); }
+        .project-card-inner:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        
+        .blog-thumb-wrapper { position: relative; overflow: hidden; }
+        .blog-thumb { transition: transform 0.6s ease; }
+        .project-card-inner:hover .blog-thumb { transform: scale(1.05); }
+        
+        .blog-category-badge { position: absolute; top: 15px; left: 15px; z-index: 5; }
+        
+        .blog-info1 { padding: 20px; }
+        .blog-title1 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
+        .blog-meta { display: flex; justify-content: space-between; align-items: center; }
+        
+        .btn-edit-trigger { background: transparent; border: 1px solid #e2462b; color: #e2462b; padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .btn-edit-trigger:hover { background: #e2462b; color: #fff; }
+    </style>
 
-    <!-- Logo -->
+    {{-- Rest of the scripts and logo --}}
     <a href="{{ route('home') }}">
       <div class="secundary-brand"></div>
     </a>
-    <script>
-      const container = document.querySelector(".secundary-brand");
-      // Use asset helper for reliable path
-      fetch("{{ asset('svg/indi-lab_Vertical_Animate.svg') }}")
-        .then((response) => response.text())
-        .then((svgText) => {
-          container.innerHTML = svgText;
-        })
-        .catch((err) => console.error("Error cargando SVG:", err));
-    </script>
     
-    @include('partials.newsletter')
     @include('partials.newsletter')
 
     {{-- Recovery Modal --}}

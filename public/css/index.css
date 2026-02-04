@@ -22,7 +22,7 @@ body {
     box-sizing: border-box;
 }
 
-body:not(.dashboard-page):not(.light-theme):not(.dark-theme) {
+html:not(.light-theme):not(.dark-theme) body:not(.dashboard-page) {
     padding-left: 100px;
 }
 body.menu-open {
@@ -92,8 +92,12 @@ body::before {
    Section BRAND
 =========================== */
 #brand {
+    margin-left: 0;
+    width: 100vw;
+}
+
+html:not(.light-theme):not(.dark-theme) body:not(.dashboard-page) #brand {
     margin-left: -100px; /* 👈 compensa el padding global */
-    width: 100vw; /* vuelve a ocupar todo el viewport */
 }
 
 .brand {
@@ -170,9 +174,15 @@ body:has(#fullscreen-menu.show) #svg-wrapper {
 .navigation-arrows2 {
     padding-top: 18%;
     width: 100vw;
-    margin-left: -100px;
+    margin-left: 0;
     display: flex;
     justify-content: center;
+}
+
+html:not(.light-theme):not(.dark-theme)
+    body:not(.dashboard-page)
+    .navigation-arrows2 {
+    margin-left: -100px;
 }
 .navigation-arrows2 h2 {
     color: #eee;
@@ -726,14 +736,9 @@ brands colors
     display: none;
 }
 
+/* .top-bar is handled by specific media queries in other files */
 .top-bar {
     display: none;
-}
-
-@media (max-width: 1080px) {
-    .top-bar {
-        display: none;
-    }
 }
 
 .main-content {
@@ -744,7 +749,7 @@ brands colors
     body {
         width: 100%;
         margin: 0;
-        padding-left: 0; /* 👈 desplaza TODO hacia la derecha */
+        padding-left: 0 !important;
         background-color: var(--color-bg-dark);
     }
 
@@ -771,11 +776,12 @@ brands colors
     .layout {
         width: 100vw;
         height: auto;
-        padding-right: -250px;
+        padding-right: 0;
     }
 
     .right-column {
-        left: 10px; /* quitamos 100px porque rompe el centrado */
+        left: 0;
+        width: 100%;
     }
     /* .left-column,
   .right-column {

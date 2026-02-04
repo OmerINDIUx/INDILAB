@@ -435,7 +435,7 @@
 
 <script>
     window.rootPath = "{{ asset('/') }}";
-    let blockIndex = {{ count(old('content.blocks', [])) > 0 ? max(array_keys(old('content.blocks'))) + 1 : 1 }};
+    let blockIndex = {{ (old('content.blocks') && count(old('content.blocks')) > 0) ? max(array_keys(old('content.blocks'))) + 1 : 1 }};
 
     // Shadow DOM Integration
     document.addEventListener('DOMContentLoaded', () => {
@@ -738,10 +738,36 @@
         if(field === 'image') {
             if(val) {
                 const baseUrl = window.rootPath || '/';
-                window.cardShadow.getElementById('card-img-preview').src = baseUrl + 'storage/' + val;
+                const fullPath = val.startsWith('http') ? val : (baseUrl + 'storage/' + (val.startsWith('/') ? val.substring(1) : val));
+                const imgEl = window.cardShadow.getElementById('card-img-preview');
+                if(imgEl) imgEl.src = fullPath;
             }
         }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Local File Preview for Card Image
+        const fileInput = document.querySelector('input[name="image"]');
+        if (fileInput) {
+            fileInput.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(ex) {
+                        const preview = document.getElementById('preview-cover');
+                        if (preview) {
+                            preview.style.backgroundImage = `url('${ex.target.result}')`;
+                            preview.innerHTML = '';
+                        }
+                        if (window.cardShadow) {
+                            const cardImg = window.cardShadow.getElementById('card-img-preview');
+                            if (cardImg) cardImg.src = ex.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        }
+    });
 
     // Obsolete setTheme function removed as UI is gone.
 
