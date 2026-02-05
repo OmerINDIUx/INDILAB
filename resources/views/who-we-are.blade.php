@@ -4,7 +4,6 @@
 
 @push('css')
     <link id="menu-css" rel="stylesheet" href="{{ asset('css/who-we-are.css') }}" />
-    <link id="menu-header-css" rel="stylesheet" href="{{ asset('css/components/menu-header.css') }}">
 @endpush
 
 @section('content')

@@ -32,11 +32,13 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        \Illuminate\Support\Facades\View::composer(['partials.menu', 'partials.newsletter'], function ($view) {
-            $view->with('latestProjects', \App\Models\Project::orderBy('coming_soon', 'asc')
-                ->orderBy('created_at', 'desc')
-                ->take(3)
-                ->get());
-        });
+        // Share latestProjects GLOBALLY with all views
+        // This ensures the 'Noticias + Actualizaciones' menu works on every page, not just some
+        $latestProjects = \App\Models\Project::orderBy('coming_soon', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+            
+        \Illuminate\Support\Facades\View::share('latestProjects', $latestProjects);
     }
 }
