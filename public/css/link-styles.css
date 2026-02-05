@@ -39,3 +39,17 @@ p a[target="_blank"]::after {
     margin-left: 5px;
 }
 */
+
+/* Carousel Items Links Override */
+.carousel-item h2 a,
+.carousel-item h2 a:visited {
+    color: #eeeeee !important; /* Default to white/gray */
+    text-decoration: underline !important;
+    text-decoration-thickness: 1px !important;
+    text-underline-offset: 4px !important;
+}
+
+.carousel-item h2 a:hover {
+    color: #18b2e8 !important; /* Blue on hover */
+    text-decoration-color: #18b2e8 !important;
+}

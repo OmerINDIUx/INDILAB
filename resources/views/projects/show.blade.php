@@ -373,9 +373,9 @@
                         @endif
                         <h2 style="grid-area: title;">
                             @if(!empty($slide['link']))
-                                <a href="{{ $slide['link'] }}" target="_blank">{{ $slide['title'] ?? '' }}</a>
+                                <a href="{{ $slide['link'] }}" target="_blank">{!! $slide['title'] ?? '' !!}</a>
                             @else
-                                {{ $slide['title'] ?? '' }}
+                                {!! $slide['title'] ?? '' !!}
                             @endif
                         </h2>
                         <div style="grid-area: text; font-size: 0.95rem; margin: 0; line-height: 1.5;">{!! $slide['description'] ?? '' !!}</div>
