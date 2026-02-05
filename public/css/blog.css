@@ -832,10 +832,10 @@ span {
    TEXT LARGE BLOCK
 =========================== */
 .TextLarge {
-    padding: 8rem 20% !important;
+    padding: 8rem 10% !important; /* Reduced from 20% to 10% to make it wider */
 }
 .TextLarge > div {
-    max-width: 900px;
+    max-width: 1200px; /* Increased from 900px */
     margin: 0 auto;
 }
 .TextLarge ul {
@@ -848,8 +848,36 @@ span {
     font-size: 1.2rem;
     color: #1a1a1a;
 }
-.dark-theme .TextLarge li {
-    color: #eee;
+/* .dark-theme .TextLarge li { color: #eee; } REMOVED to force #1a1a1a */
+
+.TextLarge a {
+    display: inline !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: 1px !important;
+    text-underline-offset: 3px !important;
+    color: #1a1a1a !important; /* Force blackish color */
+    font-weight: inherit;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+.TextLarge a:hover {
+    color: #0000ff !important; /* Force Blue on hover */
+    text-decoration: underline !important;
+}
+
+/* Dark theme override REMOVED for links to enforce #1a1a1a always */
+/* .dark-theme .TextLarge a { color: #eee !important; } */
+
+.dark-theme .TextLarge a:hover {
+    color: #4da6ff !important;
+}
+
+/* Fix for font size changing in spans (Editor often wraps text in spans) */
+.TextLarge span {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit;
 }
 
 @media (max-width: 900px) {

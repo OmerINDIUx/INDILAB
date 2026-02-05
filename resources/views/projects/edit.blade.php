@@ -680,6 +680,18 @@
                 .TextLarge { padding: 2rem 1rem !important; font-size: 0.9rem !important; }
                 .TextLarge h2 { font-size: 1.3rem !important; } 
                 .TextLarge > div { max-width: 95% !important; }
+                .TextLarge a {
+                    display: inline !important;
+                    text-decoration: underline !important;
+                    text-decoration-thickness: 1px !important;
+                    text-underline-offset: 3px !important;
+                    color: #1a1a1a !important;
+                    font-weight: inherit;
+                    font-size: inherit !important;
+                    line-height: inherit !important;
+                }
+                .TextLarge a:hover { color: #0000FF !important; }
+                .TextLarge span { font-size: inherit !important; line-height: inherit !important; color: inherit; }
                 
                 .Title { width: 90% !important; margin: 0 auto 20px auto !important; padding: 40px 0 !important; text-align: center !important; }
                 .Title h1 { font-size: 2.2rem !important; margin: 10px 0 !important; line-height: 1.1 !important; } 

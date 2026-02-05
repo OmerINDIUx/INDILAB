@@ -418,17 +418,16 @@ body::before {
 }
 
 .TextLarge > div {
-    max-width: 80%;
+    max-width: 90%; /* Increased from 80%/70% */
     margin: 0 auto;
     text-align: justify;
     color: #1a1a1a;
     line-height: 1.8;
-    max-width: 70%;
 }
 
 @media (max-width: 1024px) {
     .TextLarge > div {
-        max-width: 90%;
+        max-width: 95%; /* Increased from 90% */
     }
 }
 
