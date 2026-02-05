@@ -78,5 +78,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Media Library Routes
     Route::get('/media', [App\Http\Controllers\MediaController::class, 'index'])->name('media.index');
     Route::post('/media', [App\Http\Controllers\MediaController::class, 'store'])->name('media.store');
+    Route::post('/media/folder', [App\Http\Controllers\MediaController::class, 'storeFolder'])->name('media.folder.store');
+    Route::post('/media/move', [App\Http\Controllers\MediaController::class, 'move'])->name('media.move');
+    Route::delete('/media/folder/{folder}', [App\Http\Controllers\MediaController::class, 'destroyFolder'])->name('media.folder.destroy');
     Route::delete('/media/{media}', [App\Http\Controllers\MediaController::class, 'destroy'])->name('media.destroy');
 });
