@@ -217,15 +217,49 @@
                                     <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][text]" value="{{ $data['data']['text'] ?? '' }}">
 
                                 @elseif($type === 'text_large')
-                                    <div class="form-group">
-                                        <label class="form-label">Subtítulo</label>
-                                        <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                        <div id="h2-{{ $idx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'h2', this.innerHTML)"></div>
-                                        <input type="hidden" id="h2-{{ $idx }}" name="content[blocks][{{ $idx }}][data][h2]" value="{{ $data['data']['h2'] ?? '' }}">
+                                    <div id="text-large-elements-{{ $idx }}" class="text-large-elements-container">
+                                        @php
+                                            $elements = $data['data']['elements'] ?? [];
+                                            if (empty($elements) && (isset($data['data']['h2']) || isset($data['data']['content']))) {
+                                                if (!empty($data['data']['h2'])) $elements[] = ['type' => 'h2', 'value' => $data['data']['h2']];
+                                                if (!empty($data['data']['content'])) $elements[] = ['type' => 'text', 'value' => $data['data']['content']];
+                                            }
+                                        @endphp
+                                        @foreach($elements as $subIdx => $element)
+                                            @if($element['type'] === 'h2')
+                                                <div class="sub-element sub-h2" style="border-left: 3px solid #ccc; padding-left: 10px; margin-bottom: 15px; position:relative;">
+                                                    <button type="button" class="block-btn remove" style="position:absolute; top:0; right:0;" onclick="removeLargeTextElement(this, '{{ $idx }}')">×</button>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Subtítulo</label>
+                                                        <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-{{ $idx }}-{{ $subIdx }}', 'a')"><i class="fas fa-link"></i></button></div>
+                                                        <div id="h2-{{ $idx }}-{{ $subIdx }}-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateLargeTextPreview('{{ $idx }}')"></div>
+                                                        <input type="hidden" name="content[blocks][{{ $idx }}][data][elements][{{ $subIdx }}][type]" value="h2">
+                                                        <input type="hidden" id="h2-{{ $idx }}-{{ $subIdx }}" name="content[blocks][{{ $idx }}][data][elements][{{ $subIdx }}][value]" value="{{ $element['value'] ?? '' }}">
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="sub-element sub-text" style="border-left: 3px solid #ccc; padding-left: 10px; margin-bottom: 15px; position:relative;">
+                                                    <button type="button" class="block-btn remove" style="position:absolute; top:0; right:0;" onclick="removeLargeTextElement(this, '{{ $idx }}')">×</button>
+                                                    <div class="form-group">
+                                                        <label class="form-label">Cuadro de Texto</label>
+                                                        <div class="rt-toolbar">
+                                                            <button type="button" class="rt-btn" onclick="formatText('para-{{ $idx }}-{{ $subIdx }}', 'b')"><b>B</b></button>
+                                                            <button type="button" class="rt-btn" onclick="formatText('para-{{ $idx }}-{{ $subIdx }}', 'a')"><i class="fas fa-link"></i></button>
+                                                            <button type="button" class="rt-btn" onclick="formatText('para-{{ $idx }}-{{ $subIdx }}', 'span', 'span-resaltado')"><b>H</b></button>
+                                                            <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('para-{{ $idx }}-{{ $subIdx }}', 'ul')"><i class="fas fa-list-ul"></i></button>
+                                                        </div>
+                                                        <div id="para-{{ $idx }}-{{ $subIdx }}-editor" class="rich-editor" contenteditable="true" oninput="updateLargeTextPreview('{{ $idx }}')"></div>
+                                                        <input type="hidden" name="content[blocks][{{ $idx }}][data][elements][{{ $subIdx }}][type]" value="text">
+                                                        <input type="hidden" id="para-{{ $idx }}-{{ $subIdx }}" name="content[blocks][{{ $idx }}][data][elements][{{ $subIdx }}][value]" value="{{ $element['value'] ?? '' }}">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'b')"><b>B</b></button><button type="button" class="rt-btn" onclick="formatText('textarea-{{ $idx }}', 'a')"><i class="fas fa-link"></i></button></div>
-                                    <div id="textarea-{{ $idx }}-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('{{ $idx }}', 'content', this.innerHTML)"></div>
-                                    <input type="hidden" id="textarea-{{ $idx }}" name="content[blocks][{{ $idx }}][data][content]" value="{{ $data['data']['content'] ?? '' }}">
+                                    <div class="text-large-actions" style="display:flex; gap:10px; margin-top:15px;">
+                                        <button type="button" class="form-control" onclick="addLargeTextElement('{{ $idx }}', 'h2')">+ Añadir Subtítulo</button>
+                                        <button type="button" class="form-control" onclick="addLargeTextElement('{{ $idx }}', 'text')">+ Añadir Cuadro de Texto</button>
+                                    </div>
                                 @elseif($type === 'gallery_rail')
                                     <div class="form-group">
                                         <label class="form-label">Frase Destacada (Scroll Strip)</label>
@@ -382,19 +416,42 @@
     <div class="block-item" data-type="text_large"><input type="hidden" name="content[blocks][INDEX][type]" value="text_large">
         <div class="block-header" onclick="toggleBlock(this)"><span class="block-title"><i class="fas fa-bars"></i> TEXTO LARGO</span><button type="button" class="block-btn remove" onclick="removeBlock(this, event)"><i class="fas fa-trash"></i></button></div>
         <div class="block-body">
-            <div class="form-group">
-                <label class="form-label">Subtítulo</label>
-                <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-INDEX', 'a')"><i class="fas fa-link"></i></button></div>
-                <div id="h2-INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateBlockPreview('INDEX', 'h2', this.innerHTML)"></div>
-                <input type="hidden" id="h2-INDEX" name="content[blocks][INDEX][data][h2]">
+            <div id="text-large-elements-INDEX" class="text-large-elements-container"></div>
+            <div class="text-large-actions" style="display:flex; gap:10px; margin-top:15px;">
+                <button type="button" class="form-control" onclick="addLargeTextElement('INDEX', 'h2')">+ Añadir Subtítulo</button>
+                <button type="button" class="form-control" onclick="addLargeTextElement('INDEX', 'text')">+ Añadir Cuadro de Texto</button>
             </div>
+        </div>
+    </div>
+</template>
+
+<template id="tpl-text-large-h2">
+    <div class="sub-element sub-h2" style="border-left: 3px solid #ccc; padding-left: 10px; margin-bottom: 15px; position:relative;">
+        <button type="button" class="block-btn remove" style="position:absolute; top:0; right:0;" onclick="removeLargeTextElement(this, 'BLOCK_INDEX')">×</button>
+        <div class="form-group">
+            <label class="form-label">Subtítulo</label>
+            <div class="rt-toolbar"><button type="button" class="rt-btn" onclick="formatText('h2-BLOCK_INDEX-SUB_INDEX', 'a')"><i class="fas fa-link"></i></button></div>
+            <div id="h2-BLOCK_INDEX-SUB_INDEX-editor" class="rich-editor single-line no-bold" contenteditable="true" oninput="updateLargeTextPreview('BLOCK_INDEX')"></div>
+            <input type="hidden" name="content[blocks][BLOCK_INDEX][data][elements][SUB_INDEX][type]" value="h2">
+            <input type="hidden" id="h2-BLOCK_INDEX-SUB_INDEX" name="content[blocks][BLOCK_INDEX][data][elements][SUB_INDEX][value]">
+        </div>
+    </div>
+</template>
+
+<template id="tpl-text-large-text">
+    <div class="sub-element sub-text" style="border-left: 3px solid #ccc; padding-left: 10px; margin-bottom: 15px; position:relative;">
+        <button type="button" class="block-btn remove" style="position:absolute; top:0; right:0;" onclick="removeLargeTextElement(this, 'BLOCK_INDEX')">×</button>
+        <div class="form-group">
+            <label class="form-label">Cuadro de Texto</label>
             <div class="rt-toolbar">
-                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'b')"><b>B</b></button>
-                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'a')"><i class="fas fa-link"></i></button>
-                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('textarea-INDEX', 'span', 'span-resaltado')"><b>H</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('para-BLOCK_INDEX-SUB_INDEX', 'b')"><b>B</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('para-BLOCK_INDEX-SUB_INDEX', 'a')"><i class="fas fa-link"></i></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('para-BLOCK_INDEX-SUB_INDEX', 'span', 'span-resaltado')"><b>H</b></button>
+                <button type="button" class="rt-btn" onmousedown="event.preventDefault(); formatText('para-BLOCK_INDEX-SUB_INDEX', 'ul')"><i class="fas fa-list-ul"></i></button>
             </div>
-            <div id="textarea-INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateBlockPreview('INDEX', 'content', this.innerHTML)"></div>
-            <input type="hidden" id="textarea-INDEX" name="content[blocks][INDEX][data][content]">
+            <div id="para-BLOCK_INDEX-SUB_INDEX-editor" class="rich-editor" contenteditable="true" oninput="updateLargeTextPreview('BLOCK_INDEX')"></div>
+            <input type="hidden" name="content[blocks][BLOCK_INDEX][data][elements][SUB_INDEX][type]" value="text">
+            <input type="hidden" id="para-BLOCK_INDEX-SUB_INDEX" name="content[blocks][BLOCK_INDEX][data][elements][SUB_INDEX][value]">
         </div>
     </div>
 </template>
@@ -524,8 +581,7 @@
             if(type === 'intro_glass') {
                 updateBlockPreview(idx, 'text', block.querySelector(`input[id^="textarea-"]`)?.value || '');
             } else if(type === 'text_large') {
-                updateBlockPreview(idx, 'h2', block.querySelector(`input[id^="h2-"]`)?.value || '');
-                updateBlockPreview(idx, 'content', block.querySelector(`input[id^="textarea-"]`)?.value || '');
+                updateLargeTextPreview(idx);
             } else if(type === 'gallery_rail') {
                 updateGalleryPreview(idx);
             } else if(type === 'carousel_adv') {
@@ -931,8 +987,8 @@
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
-            initRichEditor(`h2-${blockIndex}-editor`, `h2-${blockIndex}`);
-            initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
+            addLargeTextElement(blockIndex, 'h2');
+            addLargeTextElement(blockIndex, 'text');
         }
 
         blockIndex++;
@@ -977,6 +1033,8 @@
         editor.focus();
         if (tag === 'b') {
             document.execCommand('bold', false, null);
+        } else if (tag === 'ul') {
+            document.execCommand('insertUnorderedList', false, null);
         } else if (tag === 'span') {
             const selection = window.getSelection();
             if (!selection.rangeCount || selection.isCollapsed) return;
@@ -1136,16 +1194,7 @@
              }
         }
         else if(type === 'text_large') {
-            let container = p.querySelector('.TextLarge');
-            if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }
-            if(field === 'h2') {
-                const h2 = container.querySelector('h2');
-                if(h2) h2.innerHTML = val;
-            }
-            if(field === 'content') {
-                const contentDiv = container.querySelector('div');
-                if(contentDiv) contentDiv.innerHTML = val;
-            }
+            updateLargeTextPreview(idx);
         }
     }
 
@@ -1438,6 +1487,67 @@
             document.getElementById('hero-sequence-fields').style.display = 'none';
         }
         syncAllPreviews();
+    }
+    function updateLargeTextPreview(idx) {
+        if(!window.previewShadow) return;
+        const p = window.previewShadow.getElementById('prev-block-' + idx);
+        if(!p) return;
+
+        const container = document.getElementById('text-large-elements-' + idx);
+        if(!container) return;
+
+        let html = '<div class="TextLarge" style="padding: 20px;">';
+        const elements = container.querySelectorAll('.sub-element');
+        elements.forEach(el => {
+            const typeInput = el.querySelector('input[name*="[type]"]');
+            const valueInput = el.querySelector('input[type="hidden"][name*="[value]"]');
+            if(!typeInput || !valueInput) return;
+
+            const type = typeInput.value;
+            const editor = el.querySelector('.rich-editor');
+            const value = editor ? editor.innerHTML : '';
+            
+            if(type === 'h2') {
+                html += `<h2>${value}</h2>`;
+            } else {
+                html += `<div>${value}</div>`;
+            }
+        });
+        html += '</div>';
+        p.innerHTML = html;
+    }
+
+    function addLargeTextElement(blockIdx, type, value = '', subIdx = null) {
+        const container = document.getElementById('text-large-elements-' + blockIdx);
+        if(!container) return;
+        
+        if (subIdx === null) {
+            subIdx = container.querySelectorAll('.sub-element').length + Math.floor(Math.random() * 1000);
+        }
+        
+        const templateId = type === 'h2' ? 'tpl-text-large-h2' : 'tpl-text-large-text';
+        const template = document.getElementById(templateId);
+        let html = template.innerHTML.replace(/BLOCK_INDEX/g, blockIdx).replace(/SUB_INDEX/g, subIdx);
+        container.insertAdjacentHTML('beforeend', html);
+        
+        const editorId = type === 'h2' ? `h2-${blockIdx}-${subIdx}` : `para-${blockIdx}-${subIdx}`;
+        initRichEditor(editorId + '-editor', editorId);
+        
+        if (value) {
+            const editor = document.getElementById(editorId + '-editor');
+            const hidden = document.getElementById(editorId);
+            if(editor) editor.innerHTML = value;
+            if(hidden) hidden.value = value;
+        }
+        
+        updateLargeTextPreview(blockIdx);
+    }
+    
+    function removeLargeTextElement(btn, blockIdx) {
+        if(confirm('¿Eliminar elemento?')) {
+            btn.closest('.sub-element').remove();
+            updateLargeTextPreview(blockIdx);
+        }
     }
 </script>
 @endsection

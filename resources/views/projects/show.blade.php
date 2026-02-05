@@ -287,10 +287,21 @@
             @if($block['type'] === 'text_large')
             <section class="TextLarge">
                 <div>
-                    @if(!empty($data['h2']))
-                        <h2>{{ $data['h2'] }}</h2>
-                    @endif
-                    {!! $data['content'] ?? '' !!}
+                    @php
+                        $elements = $data['elements'] ?? [];
+                        // Migration/Backward Compatibility
+                        if (empty($elements) && (isset($data['h2']) || isset($data['content']))) {
+                            if (!empty($data['h2'])) $elements[] = ['type' => 'h2', 'value' => $data['h2']];
+                            if (!empty($data['content'])) $elements[] = ['type' => 'text', 'value' => $data['content']];
+                        }
+                    @endphp
+                    @foreach($elements as $element)
+                        @if(($element['type'] ?? '') === 'h2')
+                            <h2>{!! $element['value'] ?? '' !!}</h2>
+                        @else
+                            <div>{!! $element['value'] ?? '' !!}</div>
+                        @endif
+                    @endforeach
                 </div>
             </section>
             @endif

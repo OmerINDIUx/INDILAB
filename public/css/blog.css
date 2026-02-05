@@ -828,6 +828,30 @@ span {
     margin: 0;
 }
 
+/* ===========================
+   TEXT LARGE BLOCK
+=========================== */
+.TextLarge {
+    padding: 8rem 20% !important;
+}
+.TextLarge div {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.TextLarge ul {
+    margin: 1.5rem 0 1.5rem 2.5rem !important;
+    list-style-type: disc !important;
+}
+.TextLarge li {
+    margin-bottom: 0.8rem !important;
+    line-height: 1.6 !important;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+}
+.dark-theme .TextLarge li {
+    color: #eee;
+}
+
 @media (max-width: 900px) {
     .text-provocation {
         grid-template-columns: 1fr !important;
