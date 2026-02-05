@@ -834,7 +834,7 @@ span {
 .TextLarge {
     padding: 8rem 20% !important;
 }
-.TextLarge div {
+.TextLarge > div {
     max-width: 900px;
     margin: 0 auto;
 }

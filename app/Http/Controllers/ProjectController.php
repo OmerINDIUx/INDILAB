@@ -174,6 +174,8 @@ class ProjectController extends Controller
         $contentData = $validated['content'] ?? [];
         $blocks = $contentData['blocks'] ?? [];
 
+        \Illuminate\Support\Facades\Log::info('Project Update Blocks Raw:', $blocks);
+
         // Note: We rely on hidden inputs in the form for persistence. 
         // If a file is uploaded, processBlockFiles overwrites the hidden input value.
         // If no file, the hidden input (string path) is preserved.

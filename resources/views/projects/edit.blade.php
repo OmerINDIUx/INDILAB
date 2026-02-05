@@ -869,30 +869,9 @@
             e.preventDefault();
             document.getElementById('form-action').value = 'save';
             
-            // Sync rich editors to hidden inputs before form submission
-            document.querySelectorAll('.rich-editor').forEach(editor => {
-                const hiddenInputId = editor.id.replace('-editor', '');
-                const hiddenInput = document.getElementById(hiddenInputId);
-                if (hiddenInput) {
-                    hiddenInput.value = editor.innerHTML;
-                }
-            });
+            prepareFormForSubmit();
 
-            // RE-INDEX TEXT LARGE ELEMENTS to ensure DOM order is preserved
-            document.querySelectorAll('.text-large-elements-container').forEach(container => {
-                const blockIdxMatch = container.id.match(/text-large-elements-(\d+)/);
-                if(blockIdxMatch) {
-                    const blockIdx = blockIdxMatch[1];
-                    container.querySelectorAll('.sub-element').forEach((el, index) => {
-                        // Update all input names within this element
-                        el.querySelectorAll('input, select, textarea').forEach(input => {
-                            // Regex to find [elements][OLD_INDEX] and replace with [elements][index]
-                            // The name format is content[blocks][blockIdx][data][elements][subIdx][field]
-                            input.name = input.name.replace(/\[elements\]\[\d+\]/, `[elements][${index}]`);
-                        });
-                    });
-                }
-            });
+            btnSave.disabled = true;
 
             btnSave.disabled = true;
             btnSave.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
@@ -942,11 +921,38 @@
 
         // PUBLISH
         const btnPublish = document.getElementById('btn-publish-project');
-        btnPublish.addEventListener('click', () => {
+        btnPublish.addEventListener('click', (e) => {
+            e.preventDefault();
             document.getElementById('form-action').value = 'publish';
+            prepareFormForSubmit();
             form.submit();
         });
     });
+
+    function prepareFormForSubmit() {
+        // Sync rich editors to hidden inputs
+        document.querySelectorAll('.rich-editor').forEach(editor => {
+            const hiddenInputId = editor.id.replace('-editor', '');
+            const hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) {
+                hiddenInput.value = editor.innerHTML;
+            }
+        });
+
+        // RE-INDEX TEXT LARGE ELEMENTS to ensure DOM order is preserved
+        document.querySelectorAll('.text-large-elements-container').forEach(container => {
+            const blockIdxMatch = container.id.match(/text-large-elements-(\d+)/);
+            if(blockIdxMatch) {
+                const blockIdx = blockIdxMatch[1];
+                container.querySelectorAll('.sub-element').forEach((el, index) => {
+                    // Update all input names within this element
+                    el.querySelectorAll('input, select, textarea').forEach(input => {
+                        input.name = input.name.replace(/\[elements\]\[\d+\]/, `[elements][${index}]`);
+                    });
+                });
+            }
+        });
+    }
 
     function showToast(message) {
         let toast = document.createElement('div');
@@ -1063,7 +1069,7 @@
             // Initialize mock content structure matches Global CSS expectations
             if(type === 'intro_glass') newItem.innerHTML = '<div class="card" style="padding: 2rem;"></div>';
 
-            else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>';
+            else if(type === 'text_large') newItem.innerHTML = '<div class="TextLarge" style="padding: 20px;"></div>';
             else if(type === 'gallery_rail') newItem.innerHTML = '<div class="blog-scroll-strip"><div class="blog-scroll-strip__inner"><div class="blog-scroll-strip__rail"></div></div></div>';
             else if(type === 'carousel_adv') newItem.innerHTML = '<div class="carousel-wrapper-preview" style="display:flex; flex-direction:column; gap:15px;"></div>';
             
@@ -1079,8 +1085,7 @@
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
-            addLargeTextElement(blockIndex, 'h2');
-            addLargeTextElement(blockIndex, 'text');
+            // Start empty as requested
         }
 
         blockIndex++;
