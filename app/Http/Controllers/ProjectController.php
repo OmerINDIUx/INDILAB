@@ -43,6 +43,8 @@ class ProjectController extends Controller
             'sticky_title' => 'nullable|string|max:255',
             'tags' => 'nullable|string',
             'theme' => 'required|in:dark,light',
+            'hero_type' => 'nullable|string',
+            'hero_folder_id' => 'nullable|integer',
             'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'image_path' => 'nullable|string',
@@ -73,6 +75,8 @@ class ProjectController extends Controller
             'category' => $validated['category'] ?? null,
             'meta_keywords' => $validated['meta_keywords'] ?? null,
             'badge_color' => $validated['badge_color'] ?? 'cat-grad-1',
+            'hero_type' => $validated['hero_type'] ?? 'static',
+            'hero_folder_id' => $validated['hero_folder_id'] ?? null,
             'published_at' => $validated['published_at'] ?? null,
             'coming_soon' => $request->boolean('coming_soon'),
         ]);
@@ -114,7 +118,13 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('projects.show', compact('project'));
+        $heroImages = [];
+        if ($project->hero_type === 'sequence' && $project->hero_folder_id) {
+            $heroImages = \App\Models\Media::where('folder_id', $project->hero_folder_id)
+                ->orderBy('filename', 'asc')
+                ->get();
+        }
+        return view('projects.show', compact('project', 'heroImages'));
     }
 
     /**
@@ -125,6 +135,7 @@ class ProjectController extends Controller
         if ($request->get('use_draft') && $project->draft_content) {
             $project->content = $project->draft_content;
         }
+        $project->load('heroFolder.media');
         return view('projects.edit', compact('project'));
     }
 
@@ -139,6 +150,8 @@ class ProjectController extends Controller
             'sticky_title' => 'nullable|string|max:255',
             'tags' => 'nullable|string',
             'theme' => 'required|in:dark,light',
+            'hero_type' => 'nullable|string',
+            'hero_folder_id' => 'nullable|integer',
             'short_description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'image_path' => 'nullable|string',
@@ -173,6 +186,8 @@ class ProjectController extends Controller
         $project->category = $validated['category'] ?? null;
         $project->meta_keywords = $validated['meta_keywords'] ?? null;
         $project->badge_color = $validated['badge_color'] ?? 'cat-grad-1';
+        $project->hero_type = $validated['hero_type'] ?? 'static';
+        $project->hero_folder_id = $validated['hero_folder_id'] ?? null;
         $project->published_at = $validated['published_at'] ?? null;
         $project->coming_soon = $request->boolean('coming_soon');
 

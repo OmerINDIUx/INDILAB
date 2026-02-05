@@ -183,43 +183,50 @@
         @foreach($project->content['blocks'] as $block)
             @php $data = $block['data'] ?? []; @endphp
 
-            {{-- 1. HERO (Refactored: Fixed BG + Scrolling Title) --}}
+            {{-- 1. HERO (Static or Sequence) --}}
             @if($block['type'] === 'hero')
-            <!-- Fixed Background Layer (Behind everything) -->
-            <div class="fixed-hero-bg" style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                z-index: 0;
-                background-image: url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); 
-                background-size: cover; 
-                background-position: center;
-                pointer-events: none;">
-            </div>
+                @if(($project->hero_type ?? 'static') === 'sequence' && $project->hero_folder_id)
+                    <!-- Sequence Hero Layer -->
+                    <div id="hero-sequence-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden;">
+                        <canvas id="hero-sequence-canvas" style="width: 100%; height: 100%; object-fit: cover;"></canvas>
+                    </div>
+                @else
+                    <!-- Fixed Background Layer (Static) -->
+                    <div class="fixed-hero-bg" style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100vh;
+                        z-index: 0;
+                        background-image: url('{{ isset($data['image']) ? asset('storage/' . $data['image']) : '' }}'); 
+                        background-size: cover; 
+                        background-position: center;
+                        pointer-events: none;">
+                    </div>
+                @endif
 
-            <!-- Title Section (Scrolls over Fixed BG) -->
-            <section class="title-section-video" style="
-                height: 100vh; 
-                margin-top: 0 !important; 
-                padding-top: 0; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                background: transparent; /* No background here */
-                position: relative;
-                z-index: 10; /* Above fixed bg */">
-                <div class="Title">
-                    @if(!empty($data['h3']))
-                        <h3 class="general-tittle">{{ $data['h3'] }}</h3>
-                    @endif
-                    <h1>{{ $data['h1'] ?? $project->title }}</h1>
-                    @if(!empty($data['h2']))
-                        <h2>{{ $data['h2'] }}</h2>
-                    @endif
-                </div>
-            </section>
+                <!-- Title Section (Scrolls over Fixed BG/Canvas) -->
+                <section class="title-section-video {{ ($project->hero_type ?? 'static') === 'sequence' ? 'hero-sequence-trigger' : '' }}" style="
+                    height: 100vh; 
+                    margin-top: 0 !important; 
+                    padding-top: 0; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    background: transparent; 
+                    position: relative;
+                    z-index: 10;">
+                    <div class="Title">
+                        @if(!empty($data['h3']))
+                            <h3 class="general-tittle">{!! $data['h3'] !!}</h3>
+                        @endif
+                        <h1>{!! $data['h1'] ?? $project->title !!}</h1>
+                        @if(!empty($data['h2']))
+                            <h2>{!! $data['h2'] !!}</h2>
+                        @endif
+                    </div>
+                </section>
             @endif
 
             {{-- 2. INTRO GLASS --}}
@@ -479,6 +486,82 @@
                 );
             }
             initCornerAnimation();
+            
+            // SEQUENCE HERO LOGIC
+            @if(($project->hero_type ?? 'static') === 'sequence' && $project->hero_folder_id)
+            initHeroSequence();
+            @endif
+
+            function initHeroSequence() {
+                const canvas = document.getElementById("hero-sequence-canvas");
+                if(!canvas) return;
+                const context = canvas.getContext("2d");
+                
+                const images = [];
+                const imageSeq = { frame: 0 };
+                const mediaPaths = {!! json_encode($heroImages->pluck('path')) !!};
+                
+                if(mediaPaths.length === 0) return;
+                
+                // Pre-load images
+                let loadedCount = 0;
+                mediaPaths.forEach((path, i) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        loadedCount++;
+                        if(loadedCount === 1) render(); // Render first frame immediately
+                    };
+                    img.src = (window.rootPath || '/') + 'storage/' + path;
+                    images.push(img);
+                });
+
+                // Setup GSAP Animation
+                gsap.to(imageSeq, {
+                    frame: mediaPaths.length - 1,
+                    snap: "frame",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".hero-sequence-trigger",
+                        start: "top top",
+                        endTrigger: ".card", // Fade out or sequence ends near first real content block
+                        end: "top top",
+                        scrub: 1,
+                        onUpdate: render
+                    }
+                });
+
+
+
+                function resizeCanvas() {
+                    canvas.width = canvas.clientWidth;
+                    canvas.height = canvas.clientHeight;
+                    render();
+                }
+
+                function render() {
+                    const img = images[imageSeq.frame];
+                    if (!img || !img.complete) return;
+
+                    const cw = canvas.width;
+                    const ch = canvas.height;
+                    const iw = img.width;
+                    const ih = img.height;
+
+                    const baseScale = Math.max(cw / iw, ch / ih);
+                    const scale = baseScale * 1.05;
+
+                    const drawWidth = iw * scale;
+                    const drawHeight = ih * scale;
+                    const offsetX = (cw - drawWidth) / 2;
+                    const offsetY = (ch - drawHeight) / 2;
+
+                    context.clearRect(0, 0, cw, ch);
+                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                }
+
+                window.addEventListener("resize", resizeCanvas);
+                resizeCanvas();
+            }
 
             // Progress Bar Animation
             gsap.to("#read-progress-bar", {

@@ -18,6 +18,8 @@ class Project extends Model
         'short_description',
         'tags',
         'theme',
+        'hero_type',
+        'hero_folder_id',
         'content',
         'image_path',
         'meta_title',
@@ -55,6 +57,11 @@ class Project extends Model
                 $project->slug = Str::slug($project->title);
             }
         });
+    }
+
+    public function heroFolder()
+    {
+        return $this->belongsTo(MediaFolder::class, 'hero_folder_id');
     }
 
     public function lastEditor()

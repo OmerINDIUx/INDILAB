@@ -9,6 +9,9 @@
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 15px;">
+                <button type="button" id="btn-select-folder" onclick="selectCurrentFolderFromModal()" class="btn-action-modal" style="display: none; background: #ebfbee; color: #2b8a3e; border: 1px solid #d3f9d8; padding: 8px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; align-items: center; gap: 8px;">
+                    <i class="fas fa-check-circle"></i> Select This Folder
+                </button>
                 <button type="button" onclick="promptNewFolderInModal()" class="btn-action-modal" style="background: #f0f7ff; color: #007bff; border: 1px solid #cce5ff; padding: 8px 15px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
                     <i class="fas fa-folder-plus"></i> New Folder
                 </button>
@@ -132,22 +135,33 @@
         window.currentTargetInputId = null;
         window.currentPreviewId = null;
         window.managerCurrentFolderId = null;
+        window.mediaManagerMode = 'file'; // 'file' or 'folder'
     }
 
     let modalDraggedId = null;
     let modalDraggedType = null;
 
-    function openMediaModal(inputId, previewId) {
+    function openMediaModal(inputId, previewId, mode = 'file') {
         window.currentTargetInputId = inputId;
         window.currentPreviewId = previewId;
+        window.mediaManagerMode = mode;
         window.managerCurrentFolderId = null;
+        
         document.getElementById('media-modal').classList.add('open');
+        
+        // Folder selection mode UI
+        const selectFolderBtn = document.getElementById('btn-select-folder');
+        if (selectFolderBtn) {
+            selectFolderBtn.style.display = (mode === 'folder') ? 'flex' : 'none';
+        }
+
         fetchMediaInModal(null);
     }
 
     function closeMediaModal() {
         document.getElementById('media-modal').classList.remove('open');
     }
+
 
     function fetchMediaInModal(folderId = null) {
         const gallery = document.getElementById('media-gallery');
@@ -330,7 +344,52 @@
         if(uploadLabel) uploadLabel.innerText = window.managerCurrentFolderId ? "this folder" : "Root";
     }
 
+    function selectCurrentFolderFromModal() {
+        if(window.currentTargetInputId) {
+            const input = document.getElementById(window.currentTargetInputId);
+            const folderId = window.managerCurrentFolderId;
+            if (input) {
+                input.value = folderId || "";
+                input.dispatchEvent(new Event('change'));
+            }
+            
+            if(folderId) {
+                // Fetch Folder Name & First Image for UI
+                fetch(`${window.rootPath}admin/media/folder/${folderId}/info`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if(window.currentPreviewId) {
+                            const preview = document.getElementById(window.currentPreviewId);
+                            if (preview) {
+                                let html = `<div style="text-align:center;">`;
+                                if(data.first_image) {
+                                    html += `<img src="${window.rootPath}storage/${data.first_image}" style="width:120px; height:80px; object-fit:cover; border-radius:4px; margin-bottom:10px; border:2px solid #ffc107;">`;
+                                } else {
+                                    html += `<i class="fas fa-folder fa-4x" style="color:#ffc107"></i>`;
+                                }
+                                html += `<br><span style="font-weight:700; color:#333;">${data.name}</span></div>`;
+                                preview.innerHTML = html;
+                                preview.style.backgroundImage = 'none';
+                                preview.style.backgroundColor = '#f8f9fa';
+                            }
+                        }
+                        // Trigger a custom event for Project Editor to sync preview bg
+                        document.dispatchEvent(new CustomEvent('heroFolderSelected', { detail: data }));
+                    });
+            } else {
+                 if(window.currentPreviewId) {
+                    const preview = document.getElementById(window.currentPreviewId);
+                    if (preview) {
+                        preview.innerHTML = `<span style="color:#999; font-weight:600;">Click para seleccionar carpeta</span>`;
+                    }
+                }
+            }
+        }
+        closeMediaModal();
+    }
+
     function selectMediaFromModal(item) {
+        if(window.mediaManagerMode === 'folder') return; // Don't select files in folder mode
         if(window.currentTargetInputId) {
             const input = document.getElementById(window.currentTargetInputId);
             if (input) { input.value = item.path; input.dispatchEvent(new Event('change')); }

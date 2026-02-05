@@ -149,4 +149,14 @@ class MediaController extends Controller
         $folder->delete();
         return response()->json(['success' => true]);
     }
+
+    public function folderInfo(MediaFolder $folder)
+    {
+        $firstMedia = $folder->media()->orderBy('filename', 'asc')->first();
+        return response()->json([
+            'id' => $folder->id,
+            'name' => $folder->name,
+            'first_image' => $firstMedia ? $firstMedia->path : null
+        ]);
+    }
 }

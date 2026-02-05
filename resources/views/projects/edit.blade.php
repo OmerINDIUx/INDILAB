@@ -168,19 +168,56 @@
                     <input type="hidden" name="content[blocks][0][data][h2]" id="hero-h2" value="{{ $heroBlock['data']['h2'] ?? '' }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Imagen de Fondo Hero</label>
-                    @if(isset($heroBlock['data']['image']))
-                        <img src="{{ asset('storage/'.$heroBlock['data']['image']) }}" style="height:40px; margin-bottom:5px;">
-                    @endif
-                    <div class="media-selector-wrapper">
-                        <div class="media-preview-box" id="preview-hero" 
-                             style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); height: 200px; background-size: cover; background-position: center; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
-                             onclick="openMediaModal('input-hero', 'preview-hero')">
-                            @if(!isset($heroBlock['data']['image'])) <span style="color:#999; font-weight:600;">Click to Open Media Library</span> @endif
+                    <label class="form-label">Tipo de Hero</label>
+                    <select name="hero_type" class="form-control" onchange="toggleHeroType(this.value)">
+                        <option value="static" {{ $project->hero_type === 'static' ? 'selected' : '' }}>Imagen Estática (Normal)</option>
+                        <option value="sequence" {{ $project->hero_type === 'sequence' ? 'selected' : '' }}>Secuencia de Imágenes (Scroll Parallax)</option>
+                    </select>
+                </div>
+
+                <div id="hero-static-fields" style="display: {{ $project->hero_type === 'sequence' ? 'none' : 'block' }};">
+                    <div class="form-group">
+                        <label class="form-label">Imagen de Fondo Hero (Estática)</label>
+                        <div class="media-selector-wrapper">
+                            <div class="media-preview-box" id="preview-hero" 
+                                 style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); height: 200px; background-size: cover; background-position: center; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #eee;" 
+                                 onclick="openMediaModal('input-hero', 'preview-hero')">
+                                @if(!isset($heroBlock['data']['image'])) <span style="color:#999; font-weight:600;">Click to Open Media Library</span> @endif
+                            </div>
+                            <input type="hidden" name="content[blocks][0][data][image]" id="input-hero" value="{{ $heroBlock['data']['image'] ?? '' }}" onchange="updateHeroBg(this.value)">
+                            <button type="button" class="form-control" onclick="openMediaModal('input-hero', 'preview-hero')"><i class="fas fa-image"></i> Seleccionar Imagen</button>
                         </div>
-                        <input type="hidden" name="content[blocks][0][data][image]" id="input-hero" value="{{ $heroBlock['data']['image'] ?? '' }}" onchange="updateHeroBg(this.value)">
-                        <input type="file" name="content[blocks][0][data][image_file]" class="form-control" style="display:none">
-                        <button type="button" class="form-control" onclick="openMediaModal('input-hero', 'preview-hero')"><i class="fas fa-image"></i> Select from Library</button>
+                    </div>
+                </div>
+
+                <div id="hero-sequence-fields" style="display: {{ $project->hero_type === 'sequence' ? 'block' : 'none' }};">
+                    <div class="form-group">
+                        <label class="form-label">Carpeta de Secuencia (Imágenes para Scroll)</label>
+                        <div class="media-selector-wrapper">
+                            <div class="media-preview-box" id="preview-hero-folder" 
+                                 style="height: 150px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: #f8f9fa;" 
+                                 onclick="openMediaModal('input-hero-folder', 'preview-hero-folder', 'folder')">
+                                @if($project->hero_folder_id)
+                                    @php
+                                        $folderName = $project->heroFolder->name ?? 'ID: ' . $project->hero_folder_id;
+                                        $firstHeroImg = $project->heroFolder ? $project->heroFolder->media->sortBy('filename')->first() : null;
+                                    @endphp
+                                    <div style="text-align:center;">
+                                        @if($firstHeroImg)
+                                            <img src="{{ asset('storage/'.$firstHeroImg->path) }}" style="width:120px; height:80px; object-fit:cover; border-radius:4px; margin-bottom:10px; border:2px solid #ffc107;">
+                                        @else
+                                            <i class="fas fa-folder fa-4x" style="color:#ffc107"></i>
+                                        @endif
+                                        <br><span style="font-weight:700; color:#333;">{{ $folderName }}</span>
+                                    </div>
+                                @else
+                                    <span style="color:#999; font-weight:600;">Click para seleccionar carpeta</span>
+                                @endif
+                            </div>
+                            <input type="hidden" name="hero_folder_id" id="input-hero-folder" value="{{ $project->hero_folder_id ?? '' }}">
+                            <button type="button" class="form-control" onclick="openMediaModal('input-hero-folder', 'preview-hero-folder', 'folder')"><i class="fas fa-folder-open"></i> Seleccionar Carpeta</button>
+                            <p style="font-size: 0.8rem; color: #666; margin-top: 8px;"><i class="fas fa-info-circle"></i> Sube las imágenes de la secuencia a esta carpeta. Se animarán automáticamente según el orden alfabético.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -323,7 +360,16 @@
         <template id="initial-preview-html">
             <div id="preview-blocks-list">
                 <div class="preview-item" id="prev-block-0" data-type="hero">
-                    <div class="Title" id="hero-preview-bg" style="background-image: url('{{ isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '' }}'); background-size: cover; background-position: center; border-radius: 12px; margin-bottom: 20px; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
+                    @php
+                        $heroBg = '';
+                        if ($project->hero_type === 'sequence' && $project->hero_folder_id) {
+                            $firstMedia = $project->heroFolder->media->sortBy('filename')->first();
+                            $heroBg = $firstMedia ? asset('storage/'.$firstMedia->path) : '';
+                        } else {
+                            $heroBg = isset($heroBlock['data']['image']) ? asset('storage/'.$heroBlock['data']['image']) : '';
+                        }
+                    @endphp
+                    <div class="Title" id="hero-preview-bg" style="background-image: url('{{ $heroBg }}'); background-size: cover; background-position: center; border-radius: 12px; margin-bottom: 20px; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
                         <span class="h3 blog-category-badge {{ $project->badge_color ?? 'cat-grad-1' }}" style="margin-bottom: 20px;">{{ $heroBlock['data']['h3'] ?? 'Categoría' }}</span>
                         <h1>{{ $heroBlock['data']['h1'] ?? $project->title }}</h1>
                         <h2>{{ $heroBlock['data']['h2'] ?? '' }}</h2>
@@ -747,8 +793,9 @@
             cardShadow.appendChild(tpl.content.cloneNode(true));
             window.cardShadow = cardShadow;
         }
-        // 3. Init All Rich Editors
+        // Initial state sync
         initializeAllRichEditors();
+        syncAllPreviews();
 
         // 4. Initial state sync for Category
         const catSelect = document.querySelector('select[name="category"]');
@@ -853,9 +900,70 @@
 
         // Init Block Editors
         document.querySelectorAll('.rich-editor').forEach(editor => {
-            if (editor.id.startsWith('hero-')) return; // Already done
+            if (editor.id.startsWith('hero-')) return; 
             const syncId = editor.id.replace('-editor', '');
             initRichEditor(editor.id, syncId);
+        });
+    }
+
+    function syncAllPreviews() {
+        // Card Preview Sync
+        const titleEl = document.querySelector('input[name="title"]');
+        if(titleEl) updateCardPreview('title', titleEl.value);
+        
+        const catEl = document.querySelector('select[name="category"]');
+        if(catEl) updateCardPreview('category', catEl.value);
+        
+        const badgeEl = document.querySelector('input[name="badge_color"]:checked');
+        if(badgeEl) updateCardPreview('badge_color', badgeEl.value);
+        
+        updateCardPreview('date', document.getElementById('input-date')?.value);
+        updateCardPreview('coming_soon', document.getElementById('check-coming-soon')?.checked);
+        updateCardPreview('image', document.getElementById('input-cover')?.value);
+
+        // Hero Sync
+        updateBlockPreview('0', 'h3', document.getElementById('hero-h3')?.value || '');
+        updateBlockPreview('0', 'h1', document.getElementById('hero-h1')?.value || '');
+        updateBlockPreview('0', 'h2', document.getElementById('hero-h2')?.value || '');
+        
+        const heroType = document.querySelector('select[name="hero_type"]')?.value;
+        if (heroType === 'sequence') {
+            const folderId = document.getElementById('input-hero-folder')?.value;
+            if (folderId) {
+                fetch(`${window.rootPath}admin/media/folder/${folderId}/info`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.first_image) updateHeroBg(data.first_image);
+                    });
+            }
+        } else {
+            updateHeroBg(document.getElementById('input-hero')?.value);
+        }
+
+        // Dynamic Blocks Sync
+        document.querySelectorAll('#blocks-wrapper .block-item').forEach(block => {
+            const type = block.dataset.type;
+            const idxInput = block.querySelector('input[name*="[type]"]');
+            if(!idxInput) return;
+            const idxMatch = idxInput.name.match(/\[(\d+)\]/);
+            if(!idxMatch) return;
+            const idx = idxMatch[1];
+            
+            if(type === 'intro_glass') {
+                updateBlockPreview(idx, 'text', block.querySelector(`input[id^="textarea-"]`)?.value || '');
+            } else if(type === 'text_large') {
+                updateBlockPreview(idx, 'h2', block.querySelector(`input[id^="h2-"]`)?.value || '');
+                updateBlockPreview(idx, 'content', block.querySelector(`input[id^="textarea-"]`)?.value || '');
+            } else if(type === 'gallery_rail') {
+                updateGalleryPreview(idx);
+            } else if(type === 'carousel_adv') {
+                updateCarouselPreview(idx);
+            } else if(type === 'statement') {
+                updateBlockPreview(idx, 'statement', block.querySelector(`textarea`)?.value || '');
+            } else if(type === 'text_provocation') {
+                updateBlockPreview(idx, 'text_provocation', block.querySelector(`textarea`)?.value || '');
+                updateBlockPreview(idx, 'text_provocation_image', block.querySelector(`input[type="hidden"][name*="image"]`)?.value || '');
+            }
         });
     }
 
@@ -897,15 +1005,8 @@
         if(type === 'intro_glass') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
 
-        } else if(type === 'statement') {
-            const temp = document.getElementById('tpl-statement');
-            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
-        } else if(type === 'text_provocation') {
-            const temp = document.getElementById('tpl-text_provocation');
-            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
-        } else if(type === 'custom_html') {
-            const temp = document.getElementById('tpl-custom_html');
-            html = temp.innerHTML.replace(/INDEX/g, blockIndex);
+        } else if(type === 'statement' || type === 'text_provocation' || type === 'custom_html') {
+            // Textarea/HTML triggers it via oninput, no editor to init
         } else if(type === 'gallery_rail') {
             initRichEditor(`textarea-${blockIndex}-editor`, `textarea-${blockIndex}`);
         } else if(type === 'text_large') {
@@ -1089,9 +1190,14 @@
         const type = p.dataset.type;
 
         if(type === 'hero') {
-            if(field === 'h3') p.querySelector('.h3').innerText = val;
-            if(field === 'h1') p.querySelector('h1').innerText = val;
-            if(field === 'h2') p.querySelector('h2').innerText = val;
+            const h3 = p.querySelector('.h3');
+            if(h3 && field === 'h3') h3.innerHTML = val;
+            
+            const h1 = p.querySelector('h1');
+            if(h1 && field === 'h1') h1.innerHTML = val;
+            
+            const h2 = p.querySelector('h2');
+            if(h2 && field === 'h2') h2.innerHTML = val;
         }
         else if(type === 'intro_glass') {
             let el = p.querySelector('.card');
@@ -1101,7 +1207,7 @@
         else if(type === 'phrase') {
             let el = p.querySelector('.span-resaltado');
             if(!el) { p.innerHTML = '<div class="span-resaltado" style="margin: 20px 0;"></div>'; el = p.querySelector('.span-resaltado'); }
-            el.innerText = val;
+            el.innerHTML = val;
         }
         else if(type === 'text_provocation') {
              const container = p.querySelector('.text-provocation');
@@ -1111,7 +1217,7 @@
              // Handle text update
              if(field === 'text_provocation' || field === undefined) {
                  const h2 = p.querySelector('.provoc-text h2');
-                 if(h2) h2.innerText = val;
+                 if(h2) h2.innerHTML = val;
              }
              // Handle image update
              if(field === 'text_provocation_image') {
@@ -1129,18 +1235,24 @@
              }
         }
         else if(type === 'statement') {
-            let el = p.querySelector('.statement h2');
+            let el = p.querySelector('.Statement');
             if(!el) { 
-                p.innerHTML = '<div class="statement"><div class="content-text"><h2></h2></div></div>'; 
-                el = p.querySelector('h2'); 
+                p.innerHTML = '<div class="Statement" style="padding: 20px; text-align: center; font-size: 1.5rem; font-weight: bold;"></div>'; 
+                el = p.querySelector('.Statement'); 
             }
-            el.innerText = val;
+            el.innerHTML = val;
         }
         else if(type === 'text_large') {
             let container = p.querySelector('.TextLarge');
             if(!container) { p.innerHTML = '<div class="TextLarge" style="padding: 20px;"><h2></h2><div></div></div>'; container = p.querySelector('.TextLarge'); }
-            if(field === 'h2') container.querySelector('h2').innerText = val;
-            if(field === 'content') container.querySelector('div').innerHTML = val;
+            if(field === 'h2') {
+                const h2 = container.querySelector('h2');
+                if(h2) h2.innerHTML = val;
+            }
+            if(field === 'content') {
+                const contentDiv = container.querySelector('div');
+                if(contentDiv) contentDiv.innerHTML = val;
+            }
         }
     }
 
@@ -1373,6 +1485,17 @@
             btn.style.filter = 'none';
         }
     }
+    function toggleHeroType(type) {
+        if(type === 'sequence') {
+            document.getElementById('hero-static-fields').style.display = 'none';
+            document.getElementById('hero-sequence-fields').style.display = 'block';
+        } else {
+            document.getElementById('hero-static-fields').style.display = 'block';
+            document.getElementById('hero-sequence-fields').style.display = 'none';
+        }
+        syncAllPreviews();
+    }
+
     document.addEventListener('DOMContentLoaded', () => { 
         initSortable(); 
         checkIntroGlassConstraint(); 
@@ -1398,6 +1521,13 @@
                 }
             });
         }
+        // Listen for folder selection from media manager
+        document.addEventListener('heroFolderSelected', function(e) {
+            const data = e.detail;
+            if (data && data.first_image) {
+                updateHeroBg(data.first_image);
+            }
+        });
     });
 </script>
 @endsection
