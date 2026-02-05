@@ -19,7 +19,7 @@ class ProjectController extends Controller
     {
         $projects = Project::with('lastEditor')
             ->orderBy('coming_soon', 'asc')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('title', 'asc')
             ->get();
         return view('projects.index', compact('projects'));
     }
@@ -58,6 +58,14 @@ class ProjectController extends Controller
 
         $contentData = $validated['content'] ?? [];
         $blocks = $contentData['blocks'] ?? [];
+
+        // Fix: Enforce array_values on text_large elements to preserve order
+        foreach ($blocks as &$block) {
+            if (isset($block['type']) && $block['type'] === 'text_large' && isset($block['data']['elements'])) {
+                $block['data']['elements'] = array_values($block['data']['elements']);
+            }
+        }
+        unset($block); // break reference
 
         if (!empty($blocks)) {
             $blocks = $this->processBlockFiles($request, $blocks);

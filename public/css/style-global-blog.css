@@ -417,7 +417,7 @@ body::before {
     padding-top: 0;
 }
 
-.TextLarge div {
+.TextLarge > div {
     max-width: 80%;
     margin: 0 auto;
     text-align: justify;
@@ -427,7 +427,7 @@ body::before {
 }
 
 @media (max-width: 1024px) {
-    .TextLarge div {
+    .TextLarge > div {
         max-width: 90%;
     }
 }

@@ -679,7 +679,7 @@
                 
                 .TextLarge { padding: 2rem 1rem !important; font-size: 0.9rem !important; }
                 .TextLarge h2 { font-size: 1.3rem !important; } 
-                .TextLarge div { max-width: 95% !important; }
+                .TextLarge > div { max-width: 95% !important; }
                 
                 .Title { width: 90% !important; margin: 0 auto 20px auto !important; padding: 40px 0 !important; text-align: center !important; }
                 .Title h1 { font-size: 2.2rem !important; margin: 10px 0 !important; line-height: 1.1 !important; } 
@@ -875,6 +875,22 @@
                 const hiddenInput = document.getElementById(hiddenInputId);
                 if (hiddenInput) {
                     hiddenInput.value = editor.innerHTML;
+                }
+            });
+
+            // RE-INDEX TEXT LARGE ELEMENTS to ensure DOM order is preserved
+            document.querySelectorAll('.text-large-elements-container').forEach(container => {
+                const blockIdxMatch = container.id.match(/text-large-elements-(\d+)/);
+                if(blockIdxMatch) {
+                    const blockIdx = blockIdxMatch[1];
+                    container.querySelectorAll('.sub-element').forEach((el, index) => {
+                        // Update all input names within this element
+                        el.querySelectorAll('input, select, textarea').forEach(input => {
+                            // Regex to find [elements][OLD_INDEX] and replace with [elements][index]
+                            // The name format is content[blocks][blockIdx][data][elements][subIdx][field]
+                            input.name = input.name.replace(/\[elements\]\[\d+\]/, `[elements][${index}]`);
+                        });
+                    });
                 }
             });
 
@@ -1153,6 +1169,25 @@
         });
 
         editor.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                // Insert BR securely
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    const br = document.createElement("br");
+                    range.deleteContents();
+                    range.insertNode(br);
+                    range.setStartAfter(br);
+                    range.setEndAfter(br);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    // Scroll to ensure visibility
+                    editor.scrollTop = editor.scrollHeight;
+                }
+                // Update bindings
+                editor.dispatchEvent(new Event('input', { bubbles: true }));
+            }
             if (editor.classList.contains('no-bold') && (e.ctrlKey || e.metaKey) && e.key === 'b') {
                 e.preventDefault();
             }
