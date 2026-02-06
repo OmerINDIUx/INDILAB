@@ -618,10 +618,12 @@ span {
 =================== */
 @media (max-width: 768px) {
     /* ===== BODY ===== */
-    body {
+    body,
+    html:not(.light-theme):not(.dark-theme) body:not(.dashboard-page) {
         margin: 0;
         width: 100%;
         height: auto;
+        margin-left: 0;
         margin-top: 80px; /* deja espacio si hay header fijo */
         padding: 0 10px;
     }
@@ -637,7 +639,14 @@ span {
     .heroes .text-container1 .textchange {
         font-size: 1rem;
         line-height: 1.5;
+        max-width: 80%;
+        margin: 0 auto;
         padding: 0 5px;
+    }
+
+    .heroes .text-container1 {
+        max-width: 100%; /* reset container width so children control it, or just control it here */
+        width: 100%;
     }
 
     /* ===== FILTER BUTTONS ===== */
@@ -897,7 +906,8 @@ span {
     .text-provocation h2,
     .text-provocation p {
         text-align: center;
-        max-width: 100%;
+        max-width: 80%;
+        margin: 0 auto;
     }
 }
 /* ===========================
