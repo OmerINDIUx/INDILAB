@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -75,6 +75,19 @@
       <h2 class="blog-heading1" data-i18n="Our work"></h2>
 
       <div class="blog-list1" id="blogList">
+        <article class="blog-item1" data-tags="Resiliencia">
+          <a href="/projects/Islas_calor_urbano/IslasDeCalorUrbano.html">
+            <img
+              src="/projects/ViviendaModular/images/ICU.png"
+              alt="Post 1"
+              class="blog-thumb"
+            />
+            <div class="blog-info1">
+              <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
+              <p class="blog-date1" data-i18n="Publicado"></p>
+            </div>
+          </a>
+        </article>
         <article class="blog-item1" data-tags="Infraestructura">
           <a
             href="/projects/Infraestructura-bioresponsiva/infraestructura-bioresponsiva.html"
@@ -108,19 +121,6 @@
           </a>
         </article>
 
-        <article class="blog-item1" data-tags="Resiliencia">
-          <a href="/Coming_Soom.html">
-            <img
-              src="/projects/ViviendaModular/images/Generated Image September 09, 2025 - 2_24PM.png"
-              alt="Post 1"
-              class="blog-thumb"
-            />
-            <div class="blog-info1">
-              <h3 class="blog-title1" data-i18n="Urban Heat Islands"></h3>
-              <p class="blog-date1" data-i18n="December 2024"></p>
-            </div>
-          </a>
-        </article>
         <article class="blog-item1" data-tags="Urbanismo">
           <a href="/Coming_Soom.html">
             <img
@@ -367,12 +367,12 @@
               .catch(() => {
                 try {
                   const pending = JSON.parse(
-                    localStorage.getItem("newsletter_pending") || "[]"
+                    localStorage.getItem("newsletter_pending") || "[]",
                   );
                   pending.push(payload);
                   localStorage.setItem(
                     "newsletter_pending",
-                    JSON.stringify(pending)
+                    JSON.stringify(pending),
                   );
                 } catch (err) {}
                 show("Suscripción Enviada", true);
@@ -392,7 +392,7 @@
         .then((response) => {
           if (!response.ok) {
             throw new Error(
-              `Error al cargar el menú: ${response.status} ${response.statusText}`
+              `Error al cargar el menú: ${response.status} ${response.statusText}`,
             );
           }
           return response.text();
@@ -401,7 +401,7 @@
           const placeholder = document.getElementById("menu-placeholder");
           if (!placeholder) {
             throw new Error(
-              "Elemento con id 'menu-placeholder' no encontrado en el DOM"
+              "Elemento con id 'menu-placeholder' no encontrado en el DOM",
             );
           }
           placeholder.innerHTML = data;

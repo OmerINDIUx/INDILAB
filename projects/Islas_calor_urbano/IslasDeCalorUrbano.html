@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
@@ -17,6 +17,17 @@
     <meta charset="UTF-8" />
     <title>Islas de Calor Urbano</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ciudades que enfrían: Rediseñando el clima urbano. ¿Qué pasaría si las ciudades pudieran operar como organismos reguladores de temperatura?"
+    />
+    <meta property="og:title" content="Islas de Calor Urbano | INDI Lab" />
+    <meta
+      property="og:description"
+      content="Ciudades que enfrían: Rediseñando el clima urbano. ¿Qué pasaría si las ciudades pudieran operar como organismos reguladores de temperatura?"
+    />
+    <meta property="og:site_name" content="INDI Lab • Grupo INDI" />
+    <meta property="og:type" content="article" />
 
     <!-- GSAP loaded at the end of body -->
 
@@ -52,7 +63,7 @@
       <div class="Title">
         <h3 class="general-tittle">Señales Urbanas | Islas de Calor Urbano</h3>
         <h1>Islas de Calor Urbano</h1>
-        <h3>Diciembre 2025</h3>
+        <!-- <h3>Diciembre 2025</h3> -->
       </div>
     </section>
 
@@ -271,10 +282,9 @@
       </div>
     </section>
 
-    <section class="insersion_mapas">
+    <!-- <section class="insersion_mapas">
       <div class="archivo-erick-islas">
         <div class="mapas-layout">
-          <!-- Mapa (izquierda) -->
           <div class="mapa-col">
             <div class="map-container-wrapper">
               <div id="islasdecalor-erick-placeholder"></div>
@@ -303,7 +313,6 @@
             </div>
           </div>
 
-          <!-- Texto (derecha) -->
           <div class="texto-col">
             <h2 class="sub">Mapas de las ICU</h2>
             <p>
@@ -319,7 +328,6 @@
           </div>
         </div>
 
-        <!-- Tu script de fetch permanece igual -->
         <script>
           fetch("../../inserciones/islasdecalor/islasdecalor-erick.html")
             .then((response) => {
@@ -389,7 +397,7 @@
             );
         </script>
       </div>
-    </section>
+    </section> -->
 
     <section id="horizontal-scroll" class="horizontal-scroll-section">
       <div class="carousel-wrapper">
@@ -675,7 +683,7 @@
               y: 0,
               opacity: 1,
               ease: "power3.out",
-            }
+            },
           ).fromTo(
             topRight,
             {
@@ -689,7 +697,7 @@
               opacity: 1,
               ease: "power3.out",
             },
-            "<"
+            "<",
           );
 
           // Fade-in text
@@ -704,7 +712,7 @@
                 end: "bottom bottom",
                 scrub: true,
               },
-            }
+            },
           );
         }
 
@@ -825,7 +833,7 @@
             console.log("✅ Lenis inicializado en IslasDeCalorUrbano");
           } else {
             console.error(
-              "❌ Lenis no está definido. Falló la carga del script."
+              "❌ Lenis no está definido. Falló la carga del script.",
             );
           }
         };
@@ -937,7 +945,7 @@
         .then((response) => {
           if (!response.ok) {
             throw new Error(
-              `Error al cargar el menú: ${response.status} ${response.statusText}`
+              `Error al cargar el menú: ${response.status} ${response.statusText}`,
             );
           }
           return response.text();
@@ -946,7 +954,7 @@
           const placeholder = document.getElementById("menu-placeholder");
           if (!placeholder) {
             throw new Error(
-              "Elemento con id 'menu-placeholder' no encontrado en el DOM"
+              "Elemento con id 'menu-placeholder' no encontrado en el DOM",
             );
           }
           placeholder.innerHTML = data;
@@ -1140,12 +1148,12 @@
               .catch(() => {
                 try {
                   const pending = JSON.parse(
-                    localStorage.getItem("newsletter_pending") || "[]"
+                    localStorage.getItem("newsletter_pending") || "[]",
                   );
                   pending.push(payload);
                   localStorage.setItem(
                     "newsletter_pending",
-                    JSON.stringify(pending)
+                    JSON.stringify(pending),
                   );
                 } catch (err) {}
                 show("Suscripción Enviada", true);

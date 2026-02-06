@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -15,8 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Some examples for how sticky sections can be animated."
+      content="Data • Infrastructure • Design • Technology • Civic Imagination"
     />
+    <meta
+      property="og:title"
+      content="Co-creando el futuro urbano. | Co-creating the future of cities."
+    />
+    <meta
+      property="og:description"
+      content="Data • Infrastructure • Design • Technology • Civic Imagination"
+    />
+    <meta property="og:site_name" content="INDI Lab • Grupo INDI" />
+    <meta property="og:type" content="website" />
     <meta
       name="keywords"
       content="sticky, css, gsap, animation, sticky section, layout"
@@ -378,12 +388,12 @@
               .catch(() => {
                 try {
                   const pending = JSON.parse(
-                    localStorage.getItem("newsletter_pending") || "[]"
+                    localStorage.getItem("newsletter_pending") || "[]",
                   );
                   pending.push(payload);
                   localStorage.setItem(
                     "newsletter_pending",
-                    JSON.stringify(pending)
+                    JSON.stringify(pending),
                   );
                 } catch (err) {}
                 show("Suscripción Enviada", true);

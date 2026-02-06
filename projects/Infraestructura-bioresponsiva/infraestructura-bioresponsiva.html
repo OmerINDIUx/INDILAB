@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -12,6 +12,20 @@
     <meta charset="UTF-8" />
     <title>Infraestructura biorresponsiva</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="La ciudad como organismo: Infraestructura que responde al entorno en tiempo real. Un puente entre naturaleza, tecnología y diseño urbano."
+    />
+    <meta
+      property="og:title"
+      content="Infraestructura Biorresponsiva | INDI Lab"
+    />
+    <meta
+      property="og:description"
+      content="La ciudad como organismo: Infraestructura que responde al entorno en tiempo real. Un puente entre naturaleza, tecnología y diseño urbano."
+    />
+    <meta property="og:site_name" content="INDI Lab • Grupo INDI" />
+    <meta property="og:type" content="article" />
 
     <!-- External CSS -->
     <link
@@ -531,11 +545,11 @@
 
             gsap.ticker.lagSmoothing(0);
             console.log(
-              "✅ Lenis inicializado en infraestructura-bioresponsiva"
+              "✅ Lenis inicializado en infraestructura-bioresponsiva",
             );
           } else {
             console.error(
-              "❌ Lenis no está definido. Falló la carga del script."
+              "❌ Lenis no está definido. Falló la carga del script.",
             );
           }
         };
@@ -575,7 +589,7 @@
                 scrub: 1,
                 invalidateOnRefresh: true,
               },
-            }
+            },
           );
 
           // Refresh on window load to ensure all images/layout are settled
@@ -599,7 +613,7 @@
         .then((response) => {
           if (!response.ok) {
             throw new Error(
-              `Error al cargar el menú: ${response.status} ${response.statusText}`
+              `Error al cargar el menú: ${response.status} ${response.statusText}`,
             );
           }
           return response.text();
@@ -608,7 +622,7 @@
           const placeholder = document.getElementById("menu-placeholder");
           if (!placeholder) {
             throw new Error(
-              "Elemento con id 'menu-placeholder' no encontrado en el DOM"
+              "Elemento con id 'menu-placeholder' no encontrado en el DOM",
             );
           }
           placeholder.innerHTML = data;
@@ -795,12 +809,12 @@
               .catch(() => {
                 try {
                   const pending = JSON.parse(
-                    localStorage.getItem("newsletter_pending") || "[]"
+                    localStorage.getItem("newsletter_pending") || "[]",
                   );
                   pending.push(payload);
                   localStorage.setItem(
                     "newsletter_pending",
-                    JSON.stringify(pending)
+                    JSON.stringify(pending),
                   );
                 } catch (err) {}
                 show("Suscripción Enviada", true);
